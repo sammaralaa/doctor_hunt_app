@@ -1,5 +1,9 @@
+import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/features/splash/presentation/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'core/routing/router_generation_config.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,38 +13,21 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Doctor Hunt',
-      theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home:  SplashScreen(),
+    return ScreenUtilInit(
+      designSize: Size(375, 812),
+      builder: (context,child){
+        return MaterialApp.router(
+          title: 'Doctor Hunt',
+          theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
+            fontFamily: 'Rubik'
+        ),
+        routerConfig: RouterGenerationConfig.goRouter,
+        debugShowCheckedModeBanner: false,
+        );
+      },
     );
+
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-
-      ),
-
-    );
-  }
-}

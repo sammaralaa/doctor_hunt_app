@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 class TopLeftShadowWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    return           Positioned(
+    return Positioned(
       top: -108, // Half of height (216 / 2) to center on corner
       left: -108,  // Half of width (216 / 2)
       child: ImageFiltered(

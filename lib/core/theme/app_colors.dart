@@ -6,6 +6,8 @@ class AppColors {
   static const Color subtitleColor = Color(0xE5677294);
   static const Color inactiveIconColor = Color(0xff858EA9);
   static const Color lightGreen = Color(0x140EBE7F);
+  static const Color midnightBlue = Color(0XFF17202A);
+  static const Color inactiveBorderColor = Color(0XFFE6ECEA);
 
 
   static const Color red = Color(0xffFF0000);
