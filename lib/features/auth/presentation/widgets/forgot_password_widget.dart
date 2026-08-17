@@ -3,6 +3,7 @@ import 'package:doctor_hunt_app/core/theme/app_text_styles.dart';
 import 'package:doctor_hunt_app/core/widgets/custom_elevated_button.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/features/auth/presentation/widgets/custom_textfeild_widget.dart';
+import 'package:doctor_hunt_app/features/auth/presentation/widgets/enter_digits_widget.dart';
 import 'package:doctor_hunt_app/features/auth/presentation/widgets/reset_password_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -32,16 +33,21 @@ class ForgotPasswordWidget extends StatelessWidget{
             ),
           ),
           HeightSpace(30),
-          Text(
-            'Forgot password',
-            style: AppTextStyles.titleTextStyle,
-            textAlign: TextAlign.start,
-          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Forgot password',
+                style: AppTextStyles.titleTextStyle,
+                textAlign: TextAlign.start,
+              ),
 
-          HeightSpace(12),
-          Text(
-            'Enter your email for the verification process, we will send 4 digits code to your email.',
-            style: AppTextStyles.subTitleTextStyle,
+              HeightSpace(12),
+              Text(
+                'Enter your email for the verification process, we will send 4 digits code to your email.',
+                style: AppTextStyles.subTitleTextStyle,
+              )
+            ],
           ),
 
           SizedBox(height: 36.h),
@@ -57,7 +63,7 @@ class ForgotPasswordWidget extends StatelessWidget{
                   top: Radius.circular(30.r),
                 ),
               ),
-              builder: (context) =>  ResetPasswordWidget(),
+              builder: (context) =>  EnterDigitsWidget(),
             );
           },),
           HeightSpace(50),

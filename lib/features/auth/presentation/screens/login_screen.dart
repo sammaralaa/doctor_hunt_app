@@ -36,6 +36,12 @@ class _LoginScreen extends State<LoginScreen> {
   }
 
   @override
+  void dispose() {
+    emailController.dispose();
+    passController.dispose();
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
@@ -43,98 +49,157 @@ class _LoginScreen extends State<LoginScreen> {
           TopLeftShadowWidget(),
           BottomRightShadowWidget(),
           SafeArea(
-            child: Padding(
-              padding: EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  HeightSpace(100),
-                  Text(
-                    "Welcome back",
-                    style: AppTextStyles.titleTextStyle,
-                  ),
-                  HeightSpace(15),
-                  Text(
-                    "You can search c ourse, apply course and findscholarship for abroad studies",
-                    style: AppTextStyles.subTitleTextStyle,
-                    textAlign: TextAlign.center,
-                  ),
-                  HeightSpace(60),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      LoginWithWidget(
-                        btnText: "Google",
-                        onTop: () {},
-                        btnIcon: SvgPicture.asset(
-                          "assets/icons/google_icon.svg",
-                          width: 20.w,
-                          height: 20.h,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minHeight: constraints.maxHeight,
+                    ),
+                    child: IntrinsicHeight(
+                      child: Padding(
+                        padding: EdgeInsets.all(20),
+                          child: Form(
+                            key: formKey,
+                            child: Column(
+                              children: [
+                                HeightSpace(100),
+                                Text(
+                                  "Welcome back",
+                                  style: AppTextStyles.titleTextStyle,
+                                ),
+                                HeightSpace(15),
+                                Text(
+                                  "You can search c ourse, apply course and findscholarship for abroad studies",
+                                  style: AppTextStyles.subTitleTextStyle,
+                                  textAlign: TextAlign.center,
+                                ),
+                                HeightSpace(60),
+                                Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    LoginWithWidget(
+                                      btnText: "Google",
+                                      onTop: () {},
+                                      btnIcon: SvgPicture.asset(
+                                        "assets/icons/google_icon.svg",
+                                        width: 20.w,
+                                        height: 20.h,
+                                      ),
+                                    ),
+                                    WidthSpace(15),
+                                    LoginWithWidget(
+                                      btnText: "Facebook",
+                                      onTop: () {},
+                                      btnIcon: SvgPicture.asset(
+                                        "assets/icons/facebook_icon.svg",
+                                        width: 20.w,
+                                        height: 20.h,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                HeightSpace(34),
+                                CustomTextfeildWidget(
+                                  hintText: "Email",
+                                  validator: (value){
+                                    if(value == null || value.isEmpty){
+                                      return "Enter your email";
+                                    }
+                                  },
+                                  controller: emailController,
+                                ),
+                                HeightSpace(18),
+                                CustomTextfeildWidget(
+                                    hintText: "Password",
+                                    controller: passController,
+                                  isPassWord: ispassword,
+                                  suffixIcon: IconButton(
+                                    icon: ispassword
+                                        ? Icon(Icons.visibility_off)
+                                        : Icon(Icons.visibility),
+                                    color: AppColors.subtitleColor,
+                                    onPressed: () {
+                                      setState(() {
+                                        ispassword = !ispassword;
+                                      });
+                                    },
+                                  ),
+                                  validator: (value){
+                                    if(value == null || value.isEmpty){
+                                      return "Enter your email";
+                                    }
+                                    if(value.length < 8){
+                                      return "password must be at least 8 characters";
+                                    }
+                                  },
+
+                                ),
+                                HeightSpace(32),
+                                CustomElevatdButton(
+                                  buttonTXT: "Login",
+                                  onTap: () {},
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    showModalBottomSheet(
+                                      context: context,
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.white,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.vertical(
+                                          top: Radius.circular(30.r),
+                                        ),
+                                      ),
+                                      builder: (context) =>
+                                          ForgotPasswordWidget(),
+                                    );
+                                  },
+                                  child: Text(
+                                    "Forgor password",
+                                    style: AppTextStyles.subTitleTextStyle
+                                        .copyWith(color: AppColors.primaryColor),
+                                  ),
+                                ),
+                                //HeightSpace(60),
+                                Spacer(),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Don’t have an account?",
+                                      style: AppTextStyles.subTitleTextStyle
+                                          .copyWith(
+                                        color: AppColors.primaryColor,
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        GoRouter.of(
+                                          context,
+                                        ).pushNamed(AppRoutes.signupScreen);
+                                      },
+                                      child: Text(
+                                        "Join us",
+                                        style: AppTextStyles.subTitleTextStyle
+                                            .copyWith(
+                                          color: AppColors.primaryColor,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )
+
                         ),
-                      ),
-                      WidthSpace(15),
-                      LoginWithWidget(
-                        btnText: "Facebook",
-                        onTop: () {},
-                        btnIcon: SvgPicture.asset(
-                          "assets/icons/facebook_icon.svg",
-                          width: 20.w,
-                          height: 20.h,
-                        ),
-                      ),
-                    ],
-                  ),
-                  HeightSpace(34),
-                  CustomTextfeildWidget(hintText: "Email"),
-                  HeightSpace(18),
-                  CustomTextfeildWidget(hintText: "Password"),
-                  HeightSpace(32),
-                  CustomElevatdButton(buttonTXT: "Sign up", onTap: () {}),
-                  TextButton(
-                    onPressed: () {
-                      showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        backgroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(30.r),
-                          ),
-                        ),
-                        builder: (context) =>  ForgotPasswordWidget(),
-                      );
-                    },
-                    child: Text(
-                      "Forgor password",
-                      style: AppTextStyles.subTitleTextStyle.copyWith(
-                        color: AppColors.primaryColor,
                       ),
                     ),
-                  ),
-                  Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Don’t have an account?",
-                        style: AppTextStyles.subTitleTextStyle.copyWith(
-                          color: AppColors.primaryColor,
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          GoRouter.of(context,).pushNamed(AppRoutes.signupScreen);
-                        },
-                        child: Text(
-                          "Join us",
-                          style: AppTextStyles.subTitleTextStyle.copyWith(
-                            color: AppColors.primaryColor,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                );
+              },
             ),
           ),
         ],
