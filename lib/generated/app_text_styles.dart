@@ -7,7 +7,7 @@ class AppTextStyles {
   //static const String _fontFamily = 'Rubik';
   static  TextStyle titleTextStyle = TextStyle(
     fontSize: 25.sp,
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.bold,
     letterSpacing: -0.3,
     color: AppColors.titleColor,
   );
@@ -34,6 +34,12 @@ static TextStyle loginWithButton = TextStyle(
   fontWeight: FontWeight.w400,
   letterSpacing: -0.3,
   color: AppColors.subtitleColor,
+);
+static TextStyle homeSectionsTitle = TextStyle(
+  fontSize: 18.sp,
+  fontWeight: FontWeight.w500,
+  letterSpacing: -0.3,
+  color: AppColors.titleColor,
 );
 // static TextStyle inter12regular = GoogleFonts.inter(
   //   fontSize: 12.sp,

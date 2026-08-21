@@ -1,20 +1,21 @@
 import 'dart:ui';
 
+import 'package:doctor_hunt_app/core/routing/routes.dart';
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
-import 'package:doctor_hunt_app/core/theme/app_text_styles.dart';
+import 'package:doctor_hunt_app/generated/app_text_styles.dart';
 import 'package:doctor_hunt_app/core/widgets/bottom_right_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/core/widgets/top_left_color_shape.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/routing/app_routs.dart';
 import '../../../../core/widgets/custom_elevated_button.dart';
 import '../../data/onboarding_model.dart';
 
 class OnboardingScreen extends StatefulWidget {
+  const OnboardingScreen({super.key});
+
   @override
   State<StatefulWidget> createState() => _OnboardingScreen();
 }
@@ -41,7 +42,6 @@ class _OnboardingScreen extends State<OnboardingScreen> {
                   });
                 },
                 itemBuilder: (context, index) {
-                  final item = OnboardingModel.onboardingPages[index];
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -72,18 +72,25 @@ class _OnboardingScreen extends State<OnboardingScreen> {
                       CustomElevatdButton(
                         buttonTXT: "Get Started",
                         onTap: () {
-                          if(_currentIndex<(OnboardingModel.onboardingPages.length - 1)){
-                            _pageController.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut,);
-                          }else{
-                            GoRouter.of(context,).pushNamed(AppRoutes.loginScreen);
+                          if (_currentIndex <
+                              (OnboardingModel.onboardingPages.length - 1)) {
+                            _pageController.nextPage(
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.easeInOut,
+                            );
+                          } else {
+                            ChooseRoleRoute().go(context);
+                            //GoRouter.of(context,).pushNamed(AppRoutes.chooseRoleScreen);
                           }
-
                         },
                       ),
                       HeightSpace(10),
                       TextButton(
                         onPressed: () {
-                          GoRouter.of(context,).pushNamed(AppRoutes.chooseRoleScreen);
+                          // GoRouter.of(
+                          //   context,
+                          // ).pushNamed(AppRoutes.chooseRoleScreen);
+                          ChooseRoleRoute().go(context);
                         },
                         child: Text(
                           "Skip",
