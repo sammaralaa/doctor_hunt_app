@@ -8,6 +8,7 @@ import 'package:doctor_hunt_app/features/home/presentation/widgets/popular_docto
 import 'package:doctor_hunt_app/generated/app_text_styles.dart';
 import 'package:doctor_hunt_app/generated/icons_assets.dart';
 import 'package:doctor_hunt_app/generated/image_assets.dart';
+import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -32,7 +33,7 @@ class _HomeScreen extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
+        //physics: const BouncingScrollPhysics(),
         slivers: [
           SliverToBoxAdapter(
             child: CustomHomeTopHeader(searchController: searchController),
@@ -46,7 +47,7 @@ class _HomeScreen extends State<HomeScreen> {
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: Text(
                     'Live Doctors',
-                    style: AppTextStyles.homeSectionsTitle,
+                    style: context.bold18TextMain,
                   ),
                 ),
 

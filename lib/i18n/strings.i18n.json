@@ -1,0 +1,11 @@
+{
+  "live": "LIVE",
+  "doctor_hunt": "Doctor Hunt",
+  "doctorDetails": "Doctor Details",
+  "findYourDoctor": "Find Your Doctor",
+  "search": "Search.....",
+  "nextAvailable": "Next Available",
+  "bookNow": "Book Now",
+  "urlTemp": "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+  "packageName": "doctor_hunt_app.app"
+}

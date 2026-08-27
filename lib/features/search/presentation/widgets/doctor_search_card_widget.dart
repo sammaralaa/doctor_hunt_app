@@ -1,3 +1,4 @@
+import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
@@ -32,7 +33,7 @@ class _DoctorSearchCardWidgetState extends State<DoctorSearchCardWidget> {
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha:0.04),
             blurRadius: 15.r,
             offset: const Offset(0, 5),
           ),
@@ -45,7 +46,6 @@ class _DoctorSearchCardWidgetState extends State<DoctorSearchCardWidget> {
           padding: EdgeInsets.all(14.r),
           child: Column(
             children: [
-              // 1️⃣ القسم العلوي: الصورة + التفاصيل + القلب
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -99,7 +99,6 @@ class _DoctorSearchCardWidgetState extends State<DoctorSearchCardWidget> {
                         ),
                         HeightSpace(2),
 
-                        // التخصص
                         Text(
                           'Tooths Dentist',
                           style: TextStyle(
@@ -110,7 +109,6 @@ class _DoctorSearchCardWidgetState extends State<DoctorSearchCardWidget> {
                         ),
                         HeightSpace(4),
 
-                        // سنوات الخبرة
                         Text(
                           '7 Years experience',
                           style: TextStyle(
@@ -120,10 +118,8 @@ class _DoctorSearchCardWidgetState extends State<DoctorSearchCardWidget> {
                         ),
                         HeightSpace(8),
 
-                        // النسبة المئوية وقصص المرضى (Patient Stories)
                         Row(
                           children: [
-                            // النقطة الخضراء + النسبة
                             const CircleAvatar(
                               radius: 4,
                               backgroundColor: AppColors.primaryColor,
@@ -138,7 +134,6 @@ class _DoctorSearchCardWidgetState extends State<DoctorSearchCardWidget> {
                             ),
                             WidthSpace(14),
 
-                            // النقطة الخضراء + عدد القصص
                             const CircleAvatar(
                               radius: 4,
                               backgroundColor: AppColors.primaryColor,
@@ -168,7 +163,7 @@ class _DoctorSearchCardWidgetState extends State<DoctorSearchCardWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Next Available',
+                        t.nextAvailable,
                         style: TextStyle(
                           fontSize: 13.sp,
                           color: AppColors.primaryColor,
@@ -214,13 +209,8 @@ class _DoctorSearchCardWidgetState extends State<DoctorSearchCardWidget> {
                         padding: EdgeInsets.zero,
                       ),
                       child: Text(
-                        'Book Now',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: 'Rubik',
-                        ),
+                        t.bookNow,
+                        style: AppTextStyles.buttonTextStyle,
                       ),
                     ),
                   ),

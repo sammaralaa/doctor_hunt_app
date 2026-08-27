@@ -18,11 +18,11 @@ class _CustomSearchTextFieldWidget extends State<CustomSearchTextFieldWidget> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.white,
         borderRadius: BorderRadius.circular(6.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.06),
+            color: AppColors.black.withValues(alpha:0.06),
             blurRadius: 15.r,
             offset: const Offset(0, 5),
           ),

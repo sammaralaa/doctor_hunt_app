@@ -7,7 +7,7 @@ class NumberStatisticsWidget extends StatelessWidget {
   final String number;
   final String label;
 
-  NumberStatisticsWidget({required this.number, required this.label});
+  const NumberStatisticsWidget({super.key, required this.number, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class NumberStatisticsWidget extends StatelessWidget {
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.r),
-        color: AppColors.subtitleColor.withOpacity(0.1),
+        color: AppColors.subtitleColor.withValues(alpha:0.1),
       ),
       child: Column(
         children: [

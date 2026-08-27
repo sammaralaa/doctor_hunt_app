@@ -1,4 +1,5 @@
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
+import 'package:doctor_hunt_app/generated/app_text_styles.dart';
 import 'package:doctor_hunt_app/generated/image_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,80 +9,89 @@ class LiveDocotorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 120.w,
-      height: 168.h,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.r),
-        // image: DecorationImage(
-        //   image: AssetImage(ImageAssets.doctorImage),
-        //   fit: BoxFit.cover,
-        // ),
-      ),
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Positioned.fill(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.r),
-                //color: Colors.black.withOpacity(0.15),
-                image: DecorationImage(
-                  image: AssetImage(ImageAssets.doctorImage),
-                  fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        width: 118.w,
+        height: 168.h,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          image: DecorationImage(
+            image: AssetImage(ImageAssets.doctorImgTest),
+            //NetworkImage(imageUrl),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: Stack(
+            children: [
+              // Subtle dark gradient overlay to improve contrast
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.black.withValues(alpha:0.15),
+                      Colors.black.withValues(alpha:0.05),
+                      Colors.black.withValues(alpha:0.2),
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
                 ),
               ),
-            ),
-          ),
 
-          Positioned(
-            top: 8.h,
-            right: 8.w,
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
-              decoration: BoxDecoration(
-                color: const Color(0xFFFF0037),
-                borderRadius: BorderRadius.circular(4.r),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    width: 5.r,
-                    height: 5.r,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                    ),
+              // "LIVE" Badge (Top Right)
+              Positioned(
+                top: 12,
+                right: 12,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 4,
                   ),
-                  SizedBox(width: 4.w),
-                  Text(
-                    'LIVE',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 8.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  decoration: BoxDecoration(
+                    color: AppColors.red, // Red badge
+                    borderRadius: BorderRadius.circular(3),
                   ),
-                ],
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.circle, color: Colors.white, size: 5),
+                      SizedBox(width: 5),
+                      Text(
+                        'LIVE',
+                        style: AppTextStyles.buttonTextStyle.copyWith(
+                          fontSize: 7.sp,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ),
-          ),
 
-          Container(
-            width: 32.r,
-            height: 32.r,
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.3),
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              Icons.play_arrow_rounded,
-              color: Colors.white,
-              size: 22.r,
-            ),
+              Center(
+                child: Container(
+                  width: 35,
+                  height: 35,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: AppColors.white.withValues(alpha: 0.85),
+                      width: 3.5,
+                    ),
+                    color: AppColors.midnightBlue.withValues(alpha:0.15),
+                  ),
+                  child:  Icon(
+                    Icons.play_arrow_rounded,
+                    color: AppColors.white,
+                    size: 20,
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

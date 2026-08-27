@@ -6,10 +6,11 @@ import 'package:doctor_hunt_app/core/widgets/top_left_shadow_widget.dart';
 import 'package:doctor_hunt_app/features/doctor_details/presentation/widgets/doctor_details_card_widget.dart';
 import 'package:doctor_hunt_app/features/doctor_details/presentation/widgets/number_statistics_widget.dart';
 import 'package:doctor_hunt_app/features/doctor_details/presentation/widgets/services_section_details.dart';
-import 'package:doctor_hunt_app/generated/app_text_styles.dart';
+import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
+import 'package:latlong2/latlong.dart';
 
 class DoctorDetailsScreen extends StatefulWidget {
   @override
@@ -24,19 +25,20 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
         children: [
           TopLeftShadowWidget(),
           BottomRightShadowWidget(),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: SafeArea(
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(25.0),
+
               child: Column(
                 children: [
                   CustomAppBarWidget(
                     showSearchIcon: true,
-                    title: 'Doctor Details',
+                    title: t.doctorDetails,
                   ),
                   HeightSpace(30),
                   DoctorDetailsCardWidget(
                     onBookNowPressed: () {
-                      // Handle the "Book Now" button press here
+                      //Book Now
                     },
                   ),
                   //doctor card
@@ -59,6 +61,40 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
                   HeightSpace(30),
 
                   DoctorServicesSection(),
+
+                  Container(
+                    height: 200.h,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.r),
+                      border: BoxBorder.all(color: AppColors.white, width: 9.w),
+                    ),
+                    child: FlutterMap(
+                      options: const MapOptions(
+                        initialCenter: LatLng(30.0444, 31.2357),
+                        initialZoom: 13.0,
+                      ),
+                      children: [
+                        TileLayer(
+                          urlTemplate: t.urlTemp,
+                          userAgentPackageName: t.packageName,
+                        ),
+                        MarkerLayer(
+                          markers: [
+                            Marker(
+                              point: const LatLng(30.0444, 31.2357),
+                              width: 40,
+                              height: 40,
+                              child: const Icon(
+                                Icons.location_on,
+                                color: AppColors.red,
+                                size: 40,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),

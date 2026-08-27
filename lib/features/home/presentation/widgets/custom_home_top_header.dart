@@ -5,6 +5,7 @@ import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/generated/app_text_styles.dart';
 import 'package:doctor_hunt_app/generated/image_assets.dart';
+import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -41,7 +42,7 @@ class CustomHomeTopHeader extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Find Your Doctor',
+                    t.findYourDoctor,
                     style: AppTextStyles.titleTextStyle.copyWith(
                       color: AppColors.white,
                     ),
@@ -60,11 +61,11 @@ class CustomHomeTopHeader extends StatelessWidget {
           bottom: -24.h,
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.white,
               borderRadius: BorderRadius.circular(6.r),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.06),
+                  color: AppColors.black.withValues(alpha:0.06),
                   blurRadius: 15.r,
                   offset: const Offset(0, 5),
                 ),
@@ -74,7 +75,7 @@ class CustomHomeTopHeader extends StatelessWidget {
               controller: searchController,
               onSubmitted: (value) => {FindDoctorsRoute().push(context)},
               decoration: InputDecoration(
-                hintText: 'Search.....',
+                hintText: t.search,
                 hintStyle: AppTextStyles.subTitleTextStyle.copyWith(
                   fontSize: 15.sp,
                 ),
