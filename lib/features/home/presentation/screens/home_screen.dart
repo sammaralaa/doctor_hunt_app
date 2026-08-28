@@ -149,6 +149,7 @@ class _HomeScreen extends State<HomeScreen> {
                       },
                     ),
                   ),
+                  HeightSpace(100),
                 ],
               ),
             ),

@@ -43,6 +43,7 @@ dependencies:
   latlong2: ^0.9.1
   slang: ^4.4.0
   slang_flutter: ^4.4.0
+  animated_notch_bottom_bar: ^1.0.4
 
 dev_dependencies:
   flutter_test:
