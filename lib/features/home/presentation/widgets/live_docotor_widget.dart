@@ -31,9 +31,9 @@ class LiveDocotorWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      Colors.black.withValues(alpha:0.15),
-                      Colors.black.withValues(alpha:0.05),
-                      Colors.black.withValues(alpha:0.2),
+                      AppColors.black.withValues(alpha:0.15),
+                      AppColors.black.withValues(alpha:0.05),
+                      AppColors.black.withValues(alpha:0.2),
                     ],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,

@@ -2,10 +2,11 @@ import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/bottom_right_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/custom_app_bar_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
+import 'package:doctor_hunt_app/core/widgets/success_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/top_left_shadow_widget.dart';
 import 'package:doctor_hunt_app/features/doctor_details/presentation/widgets/doctor_details_card_widget.dart';
-import 'package:doctor_hunt_app/features/doctor_details/presentation/widgets/number_statistics_widget.dart';
 import 'package:doctor_hunt_app/features/doctor_details/presentation/widgets/services_section_details.dart';
+import 'package:doctor_hunt_app/generated/app_text_styles.dart';
 import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -13,6 +14,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:latlong2/latlong.dart';
 
 class DoctorDetailsScreen extends StatefulWidget {
+  const DoctorDetailsScreen({super.key});
+
   @override
   State<DoctorDetailsScreen> createState() => _DoctorDetailsScreenState();
 }
@@ -38,7 +41,11 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
                   HeightSpace(30),
                   DoctorDetailsCardWidget(
                     onBookNowPressed: () {
-                      //Book Now
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext dialogContext) =>
+                            SuccessWidget(),
+                      );
                     },
                   ),
                   //doctor card
@@ -52,9 +59,21 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        NumberStatisticsWidget(number: "100", label: "Runing"),
-                        NumberStatisticsWidget(number: "500", label: "Ongoing"),
-                        NumberStatisticsWidget(number: "700", label: "Patient"),
+                        buildNumberStatisticItem(
+                          number: "100",
+                          label: "Runing",
+                          context: context,
+                        ),
+                        buildNumberStatisticItem(
+                          number: "500",
+                          label: "Ongoing",
+                          context: context,
+                        ),
+                        buildNumberStatisticItem(
+                          number: "700",
+                          label: "Patient",
+                          context: context,
+                        ),
                       ],
                     ),
                   ),
@@ -103,4 +122,25 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
       ),
     );
   }
+}
+
+Widget buildNumberStatisticItem({
+  required String number,
+  required String label,
+  required dynamic context,
+}) {
+  return Container(
+    padding: EdgeInsets.all(20.r),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(10.r),
+      color: AppColors.subtitleColor.withValues(alpha: 0.1),
+    ),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        //Text(number, style: context.bold18TextMain),
+        // Text(label, style: context.regular14TextSub),
+      ],
+    ),
+  );
 }

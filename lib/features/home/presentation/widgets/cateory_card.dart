@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart'; // إذا كانت الأيقونة SVG
+import 'package:flutter_svg/flutter_svg.dart'; 
 
 class CategoryCard extends StatelessWidget {
-  final String iconPath; // أو IconData لو بتستخدمي Icons عادية
+  final String iconPath; 
   final VoidCallback? onTap;
   final Color? fromColor;
   final Color? toColor;
@@ -20,8 +20,8 @@ class CategoryCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 80.w,
-        height: 80.h,
+        width: 70.w,
+        height: 70.h,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.r),
           gradient: LinearGradient(
@@ -45,8 +45,8 @@ class CategoryCard extends StatelessWidget {
         child: Center(
           child: SvgPicture.asset(
             iconPath,
-            width: 36.r,
-            height: 36.r,
+            width: 30.r,
+            height: 30.r,
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
           ),
         ),

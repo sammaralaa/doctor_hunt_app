@@ -1,7 +1,7 @@
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/bottom_right_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/top_left_shadow_widget.dart';
-import 'package:doctor_hunt_app/features/favorite/presentation/favorite_screen.dart';
+import 'package:doctor_hunt_app/features/favorite/presentation/screens/favorite_screen.dart';
 import 'package:doctor_hunt_app/features/home/presentation/screens/home_screen.dart';
 import 'package:doctor_hunt_app/features/main_screen/presentation/widgets/custom_icon_bottom_nav.dart';
 import 'package:doctor_hunt_app/generated/icons_assets.dart';

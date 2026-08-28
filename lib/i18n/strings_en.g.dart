@@ -67,6 +67,18 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 
 	/// en: 'doctor_hunt_app.app'
 	String get packageName => 'doctor_hunt_app.app';
+
+	/// en: 'Popular Doctors'
+	String get popularDoctors => 'Popular Doctors';
+
+	/// en: 'See all'
+	String get seeAll => 'See all';
+
+	/// en: 'Feature Doctor'
+	String get featureDoctor => 'Feature Doctor';
+
+	/// en: 'Live Doctors'
+	String get liveDoctors => 'Live Doctors';
 }
 
 /// The flat map containing all translations for locale <en>.
@@ -86,6 +98,10 @@ extension on Translations {
 			'bookNow' => 'Book Now',
 			'urlTemp' => 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
 			'packageName' => 'doctor_hunt_app.app',
+			'popularDoctors' => 'Popular Doctors',
+			'seeAll' => 'See all',
+			'featureDoctor' => 'Feature Doctor',
+			'liveDoctors' => 'Live Doctors',
 			_ => null,
 		};
 	}
