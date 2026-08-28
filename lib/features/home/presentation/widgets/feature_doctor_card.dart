@@ -16,7 +16,6 @@ class FeatureDoctorCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          //HeightSpace(10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,

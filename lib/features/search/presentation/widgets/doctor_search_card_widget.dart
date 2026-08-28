@@ -1,3 +1,4 @@
+import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -70,11 +71,8 @@ class _DoctorSearchCardWidgetState extends State<DoctorSearchCardWidget> {
                             Expanded(
                               child: Text(
                                 'Dr. Shruti Kedia',
-                                style: AppTextStyles.buttonTextStyle.copyWith(
-                                  color: AppColors.titleColor,
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: context.bold16TextMain
+                              ,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -101,20 +99,14 @@ class _DoctorSearchCardWidgetState extends State<DoctorSearchCardWidget> {
 
                         Text(
                           'Tooths Dentist',
-                          style: TextStyle(
-                            fontSize: 13.sp,
-                            color: AppColors.primaryColor,
-                            fontWeight: FontWeight.w500,
-                          ),
+                          style: context.bold14Primary
+                        ,
                         ),
                         HeightSpace(4),
 
                         Text(
                           '7 Years experience',
-                          style: TextStyle(
-                            fontSize: 12.sp,
-                            color: const Color(0xFF677294),
-                          ),
+                          style: context.regular12TextSub,
                         ),
                         HeightSpace(8),
 
@@ -127,10 +119,7 @@ class _DoctorSearchCardWidgetState extends State<DoctorSearchCardWidget> {
                             WidthSpace(4),
                             Text(
                               '87%',
-                              style: TextStyle(
-                                fontSize: 11.sp,
-                                color: const Color(0xFF677294),
-                              ),
+                              style: context.regular11TextSub,
                             ),
                             WidthSpace(14),
 
@@ -141,10 +130,7 @@ class _DoctorSearchCardWidgetState extends State<DoctorSearchCardWidget> {
                             WidthSpace(4),
                             Text(
                               '69 Patient Stories',
-                              style: TextStyle(
-                                fontSize: 11.sp,
-                                color: const Color(0xFF677294),
-                              ),
+                              style: context.regular11TextSub,
                             ),
                           ],
                         ),
@@ -164,11 +150,8 @@ class _DoctorSearchCardWidgetState extends State<DoctorSearchCardWidget> {
                     children: [
                       Text(
                         t.nextAvailable,
-                        style: TextStyle(
-                          fontSize: 13.sp,
-                          color: AppColors.primaryColor,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: context.bold14Primary
+                        ,
                       ),
                       HeightSpace(2),
                       RichText(
@@ -176,18 +159,12 @@ class _DoctorSearchCardWidgetState extends State<DoctorSearchCardWidget> {
                           children: [
                             TextSpan(
                               text: '10:00 ',
-                              style: TextStyle(
-                                color: AppColors.titleColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12.sp,
-                              ),
+                              style: context.bold12TextMain
+                             ,
                             ),
                             TextSpan(
                               text: 'AM tomorrow',
-                              style: TextStyle(
-                                color: const Color(0xFF677294),
-                                fontSize: 12.sp,
-                              ),
+                              style: context.regular12TextSub,
                             ),
                           ],
                         ),
@@ -210,7 +187,7 @@ class _DoctorSearchCardWidgetState extends State<DoctorSearchCardWidget> {
                       ),
                       child: Text(
                         t.bookNow,
-                        style: AppTextStyles.buttonTextStyle,
+                        style: context.bold18White,
                       ),
                     ),
                   ),

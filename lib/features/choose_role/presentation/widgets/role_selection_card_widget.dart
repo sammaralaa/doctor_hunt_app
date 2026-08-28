@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
+import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/theme/app_colors.dart';
-import '../../../../generated/app_text_styles.dart';
 import '../../../../core/widgets/spacing_widgets.dart';
 
 class RoleSelectionCardWidget extends StatelessWidget {
@@ -57,16 +56,14 @@ class RoleSelectionCardWidget extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: AppTextStyles.titleTextStyle.copyWith(
-                      fontSize: 20.sp,
-                    ),
+                    style: context.bold20TextMain,
                     textAlign: TextAlign.start,
                   ),
                   SizedBox(
                     width: 200.w,
                     child: Text(
                       description,
-                      style: AppTextStyles.subTitleTextStyle,
+                      style: context.regular14TextSub,
                       textAlign: TextAlign.start,
                       overflow: TextOverflow.clip,
                     ),

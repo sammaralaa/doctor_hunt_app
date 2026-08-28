@@ -5,6 +5,7 @@ import 'package:doctor_hunt_app/generated/app_text_styles.dart';
 import 'package:doctor_hunt_app/core/widgets/bottom_right_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/core/widgets/top_left_shadow_widget.dart';
+import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -45,7 +46,7 @@ class _SplashScreen extends State<SplashScreen> {
                 children: [
                   Image.asset("assets/images/app_logo.png"),
                   HeightSpace(11),
-                  Text("Doctor Hunt", style: AppTextStyles.titleTextStyle),
+                  Text("Doctor Hunt", style: context.bold26TextMain),
                 ],
               ),
             ),

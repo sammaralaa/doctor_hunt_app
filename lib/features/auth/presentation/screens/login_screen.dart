@@ -1,17 +1,16 @@
 import 'package:doctor_hunt_app/core/routing/routes.dart';
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
-import 'package:doctor_hunt_app/generated/app_text_styles.dart';
 import 'package:doctor_hunt_app/core/widgets/bottom_right_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/custom_elevated_button.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/core/widgets/top_left_shadow_widget.dart';
 import 'package:doctor_hunt_app/features/auth/presentation/widgets/custom_textfeild_widget.dart';
 import 'package:doctor_hunt_app/features/auth/presentation/widgets/login_with_widget.dart';
+import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 
 import '../widgets/forgot_password_widget.dart';
 
@@ -68,12 +67,12 @@ class _LoginScreen extends State<LoginScreen> {
                               HeightSpace(100),
                               Text(
                                 "Welcome back",
-                                style: AppTextStyles.titleTextStyle,
+                                style: context.bold26TextMain,
                               ),
                               HeightSpace(15),
                               Text(
                                 "You can search c ourse, apply course and findscholarship for abroad studies",
-                                style: AppTextStyles.subTitleTextStyle,
+                                style: context.regular14TextSub,
                                 textAlign: TextAlign.center,
                               ),
                               HeightSpace(60),
@@ -166,8 +165,7 @@ class _LoginScreen extends State<LoginScreen> {
                                 },
                                 child: Text(
                                   "Forgor password",
-                                  style: AppTextStyles.subTitleTextStyle
-                                      .copyWith(color: AppColors.primaryColor),
+                                  style: context.regular14Primary,
                                 ),
                               ),
                               //HeightSpace(60),
@@ -177,10 +175,7 @@ class _LoginScreen extends State<LoginScreen> {
                                 children: [
                                   Text(
                                     "Don’t have an account?",
-                                    style: AppTextStyles.subTitleTextStyle
-                                        .copyWith(
-                                          color: AppColors.primaryColor,
-                                        ),
+                                    style: context.regular14Primary,
                                   ),
                                   TextButton(
                                     onPressed: () {
@@ -191,10 +186,7 @@ class _LoginScreen extends State<LoginScreen> {
                                     },
                                     child: Text(
                                       "Join us",
-                                      style: AppTextStyles.subTitleTextStyle
-                                          .copyWith(
-                                            color: AppColors.primaryColor,
-                                          ),
+                                      style: context.regular14Primary,
                                     ),
                                   ),
                                 ],

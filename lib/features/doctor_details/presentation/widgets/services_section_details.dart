@@ -1,4 +1,5 @@
 import 'package:doctor_hunt_app/generated/app_text_styles.dart';
+import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
@@ -21,7 +22,7 @@ class DoctorServicesSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Services', style: AppTextStyles.homeSectionsTitle),
+        Text('Services', style: context.bold18TextMain),
 
         HeightSpace(16),
 
@@ -44,16 +45,13 @@ class DoctorServicesSection extends StatelessWidget {
               children: [
                 Text(
                   '${index + 1}.',
-                  style: AppTextStyles.rubik12bold.copyWith(
-                    color: AppColors.primaryColor,
-                    fontSize: 13.sp,
-                  ),
+                  style: context.bold14Primary,
                 ),
                 SizedBox(width: 10.w),
                 Expanded(
                   child: Text(
                     services[index],
-                    style: AppTextStyles.subTitleTextStyle,
+                    style: context.regular14TextSub,
                   ),
                 ),
               ],

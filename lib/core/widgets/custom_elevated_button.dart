@@ -1,9 +1,9 @@
+import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../theme/app_colors.dart';
-import '../../generated/app_text_styles.dart';
 
 class CustomElevatdButton extends StatelessWidget{
   final String buttonTXT;
@@ -25,7 +25,7 @@ class CustomElevatdButton extends StatelessWidget{
         ),
         child: Text(
           buttonTXT,
-          style: AppTextStyles.buttonTextStyle,
+          style: context.bold18White,
         ),
       ),
     );

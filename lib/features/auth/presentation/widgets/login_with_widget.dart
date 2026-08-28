@@ -1,4 +1,5 @@
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
+import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,7 +17,7 @@ class LoginWithWidget extends StatelessWidget{
     return Expanded(
         child:ElevatedButton.icon(
           onPressed: onTop,
-          label: Text(btnText,style: AppTextStyles.loginWithButton,),
+          label: Text(btnText,style: context.regular16TextSub,),
           icon: btnIcon,
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.white,

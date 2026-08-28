@@ -2,6 +2,7 @@ import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/generated/app_text_styles.dart';
 import 'package:doctor_hunt_app/generated/image_assets.dart';
+import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -59,10 +60,8 @@ class _DoctorDetailsCardWidgetState extends State<DoctorDetailsCardWidget> {
                         Expanded(
                           child: Text(
                             'Dr. Pediatrician',
-                            style: AppTextStyles.buttonTextStyle.copyWith(
-                              color: AppColors.titleColor,
-                              fontSize: 16.sp,
-                            ),
+                            style:context.bold16TextMain
+                            ,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -89,9 +88,7 @@ class _DoctorDetailsCardWidgetState extends State<DoctorDetailsCardWidget> {
 
                     Text(
                       'Specialist Cardiologist',
-                      style: AppTextStyles.subTitleTextStyle.copyWith(
-                        fontSize: 12.sp,
-                      ),
+                      style: context.regular12TextSub,
                     ),
                     HeightSpace(8),
 
@@ -115,17 +112,11 @@ class _DoctorDetailsCardWidgetState extends State<DoctorDetailsCardWidget> {
                             children: [
                               TextSpan(
                                 text: '\$ ',
-                                style: AppTextStyles.subTitleTextStyle.copyWith(
-                                  color: AppColors.primaryColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16.sp,
-                                ),
+                                style: context.bold16Primary,
                               ),
                               TextSpan(
                                 text: '28.00/hr',
-                                style: AppTextStyles.subTitleTextStyle.copyWith(
-                                  fontSize: 16.sp,
-                                ),
+                                style: context.regular16TextSub,
                               ),
                             ],
                           ),
@@ -155,7 +146,7 @@ class _DoctorDetailsCardWidgetState extends State<DoctorDetailsCardWidget> {
               ),
               child: Text(
                 'Book Now',
-                style: AppTextStyles.buttonTextStyle.copyWith(fontSize: 14),
+                style: context.bold14White,
               ),
             ),
           ),

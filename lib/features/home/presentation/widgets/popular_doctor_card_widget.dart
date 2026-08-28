@@ -3,6 +3,7 @@ import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/generated/app_text_styles.dart';
 import 'package:doctor_hunt_app/generated/image_assets.dart';
+import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -32,11 +33,9 @@ class PopularDoctorCardWidget extends StatelessWidget {
             HeightSpace(14),
             Text(
               'Dr. Fillerup Grab',
-              style: AppTextStyles.buttonTextStyle.copyWith(
-                color: AppColors.titleColor,
-              ),
+              style: context.bold18TextMain,
             ),
-            Text('Medicine Specialist', style: AppTextStyles.subTitleTextStyle),
+            Text('Medicine Specialist', style: context.regular14TextSub),
             HeightSpace(6),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
