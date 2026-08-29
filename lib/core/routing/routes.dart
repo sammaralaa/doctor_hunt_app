@@ -5,6 +5,7 @@ import 'package:doctor_hunt_app/features/doctor_details/presentation/screens/doc
 import 'package:doctor_hunt_app/features/main_screen/presentation/screens/main_screen.dart';
 import 'package:doctor_hunt_app/features/onboarding/presentation/screens/onboarding_screen.dart';
 import 'package:doctor_hunt_app/features/search/presentation/screens/find_doctors_screen.dart';
+import 'package:doctor_hunt_app/features/select_time_and_date/presentation/screens/select_time_date_screen.dart';
 import 'package:doctor_hunt_app/features/splash/presentation/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -83,5 +84,14 @@ class FindDoctorsRoute extends GoRouteData with $FindDoctorsRoute {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return  FindDoctorsScreen();
+  }
+}
+@TypedGoRoute<SelectTimeRoute>(path: '/select-time')
+class SelectTimeRoute extends GoRouteData with $SelectTimeRoute {
+  const SelectTimeRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return  SelectTimeDateScreen();
   }
 }

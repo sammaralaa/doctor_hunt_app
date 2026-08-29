@@ -79,6 +79,9 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 
 	/// en: 'Live Doctors'
 	String get liveDoctors => 'Live Doctors';
+
+	/// en: 'Select Time'
+	String get selectTime => 'Select Time';
 }
 
 /// The flat map containing all translations for locale <en>.
@@ -102,6 +105,7 @@ extension on Translations {
 			'seeAll' => 'See all',
 			'featureDoctor' => 'Feature Doctor',
 			'liveDoctors' => 'Live Doctors',
+			'selectTime' => 'Select Time',
 			_ => null,
 		};
 	}
