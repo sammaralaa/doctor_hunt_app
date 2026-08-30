@@ -1,6 +1,5 @@
-import 'package:doctor_hunt_app/core/routing/routes.dart';
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
-import 'package:doctor_hunt_app/generated/app_text_styles.dart';
+import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,11 +17,11 @@ class _CustomSearchTextFieldWidget extends State<CustomSearchTextFieldWidget> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.white,
         borderRadius: BorderRadius.circular(6.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.06),
+            color: AppColors.black.withValues(alpha:0.06),
             blurRadius: 15.r,
             offset: const Offset(0, 5),
           ),
@@ -33,7 +32,7 @@ class _CustomSearchTextFieldWidget extends State<CustomSearchTextFieldWidget> {
         onSubmitted: widget.onSubmit,
         decoration: InputDecoration(
           hintText: 'Search.....',
-          hintStyle: AppTextStyles.subTitleTextStyle.copyWith(fontSize: 15.sp),
+          hintStyle: context.regular16TextSub,
           prefixIcon: const Icon(Icons.search, color: AppColors.subtitleColor),
           suffixIcon: IconButton(
             icon: const Icon(Icons.close, color: AppColors.subtitleColor),

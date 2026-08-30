@@ -3,6 +3,7 @@ import 'package:doctor_hunt_app/generated/app_text_styles.dart';
 import 'package:doctor_hunt_app/core/widgets/custom_elevated_button.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/features/auth/presentation/widgets/custom_textfeild_widget.dart';
+import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -32,14 +33,14 @@ class ResetPasswordWidget extends StatelessWidget{
           HeightSpace(30),
           Text(
             'Reset Password',
-            style: AppTextStyles.titleTextStyle,
+            style: context.bold26TextMain,
             textAlign: TextAlign.start,
           ),
 
           HeightSpace(12),
           Text(
             'Set the new password for your account so you can login and access all the features.',
-            style: AppTextStyles.subTitleTextStyle,
+            style: context.regular14TextSub,
           ),
 
           SizedBox(height: 36.h),

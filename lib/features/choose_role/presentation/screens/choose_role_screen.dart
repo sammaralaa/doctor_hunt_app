@@ -1,10 +1,9 @@
 import 'package:doctor_hunt_app/core/routing/routes.dart';
-import 'package:doctor_hunt_app/core/theme/app_colors.dart';
-import 'package:doctor_hunt_app/generated/app_text_styles.dart';
 import 'package:doctor_hunt_app/core/widgets/bottom_right_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/custom_elevated_button.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/core/widgets/top_left_shadow_widget.dart';
+import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -32,13 +31,13 @@ class _ChooseRoleScreen extends State<ChooseRoleScreen> {
                 children: [
                   HeightSpace(32),
                   Image.asset(ImageAssets.appLogo),
-                  Text("Doctor Hunt", style: AppTextStyles.titleTextStyle),
+                  Text("Doctor Hunt", style: context.bold26TextMain),
                   HeightSpace(55),
-                  Text("Choose your role", style: AppTextStyles.rubik28regular),
+                  Text("Choose your role", style: context.regular28TextMain),
                   HeightSpace(10),
                   Text(
                     "The selected role determines the experience and available features.",
-                    style: AppTextStyles.subTitleTextStyle,
+                    style: context.regular14TextSub,
                     textAlign: TextAlign.center,
                   ),
                   HeightSpace(30),

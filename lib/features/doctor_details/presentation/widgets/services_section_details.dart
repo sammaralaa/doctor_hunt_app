@@ -1,3 +1,5 @@
+import 'package:doctor_hunt_app/generated/app_text_styles.dart';
+import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
@@ -20,20 +22,10 @@ class DoctorServicesSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // 1️⃣ عنوان "Services"
-        Text(
-          'Services',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.bold,
-            color: AppColors.titleColor,
-            fontFamily: 'Rubik',
-          ),
-        ),
+        Text('Services', style: context.bold18TextMain),
 
         HeightSpace(16),
 
-        // 2️⃣ القائمة المرقمة مع الخطوط الفاصلة
         ListView.separated(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -42,7 +34,7 @@ class DoctorServicesSection extends StatelessWidget {
           separatorBuilder: (context, index) => Padding(
             padding: EdgeInsets.symmetric(vertical: 12.h),
             child: Divider(
-              color: const Color(0xFFE8ECF2),
+              color: AppColors.subtitleColor.withValues(alpha: 0.10),
               thickness: 1.h,
               height: 1.h,
             ),
@@ -51,27 +43,15 @@ class DoctorServicesSection extends StatelessWidget {
             return Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // الرقم الأخضر بارز
                 Text(
                   '${index + 1}.',
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.primaryColor, // اللون الأخضر الأساسي للفرامورك
-                    fontFamily: 'Rubik',
-                  ),
+                  style: context.bold14Primary,
                 ),
                 SizedBox(width: 10.w),
-                // النص الخاص بالخدمة
                 Expanded(
                   child: Text(
                     services[index],
-                    style: TextStyle(
-                      fontSize: 13.sp,
-                      color: const Color(0xFF677294),
-                      height: 1.4,
-                      fontFamily: 'Rubik',
-                    ),
+                    style: context.regular14TextSub,
                   ),
                 ),
               ],
@@ -80,9 +60,6 @@ class DoctorServicesSection extends StatelessWidget {
         ),
 
         HeightSpace(24),
-
-        // 3️⃣ كارت الخريطة
-        //const DoctorLocationMapWidget(),
       ],
     );
   }

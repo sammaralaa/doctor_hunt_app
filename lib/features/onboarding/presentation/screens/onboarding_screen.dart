@@ -1,14 +1,12 @@
 import 'dart:ui';
 
 import 'package:doctor_hunt_app/core/routing/routes.dart';
-import 'package:doctor_hunt_app/core/theme/app_colors.dart';
-import 'package:doctor_hunt_app/generated/app_text_styles.dart';
 import 'package:doctor_hunt_app/core/widgets/bottom_right_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/core/widgets/top_left_color_shape.dart';
+import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../core/widgets/custom_elevated_button.dart';
 import '../../data/onboarding_model.dart';
@@ -58,14 +56,14 @@ class _OnboardingScreen extends State<OnboardingScreen> {
                       HeightSpace(65),
                       Text(
                         OnboardingModel.onboardingPages[index].title,
-                        style: AppTextStyles.titleTextStyle,
+                        style: context.bold26TextMain,
                       ),
                       HeightSpace(11),
                       Text(
                         OnboardingModel
                             .onboardingPages[_currentIndex]
                             .description,
-                        style: AppTextStyles.subTitleTextStyle,
+                        style: context.regular14TextSub,
                         textAlign: TextAlign.center,
                       ),
                       HeightSpace(35),
@@ -94,7 +92,7 @@ class _OnboardingScreen extends State<OnboardingScreen> {
                         },
                         child: Text(
                           "Skip",
-                          style: AppTextStyles.subTitleTextStyle,
+                          style: context.regular14TextSub,
                         ),
                       ),
                     ],

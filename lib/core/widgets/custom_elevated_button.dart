@@ -1,20 +1,21 @@
+import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../theme/app_colors.dart';
-import '../../generated/app_text_styles.dart';
 
-class CustomElevatdButton extends StatelessWidget{
+class CustomElevatdButton extends StatelessWidget {
   final String buttonTXT;
   final VoidCallback? onTap;
+  final double? buttonWidth;
 
-  const CustomElevatdButton({super.key, required this.buttonTXT,this.onTap});
+  const CustomElevatdButton({super.key, required this.buttonTXT, this.onTap,this.buttonWidth});
   @override
   Widget build(BuildContext context) {
-    return                   SizedBox(
+    return SizedBox(
       height: 50.h,
-      width: 295.w,
+      width:  buttonWidth ??  295.w,
       child: ElevatedButton(
         onPressed: onTap,
         style: ElevatedButton.styleFrom(
@@ -23,12 +24,8 @@ class CustomElevatdButton extends StatelessWidget{
             borderRadius: BorderRadiusGeometry.circular(10.r),
           ),
         ),
-        child: Text(
-          buttonTXT,
-          style: AppTextStyles.buttonTextStyle,
-        ),
+        child: Text(buttonTXT, style: context.bold18White),
       ),
     );
   }
-
 }

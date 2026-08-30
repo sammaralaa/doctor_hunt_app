@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 
 class TopLeftShadowWidget extends StatelessWidget{
@@ -18,7 +19,7 @@ class TopLeftShadowWidget extends StatelessWidget{
           height: 216,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: const Color(0xFF0EBE7E).withOpacity(0.30), // #0EBE7E @ 30%
+            color: AppColors.primaryColor.withValues(alpha:0.30), // #0EBE7E @ 30%
           ),
         ),
       ),

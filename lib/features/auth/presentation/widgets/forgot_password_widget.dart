@@ -5,6 +5,7 @@ import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/features/auth/presentation/widgets/custom_textfeild_widget.dart';
 import 'package:doctor_hunt_app/features/auth/presentation/widgets/enter_digits_widget.dart';
 import 'package:doctor_hunt_app/features/auth/presentation/widgets/reset_password_widget.dart';
+import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,14 +39,14 @@ class ForgotPasswordWidget extends StatelessWidget{
             children: [
               Text(
                 'Forgot password',
-                style: AppTextStyles.titleTextStyle,
+                style: context.bold26TextMain,
                 textAlign: TextAlign.start,
               ),
 
               HeightSpace(12),
               Text(
                 'Enter your email for the verification process, we will send 4 digits code to your email.',
-                style: AppTextStyles.subTitleTextStyle,
+                style: context.regular14TextSub,
               )
             ],
           ),

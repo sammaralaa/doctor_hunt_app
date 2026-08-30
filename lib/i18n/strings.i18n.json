@@ -1,0 +1,21 @@
+{
+  "live": "LIVE",
+  "doctor_hunt": "Doctor Hunt",
+  "doctorDetails": "Doctor Details",
+  "findYourDoctor": "Find Your Doctor",
+  "search": "Search.....",
+  "nextAvailable": "Next Available",
+  "bookNow": "Book Now",
+  "urlTemp": "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+  "packageName": "doctor_hunt_app.app",
+  "popularDoctors": "Popular Doctors",
+  "seeAll": "See all",
+  "featureDoctor": "Feature Doctor",
+  "liveDoctors": "Live Doctors",
+  "selectTime": "Select Time",
+  "noSlotsAvailable": "No slots available",
+  "or": "OR",
+  "contactClinic": "Contact Clinic",
+  "eveningSlots": "Evening $length slots",
+  "afternoonSlots": "Afternoon $length slots"
+}
