@@ -5,16 +5,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../theme/app_colors.dart';
 
-class CustomElevatdButton extends StatelessWidget{
+class CustomElevatdButton extends StatelessWidget {
   final String buttonTXT;
   final VoidCallback? onTap;
+  final double? buttonWidth;
 
-  const CustomElevatdButton({super.key, required this.buttonTXT,this.onTap});
+  const CustomElevatdButton({super.key, required this.buttonTXT, this.onTap,this.buttonWidth});
   @override
   Widget build(BuildContext context) {
-    return                   SizedBox(
+    return SizedBox(
       height: 50.h,
-      width: 295.w,
+      width:  buttonWidth ??  295.w,
       child: ElevatedButton(
         onPressed: onTap,
         style: ElevatedButton.styleFrom(
@@ -23,12 +24,8 @@ class CustomElevatdButton extends StatelessWidget{
             borderRadius: BorderRadiusGeometry.circular(10.r),
           ),
         ),
-        child: Text(
-          buttonTXT,
-          style: context.bold18White,
-        ),
+        child: Text(buttonTXT, style: context.bold18White),
       ),
     );
   }
-
 }

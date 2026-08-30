@@ -82,6 +82,21 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 
 	/// en: 'Select Time'
 	String get selectTime => 'Select Time';
+
+	/// en: 'No slots available'
+	String get noSlotsAvailable => 'No slots available';
+
+	/// en: 'OR'
+	String get or => 'OR';
+
+	/// en: 'Contact Clinic'
+	String get contactClinic => 'Contact Clinic';
+
+	/// en: 'Evening $length slots'
+	String eveningSlots({required Object length}) => 'Evening ${length} slots';
+
+	/// en: 'Afternoon $length slots'
+	String afternoonSlots({required Object length}) => 'Afternoon ${length} slots';
 }
 
 /// The flat map containing all translations for locale <en>.
@@ -106,6 +121,11 @@ extension on Translations {
 			'featureDoctor' => 'Feature Doctor',
 			'liveDoctors' => 'Live Doctors',
 			'selectTime' => 'Select Time',
+			'noSlotsAvailable' => 'No slots available',
+			'or' => 'OR',
+			'contactClinic' => 'Contact Clinic',
+			'eveningSlots' => ({required Object length}) => 'Evening ${length} slots',
+			'afternoonSlots' => ({required Object length}) => 'Afternoon ${length} slots',
 			_ => null,
 		};
 	}

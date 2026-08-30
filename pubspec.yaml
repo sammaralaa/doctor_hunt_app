@@ -45,6 +45,8 @@ dependencies:
   slang_flutter: ^4.4.0
   animated_notch_bottom_bar: ^1.0.4
   intl: ^0.20.2
+  firebase_core: ^4.14.0
+  firebase_auth: ^6.6.1
 
 dev_dependencies:
   flutter_test:

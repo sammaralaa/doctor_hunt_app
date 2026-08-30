@@ -48,7 +48,7 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
                       //   builder: (BuildContext dialogContext) =>
                       //       SuccessWidget(),
                       // );
-                      SelectTimeRoute().go(context);
+                      SelectTimeRoute().push(context);
                       
                     },
                   ),

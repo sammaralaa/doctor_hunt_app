@@ -12,5 +12,10 @@
   "seeAll": "See all",
   "featureDoctor": "Feature Doctor",
   "liveDoctors": "Live Doctors",
-  "selectTime": "Select Time"
+  "selectTime": "Select Time",
+  "noSlotsAvailable": "No slots available",
+  "or": "OR",
+  "contactClinic": "Contact Clinic",
+  "eveningSlots": "Evening $length slots",
+  "afternoonSlots": "Afternoon $length slots"
 }
