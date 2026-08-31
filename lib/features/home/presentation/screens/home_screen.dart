@@ -8,6 +8,7 @@ import 'package:doctor_hunt_app/features/home/presentation/widgets/popular_docto
 import 'package:doctor_hunt_app/generated/icons_assets.dart';
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:doctor_hunt_app/i18n/strings.g.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -20,11 +21,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreen extends State<HomeScreen> {
   late TextEditingController? searchController;
+  late String userName ;
 
   @override
   initState() {
     super.initState();
     searchController = TextEditingController();
+    final user = FirebaseAuth.instance.currentUser;
+    userName = user?.displayName ?? t.user;
   }
 
   @override
@@ -34,7 +38,7 @@ class _HomeScreen extends State<HomeScreen> {
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
-            child: CustomHomeTopHeader(searchController: searchController),
+            child: CustomHomeTopHeader(searchController: searchController,userName: userName,),
           ),
           SliverToBoxAdapter(
             child: Padding(

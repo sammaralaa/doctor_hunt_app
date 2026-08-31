@@ -1,11 +1,10 @@
-import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthRepository{
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn.instance;
 
   // 1. Sign Up
   Future<UserCredential> signUp({
@@ -28,18 +27,34 @@ class AuthRepository{
       password: password,
     );
   }
+  //with google
+  Future<UserCredential> signInWithGoogle() async {
+    final GoogleSignInAccount? googleUser = await _googleSignIn.authenticate();
 
-  Future<String> uploadProfileImage(File imageFile) async {
-    final userId = _firebaseAuth.currentUser?.uid;
-    if (userId == null) throw Exception("User not logged in");
+    if (googleUser == null) {
+      throw Exception('Google Sign-In was canceled by the user.');
+    }
 
-    final storageRef = _firebaseStorage
-        .ref()
-        .child('user_profile_images')
-        .child('$userId.jpg');
+    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
 
-    await storageRef.putFile(imageFile);
+    final OAuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.idToken,
+      idToken: googleAuth.idToken,
+    );
 
-    return await storageRef.getDownloadURL();
+    return await _firebaseAuth.signInWithCredential(credential);
   }
+  // Future<String> uploadProfileImage(File imageFile) async {
+  //   final userId = _firebaseAuth.currentUser?.uid;
+  //   if (userId == null) throw Exception("User not logged in");
+
+  //   final storageRef = _firebaseStorage
+  //       .ref()
+  //       .child('user_profile_images')
+  //       .child('$userId.jpg');
+
+  //   await storageRef.putFile(imageFile);
+
+  //   return await storageRef.getDownloadURL();
+  // }
 }

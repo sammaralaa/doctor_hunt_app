@@ -62,12 +62,6 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	/// en: 'Book Now'
 	String get bookNow => 'Book Now';
 
-	/// en: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
-	String get urlTemp => 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
-
-	/// en: 'doctor_hunt_app.app'
-	String get packageName => 'doctor_hunt_app.app';
-
 	/// en: 'Popular Doctors'
 	String get popularDoctors => 'Popular Doctors';
 
@@ -97,6 +91,57 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 
 	/// en: 'Afternoon $length slots'
 	String afternoonSlots({required Object length}) => 'Afternoon ${length} slots';
+
+	/// en: 'Password'
+	String get password => 'Password';
+
+	/// en: 'Email'
+	String get email => 'Email';
+
+	/// en: 'Name'
+	String get name => 'Name';
+
+	/// en: 'Facebook'
+	String get facebook => 'Facebook';
+
+	/// en: 'Google'
+	String get google => 'Google';
+
+	/// en: 'User'
+	String get user => 'User';
+
+	/// en: 'Have an account?'
+	String get haveAnAccount => 'Have an account?';
+
+	/// en: 'Log in'
+	String get logIn => 'Log in';
+
+	/// en: 'Sign up'
+	String get signUp => 'Sign up';
+
+	/// en: 'I agree with the Terms of Service & Privacy Policy'
+	String get iAgreeWithTheTerms => 'I agree with the Terms of Service & Privacy Policy';
+
+	/// en: 'Join us to start searching'
+	String get joinUs => 'Join us to start searching';
+
+	/// en: 'Hi $userName!'
+	String hi({required Object userName}) => 'Hi ${userName}!';
+
+	/// en: 'Welcome back'
+	String get welcomeBack => 'Welcome back';
+
+	/// en: 'Enter your Name'
+	String get enterYourName => 'Enter your Name';
+
+	/// en: 'Enter your email'
+	String get enterYourEmail => 'Enter your email';
+
+	/// en: 'Enter your Password'
+	String get enterYourPassword => 'Enter your Password';
+
+	/// en: 'password must be at least 8 characters'
+	String get passwordMustBe => 'password must be at least 8 characters';
 }
 
 /// The flat map containing all translations for locale <en>.
@@ -114,8 +159,6 @@ extension on Translations {
 			'search' => 'Search.....',
 			'nextAvailable' => 'Next Available',
 			'bookNow' => 'Book Now',
-			'urlTemp' => 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-			'packageName' => 'doctor_hunt_app.app',
 			'popularDoctors' => 'Popular Doctors',
 			'seeAll' => 'See all',
 			'featureDoctor' => 'Feature Doctor',
@@ -126,6 +169,23 @@ extension on Translations {
 			'contactClinic' => 'Contact Clinic',
 			'eveningSlots' => ({required Object length}) => 'Evening ${length} slots',
 			'afternoonSlots' => ({required Object length}) => 'Afternoon ${length} slots',
+			'password' => 'Password',
+			'email' => 'Email',
+			'name' => 'Name',
+			'facebook' => 'Facebook',
+			'google' => 'Google',
+			'user' => 'User',
+			'haveAnAccount' => 'Have an account?',
+			'logIn' => 'Log in',
+			'signUp' => 'Sign up',
+			'iAgreeWithTheTerms' => 'I agree with the Terms of Service & Privacy Policy',
+			'joinUs' => 'Join us to start searching',
+			'hi' => ({required Object userName}) => 'Hi ${userName}!',
+			'welcomeBack' => 'Welcome back',
+			'enterYourName' => 'Enter your Name',
+			'enterYourEmail' => 'Enter your email',
+			'enterYourPassword' => 'Enter your Password',
+			'passwordMustBe' => 'password must be at least 8 characters',
 			_ => null,
 		};
 	}

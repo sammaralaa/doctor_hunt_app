@@ -11,8 +11,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomHomeTopHeader extends StatelessWidget {
   final TextEditingController? searchController;
+  final String userName;
 
-  const CustomHomeTopHeader({super.key, this.searchController});
+  const CustomHomeTopHeader({super.key, this.searchController, required this.userName});
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -34,14 +35,8 @@ class CustomHomeTopHeader extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Hi Handwerker!',
-                    style:context.regular20White,
-                  ),
-                  Text(
-                    t.findYourDoctor,
-                    style:context.bold26White,
-                  ),
+                  Text(t.hi(userName:userName), style: context.regular20White),
+                  Text(t.findYourDoctor, style: context.bold26White),
                   HeightSpace(30),
                 ],
               ),
@@ -60,7 +55,7 @@ class CustomHomeTopHeader extends StatelessWidget {
               borderRadius: BorderRadius.circular(6.r),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.black.withValues(alpha:0.06),
+                  color: AppColors.black.withValues(alpha: 0.06),
                   blurRadius: 15.r,
                   offset: const Offset(0, 5),
                 ),

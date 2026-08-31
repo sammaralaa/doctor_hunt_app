@@ -98,8 +98,8 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
                       ),
                       children: [
                         TileLayer(
-                          urlTemplate: t.urlTemp,
-                          userAgentPackageName: t.packageName,
+                          urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                          userAgentPackageName: "doctor_hunt_app.app",
                         ),
                         MarkerLayer(
                           markers: [
@@ -126,9 +126,7 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
       ),
     );
   }
-}
-
-Widget buildNumberStatisticItem({
+  Widget buildNumberStatisticItem({
   required String number,
   required String label,
   required dynamic context,
@@ -142,9 +140,12 @@ Widget buildNumberStatisticItem({
     child: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        //Text(number, style: context.bold18TextMain),
-        // Text(label, style: context.regular14TextSub),
+        Text(number, style: context.bold18TextMain),
+        Text(label, style: context.regular14TextSub),
       ],
     ),
   );
 }
+
+}
+
