@@ -7,7 +7,6 @@ import 'package:doctor_hunt_app/core/widgets/top_left_shadow_widget.dart';
 import 'package:doctor_hunt_app/features/auth/presentation/widgets/custom_textfeild_widget.dart';
 import 'package:doctor_hunt_app/features/auth/presentation/widgets/login_with_widget.dart';
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,6 +14,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../widgets/forgot_password_widget.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return _LoginScreen();
