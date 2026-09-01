@@ -122,8 +122,8 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	/// en: 'I agree with the Terms of Service & Privacy Policy'
 	String get iAgreeWithTheTerms => 'I agree with the Terms of Service & Privacy Policy';
 
-	/// en: 'Join us to start searching'
-	String get joinUs => 'Join us to start searching';
+	/// en: 'Join us'
+	String get joinUs => 'Join us';
 
 	/// en: 'Hi $userName!'
 	String hi({required Object userName}) => 'Hi ${userName}!';
@@ -142,6 +142,27 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 
 	/// en: 'password must be at least 8 characters'
 	String get passwordMustBe => 'password must be at least 8 characters';
+
+	/// en: 'Next availability on $nextAvailable'
+	String nextAvailabilityOn({required Object nextAvailable}) => 'Next availability on ${nextAvailable}';
+
+	/// en: 'loged in successfully!'
+	String get logedInSuccessfully => 'loged in successfully!';
+
+	/// en: 'Forgot password'
+	String get forgotPassword => 'Forgot password';
+
+	/// en: 'Don’t have an account?'
+	String get donTHaveAnAccount => 'Don’t have an account?';
+
+	/// en: 'You can search c ourse, apply course and findscholarship for abroad studies'
+	String get authDescreption => 'You can search c ourse, apply course and findscholarship for abroad studies';
+
+	/// en: 'Account created successfully!'
+	String get accountCreatedSuccessfully => 'Account created successfully!';
+
+	/// en: 'Please accept the Terms & Privacy Policy'
+	String get AcceptTheTermsPrivacy => 'Please accept the Terms & Privacy Policy';
 }
 
 /// The flat map containing all translations for locale <en>.
@@ -179,13 +200,20 @@ extension on Translations {
 			'logIn' => 'Log in',
 			'signUp' => 'Sign up',
 			'iAgreeWithTheTerms' => 'I agree with the Terms of Service & Privacy Policy',
-			'joinUs' => 'Join us to start searching',
+			'joinUs' => 'Join us',
 			'hi' => ({required Object userName}) => 'Hi ${userName}!',
 			'welcomeBack' => 'Welcome back',
 			'enterYourName' => 'Enter your Name',
 			'enterYourEmail' => 'Enter your email',
 			'enterYourPassword' => 'Enter your Password',
 			'passwordMustBe' => 'password must be at least 8 characters',
+			'nextAvailabilityOn' => ({required Object nextAvailable}) => 'Next availability on ${nextAvailable}',
+			'logedInSuccessfully' => 'loged in successfully!',
+			'forgotPassword' => 'Forgot password',
+			'donTHaveAnAccount' => 'Don’t have an account?',
+			'authDescreption' => 'You can search c ourse, apply course and findscholarship for abroad studies',
+			'accountCreatedSuccessfully' => 'Account created successfully!',
+			'AcceptTheTermsPrivacy' => 'Please accept the Terms & Privacy Policy',
 			_ => null,
 		};
 	}

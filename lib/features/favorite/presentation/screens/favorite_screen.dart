@@ -19,77 +19,81 @@ class FavoriteScreen extends StatefulWidget {
 class _FavoriteScreen extends State<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      minimum: EdgeInsets.symmetric(vertical: 40, horizontal: 20),
-      child: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: Column(
-              children: [
-                CustomAppBarWidget(
-                  showSearchIcon: false,
-                  title: "Favourite Doctors",
-                ),
-                HeightSpace(30),
-                CustomSearchTextFieldWidget(onSubmit: (value) {}),
-                HeightSpace(24),
-              ],
-            ),
-          ),
-          SliverGrid(
-            delegate: SliverChildBuilderDelegate((context, index) {
-              return FavoriteCardWidget(
-                imagePath: ImageAssets.doctorImage2,
-                doctorName: "Dr. Christenfeld N",
-                specialty: "Specalist Cancer",
-                initialIsFavorite: false,
-              );
-            }, childCount: 4),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 15,
-              mainAxisSpacing: 15,
-              childAspectRatio: 0.78,
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Column(
-              children: [
-                HeightSpace(10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(t.featureDoctor, style: context.bold18TextMain),
-                    TextButton.icon(
-                      onPressed: () {},
-                      label: Text(t.seeAll, style: context.regular12TextSub),
-                      icon: Icon(
-                        Icons.arrow_forward_ios,
-                        size: 12,
-                        color: AppColors.subtitleColor,
-                      ),
-                      iconAlignment: IconAlignment.end,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 180,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    padding: EdgeInsets.symmetric(vertical: 20),
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.only(right: 15),
-                        child: FeatureDoctorCard(),
-                      );
-                    },
+    return Scaffold(
+      //minimum: EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: Column(
+                children: [
+                  CustomAppBarWidget(
+                    showSearchIcon: false,
+                    title: "Favourite Doctors",
                   ),
-                ),
-              ],
+                  HeightSpace(30),
+                  CustomSearchTextFieldWidget(onSubmit: (value) {}),
+                  HeightSpace(24),
+                ],
+              ),
             ),
-          ),
-        ],
+            SliverGrid(
+              delegate: SliverChildBuilderDelegate((context, index) {
+                return FavoriteCardWidget(
+                  imagePath: ImageAssets.doctorImage2,
+                  doctorName: "Dr. Christenfeld N",
+                  specialty: "Specalist Cancer",
+                  initialIsFavorite: false,
+                );
+              }, childCount: 4),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 15,
+                mainAxisSpacing: 15,
+                childAspectRatio: 0.78,
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Column(
+                children: [
+                  HeightSpace(10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(t.featureDoctor, style: context.bold18TextMain),
+                      TextButton.icon(
+                        onPressed: () {},
+                        label: Text(t.seeAll, style: context.regular12TextSub),
+                        icon: Icon(
+                          Icons.arrow_forward_ios,
+                          size: 12,
+                          color: AppColors.subtitleColor,
+                        ),
+                        iconAlignment: IconAlignment.end,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 180,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      padding: EdgeInsets.symmetric(vertical: 20),
+                      itemCount: 10,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: EdgeInsets.only(right: 15),
+                          child: FeatureDoctorCard(),
+                        );
+                      },
+                    ),
+                  ),
+                  HeightSpace(40),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -116,7 +116,7 @@ class _LoginScreen extends State<LoginScreen> {
                                   hintText: t.email,
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return "Enter your email";
+                                      return t.enterYourEmail;
                                     }
                                     return null;
                                   },
@@ -140,10 +140,10 @@ class _LoginScreen extends State<LoginScreen> {
                                   ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return "Enter your Password";
+                                      return t.enterYourPassword;
                                     }
                                     if (value.length < 8) {
-                                      return "password must be at least 8 characters";
+                                      return t.passwordMustBe;
                                     }
                                   },
                                 ),
@@ -152,9 +152,9 @@ class _LoginScreen extends State<LoginScreen> {
                                 listener: (context, state) {
                                   if (state is AuthSuccess) {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
+                                       SnackBar(
                                         content: Text(
-                                          "loged in successfully!",
+                                          t.logedInSuccessfully,
                                         ),
                                         backgroundColor: AppColors.primaryColor,
                                       ),
@@ -174,7 +174,7 @@ class _LoginScreen extends State<LoginScreen> {
                                     return const CircularProgressIndicator();
                                   }
                                   return CustomElevatdButton(
-                                    buttonTXT: "Login",
+                                    buttonTXT: t.logIn,
                                     onTap: () {
                                       if (formKey.currentState?.validate() ??
                                           false) {
@@ -191,17 +191,7 @@ class _LoginScreen extends State<LoginScreen> {
                                   );
                                 },
                               ),
-                                // CustomElevatdButton(
-                                //   buttonTXT: "Login",
-                                //   onTap: () {
-                                //     MainScreenRoute().go(context);
-                                //     // if (formKey.currentState?.validate() ??
-                                //     //     false) {
-                                //     //   print(emailController.value);
-                                //     //   print(passController.value);
-                                //     // }
-                                //   },
-                                // ),
+                             
                                 TextButton(
                                   onPressed: () {
                                     showModalBottomSheet(
@@ -218,7 +208,7 @@ class _LoginScreen extends State<LoginScreen> {
                                     );
                                   },
                                   child: Text(
-                                    "Forgot password",
+                                    t.forgotPassword,
                                     style: context.regular14Primary,
                                   ),
                                 ),
@@ -228,18 +218,16 @@ class _LoginScreen extends State<LoginScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      "Don’t have an account?",
+                                      t.donTHaveAnAccount,
                                       style: context.regular14Primary,
                                     ),
                                     TextButton(
                                       onPressed: () {
                                         SignUpRoute().go(context);
-                                        // GoRouter.of(
-                                        //   context,
-                                        // ).pushNamed(AppRoutes.signupScreen);
+                                        
                                       },
                                       child: Text(
-                                        "Join us",
+                                        t.joinUs,
                                         style: context.regular14Primary,
                                       ),
                                     ),

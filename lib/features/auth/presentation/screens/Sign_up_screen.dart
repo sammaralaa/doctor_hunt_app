@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/bottom_right_shadow_widget.dart';
@@ -83,7 +82,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                               ),
                               HeightSpace(15),
                               Text(
-                                "You can search c ourse, apply course and findscholarship for abroad studies",
+                                t.authDescreption,
                                 style: context.regular14TextSub,
                                 textAlign: TextAlign.center,
                               ),
@@ -190,9 +189,9 @@ class _SignUpScreen extends State<SignUpScreen> {
                                 listener: (context, state) {
                                   if (state is AuthSuccess) {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
+                                       SnackBar(
                                         content: Text(
-                                          "Account created successfully!",
+                                          t.accountCreatedSuccessfully,
                                         ),
                                         backgroundColor: AppColors.primaryColor,
                                       ),
@@ -218,9 +217,9 @@ class _SignUpScreen extends State<SignUpScreen> {
                                         ScaffoldMessenger.of(
                                           context,
                                         ).showSnackBar(
-                                          const SnackBar(
+                                           SnackBar(
                                             content: Text(
-                                              "Please accept the Terms & Privacy Policy",
+                                              t.AcceptTheTermsPrivacy,
                                             ),
                                           ),
                                         );

@@ -9,6 +9,7 @@ import 'package:doctor_hunt_app/features/doctor_details/presentation/widgets/doc
 import 'package:doctor_hunt_app/features/doctor_details/presentation/widgets/services_section_details.dart';
 import 'package:doctor_hunt_app/features/select_time_and_date/presentation/screens/select_time_date_screen.dart';
 import 'package:doctor_hunt_app/generated/app_text_styles.dart';
+import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -49,7 +50,6 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
                       //       SuccessWidget(),
                       // );
                       SelectTimeRoute().push(context);
-                      
                     },
                   ),
                   //doctor card
@@ -66,17 +66,14 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
                         buildNumberStatisticItem(
                           number: "100",
                           label: "Runing",
-                          context: context,
                         ),
                         buildNumberStatisticItem(
                           number: "500",
                           label: "Ongoing",
-                          context: context,
                         ),
                         buildNumberStatisticItem(
                           number: "700",
                           label: "Patient",
-                          context: context,
                         ),
                       ],
                     ),
@@ -98,7 +95,8 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
                       ),
                       children: [
                         TileLayer(
-                          urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                          urlTemplate:
+                              "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
                           userAgentPackageName: "doctor_hunt_app.app",
                         ),
                         MarkerLayer(
@@ -126,26 +124,24 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
       ),
     );
   }
+
   Widget buildNumberStatisticItem({
-  required String number,
-  required String label,
-  required dynamic context,
-}) {
-  return Container(
-    padding: EdgeInsets.all(20.r),
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(10.r),
-      color: AppColors.subtitleColor.withValues(alpha: 0.1),
-    ),
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(number, style: context.bold18TextMain),
-        Text(label, style: context.regular14TextSub),
-      ],
-    ),
-  );
+    required String number,
+    required String label,
+  }) {
+    return Container(
+      padding: EdgeInsets.all(20.r),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10.r),
+        color: AppColors.subtitleColor.withValues(alpha: 0.1),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(number, style: context.bold18TextMain),
+          Text(label, style: context.regular14TextSub),
+        ],
+      ),
+    );
+  }
 }
-
-}
-

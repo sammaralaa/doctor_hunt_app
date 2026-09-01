@@ -2,6 +2,7 @@ import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/custom_app_bar_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/custom_elevated_button.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
+import 'package:doctor_hunt_app/core/widgets/success_widget.dart';
 import 'package:doctor_hunt_app/features/select_time_and_date/data/date_slot_model.dart';
 import 'package:doctor_hunt_app/features/select_time_and_date/presentation/widgets/selected_doctor_info_card.dart';
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
@@ -18,6 +19,7 @@ class SelectTimeDateScreen extends StatefulWidget {
 class _SelectTimeDateScreen extends State<SelectTimeDateScreen> {
   late int selectedDayIndex;
   TimeSlotModel? selectedTimeSlot;
+
   @override
   void initState() {
     super.initState();
@@ -56,7 +58,7 @@ class _SelectTimeDateScreen extends State<SelectTimeDateScreen> {
                     onTap: () {
                       setState(() {
                         selectedDayIndex = index;
-                        selectedTimeSlot = null; // إعادة ضبط الوقت المختار
+                        selectedTimeSlot = null;
                       });
                     },
                     borderRadius: BorderRadius.circular(8),
@@ -102,7 +104,10 @@ class _SelectTimeDateScreen extends State<SelectTimeDateScreen> {
             ),
             HeightSpace(20),
             if (currentDay.timeSlots.isEmpty)
-              _buildNoSlotsView(context)
+              _buildNoSlotsView(
+                context,
+                dummyDays[selectedDayIndex + 1].dayLabel,
+              )
             else
               _buildAvailableSlotsView(dummyDays[selectedDayIndex].timeSlots),
           ],
@@ -111,7 +116,7 @@ class _SelectTimeDateScreen extends State<SelectTimeDateScreen> {
     );
   }
 
-  //Slots Available 
+  //Slots Available
   Widget _buildAvailableSlotsView(List<TimeSlotModel> slots) {
     final afternoonSlots = slots.where((s) => s.isAfternoon).toList();
     final eveningSlots = slots.where((s) => !s.isAfternoon).toList();
@@ -121,7 +126,7 @@ class _SelectTimeDateScreen extends State<SelectTimeDateScreen> {
       children: [
         if (afternoonSlots.isNotEmpty) ...[
           Text(
-            t.afternoonSlots(length:afternoonSlots.length),
+            t.afternoonSlots(length: afternoonSlots.length),
             style: context.bold14TextMain,
           ),
           HeightSpace(12),
@@ -130,7 +135,7 @@ class _SelectTimeDateScreen extends State<SelectTimeDateScreen> {
         ],
         if (eveningSlots.isNotEmpty) ...[
           Text(
-            t.eveningSlots(length:eveningSlots.length),
+            t.eveningSlots(length: eveningSlots.length),
             style: context.bold14TextMain,
           ),
           HeightSpace(12),
@@ -175,15 +180,20 @@ class _SelectTimeDateScreen extends State<SelectTimeDateScreen> {
   }
 }
 
-Widget _buildNoSlotsView(BuildContext context) {
+Widget _buildNoSlotsView(BuildContext context, String nextAvailable) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
       Text(t.noSlotsAvailable, style: context.regular14TextSub),
       HeightSpace(20),
       CustomElevatdButton(
-        buttonTXT: "Next availability on wed, 24 Feb",
-        onTap: () {},
+        buttonTXT: t.nextAvailabilityOn(nextAvailable: nextAvailable),
+        onTap: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext dialogContext) => SuccessWidget(),
+          );
+        },
         buttonWidth: double.infinity,
       ),
       HeightSpace(14),

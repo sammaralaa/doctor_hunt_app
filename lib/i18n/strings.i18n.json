@@ -26,11 +26,18 @@
   "logIn": "Log in",
   "signUp": "Sign up",
   "iAgreeWithTheTerms": "I agree with the Terms of Service & Privacy Policy",
-  "joinUs": "Join us to start searching",
+  "joinUs": "Join us",
   "hi": "Hi $userName!",
   "welcomeBack": "Welcome back",
   "enterYourName": "Enter your Name",
   "enterYourEmail": "Enter your email",
   "enterYourPassword": "Enter your Password",
-  "passwordMustBe": "password must be at least 8 characters"
+  "passwordMustBe": "password must be at least 8 characters",
+  "nextAvailabilityOn": "Next availability on $nextAvailable",
+  "logedInSuccessfully": "loged in successfully!",
+  "forgotPassword": "Forgot password",
+  "donTHaveAnAccount": "Don’t have an account?",
+  "authDescreption": "You can search c ourse, apply course and findscholarship for abroad studies",
+  "accountCreatedSuccessfully": "Account created successfully!",
+  "AcceptTheTermsPrivacy": "Please accept the Terms & Privacy Policy"
 }
