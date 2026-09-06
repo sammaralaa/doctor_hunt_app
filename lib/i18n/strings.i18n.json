@@ -41,5 +41,12 @@
   "accountCreatedSuccessfully": "Account created successfully!",
   "AcceptTheTermsPrivacy": "Please accept the Terms & Privacy Policy",
   "doctors": "Doctors",
-  "addDoctor": "Add Doctor"
+  "addDoctor": "Add Doctor",
+  "continue": "Continue",
+  "chooseYourRole": "Choose your role",
+  "theSelectedRoleDetermines": "The selected role determines the experience and available features.",
+  "patient": "Patient",
+  "patientRoleDescreption": "Find doctors, book appointments, and manage your medical records.",
+  "admin": "Admin",
+  "adminRoleDescription": "Manage doctors, appointments, users, and the platform."
 }

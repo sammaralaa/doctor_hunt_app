@@ -10,4 +10,5 @@ class IconsAssets {
   static const String categoryHeart = 'assets/icons/category_heart.svg';
   static const String categoryFit = 'assets/icons/category_fit.svg';
   static const String likeIcon = 'assets/icons/like.svg';
+  static const String medicalIcon = 'assets/icons/medical-icon.svg';
 }

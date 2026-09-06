@@ -159,7 +159,11 @@ class _LoginScreen extends State<LoginScreen> {
                                         backgroundColor: AppColors.primaryColor,
                                       ),
                                     );
-                                    MainScreenRoute().go(context);
+                                    if (state.role == 'admin') {
+                                      AdminMainRoute().go(context);
+                                    } else {
+                                      MainScreenRoute().go(context);
+                                    }
                                   } else if (state is AuthFailure) {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(

@@ -1,12 +1,14 @@
 import 'dart:ui';
 
 import 'package:doctor_hunt_app/core/routing/routes.dart';
+import 'package:doctor_hunt_app/core/utils/app_constants.dart';
 import 'package:doctor_hunt_app/core/widgets/bottom_right_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/core/widgets/top_left_color_shape.dart';
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/widgets/custom_elevated_button.dart';
 import '../../data/onboarding_model.dart';
@@ -21,6 +23,14 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreen extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
+  
+  Future<void> _completeOnboarding() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(AppConstants.isFirstTime, false);
+
+    if (!mounted) return;
+    ChooseRoleRoute().go(context);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +87,7 @@ class _OnboardingScreen extends State<OnboardingScreen> {
                               curve: Curves.easeInOut,
                             );
                           } else {
-                            ChooseRoleRoute().go(context);
+                            _completeOnboarding();
                             //GoRouter.of(context,).pushNamed(AppRoutes.chooseRoleScreen);
                           }
                         },
@@ -88,7 +98,7 @@ class _OnboardingScreen extends State<OnboardingScreen> {
                           // GoRouter.of(
                           //   context,
                           // ).pushNamed(AppRoutes.chooseRoleScreen);
-                          ChooseRoleRoute().go(context);
+                          _completeOnboarding();
                         },
                         child: Text(
                           "Skip",

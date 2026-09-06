@@ -169,6 +169,27 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 
 	/// en: 'Add Doctor'
 	String get addDoctor => 'Add Doctor';
+
+	/// en: 'Continue'
+	String get kContinue => 'Continue';
+
+	/// en: 'Choose your role'
+	String get chooseYourRole => 'Choose your role';
+
+	/// en: 'The selected role determines the experience and available features.'
+	String get theSelectedRoleDetermines => 'The selected role determines the experience and available features.';
+
+	/// en: 'Patient'
+	String get patient => 'Patient';
+
+	/// en: 'Find doctors, book appointments, and manage your medical records.'
+	String get patientRoleDescreption => 'Find doctors, book appointments, and manage your medical records.';
+
+	/// en: 'Admin'
+	String get admin => 'Admin';
+
+	/// en: 'Manage doctors, appointments, users, and the platform.'
+	String get adminRoleDescription => 'Manage doctors, appointments, users, and the platform.';
 }
 
 /// The flat map containing all translations for locale <en>.
@@ -222,6 +243,13 @@ extension on Translations {
 			'AcceptTheTermsPrivacy' => 'Please accept the Terms & Privacy Policy',
 			'doctors' => 'Doctors',
 			'addDoctor' => 'Add Doctor',
+			'kContinue' => 'Continue',
+			'chooseYourRole' => 'Choose your role',
+			'theSelectedRoleDetermines' => 'The selected role determines the experience and available features.',
+			'patient' => 'Patient',
+			'patientRoleDescreption' => 'Find doctors, book appointments, and manage your medical records.',
+			'admin' => 'Admin',
+			'adminRoleDescription' => 'Manage doctors, appointments, users, and the platform.',
 			_ => null,
 		};
 	}

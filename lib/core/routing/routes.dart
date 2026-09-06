@@ -1,3 +1,4 @@
+import 'package:doctor_hunt_app/features/admin_main_screen/presentation/screens/admin_main_screen.dart';
 import 'package:doctor_hunt_app/features/auth/presentation/screens/Sign_up_screen.dart';
 import 'package:doctor_hunt_app/features/auth/presentation/screens/login_screen.dart';
 import 'package:doctor_hunt_app/features/choose_role/presentation/screens/choose_role_screen.dart';
@@ -44,11 +45,12 @@ class LoginRoute extends GoRouteData with $LoginRoute {
 }
 @TypedGoRoute<SignUpRoute>(path: '/signup')
 class SignUpRoute extends GoRouteData with $SignUpRoute{
-  const SignUpRoute();
+  final String? userRole;
+  const SignUpRoute({this.userRole});
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return  SignUpScreen();
+    return  SignUpScreen(userRole: userRole,);
   }
 }
 @TypedGoRoute<MainScreenRoute>(path: '/main')
@@ -103,5 +105,15 @@ class DoctorListRoute extends GoRouteData with $DoctorListRoute {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return  DoctorsListScreen();
+  }
+}
+
+@TypedGoRoute<AdminMainRoute>(path: '/admin-main')
+class AdminMainRoute extends GoRouteData with $AdminMainRoute {
+  const AdminMainRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return  AdminMainScreen();
   }
 }
