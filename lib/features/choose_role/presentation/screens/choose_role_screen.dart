@@ -10,13 +10,14 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../generated/image_assets.dart';
 import '../widgets/role_selection_card_widget.dart';
-
+enum UserRole { patient, admin }
 class ChooseRoleScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _ChooseRoleScreen();
 }
 
 class _ChooseRoleScreen extends State<ChooseRoleScreen> {
+  UserRole _selectedRole = UserRole.patient;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,8 +47,12 @@ class _ChooseRoleScreen extends State<ChooseRoleScreen> {
                     description:
                         'Find doctors, book appointments, and manage your medical records.',
                     roleIcon: Icons.personal_injury_rounded,
-                    isSelected: true,
-                    onTap: () {},
+                    isSelected: _selectedRole == UserRole.patient,
+                    onTap: () {
+                      setState(() {
+                        _selectedRole = UserRole.patient;
+                      });
+                    },
                   ),
                   HeightSpace(16),
                   RoleSelectionCardWidget(
@@ -55,14 +60,19 @@ class _ChooseRoleScreen extends State<ChooseRoleScreen> {
                     description:
                         'Manage doctors, appointments, users, and the platform.',
                     roleIcon: Icons.grid_view_outlined,
-                    isSelected: false,
-                    onTap: () {},
+                    isSelected: _selectedRole == UserRole.admin,
+                    onTap: () {
+                      setState(() {
+                        _selectedRole = UserRole.admin;
+                      });
+                    },
                   ),
                   Spacer(),
                   CustomElevatdButton(
                     buttonTXT: "Continue",
                     onTap: () {
-                      LoginRoute().go(context);
+                      //LoginRoute().go(context);
+                      DoctorListRoute().go(context);
                       //GoRouter.of(context,).pushNamed(AppRoutes.loginScreen);
                     },
                   ),

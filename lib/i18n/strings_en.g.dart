@@ -163,6 +163,12 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 
 	/// en: 'Please accept the Terms & Privacy Policy'
 	String get AcceptTheTermsPrivacy => 'Please accept the Terms & Privacy Policy';
+
+	/// en: 'Doctors'
+	String get doctors => 'Doctors';
+
+	/// en: 'Add Doctor'
+	String get addDoctor => 'Add Doctor';
 }
 
 /// The flat map containing all translations for locale <en>.
@@ -214,6 +220,8 @@ extension on Translations {
 			'authDescreption' => 'You can search c ourse, apply course and findscholarship for abroad studies',
 			'accountCreatedSuccessfully' => 'Account created successfully!',
 			'AcceptTheTermsPrivacy' => 'Please accept the Terms & Privacy Policy',
+			'doctors' => 'Doctors',
+			'addDoctor' => 'Add Doctor',
 			_ => null,
 		};
 	}
