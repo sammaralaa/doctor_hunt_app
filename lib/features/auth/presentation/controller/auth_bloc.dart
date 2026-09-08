@@ -48,9 +48,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         email: event.email,
         password: event.password,
       );
-      // if (userCredential.user != null) {
-      //   await userCredential.user!.reload();
-      // }
+
       emit(AuthSuccess(role: role ?? 'patient'));
     } on FirebaseAuthException catch (e) {
       emit(AuthFailure(_mapFirebaseAuthError(e)));

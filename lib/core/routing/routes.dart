@@ -6,7 +6,7 @@ import 'package:doctor_hunt_app/features/doctor_details/presentation/screens/doc
 import 'package:doctor_hunt_app/features/doctors_list/presentation/screens/doctors_list_screen.dart';
 import 'package:doctor_hunt_app/features/main_screen/presentation/screens/main_screen.dart';
 import 'package:doctor_hunt_app/features/onboarding/presentation/screens/onboarding_screen.dart';
-import 'package:doctor_hunt_app/features/search/presentation/screens/find_doctors_screen.dart';
+import 'package:doctor_hunt_app/features/find_doctors/presentation/screens/find_doctors_screen.dart';
 import 'package:doctor_hunt_app/features/select_time_and_date/presentation/screens/select_time_date_screen.dart';
 import 'package:doctor_hunt_app/features/splash/presentation/screens/splash_screen.dart';
 import 'package:flutter/material.dart';

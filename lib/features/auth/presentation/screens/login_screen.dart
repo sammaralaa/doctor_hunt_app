@@ -227,7 +227,7 @@ class _LoginScreen extends State<LoginScreen> {
                                     ),
                                     TextButton(
                                       onPressed: () {
-                                        SignUpRoute().go(context);
+                                        ChooseRoleRoute().go(context);
                                         
                                       },
                                       child: Text(

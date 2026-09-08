@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
   @override
   State<StatefulWidget> createState() {
     return _HomeScreen();
@@ -21,7 +22,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreen extends State<HomeScreen> {
   late TextEditingController? searchController;
-  late String userName ;
+  late String userName;
 
   @override
   initState() {
@@ -38,7 +39,10 @@ class _HomeScreen extends State<HomeScreen> {
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
-            child: CustomHomeTopHeader(searchController: searchController,userName: userName,),
+            child: CustomHomeTopHeader(
+              searchController: searchController,
+              userName: userName,
+            ),
           ),
           SliverToBoxAdapter(
             child: Padding(

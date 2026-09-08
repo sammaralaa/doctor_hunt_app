@@ -1,19 +1,40 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:doctor_hunt_app/core/routing/routes.dart';
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
+import 'package:doctor_hunt_app/features/auth/presentation/controller/auth_bloc.dart';
+import 'package:doctor_hunt_app/features/home/presentation/controller/home_bloc.dart';
+import 'package:doctor_hunt_app/features/home/presentation/controller/home_event.dart';
 import 'package:doctor_hunt_app/generated/image_assets.dart';
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 
-class CustomHomeTopHeader extends StatelessWidget {
+class CustomHomeTopHeader extends StatefulWidget {
   final TextEditingController? searchController;
   final String userName;
+  //final String? profileImageUrl;
+  final VoidCallback? onProfileImageTap;
 
-  const CustomHomeTopHeader({super.key, this.searchController, required this.userName});
+  const CustomHomeTopHeader({
+    super.key,
+    this.searchController,
+    required this.userName,
+    this.onProfileImageTap,
+  });
+
+  @override
+  State<CustomHomeTopHeader> createState() => _CustomHomeTopHeaderState();
+}
+
+class _CustomHomeTopHeaderState extends State<CustomHomeTopHeader> {
+
+ 
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -35,12 +56,43 @@ class CustomHomeTopHeader extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(t.hi(userName:userName), style: context.regular20White),
+                  Text(
+                    t.hi(userName: widget.userName),
+                    style: context.regular20White,
+                  ),
                   Text(t.findYourDoctor, style: context.bold26White),
                   HeightSpace(30),
                 ],
               ),
-              Image.asset(ImageAssets.onBoarding5, width: 60.w, height: 60.h),
+              GestureDetector(
+                onTap: widget.onProfileImageTap,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(30.r),
+                  child:
+                      // widget.profileImageUrl != null &&
+                      //     widget.profileImageUrl!.isNotEmpty
+                      // ? Image.network(
+                      //     widget.profileImageUrl!,
+                      //     width: 60.w,
+                      //     height: 60.h,
+                      //     fit: BoxFit.cover,
+                      //     errorBuilder: (context, error, stackTrace) =>
+                      //         Image.asset(
+                      //           ImageAssets.onBoarding5,
+                      //           width: 60.w,
+                      //           height: 60.h,
+                      //           fit: BoxFit.cover,
+                      //         ),
+                      //   )
+                      // : 
+                      Image.asset(
+                          ImageAssets.onBoarding5,
+                          width: 60.w,
+                          height: 60.h,
+                          fit: BoxFit.cover,
+                        ),
+                ),
+              ),
             ],
           ),
         ),
@@ -62,7 +114,7 @@ class CustomHomeTopHeader extends StatelessWidget {
               ],
             ),
             child: TextField(
-              controller: searchController,
+              controller: widget.searchController,
               onSubmitted: (value) => {FindDoctorsRoute().push(context)},
               decoration: InputDecoration(
                 hintText: t.search,
