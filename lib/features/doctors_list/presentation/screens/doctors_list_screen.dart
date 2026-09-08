@@ -66,7 +66,7 @@ class _DoctorsListScreen extends State<DoctorsListScreen> {
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   itemCount: _categories.length,
-                  separatorBuilder: (_, __) => const SizedBox(width: 8),
+                  separatorBuilder: (_, _) => WidthSpace(8),
                   itemBuilder: (context, index) {
                     final isSelected = _selectedIndex == index;
                     final category = _categories[index];
@@ -117,7 +117,7 @@ class _DoctorsListScreen extends State<DoctorsListScreen> {
                     },
                   );
                 },
-                separatorBuilder: (_, __) => HeightSpace(12),
+                separatorBuilder: (_, _) => HeightSpace(12),
                 itemCount: 6,
               ),
             ],

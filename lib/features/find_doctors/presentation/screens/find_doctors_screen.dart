@@ -5,10 +5,11 @@ import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/core/widgets/top_left_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/custom_search_text_field_widget.dart';
 import 'package:doctor_hunt_app/features/find_doctors/presentation/widgets/doctor_search_card_widget.dart';
-import 'package:doctor_hunt_app/generated/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class FindDoctorsScreen extends StatefulWidget {
+  const FindDoctorsScreen({super.key});
+
   @override
   State<FindDoctorsScreen> createState() => _FindDoctorsScreenState();
 }
@@ -44,7 +45,7 @@ class _FindDoctorsScreenState extends State<FindDoctorsScreen> {
                           padding: const EdgeInsets.only(bottom: 16.0),
                           child: DoctorSearchCardWidget(
                             onBookNowPressed: () {},
-                            CardOnTap: () {
+                            cardOnTap: () {
                               DoctorDetailsRoute().push(context);
                             },
                           ),

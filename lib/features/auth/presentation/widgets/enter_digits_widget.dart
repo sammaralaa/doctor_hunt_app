@@ -1,7 +1,6 @@
 import 'package:doctor_hunt_app/features/auth/presentation/widgets/reset_password_widget.dart';
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../../core/theme/app_colors.dart';
@@ -9,6 +8,8 @@ import '../../../../core/widgets/custom_elevated_button.dart';
 import '../../../../core/widgets/spacing_widgets.dart';
 
 class EnterDigitsWidget extends StatefulWidget{
+  const EnterDigitsWidget({super.key});
+
   @override
   State<StatefulWidget> createState() => _EnterDigitsWidget();
 }

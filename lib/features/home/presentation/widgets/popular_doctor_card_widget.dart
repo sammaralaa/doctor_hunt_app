@@ -1,11 +1,9 @@
 import 'package:doctor_hunt_app/core/routing/routes.dart';
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
-import 'package:doctor_hunt_app/generated/app_text_styles.dart';
 import 'package:doctor_hunt_app/generated/image_assets.dart';
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PopularDoctorCardWidget extends StatelessWidget {
   const PopularDoctorCardWidget({super.key});

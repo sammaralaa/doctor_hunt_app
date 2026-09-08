@@ -1,18 +1,11 @@
-import 'dart:io';
-import 'dart:ui';
 
 import 'package:doctor_hunt_app/core/routing/routes.dart';
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
-import 'package:doctor_hunt_app/features/auth/presentation/controller/auth_bloc.dart';
-import 'package:doctor_hunt_app/features/home/presentation/controller/home_bloc.dart';
-import 'package:doctor_hunt_app/features/home/presentation/controller/home_event.dart';
 import 'package:doctor_hunt_app/generated/image_assets.dart';
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:image_picker/image_picker.dart';
 
 class CustomHomeTopHeader extends StatefulWidget {
   final TextEditingController? searchController;

@@ -3,17 +3,13 @@ import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/bottom_right_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/custom_app_bar_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
-import 'package:doctor_hunt_app/core/widgets/success_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/top_left_shadow_widget.dart';
 import 'package:doctor_hunt_app/features/doctor_details/presentation/widgets/doctor_details_card_widget.dart';
 import 'package:doctor_hunt_app/features/doctor_details/presentation/widgets/services_section_details.dart';
-import 'package:doctor_hunt_app/features/select_time_and_date/presentation/screens/select_time_date_screen.dart';
-import 'package:doctor_hunt_app/generated/app_text_styles.dart';
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:latlong2/latlong.dart';
 
 class DoctorDetailsScreen extends StatefulWidget {

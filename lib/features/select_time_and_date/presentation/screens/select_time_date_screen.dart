@@ -49,7 +49,7 @@ class _SelectTimeDateScreen extends State<SelectTimeDateScreen> {
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemCount: dummyDays.length,
-                separatorBuilder: (_, __) => SizedBox(width: 10),
+                separatorBuilder: (_, _) => SizedBox(width: 10),
                 itemBuilder: (context, index) {
                   final day = dummyDays[index];
                   final isSelected = selectedDayIndex == index;

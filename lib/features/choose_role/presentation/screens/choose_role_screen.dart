@@ -71,7 +71,6 @@ class _ChooseRoleScreen extends State<ChooseRoleScreen> {
                   Spacer(),
                   CustomElevatdButton(
                     onTap: () {
-                      print(_selectedRole.name);
                       SignUpRoute(userRole: _selectedRole.name).go(context);
                       //LoginRoute().go(context);
                       // AdminMainRoute().go(context);

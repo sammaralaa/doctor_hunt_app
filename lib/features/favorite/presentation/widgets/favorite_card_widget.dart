@@ -1,9 +1,7 @@
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
-import 'package:doctor_hunt_app/generated/image_assets.dart';
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class FavoriteCardWidget extends StatefulWidget {
   final String imagePath;

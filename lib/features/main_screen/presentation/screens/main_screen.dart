@@ -4,13 +4,13 @@ import 'package:doctor_hunt_app/core/widgets/bottom_right_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/top_left_shadow_widget.dart';
 import 'package:doctor_hunt_app/features/favorite/presentation/screens/favorite_screen.dart';
 import 'package:doctor_hunt_app/features/home/presentation/screens/home_screen.dart';
-import 'package:doctor_hunt_app/features/main_screen/presentation/widgets/custom_icon_bottom_nav.dart';
 import 'package:doctor_hunt_app/generated/icons_assets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return _MainScreen();
@@ -54,41 +54,41 @@ class _MainScreen extends State<MainScreen> {
           BottomBarItem(
             inActiveItem: SvgPicture.asset(
               IconsAssets.home,
-              color: AppColors.inactiveIconColor,
+              colorFilter: ColorFilter.mode(AppColors.inactiveIconColor, BlendMode.srcIn),
             ),
             activeItem: SvgPicture.asset(
               IconsAssets.home,
-              color: AppColors.primaryColor,
+              colorFilter: ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),
             ),
           ),
           BottomBarItem(
             inActiveItem: SvgPicture.asset(
               IconsAssets.favorite,
-              color: AppColors.inactiveIconColor,
+              colorFilter: ColorFilter.mode(AppColors.inactiveIconColor, BlendMode.srcIn),
             ),
             activeItem: SvgPicture.asset(
               IconsAssets.favorite,
-              color: AppColors.primaryColor,
+              colorFilter: ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),
             ),
           ),
           BottomBarItem(
             inActiveItem: SvgPicture.asset(
               IconsAssets.news,
-              color: AppColors.inactiveIconColor,
+              colorFilter: ColorFilter.mode(AppColors.inactiveIconColor, BlendMode.srcIn),
             ),
             activeItem: SvgPicture.asset(
               IconsAssets.news,
-              color: AppColors.primaryColor,
+              colorFilter: ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),
             ),
           ),
           BottomBarItem(
             inActiveItem: SvgPicture.asset(
               IconsAssets.chat,
-              color: AppColors.inactiveIconColor,
+              colorFilter: ColorFilter.mode(AppColors.inactiveIconColor, BlendMode.srcIn),
             ),
             activeItem: SvgPicture.asset(
               IconsAssets.chat,
-              color: AppColors.primaryColor,
+              colorFilter: ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),
             ),
           ),
         ],

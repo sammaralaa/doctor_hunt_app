@@ -193,7 +193,6 @@ class _SignUpScreen extends State<SignUpScreen> {
                                         backgroundColor: AppColors.primaryColor,
                                       ),
                                     );
-                                    print('User Role: ${widget.userRole}');
                                     if (widget.userRole == 'admin') {
                                       AdminMainRoute().go(context);
                                     } else {

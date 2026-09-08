@@ -1,13 +1,12 @@
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class CustomIconBottomNav extends StatelessWidget {
   final String icon;
   final bool isSelected;
 
-  CustomIconBottomNav({required this.icon, required this.isSelected});
+  CustomIconBottomNav({super.key, required this.icon, required this.isSelected});
 
   @override
   Widget build(BuildContext context) {

@@ -10,6 +10,8 @@ import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 
 class FavoriteScreen extends StatefulWidget {
+  const FavoriteScreen({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return _FavoriteScreen();

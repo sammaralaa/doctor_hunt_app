@@ -1,20 +1,18 @@
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
-import 'package:doctor_hunt_app/generated/app_text_styles.dart';
 import 'package:doctor_hunt_app/generated/image_assets.dart';
 
 class DoctorSearchCardWidget extends StatefulWidget {
   final VoidCallback? onBookNowPressed;
-  final VoidCallback? CardOnTap;
+  final VoidCallback? cardOnTap;
 
   const DoctorSearchCardWidget({
     super.key,
     this.onBookNowPressed,
-    this.CardOnTap,
+    this.cardOnTap,
   });
 
   @override
@@ -41,7 +39,7 @@ class _DoctorSearchCardWidgetState extends State<DoctorSearchCardWidget> {
         ],
       ),
       child: InkWell(
-        onTap: widget.CardOnTap,
+        onTap: widget.cardOnTap,
         borderRadius: BorderRadius.circular(12),
         child: Padding(
           padding: EdgeInsets.all(14),
