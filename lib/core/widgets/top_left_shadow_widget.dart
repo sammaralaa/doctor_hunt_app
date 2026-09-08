@@ -4,6 +4,8 @@ import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 
 class TopLeftShadowWidget extends StatelessWidget{
+  const TopLeftShadowWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Positioned(

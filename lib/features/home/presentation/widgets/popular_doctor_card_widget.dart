@@ -15,7 +15,7 @@ class PopularDoctorCardWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: AppColors.white,
-        borderRadius: BorderRadius.circular(12.r),
+        borderRadius: BorderRadius.circular(12),
       ),
       child: InkWell(
         onTap: () {
@@ -26,8 +26,8 @@ class PopularDoctorCardWidget extends StatelessWidget {
           children: [
             Image.asset(
               ImageAssets.doctorImage2,
-              // width: 120.w,
-              // height: 120.h,
+              // width: 120,
+              // height: 120,
               fit: BoxFit.cover,
             ),
             HeightSpace(14),
@@ -43,9 +43,9 @@ class PopularDoctorCardWidget extends StatelessWidget {
                 return Icon(
                   Icons.star_rounded,
                   color: index < 4
-                      ? const Color(0xFFFFE600) // لون النجمة الذهبي
-                      : const Color(0xFFE2E5ED), // لون النجمة الرمادي
-                  size: 12.r,
+                      ? AppColors.yellow 
+                      : AppColors.white, 
+                  size: 12,
                 );
               }),
             ),

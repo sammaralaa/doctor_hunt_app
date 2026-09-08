@@ -8,7 +8,7 @@ class FeatureDoctorCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 100.w,
+      width: 100,
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(6),
@@ -30,7 +30,7 @@ class FeatureDoctorCard extends StatelessWidget {
             ],
           ),
           HeightSpace(8),
-          Image.asset(ImageAssets.onBoarding5, width: 55.w, height: 55.h),
+          Image.asset(ImageAssets.onBoarding5, width: 55, height: 55),
           HeightSpace(10),
           Text(
             'Dr. Crick',

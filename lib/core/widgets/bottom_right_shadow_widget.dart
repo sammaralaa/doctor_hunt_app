@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 
 class BottomRightShadowWidget extends StatelessWidget {
+  const BottomRightShadowWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Positioned(

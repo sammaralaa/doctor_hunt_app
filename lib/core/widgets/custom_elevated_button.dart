@@ -1,7 +1,5 @@
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../theme/app_colors.dart';
 
@@ -14,14 +12,14 @@ class CustomElevatdButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50.h,
-      width:  buttonWidth ??  295.w,
+      height: 50,
+      width:  buttonWidth ??  295,
       child: ElevatedButton(
         onPressed: onTap,
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primaryColor,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadiusGeometry.circular(10.r),
+            borderRadius: BorderRadiusGeometry.circular(10),
           ),
         ),
         child: Text(buttonTXT, style: context.bold18White),

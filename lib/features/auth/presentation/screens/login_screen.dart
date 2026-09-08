@@ -15,7 +15,6 @@ import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../widgets/forgot_password_widget.dart';
@@ -95,8 +94,8 @@ class _LoginScreen extends State<LoginScreen> {
                                       onTop: () {},
                                       btnIcon: SvgPicture.asset(
                                         IconsAssets.googleIcon,
-                                        width: 20.w,
-                                        height: 20.h,
+                                        width: 20,
+                                        height: 20,
                                       ),
                                     ),
                                     WidthSpace(15),
@@ -105,8 +104,8 @@ class _LoginScreen extends State<LoginScreen> {
                                       onTop: () {},
                                       btnIcon: SvgPicture.asset(
                                         IconsAssets.facebookIcon,
-                                        width: 20.w,
-                                        height: 20.h,
+                                        width: 20,
+                                        height: 20,
                                       ),
                                     ),
                                   ],
@@ -145,6 +144,7 @@ class _LoginScreen extends State<LoginScreen> {
                                     if (value.length < 8) {
                                       return t.passwordMustBe;
                                     }
+                                    return null;
                                   },
                                 ),
                                 HeightSpace(32),
@@ -204,7 +204,7 @@ class _LoginScreen extends State<LoginScreen> {
                                       backgroundColor: Colors.white,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.vertical(
-                                          top: Radius.circular(30.r),
+                                          top: Radius.circular(30),
                                         ),
                                       ),
                                       builder: (context) =>

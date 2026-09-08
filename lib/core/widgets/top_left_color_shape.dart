@@ -1,15 +1,16 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TopLeftColorShape extends StatelessWidget{
+  const TopLeftColorShape({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Positioned(
       top: -20,
       left: -104,
       child: Container(
-        width: 342.w,
-        height: 342.h,
+        width: 342,
+        height: 342,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           gradient: const LinearGradient(

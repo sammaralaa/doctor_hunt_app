@@ -12,8 +12,8 @@ class LiveDocotorWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () {},
       child: Container(
-        width: 118.w,
-        height: 168.h,
+        width: 118,
+        height: 168,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           image: DecorationImage(

@@ -46,7 +46,7 @@ class _HomeScreen extends State<HomeScreen> {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.w),
+              padding: EdgeInsets.symmetric(horizontal: 15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -55,12 +55,12 @@ class _HomeScreen extends State<HomeScreen> {
 
                   HeightSpace(21),
                   SizedBox(
-                    height: 168.h,
+                    height: 168,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
                       itemCount: 10,
                       separatorBuilder: (context, index) =>
-                          SizedBox(width: 12.w),
+                          SizedBox(width: 12),
                       itemBuilder: (context, index) {
                         return LiveDocotorWidget();
                       },
@@ -101,7 +101,7 @@ class _HomeScreen extends State<HomeScreen> {
                             Text(t.seeAll, style: context.regular12TextSub),
                             Icon(
                               Icons.arrow_forward_ios,
-                              size: 12.r,
+                              size: 12,
                               color: AppColors.subtitleColor,
                             ),
                           ],
@@ -111,12 +111,12 @@ class _HomeScreen extends State<HomeScreen> {
                   ),
                   HeightSpace(22),
                   SizedBox(
-                    height: 265.h,
+                    height: 265,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
                       itemCount: 10,
                       separatorBuilder: (context, index) =>
-                          SizedBox(width: 12.w),
+                          SizedBox(width: 12),
                       itemBuilder: (context, index) {
                         return PopularDoctorCardWidget();
                       },
@@ -135,7 +135,7 @@ class _HomeScreen extends State<HomeScreen> {
                             Text(t.seeAll, style: context.regular12TextSub),
                             Icon(
                               Icons.arrow_forward_ios,
-                              size: 12.r,
+                              size: 12,
                               color: AppColors.subtitleColor,
                             ),
                           ],
@@ -145,13 +145,13 @@ class _HomeScreen extends State<HomeScreen> {
                   ),
                   HeightSpace(22),
                   SizedBox(
-                    height: 150.h,
+                    height: 150,
 
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
                       itemCount: 10,
                       separatorBuilder: (context, index) =>
-                          SizedBox(width: 12.w),
+                          SizedBox(width: 12),
                       itemBuilder: (context, index) {
                         return FeatureDoctorCard();
                       },

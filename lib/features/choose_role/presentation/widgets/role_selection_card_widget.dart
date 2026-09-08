@@ -32,10 +32,10 @@ class RoleSelectionCardWidget extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         decoration: BoxDecoration(
           color: isSelected ? activeBgColor : inactiveBgColor,
-          borderRadius: BorderRadius.circular(20.r),
+          borderRadius: BorderRadius.circular(20),
           border: Border.all(
             color: isSelected ? activeBorderColor : inactiveBorderColor,
-            width: 2.w,
+            width: 2,
           ),
         ),
         child: Padding(
@@ -60,7 +60,7 @@ class RoleSelectionCardWidget extends StatelessWidget {
                     textAlign: TextAlign.start,
                   ),
                   SizedBox(
-                    width: 200.w,
+                    width: 200,
                     child: Text(
                       description,
                       style: context.regular14TextSub,
@@ -71,7 +71,7 @@ class RoleSelectionCardWidget extends StatelessWidget {
                 ],
               ),
              if( isSelected)
-               Icon(Icons.check_circle_rounded, color: AppColors.primaryColor,size: 25.w,),
+               Icon(Icons.check_circle_rounded, color: AppColors.primaryColor,size: 25,),
             ],
           ),
         ),

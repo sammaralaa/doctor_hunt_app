@@ -104,21 +104,21 @@ class _MainScreen extends State<MainScreen> {
       //   decoration: BoxDecoration(
       //     color: Colors.white,
       //     borderRadius: BorderRadius.only(
-      //       topLeft: Radius.circular(20.r),
-      //       topRight: Radius.circular(20.r),
+      //       topLeft: Radius.circular(20),
+      //       topRight: Radius.circular(20),
       //     ),
       //     boxShadow: [
       //       BoxShadow(
       //         color: Colors.black.withAlpha(50),
-      //         blurRadius: 10.r,
+      //         blurRadius: 10,
       //         offset: const Offset(0, -4),
       //       ),
       //     ],
       //   ),
       //   child: ClipRRect(
       //     borderRadius: BorderRadius.only(
-      //       topLeft: Radius.circular(20.r),
-      //       topRight: Radius.circular(20.r),
+      //       topLeft: Radius.circular(20),
+      //       topRight: Radius.circular(20),
       //     ),
       //     child: BottomNavigationBar(
       //       type: BottomNavigationBarType.fixed,

@@ -2,7 +2,6 @@ import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 class CustomAppBarWidget extends StatelessWidget {
@@ -22,16 +21,16 @@ class CustomAppBarWidget extends StatelessWidget {
             context.pop();
           },
           child: Container(
-            height: 30.h,
-            width: 30.w,
+            height: 30,
+            width: 30,
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(10.r),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
-              size: 12.r,
+              size: 12,
               color: AppColors.subtitleColor,
             ),
           ),
@@ -45,7 +44,7 @@ class CustomAppBarWidget extends StatelessWidget {
             icon: Icon(
               Icons.search_rounded,
               color: AppColors.subtitleColor,
-              size: 20.r,
+              size: 20,
             ),
           ),
       ],

@@ -58,7 +58,7 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: AppColors.white,
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -83,10 +83,10 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
                   DoctorServicesSection(),
 
                   Container(
-                    height: 200.h,
+                    height: 200,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
-                      border: BoxBorder.all(color: AppColors.white, width: 9.w),
+                      borderRadius: BorderRadius.circular(10),
+                      border: BoxBorder.all(color: AppColors.white, width: 9),
                     ),
                     child: FlutterMap(
                       options: const MapOptions(
@@ -130,9 +130,9 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
     required String label,
   }) {
     return Container(
-      padding: EdgeInsets.all(20.r),
+      padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.r),
+        borderRadius: BorderRadius.circular(10),
         color: AppColors.subtitleColor.withValues(alpha: 0.1),
       ),
       child: Column(

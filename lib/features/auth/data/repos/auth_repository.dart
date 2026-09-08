@@ -3,10 +3,8 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor_hunt_app/core/services/cloudinary_services.dart';
-import 'package:doctor_hunt_app/core/utils/app_constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepository{
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;

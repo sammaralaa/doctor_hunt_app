@@ -21,9 +21,9 @@ class LoginWithWidget extends StatelessWidget{
           icon: btnIcon,
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.white,
-            minimumSize: Size(0,54.h),
+            minimumSize: Size(0,54),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12.r), // Border radius
+              borderRadius: BorderRadius.circular(12), // Border radius
               side: const BorderSide(
                 color: AppColors.white, // Light grey border color
                 width: 1.0,               // Border thickness

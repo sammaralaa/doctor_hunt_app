@@ -8,7 +8,6 @@ import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/theme/app_colors.dart';
@@ -94,8 +93,8 @@ class _SignUpScreen extends State<SignUpScreen> {
                                     onTop: () {},
                                     btnIcon: SvgPicture.asset(
                                       IconsAssets.googleIcon,
-                                      width: 20.w,
-                                      height: 20.h,
+                                      width: 20,
+                                      height: 20,
                                     ),
                                   ),
                                   WidthSpace(15),
@@ -104,8 +103,8 @@ class _SignUpScreen extends State<SignUpScreen> {
                                     onTop: () {},
                                     btnIcon: SvgPicture.asset(
                                       IconsAssets.facebookIcon,
-                                      width: 20.w,
-                                      height: 20.h,
+                                      width: 20,
+                                      height: 20,
                                     ),
                                   ),
                                 ],

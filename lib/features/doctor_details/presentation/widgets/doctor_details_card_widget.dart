@@ -22,14 +22,14 @@ class _DoctorDetailsCardWidgetState extends State<DoctorDetailsCardWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(12.r),
+      padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: AppColors.white,
-        borderRadius: BorderRadius.circular(12.r),
+        borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
             color: AppColors.black.withValues(alpha: 0.04),
-            blurRadius: 15.r,
+            blurRadius: 15,
             offset: const Offset(0, 5),
           ),
         ],
@@ -40,11 +40,11 @@ class _DoctorDetailsCardWidgetState extends State<DoctorDetailsCardWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.circular(10.r),
+                borderRadius: BorderRadius.circular(10),
                 child: Image.asset(
                   ImageAssets.doctorImage2,
-                  width: 84.w,
-                  height: 84.h,
+                  width: 84,
+                  height: 84,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -79,7 +79,7 @@ class _DoctorDetailsCardWidgetState extends State<DoctorDetailsCardWidget> {
                             color: isFavorite
                                 ? AppColors.red
                                 : AppColors.inactiveIconColor,
-                            size: 20.r,
+                            size: 20,
                           ),
                         ),
                       ],
@@ -102,7 +102,7 @@ class _DoctorDetailsCardWidgetState extends State<DoctorDetailsCardWidget> {
                               color: index < 4
                                   ? AppColors.yellow
                                   : AppColors.inactiveBorderColor,
-                              size: 14.r,
+                              size: 14,
                             );
                           }),
                         ),
@@ -132,15 +132,15 @@ class _DoctorDetailsCardWidgetState extends State<DoctorDetailsCardWidget> {
           HeightSpace(12),
 
           SizedBox(
-            width: 140.w,
-            height: 34.h,
+            width: 140,
+            height: 34,
             child: ElevatedButton(
               onPressed: widget.onBookNowPressed,
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primaryColor,
                 elevation: 0,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(6.r),
+                  borderRadius: BorderRadius.circular(6),
                 ),
                 padding: EdgeInsets.zero,
               ),

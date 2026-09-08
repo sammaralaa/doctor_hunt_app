@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class SuccessWidget extends StatelessWidget {
+  const SuccessWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -25,7 +27,10 @@ class SuccessWidget extends StatelessWidget {
                 IconsAssets.likeIcon,
                 width: 70,
                 height: 70,
-                color: AppColors.primaryColor,
+                colorFilter: ColorFilter.mode(
+                  AppColors.primaryColor,
+                  BlendMode.srcIn,
+                ),
               ),
             ),
             HeightSpace(12),

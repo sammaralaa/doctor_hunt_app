@@ -1,10 +1,6 @@
-import 'dart:ui';
-
-import 'package:doctor_hunt_app/core/routing/routes.dart';
 import 'package:doctor_hunt_app/features/splash/presentation/controller/splash_bloc.dart';
 import 'package:doctor_hunt_app/features/splash/presentation/controller/splash_event.dart';
 import 'package:doctor_hunt_app/features/splash/presentation/controller/splash_state.dart';
-import 'package:doctor_hunt_app/generated/app_text_styles.dart';
 import 'package:doctor_hunt_app/core/widgets/bottom_right_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/core/widgets/top_left_shadow_widget.dart';

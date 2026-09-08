@@ -29,7 +29,7 @@ class CustomTextfeildWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      //height: height ?? 56.h,
+   
 
       child: TextFormField(
         controller: controller,
@@ -45,24 +45,24 @@ class CustomTextfeildWidget extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
           contentPadding: EdgeInsets.symmetric(
-            horizontal: 18.w,
-            vertical: 18.h,
+            horizontal: 18,
+            vertical: 18,
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.r),
-            borderSide: BorderSide(color: const Color(0xffE8ECF4), width: 1.w),
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: const Color(0xffE8ECF4), width: 1),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.r),
-            borderSide: BorderSide(color: AppColors.primaryColor, width: 1.w),
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(color: AppColors.primaryColor, width: 1),
           ),
           errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.r),
-            borderSide: BorderSide(color: Colors.red, width: 1.w),
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(color: AppColors.red , width: 1),
           ),
           focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.r),
-            borderSide: BorderSide(color: Colors.red, width: 1.w),
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(color: AppColors.red, width: 1),
           ),
           filled: true,
           fillColor: AppColors.white,

@@ -4,12 +4,13 @@ import 'package:doctor_hunt_app/core/widgets/bottom_right_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/top_left_shadow_widget.dart';
 import 'package:doctor_hunt_app/features/doctors_list/presentation/screens/doctors_list_screen.dart';
 import 'package:doctor_hunt_app/features/favorite/presentation/screens/favorite_screen.dart';
-import 'package:doctor_hunt_app/features/home/presentation/screens/home_screen.dart';
 import 'package:doctor_hunt_app/generated/icons_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class AdminMainScreen extends StatefulWidget {
+  const AdminMainScreen({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return _AdminMainScreen();
@@ -55,7 +56,10 @@ class _AdminMainScreen extends State<AdminMainScreen> {
             ),
             activeItem: SvgPicture.asset(
               IconsAssets.medicalIcon,
-              color: AppColors.primaryColor,
+              colorFilter: ColorFilter.mode(
+                AppColors.primaryColor,
+                BlendMode.srcIn,
+              ),
             ),
           ),
           BottomBarItem(

@@ -32,11 +32,11 @@ class DoctorServicesSection extends StatelessWidget {
           padding: EdgeInsets.zero,
           itemCount: services.length,
           separatorBuilder: (context, index) => Padding(
-            padding: EdgeInsets.symmetric(vertical: 12.h),
+            padding: EdgeInsets.symmetric(vertical: 12),
             child: Divider(
               color: AppColors.subtitleColor.withValues(alpha: 0.10),
-              thickness: 1.h,
-              height: 1.h,
+              thickness: 1,
+              height: 1,
             ),
           ),
           itemBuilder: (context, index) {
@@ -47,7 +47,7 @@ class DoctorServicesSection extends StatelessWidget {
                   '${index + 1}.',
                   style: context.bold14Primary,
                 ),
-                SizedBox(width: 10.w),
+                SizedBox(width: 10),
                 Expanded(
                   child: Text(
                     services[index],

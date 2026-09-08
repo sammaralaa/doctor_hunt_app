@@ -14,10 +14,10 @@ class ForgotPasswordWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Padding(padding: EdgeInsets.only(
-      left: 20.w,
-      right: 20.w,
-      top: 12.h,
-      bottom: MediaQuery.of(context).viewInsets.bottom + 30.h,
+      left: 20,
+      right: 20,
+      top: 12,
+      bottom: MediaQuery.of(context).viewInsets.bottom + 30,
     ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -25,11 +25,11 @@ class ForgotPasswordWidget extends StatelessWidget{
           HeightSpace(12),
           Center(
             child: Container(
-              width: 130.w,
-              height: 5.h,
+              width: 130,
+              height: 5,
               decoration: BoxDecoration(
                 color: AppColors.subtitleColor,
-                borderRadius: BorderRadius.circular(10.r),
+                borderRadius: BorderRadius.circular(10),
               ),
             ),
           ),
@@ -51,7 +51,7 @@ class ForgotPasswordWidget extends StatelessWidget{
             ],
           ),
 
-          SizedBox(height: 36.h),
+          HeightSpace(36),
           CustomTextfeildWidget(hintText: "Email",),
           HeightSpace(30),
           CustomElevatdButton(buttonTXT: "Continue",onTap: (){
@@ -61,7 +61,7 @@ class ForgotPasswordWidget extends StatelessWidget{
               backgroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(30.r),
+                  top: Radius.circular(30),
                 ),
               ),
               builder: (context) =>  EnterDigitsWidget(),

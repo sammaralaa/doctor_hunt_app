@@ -13,6 +13,8 @@ import '../widgets/role_selection_card_widget.dart';
 enum UserRole { patient, admin }
 
 class ChooseRoleScreen extends StatefulWidget {
+  const ChooseRoleScreen({super.key});
+
   @override
   State<StatefulWidget> createState() => _ChooseRoleScreen();
 }

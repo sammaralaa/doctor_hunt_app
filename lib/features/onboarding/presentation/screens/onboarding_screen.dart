@@ -40,7 +40,7 @@ class _OnboardingScreen extends State<OnboardingScreen> {
           BottomRightShadowWidget(),
           SafeArea(
             child: Padding(
-              padding: EdgeInsets.all(20.w),
+              padding: EdgeInsets.all(20),
               child: PageView.builder(
                 controller: _pageController,
                 itemCount: OnboardingModel.onboardingPages.length,
@@ -55,11 +55,11 @@ class _OnboardingScreen extends State<OnboardingScreen> {
                     children: [
                       HeightSpace(70),
                       ClipRRect(
-                        borderRadius: BorderRadius.circular(160.0.r),
+                        borderRadius: BorderRadius.circular(160.0),
                         child: Image.asset(
                           OnboardingModel.onboardingPages[index].image,
-                          width: 336.w,
-                          height: 336.h,
+                          width: 336,
+                          height: 336,
                           fit: BoxFit.cover,
                         ),
                       ),

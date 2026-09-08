@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 class WidthSpace extends StatelessWidget {
@@ -8,7 +7,7 @@ class WidthSpace extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(width: width.w,);
+    return SizedBox(width: width,);
   }
 }
 
@@ -18,6 +17,6 @@ class HeightSpace extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(height: height.h,);
+    return SizedBox(height: height,);
   }
 }

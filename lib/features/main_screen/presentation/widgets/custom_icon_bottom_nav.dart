@@ -21,8 +21,8 @@ class CustomIconBottomNav extends StatelessWidget {
       child: Center( 
         child: SvgPicture.asset(
           icon,
-          width: 20.w, 
-          height: 20.h,
+          width: 20, 
+          height: 20,
           fit: BoxFit.contain, 
           colorFilter: ColorFilter.mode(
             isSelected ? AppColors.white : AppColors.inactiveIconColor,

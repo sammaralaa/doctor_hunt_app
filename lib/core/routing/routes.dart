@@ -1,5 +1,5 @@
 import 'package:doctor_hunt_app/features/admin_main_screen/presentation/screens/admin_main_screen.dart';
-import 'package:doctor_hunt_app/features/auth/presentation/screens/Sign_up_screen.dart';
+import 'package:doctor_hunt_app/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:doctor_hunt_app/features/auth/presentation/screens/login_screen.dart';
 import 'package:doctor_hunt_app/features/choose_role/presentation/screens/choose_role_screen.dart';
 import 'package:doctor_hunt_app/features/doctor_details/presentation/screens/doctor_details_screen.dart';

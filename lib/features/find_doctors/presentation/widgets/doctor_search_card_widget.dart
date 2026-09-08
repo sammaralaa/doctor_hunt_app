@@ -28,34 +28,34 @@ class _DoctorSearchCardWidgetState extends State<DoctorSearchCardWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 170.h,
+      height: 170,
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12.r),
+        borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha:0.04),
-            blurRadius: 15.r,
+            blurRadius: 15,
             offset: const Offset(0, 5),
           ),
         ],
       ),
       child: InkWell(
         onTap: widget.CardOnTap,
-        borderRadius: BorderRadius.circular(12.r),
+        borderRadius: BorderRadius.circular(12),
         child: Padding(
-          padding: EdgeInsets.all(14.r),
+          padding: EdgeInsets.all(14),
           child: Column(
             children: [
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(10.r),
+                    borderRadius: BorderRadius.circular(10),
                     child: Image.asset(
                       ImageAssets.doctorImage2,
-                      width: 88.w,
-                      height: 88.h,
+                      width: 88,
+                      height: 88,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -88,9 +88,9 @@ class _DoctorSearchCardWidgetState extends State<DoctorSearchCardWidget> {
                                     ? Icons.favorite_rounded
                                     : Icons.favorite_border_rounded,
                                 color: isFavorite
-                                    ? Colors.red
-                                    : const Color(0xFF677294),
-                                size: 22.r,
+                                    ? AppColors.red
+                                    : AppColors.inactiveIconColor,
+                                size: 22,
                               ),
                             ),
                           ],
@@ -173,15 +173,15 @@ class _DoctorSearchCardWidgetState extends State<DoctorSearchCardWidget> {
                   ),
 
                   SizedBox(
-                    width: 110.w,
-                    height: 34.h,
+                    width: 110,
+                    height: 34,
                     child: ElevatedButton(
                       onPressed: widget.onBookNowPressed,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primaryColor,
                         elevation: 0,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(6.r),
+                          borderRadius: BorderRadius.circular(6),
                         ),
                         padding: EdgeInsets.zero,
                       ),

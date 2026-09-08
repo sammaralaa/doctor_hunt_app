@@ -41,12 +41,12 @@ class _CustomHomeTopHeaderState extends State<CustomHomeTopHeader> {
       clipBehavior: Clip.none,
       children: [
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 40.h),
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
           decoration: BoxDecoration(
             color: AppColors.primaryColor,
             borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(20.r),
-              bottomRight: Radius.circular(20.r),
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20),
             ),
           ),
           child: Row(
@@ -67,28 +67,28 @@ class _CustomHomeTopHeaderState extends State<CustomHomeTopHeader> {
               GestureDetector(
                 onTap: widget.onProfileImageTap,
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(30.r),
+                  borderRadius: BorderRadius.circular(30),
                   child:
                       // widget.profileImageUrl != null &&
                       //     widget.profileImageUrl!.isNotEmpty
                       // ? Image.network(
                       //     widget.profileImageUrl!,
-                      //     width: 60.w,
-                      //     height: 60.h,
+                      //     width: 60,
+                      //     height: 60,
                       //     fit: BoxFit.cover,
                       //     errorBuilder: (context, error, stackTrace) =>
                       //         Image.asset(
                       //           ImageAssets.onBoarding5,
-                      //           width: 60.w,
-                      //           height: 60.h,
+                      //           width: 60,
+                      //           height: 60,
                       //           fit: BoxFit.cover,
                       //         ),
                       //   )
                       // : 
                       Image.asset(
                           ImageAssets.onBoarding5,
-                          width: 60.w,
-                          height: 60.h,
+                          width: 60,
+                          height: 60,
                           fit: BoxFit.cover,
                         ),
                 ),
@@ -98,17 +98,17 @@ class _CustomHomeTopHeaderState extends State<CustomHomeTopHeader> {
         ),
 
         Positioned(
-          left: 20.w,
-          right: 20.w,
-          bottom: -24.h,
+          left: 20,
+          right: 20,
+          bottom: -24,
           child: Container(
             decoration: BoxDecoration(
               color: AppColors.white,
-              borderRadius: BorderRadius.circular(6.r),
+              borderRadius: BorderRadius.circular(6),
               boxShadow: [
                 BoxShadow(
                   color: AppColors.black.withValues(alpha: 0.06),
-                  blurRadius: 15.r,
+                  blurRadius: 15,
                   offset: const Offset(0, 5),
                 ),
               ],
@@ -131,8 +131,8 @@ class _CustomHomeTopHeaderState extends State<CustomHomeTopHeader> {
                 ),
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.symmetric(
-                  horizontal: 16.w,
-                  vertical: 14.h,
+                  horizontal: 16,
+                  vertical: 14,
                 ),
               ),
             ),
