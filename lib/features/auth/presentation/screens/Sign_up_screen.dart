@@ -20,7 +20,8 @@ import '../widgets/custom_textfeild_widget.dart';
 import '../widgets/login_with_widget.dart';
 
 class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+  final String? userRole;
+  const SignUpScreen({super.key, this.userRole});
 
   @override
   State<StatefulWidget> createState() {
@@ -76,10 +77,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                           child: Column(
                             children: [
                               HeightSpace(100),
-                              Text(
-                                t.joinUs,
-                                style: context.bold26TextMain,
-                              ),
+                              Text(t.joinUs, style: context.bold26TextMain),
                               HeightSpace(15),
                               Text(
                                 t.authDescreption,
@@ -189,14 +187,19 @@ class _SignUpScreen extends State<SignUpScreen> {
                                 listener: (context, state) {
                                   if (state is AuthSuccess) {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                       SnackBar(
+                                      SnackBar(
                                         content: Text(
                                           t.accountCreatedSuccessfully,
                                         ),
                                         backgroundColor: AppColors.primaryColor,
                                       ),
                                     );
-                                    MainScreenRoute().go(context);
+                                    print('User Role: ${widget.userRole}');
+                                    if (widget.userRole == 'admin') {
+                                      AdminMainRoute().go(context);
+                                    } else {
+                                      MainScreenRoute().go(context);
+                                    }
                                   } else if (state is AuthFailure) {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
@@ -217,7 +220,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                                         ScaffoldMessenger.of(
                                           context,
                                         ).showSnackBar(
-                                           SnackBar(
+                                          SnackBar(
                                             content: Text(
                                               t.AcceptTheTermsPrivacy,
                                             ),
@@ -229,21 +232,21 @@ class _SignUpScreen extends State<SignUpScreen> {
                                       if (formKey.currentState?.validate() ??
                                           false) {
                                         context.read<AuthBloc>().add(
-                                         SignUpRequestedEvent(
-                                                email: emailController.text
-                                                    .trim(),
-                                                password: passController.text
-                                                    .trim(),
-                                                name: nameController.text
-                                                    .trim(),
-                                              ),
+                                          SignUpRequestedEvent(
+                                            email: emailController.text.trim(),
+                                            password: passController.text
+                                                .trim(),
+                                            name: nameController.text.trim(),
+                                            userRole:
+                                                widget.userRole ?? 'patient',
+                                          ),
                                         );
                                       }
                                     },
                                   );
                                 },
                               ),
-                            
+
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [

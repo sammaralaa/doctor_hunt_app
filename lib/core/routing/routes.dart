@@ -1,7 +1,9 @@
+import 'package:doctor_hunt_app/features/admin_main_screen/presentation/screens/admin_main_screen.dart';
 import 'package:doctor_hunt_app/features/auth/presentation/screens/Sign_up_screen.dart';
 import 'package:doctor_hunt_app/features/auth/presentation/screens/login_screen.dart';
 import 'package:doctor_hunt_app/features/choose_role/presentation/screens/choose_role_screen.dart';
 import 'package:doctor_hunt_app/features/doctor_details/presentation/screens/doctor_details_screen.dart';
+import 'package:doctor_hunt_app/features/doctors_list/presentation/screens/doctors_list_screen.dart';
 import 'package:doctor_hunt_app/features/main_screen/presentation/screens/main_screen.dart';
 import 'package:doctor_hunt_app/features/onboarding/presentation/screens/onboarding_screen.dart';
 import 'package:doctor_hunt_app/features/search/presentation/screens/find_doctors_screen.dart';
@@ -43,11 +45,12 @@ class LoginRoute extends GoRouteData with $LoginRoute {
 }
 @TypedGoRoute<SignUpRoute>(path: '/signup')
 class SignUpRoute extends GoRouteData with $SignUpRoute{
-  const SignUpRoute();
+  final String? userRole;
+  const SignUpRoute({this.userRole});
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return  SignUpScreen();
+    return  SignUpScreen(userRole: userRole,);
   }
 }
 @TypedGoRoute<MainScreenRoute>(path: '/main')
@@ -93,5 +96,24 @@ class SelectTimeRoute extends GoRouteData with $SelectTimeRoute {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return  SelectTimeDateScreen();
+  }
+}
+@TypedGoRoute<DoctorListRoute>(path: '/doctor-list')
+class DoctorListRoute extends GoRouteData with $DoctorListRoute {
+  const DoctorListRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return  DoctorsListScreen();
+  }
+}
+
+@TypedGoRoute<AdminMainRoute>(path: '/admin-main')
+class AdminMainRoute extends GoRouteData with $AdminMainRoute {
+  const AdminMainRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return  AdminMainScreen();
   }
 }

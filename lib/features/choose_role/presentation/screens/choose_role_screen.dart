@@ -4,9 +4,8 @@ import 'package:doctor_hunt_app/core/widgets/custom_elevated_button.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/core/widgets/top_left_shadow_widget.dart';
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../generated/image_assets.dart';
 import '../widgets/role_selection_card_widget.dart';
@@ -34,50 +33,49 @@ class _ChooseRoleScreen extends State<ChooseRoleScreen> {
                 children: [
                   HeightSpace(32),
                   Image.asset(ImageAssets.appLogo),
-                  Text("Doctor Hunt", style: context.bold26TextMain),
+                  Text(t.doctor_hunt, style: context.bold26TextMain),
                   HeightSpace(55),
-                  Text("Choose your role", style: context.regular28TextMain),
+                  Text(t.chooseYourRole, style: context.regular28TextMain),
                   HeightSpace(10),
                   Text(
-                    "The selected role determines the experience and available features.",
+                    t.theSelectedRoleDetermines,
                     style: context.regular14TextSub,
                     textAlign: TextAlign.center,
                   ),
                   HeightSpace(30),
                   RoleSelectionCardWidget(
-                    title: 'Patient',
-                    description:
-                        'Find doctors, book appointments, and manage your medical records.',
+                    title: t.patient,
+                    description: t.patientRoleDescreption,
                     roleIcon: Icons.personal_injury_rounded,
                     isSelected: _selectedRole == UserRole.patient,
                     onTap: () {
                       setState(() {
                         _selectedRole = UserRole.patient;
-
                       });
                     },
                   ),
                   HeightSpace(16),
                   RoleSelectionCardWidget(
-                    title: 'Admin',
-                    description:
-                        'Manage doctors, appointments, users, and the platform.',
+                    title: t.admin,
+                    description: t.adminRoleDescription,
                     roleIcon: Icons.grid_view_outlined,
-                    isSelected:  _selectedRole == UserRole.admin,
+                    isSelected: _selectedRole == UserRole.admin,
                     onTap: () {
                       setState(() {
                         _selectedRole = UserRole.admin;
                       });
-                      
                     },
                   ),
                   Spacer(),
                   CustomElevatdButton(
-                    buttonTXT: "Continue",
                     onTap: () {
-                      LoginRoute().go(context);
+                      print(_selectedRole.name);
+                      SignUpRoute(userRole: _selectedRole.name).go(context);
+                      //LoginRoute().go(context);
+                      // AdminMainRoute().go(context);
                       //GoRouter.of(context,).pushNamed(AppRoutes.loginScreen);
                     },
+                    buttonTXT: t.kContinue,
                   ),
                 ],
               ),

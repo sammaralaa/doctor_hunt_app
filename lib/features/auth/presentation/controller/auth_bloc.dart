@@ -22,13 +22,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final userCredential = await authRepository.signUp(
         email: event.email,
         password: event.password,
+        userRole: event.userRole,
       );
 
       if (userCredential.user != null && event.name.isNotEmpty) {
         await userCredential.user!.updateDisplayName(event.name);
       }
 
-      emit(AuthSuccess());
+      emit(AuthSuccess(role: event.userRole ));
     } on FirebaseAuthException catch (e) {
       emit(AuthFailure(_mapFirebaseAuthError(e)));
     } catch (e) {
@@ -43,14 +44,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(AuthLoading());
 
     try {
-       final userCredential = await authRepository.logIn(
+       final String? role = await authRepository.logIn(
         email: event.email,
         password: event.password,
       );
-      if (userCredential.user != null) {
-        await userCredential.user!.reload();
-      }
-      emit(AuthSuccess());
+      // if (userCredential.user != null) {
+      //   await userCredential.user!.reload();
+      // }
+      emit(AuthSuccess(role: role ?? 'patient'));
     } on FirebaseAuthException catch (e) {
       emit(AuthFailure(_mapFirebaseAuthError(e)));
     } catch (e) {
