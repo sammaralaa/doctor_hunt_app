@@ -48,7 +48,10 @@ class _AdminMainScreen extends State<AdminMainScreen> {
           BottomBarItem(
             inActiveItem: SvgPicture.asset(
               IconsAssets.medicalIcon,
-              color: AppColors.inactiveIconColor,
+              colorFilter: ColorFilter.mode(
+                AppColors.inactiveIconColor,
+                BlendMode.srcIn,
+              ),
             ),
             activeItem: SvgPicture.asset(
               IconsAssets.medicalIcon,

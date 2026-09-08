@@ -4,7 +4,7 @@ import 'package:doctor_hunt_app/core/widgets/custom_app_bar_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/core/widgets/top_left_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/custom_search_text_field_widget.dart';
-import 'package:doctor_hunt_app/features/search/presentation/widgets/doctor_search_card_widget.dart';
+import 'package:doctor_hunt_app/features/find_doctors/presentation/widgets/doctor_search_card_widget.dart';
 import 'package:doctor_hunt_app/generated/app_text_styles.dart';
 import 'package:flutter/material.dart';
 

@@ -1,5 +1,8 @@
 
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:doctor_hunt_app/core/services/cloudinary_services.dart';
 import 'package:doctor_hunt_app/core/utils/app_constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -9,21 +12,28 @@ class AuthRepository{
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
-  // 1. Sign Up
+  final CloudinaryServices _cloudinaryService = CloudinaryServices();
+  
+  
+  
   Future<UserCredential> signUp({
     required String email,
     required String password,
     required String userRole,
+    File? profileImageFile
   }) async {
     final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
     final String uid = userCredential.user!.uid;
+    String? imageUrl;
+    if (profileImageFile != null) {
+      imageUrl = await _cloudinaryService.uploadImage(profileImageFile);
+    }
     await _firestore.collection('users').doc(uid).set({
       'role': userRole,
-      //'createdAt': FieldValue.serverTimestamp(),
+      'profileImage': imageUrl ?? '',
     });
     return userCredential;
   }
@@ -39,7 +49,7 @@ Future<String?> logIn({
     );
 
     final String? uid = credential.user?.uid;
-    if (uid == null) return null;
+
 
     final DocumentSnapshot userDoc =
         await _firestore.collection('users').doc(uid).get();
@@ -47,10 +57,6 @@ Future<String?> logIn({
     final Map<String, dynamic>? data = userDoc.data() as Map<String, dynamic>?;
     final String? role = data?['role'] as String?;
 
-    // if (role != null) {
-    //   final prefs = await SharedPreferences.getInstance();
-    //   await prefs.setString(AppConstants.userRole, role);
-    // }
 
     return role;
   }
@@ -71,17 +77,19 @@ Future<String?> logIn({
 
     return await _firebaseAuth.signInWithCredential(credential);
   }
-  // Future<String> uploadProfileImage(File imageFile) async {
-  //   final userId = _firebaseAuth.currentUser?.uid;
-  //   if (userId == null) throw Exception("User not logged in");
+ Future<String?> uploadOrUpdateProfileImage({
+    required String uid,
+    required File imageFile,
+  }) async {
+    final String? imageUrl = await _cloudinaryService.uploadImage(imageFile);
 
-  //   final storageRef = _firebaseStorage
-  //       .ref()
-  //       .child('user_profile_images')
-  //       .child('$userId.jpg');
+    if (imageUrl != null) {
+      await _firestore.collection('users').doc(uid).set({
+        'profileImage': imageUrl,
+      }, SetOptions(merge: true)); 
+    }
 
-  //   await storageRef.putFile(imageFile);
+    return imageUrl;
+  }
 
-  //   return await storageRef.getDownloadURL();
-  // }
 }

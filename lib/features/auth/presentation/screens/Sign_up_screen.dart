@@ -255,7 +255,9 @@ class _SignUpScreen extends State<SignUpScreen> {
                                     style: context.regular14Primary,
                                   ),
                                   TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      LoginRoute().push(context);
+                                    },
                                     child: Text(
                                       t.logIn,
                                       style: context.regular14Primary,
