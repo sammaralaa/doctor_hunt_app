@@ -40,7 +40,7 @@ class CustomTextfeildWidget extends StatelessWidget {
         decoration: InputDecoration(
           hintText: hintText ?? "",
           hintStyle: TextStyle(
-            fontSize: 15.sp,
+            fontSize: 15,
             color: Color(0xff8391A1),
             fontWeight: FontWeight.w500,
           ),
