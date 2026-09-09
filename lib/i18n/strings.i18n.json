@@ -48,5 +48,18 @@
   "patient": "Patient",
   "patientRoleDescreption": "Find doctors, book appointments, and manage your medical records.",
   "admin": "Admin",
-  "adminRoleDescription": "Manage doctors, appointments, users, and the platform."
+  "adminRoleDescription": "Manage doctors, appointments, users, and the platform.",
+  "newPassword": "New Password",
+  "reEnterPassword": "Re-enter Password",
+  "updatePassword": "Update Password",
+  "setTheNewPasswordFor": "Set the new password for your account so you can login and access all the features.",
+  "resetPassword": "Reset Password",
+  "skip": "Skip",
+  "getStarted": "Get Started",
+  "theEmailAddressIsAlreadyInUseByAnotherAccount": "The email address is already in use by another account.",
+  "EmailAddressAlreadyInUse": "The email address is already in use by another account.",
+  "EmailAddressNotValid": "The email address is not valid.",
+  "thePasswordisWeak": "The password provided is too weak.",
+  "anUnknownAuthError": "An unknown authentication error occurred.",
+  "AccountsAreNotEnabled": "Email/password accounts are not enabled."
 }

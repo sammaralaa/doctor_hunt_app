@@ -1,0 +1,116 @@
+import 'package:doctor_hunt_app/core/routing/routes.dart';
+import 'package:doctor_hunt_app/core/utils/app_constants.dart';
+import 'package:doctor_hunt_app/core/widgets/bottom_right_shadow_widget.dart';
+import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
+import 'package:doctor_hunt_app/core/widgets/top_left_color_shape.dart';
+import 'package:doctor_hunt_app/generated/style_atoms.dart';
+import 'package:doctor_hunt_app/i18n/strings.g.dart';
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../../../core/widgets/custom_elevated_button.dart';
+import '../../data/onboarding_model.dart';
+
+class OnboardingScreen extends StatefulWidget {
+  const OnboardingScreen({super.key});
+
+  @override
+  State<StatefulWidget> createState() => _OnboardingScreen();
+}
+
+class _OnboardingScreen extends State<OnboardingScreen> {
+  final PageController _pageController = PageController();
+  int _currentIndex = 0;
+  
+  Future<void> _completeOnboarding() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(AppConstants.isFirstTime, false);
+
+    if (!mounted) return;
+    ChooseRoleRoute().go(context);
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          TopLeftColorShape(),
+          BottomRightShadowWidget(),
+          SafeArea(
+            child: Padding(
+              padding: EdgeInsets.all(20),
+              child: PageView.builder(
+                controller: _pageController,
+                itemCount: OnboardingModel.onboardingPages.length,
+                onPageChanged: (index) {
+                  setState(() {
+                    _currentIndex = index;
+                  });
+                },
+                itemBuilder: (context, index) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      HeightSpace(70),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(160.0),
+                        child: Image.asset(
+                          OnboardingModel.onboardingPages[index].image,
+                          width: 336,
+                          height: 336,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      HeightSpace(65),
+                      Text(
+                        OnboardingModel.onboardingPages[index].title,
+                        style: context.bold26TextMain,
+                      ),
+                      HeightSpace(11),
+                      Text(
+                        OnboardingModel
+                            .onboardingPages[_currentIndex]
+                            .description,
+                        style: context.regular14TextSub,
+                        textAlign: TextAlign.center,
+                      ),
+                      HeightSpace(35),
+                      CustomElevatdButton(
+                        buttonTXT: t.getStarted,
+                        onTap: () {
+                          if (_currentIndex <
+                              (OnboardingModel.onboardingPages.length - 1)) {
+                            _pageController.nextPage(
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.easeInOut,
+                            );
+                          } else {
+                            _completeOnboarding();
+                            //GoRouter.of(context,).pushNamed(AppRoutes.chooseRoleScreen);
+                          }
+                        },
+                      ),
+                      HeightSpace(10),
+                      TextButton(
+                        onPressed: () {
+                          // GoRouter.of(
+                          //   context,
+                          // ).pushNamed(AppRoutes.chooseRoleScreen);
+                          _completeOnboarding();
+                        },
+                        child: Text(
+                          t.skip,
+                          style: context.regular14TextSub,
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

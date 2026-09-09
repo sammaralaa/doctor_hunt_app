@@ -1,0 +1,58 @@
+import 'package:doctor_hunt_app/core/theme/app_colors.dart';
+import 'package:doctor_hunt_app/core/widgets/custom_elevated_button.dart';
+import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
+import 'package:doctor_hunt_app/features/common/auth/presentation/widgets/custom_textfeild_widget.dart';
+import 'package:doctor_hunt_app/generated/style_atoms.dart';
+import 'package:doctor_hunt_app/i18n/strings.g.dart';
+import 'package:flutter/cupertino.dart';
+
+class ResetPasswordWidget extends StatelessWidget{
+  const ResetPasswordWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(padding: EdgeInsets.only(
+      left: 20,
+      right: 20,
+      top: 12,
+      bottom: MediaQuery.of(context).viewInsets.bottom + 30,
+    ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          HeightSpace(12),
+          Center(
+            child: Container(
+              width: 130,
+              height: 5,
+              decoration: BoxDecoration(
+                color: AppColors.subtitleColor,
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
+          HeightSpace(30),
+          Text(
+            t.resetPassword,
+            style: context.bold26TextMain,
+            textAlign: TextAlign.start,
+          ),
+
+          HeightSpace(12),
+          Text(
+            t.setTheNewPasswordFor,
+            style: context.regular14TextSub,
+          ),
+
+          SizedBox(height: 36),
+          CustomTextfeildWidget(hintText: t.newPassword,),
+          HeightSpace(18),
+          CustomTextfeildWidget(hintText: t.reEnterPassword,),
+          HeightSpace(30),
+          CustomElevatdButton(buttonTXT: t.updatePassword,onTap: (){},),
+          HeightSpace(50),
+        ],
+      ),
+    );
+  }
+}

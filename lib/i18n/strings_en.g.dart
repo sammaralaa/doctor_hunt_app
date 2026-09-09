@@ -190,6 +190,45 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 
 	/// en: 'Manage doctors, appointments, users, and the platform.'
 	String get adminRoleDescription => 'Manage doctors, appointments, users, and the platform.';
+
+	/// en: 'New Password'
+	String get newPassword => 'New Password';
+
+	/// en: 'Re-enter Password'
+	String get reEnterPassword => 'Re-enter Password';
+
+	/// en: 'Update Password'
+	String get updatePassword => 'Update Password';
+
+	/// en: 'Set the new password for your account so you can login and access all the features.'
+	String get setTheNewPasswordFor => 'Set the new password for your account so you can login and access all the features.';
+
+	/// en: 'Reset Password'
+	String get resetPassword => 'Reset Password';
+
+	/// en: 'Skip'
+	String get skip => 'Skip';
+
+	/// en: 'Get Started'
+	String get getStarted => 'Get Started';
+
+	/// en: 'The email address is already in use by another account.'
+	String get theEmailAddressIsAlreadyInUseByAnotherAccount => 'The email address is already in use by another account.';
+
+	/// en: 'The email address is already in use by another account.'
+	String get EmailAddressAlreadyInUse => 'The email address is already in use by another account.';
+
+	/// en: 'The email address is not valid.'
+	String get EmailAddressNotValid => 'The email address is not valid.';
+
+	/// en: 'The password provided is too weak.'
+	String get thePasswordisWeak => 'The password provided is too weak.';
+
+	/// en: 'An unknown authentication error occurred.'
+	String get anUnknownAuthError => 'An unknown authentication error occurred.';
+
+	/// en: 'Email/password accounts are not enabled.'
+	String get AccountsAreNotEnabled => 'Email/password accounts are not enabled.';
 }
 
 /// The flat map containing all translations for locale <en>.
@@ -250,6 +289,19 @@ extension on Translations {
 			'patientRoleDescreption' => 'Find doctors, book appointments, and manage your medical records.',
 			'admin' => 'Admin',
 			'adminRoleDescription' => 'Manage doctors, appointments, users, and the platform.',
+			'newPassword' => 'New Password',
+			'reEnterPassword' => 'Re-enter Password',
+			'updatePassword' => 'Update Password',
+			'setTheNewPasswordFor' => 'Set the new password for your account so you can login and access all the features.',
+			'resetPassword' => 'Reset Password',
+			'skip' => 'Skip',
+			'getStarted' => 'Get Started',
+			'theEmailAddressIsAlreadyInUseByAnotherAccount' => 'The email address is already in use by another account.',
+			'EmailAddressAlreadyInUse' => 'The email address is already in use by another account.',
+			'EmailAddressNotValid' => 'The email address is not valid.',
+			'thePasswordisWeak' => 'The password provided is too weak.',
+			'anUnknownAuthError' => 'An unknown authentication error occurred.',
+			'AccountsAreNotEnabled' => 'Email/password accounts are not enabled.',
 			_ => null,
 		};
 	}
