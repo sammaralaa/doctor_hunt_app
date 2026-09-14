@@ -1,3 +1,4 @@
+import 'package:doctor_hunt_app/core/theme/app_colors.dart' show AppColors;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart'; 
 
@@ -46,7 +47,7 @@ class CategoryCard extends StatelessWidget {
             iconPath,
             width: 30,
             height: 30,
-            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            colorFilter: const ColorFilter.mode(AppColors.white, BlendMode.srcIn),
           ),
         ),
       ),

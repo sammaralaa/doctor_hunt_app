@@ -3,7 +3,6 @@ import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/bottom_right_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/top_left_shadow_widget.dart';
 import 'package:doctor_hunt_app/features/admin/doctors_list/presentation/screens/doctors_list_screen.dart';
-import 'package:doctor_hunt_app/features/patient/favorite/presentation/screens/favorite_screen.dart';
 import 'package:doctor_hunt_app/generated/icons_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

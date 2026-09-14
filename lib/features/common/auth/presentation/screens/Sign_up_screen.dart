@@ -1,10 +1,10 @@
 import 'package:doctor_hunt_app/core/routing/routes.dart';
+import 'package:doctor_hunt_app/core/services/di.dart';
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/bottom_right_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/custom_elevated_button.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/core/widgets/top_left_shadow_widget.dart';
-import 'package:doctor_hunt_app/features/common/auth/data/repos/auth_repository.dart';
 import 'package:doctor_hunt_app/features/common/auth/presentation/controller/auth_bloc.dart';
 import 'package:doctor_hunt_app/features/common/auth/presentation/controller/auth_events.dart';
 import 'package:doctor_hunt_app/features/common/auth/presentation/controller/auth_state.dart';
@@ -53,7 +53,7 @@ class _SignUpScreen extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AuthBloc(AuthRepository()),
+      create: (context) => getIt<AuthBloc>(),
       child: Scaffold(
         body: Stack(
           children: [

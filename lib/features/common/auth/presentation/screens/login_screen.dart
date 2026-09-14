@@ -5,7 +5,6 @@ import 'package:doctor_hunt_app/core/widgets/bottom_right_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/custom_elevated_button.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/core/widgets/top_left_shadow_widget.dart';
-import 'package:doctor_hunt_app/features/common/auth/data/repos/auth_repository.dart';
 import 'package:doctor_hunt_app/features/common/auth/presentation/controller/auth_bloc.dart';
 import 'package:doctor_hunt_app/features/common/auth/presentation/controller/auth_events.dart';
 import 'package:doctor_hunt_app/features/common/auth/presentation/controller/auth_state.dart';
