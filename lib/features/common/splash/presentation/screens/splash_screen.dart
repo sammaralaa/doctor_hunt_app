@@ -30,7 +30,13 @@ class _SplashScreen extends State<SplashScreen> {
         OnBoardingRoute().go(context);
       }
       if (SharedPrefsService.getBool('is_logged_in') == true) {
-        MainScreenRoute().go(context);
+        
+        if (SharedPrefsService.getString('user_role') == 'admin') {
+          AdminMainRoute().go(context);
+        }else {
+          MainScreenRoute().go(context);
+        }
+        
       } else {
         ChooseRoleRoute().go(context);
       }

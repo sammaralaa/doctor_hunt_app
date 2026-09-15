@@ -1,4 +1,3 @@
-
 import 'package:doctor_hunt_app/core/routing/routes.dart';
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
@@ -10,14 +9,17 @@ import 'package:flutter/material.dart';
 class CustomHomeTopHeader extends StatefulWidget {
   final TextEditingController? searchController;
   final String userName;
-  //final String? profileImageUrl;
+  final String? profileImageUrl;
   final VoidCallback? onProfileImageTap;
+  final bool isLoading;
 
   const CustomHomeTopHeader({
     super.key,
     this.searchController,
     required this.userName,
     this.onProfileImageTap,
+    this.profileImageUrl,
+    required this.isLoading,
   });
 
   @override
@@ -25,9 +27,6 @@ class CustomHomeTopHeader extends StatefulWidget {
 }
 
 class _CustomHomeTopHeaderState extends State<CustomHomeTopHeader> {
-
- 
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -61,24 +60,24 @@ class _CustomHomeTopHeaderState extends State<CustomHomeTopHeader> {
                 onTap: widget.onProfileImageTap,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(30),
-                  child:
-                      // widget.profileImageUrl != null &&
-                      //     widget.profileImageUrl!.isNotEmpty
-                      // ? Image.network(
-                      //     widget.profileImageUrl!,
-                      //     width: 60,
-                      //     height: 60,
-                      //     fit: BoxFit.cover,
-                      //     errorBuilder: (context, error, stackTrace) =>
-                      //         Image.asset(
-                      //           ImageAssets.onBoarding5,
-                      //           width: 60,
-                      //           height: 60,
-                      //           fit: BoxFit.cover,
-                      //         ),
-                      //   )
-                      // : 
-                      Image.asset(
+                  child: widget.isLoading
+                      ? CircularProgressIndicator()
+                      : widget.profileImageUrl != null &&
+                            widget.profileImageUrl!.isNotEmpty
+                      ? Image.network(
+                          widget.profileImageUrl!,
+                          width: 60,
+                          height: 60,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) =>
+                              Image.asset(
+                                ImageAssets.onBoarding5,
+                                width: 60,
+                                height: 60,
+                                fit: BoxFit.cover,
+                              ),
+                        )
+                      : Image.asset(
                           ImageAssets.onBoarding5,
                           width: 60,
                           height: 60,

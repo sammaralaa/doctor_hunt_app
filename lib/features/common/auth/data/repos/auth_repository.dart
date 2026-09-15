@@ -74,20 +74,20 @@ class AuthRepository {
     return await _firebaseAuth.signInWithCredential(credential);
   }
 
-  Future<String?> uploadOrUpdateProfileImage({
-    required String uid,
-    required File imageFile,
-  }) async {
-    final String? imageUrl = await _cloudinaryService.uploadImage(imageFile);
+  // Future<String?> uploadOrUpdateProfileImage({
+  //   required String uid,
+  //   required File imageFile,
+  // }) async {
+  //   final String? imageUrl = await _cloudinaryService.uploadImage(imageFile);
 
-    if (imageUrl != null) {
-      await _firestore.collection('users').doc(uid).set({
-        'profileImage': imageUrl,
-      }, SetOptions(merge: true));
-    }
+  //   if (imageUrl != null) {
+  //     await _firestore.collection('users').doc(uid).set({
+  //       'profileImage': imageUrl,
+  //     }, SetOptions(merge: true));
+  //   }
 
-    return imageUrl;
-  }
+  //   return imageUrl;
+  // }
 
   Future<void> signOut() async {
     await _firebaseAuth.signOut();

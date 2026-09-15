@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor_hunt_app/core/services/cloudinary_services.dart';
 import 'package:doctor_hunt_app/features/common/auth/data/repos/auth_repository.dart';
 import 'package:doctor_hunt_app/features/common/auth/presentation/controller/auth_bloc.dart';
+import 'package:doctor_hunt_app/features/patient/home/data/repos/home_repository.dart';
+import 'package:doctor_hunt_app/features/patient/home/presentation/controller/home_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -31,5 +33,14 @@ Future<void> setupGetIt() async {
     ),
   );
 
+    getIt.registerLazySingleton<HomeRepository>(
+    () => HomeRepository(
+      firebaseAuth: getIt<FirebaseAuth>(),
+      firestore: getIt<FirebaseFirestore>(),
+      cloudinaryService: getIt<CloudinaryServices>(),
+    ),
+  );
+
   getIt.registerFactory<AuthBloc>(() => AuthBloc(getIt<AuthRepository>()));
+  getIt.registerFactory<HomeBloc>(() => HomeBloc(getIt<HomeRepository>()));
 }

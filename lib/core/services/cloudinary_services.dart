@@ -7,6 +7,19 @@ class CloudinaryServices {
 
   static const String _cloudName = 'ug4exgmz';
   static const String _uploadPreset = 'unspre';
+  // static final ImagePicker _picker = ImagePicker();
+
+  // static Future<File?> pickProfileImage({ImageSource source = ImageSource.gallery}) async {
+  //   final XFile? pickedFile = await _picker.pickImage(
+  //     source: source,
+  //     maxWidth: 512,
+  //     maxHeight: 512,
+  //     imageQuality: 80,
+  //   );
+
+  //   if (pickedFile == null) return null;
+  //   return File(pickedFile.path);
+  // }
 
   Future<String?> uploadImage(File imageFile) async {
     try {
@@ -25,7 +38,7 @@ class CloudinaryServices {
       }
       return null;
     } catch (e) {
-      throw Exception('Failed to upload image to Cloudinary: $e');
+      throw Exception('Failed to upload image: $e');
     }
   }
 }

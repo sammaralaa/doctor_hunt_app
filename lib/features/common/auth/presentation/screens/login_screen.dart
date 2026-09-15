@@ -1,5 +1,6 @@
 import 'package:doctor_hunt_app/core/routing/routes.dart';
 import 'package:doctor_hunt_app/core/services/di.dart';
+import 'package:doctor_hunt_app/core/services/shared_prefs_service.dart';
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/bottom_right_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/custom_elevated_button.dart';
@@ -10,7 +11,6 @@ import 'package:doctor_hunt_app/features/common/auth/presentation/controller/aut
 import 'package:doctor_hunt_app/features/common/auth/presentation/controller/auth_state.dart';
 import 'package:doctor_hunt_app/features/common/auth/presentation/widgets/custom_textfeild_widget.dart';
 import 'package:doctor_hunt_app/features/common/auth/presentation/widgets/login_with_widget.dart';
-import 'package:doctor_hunt_app/features/common/choose_role/presentation/screens/choose_role_screen.dart';
 import 'package:doctor_hunt_app/generated/icons_assets.dart';
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:doctor_hunt_app/i18n/strings.g.dart';
@@ -39,6 +39,7 @@ class _LoginScreen extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
+    SharedPrefsService.init();
     emailController = TextEditingController();
     passController = TextEditingController();
   }
@@ -146,6 +147,8 @@ class _LoginScreen extends State<LoginScreen> {
                                   listener: (context, state) {
                                     if (state is AuthSuccess) {
                                       if (state.role == widget.userRole) {
+                                        SharedPrefsService.setBool('is_logged_in', true);
+                                        SharedPrefsService.setString('user_role', state.role);
                                         ScaffoldMessenger.of(
                                           context,
                                         ).showSnackBar(
