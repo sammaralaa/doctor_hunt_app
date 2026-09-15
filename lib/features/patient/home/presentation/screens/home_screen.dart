@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:doctor_hunt_app/core/services/cloudinary_services.dart';
 import 'package:doctor_hunt_app/core/services/di.dart';
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
@@ -71,6 +70,7 @@ class _HomeScreen extends State<HomeScreen> {
                   currentProfileImage = state.imageUrl;
                 }
                   return CustomHomeTopHeader(
+                    isLoading : isLoading,
                     searchController: searchController,
                     userName: userName,
                     profileImageUrl: currentProfileImage,
