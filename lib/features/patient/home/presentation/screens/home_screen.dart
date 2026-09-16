@@ -15,7 +15,6 @@ import 'package:doctor_hunt_app/features/patient/home/presentation/widgets/popul
 import 'package:doctor_hunt_app/generated/icons_assets.dart';
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:doctor_hunt_app/i18n/strings.g.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,20 +28,20 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreen extends State<HomeScreen> {
   late TextEditingController? searchController;
-  late String userName;
+  //late String userName;
 
   @override
   initState() {
     super.initState();
     searchController = TextEditingController();
-    final user = FirebaseAuth.instance.currentUser;
-    userName = user?.displayName ?? t.user;
+    //final user = FirebaseAuth.instance.currentUser;
+    //userName = user?.displayName ?? t.user;
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<HomeBloc>(),
+      create: (context) => getIt<HomeBloc>()..add(GetUserProfileDataEvent()),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: CustomScrollView(
@@ -50,6 +49,7 @@ class _HomeScreen extends State<HomeScreen> {
             SliverToBoxAdapter(
               child: BlocConsumer<HomeBloc, HomeState>(
                 listener: (context, state) {
+                  
                   if (state is ProfileImageSuccessState) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Profile picture updated successfully!')),
@@ -62,12 +62,17 @@ class _HomeScreen extends State<HomeScreen> {
                 },
                 builder: (context, state) {
                   String? currentProfileImage;
+                  String userName = "";
                 bool isLoading = false;
-
+                if(state is UserProfileSuccessState){
+                    currentProfileImage = state.user.profileImage;
+                    userName = state.user.name;
+                  }
                 if (state is ProfileImageLoadingState) {
                   isLoading = true;
                 } else if (state is ProfileImageSuccessState) {
-                  currentProfileImage = state.imageUrl;
+                  currentProfileImage = state.model.profileImage;
+                  userName = state.model.name;
                 }
                   return CustomHomeTopHeader(
                     isLoading : isLoading,

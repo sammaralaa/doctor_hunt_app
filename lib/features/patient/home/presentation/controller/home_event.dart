@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:doctor_hunt_app/features/patient/home/data/patient_model.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class HomeEvent extends Equatable {
@@ -19,10 +18,10 @@ class UploadProfileImageEvent extends HomeEvent {
 }
 
 class GetUserProfileDataEvent extends HomeEvent{
-  final PatientModel model;
-  const GetUserProfileDataEvent(this.model);
+  
+  const GetUserProfileDataEvent();
 
   @override
-    List<Object?> get props => [model];
+    List<Object?> get props => [];
 
 }
