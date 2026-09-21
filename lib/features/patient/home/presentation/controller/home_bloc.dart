@@ -8,7 +8,7 @@ class HomeBloc extends Bloc<HomeEvent,HomeState>{
   final HomeRepository _homeRepository;
 
   HomeBloc(this._homeRepository) : super(HomeInitialState()) {
-    on<UploadProfileImageEvent>(_onUploadProfileImage);
+   // on<UploadProfileImageEvent>(_onUploadProfileImage);
     on<GetUserProfileDataEvent>(_onGetUserProfileData);
   }
 
@@ -16,7 +16,7 @@ class HomeBloc extends Bloc<HomeEvent,HomeState>{
     GetUserProfileDataEvent event,
     Emitter<HomeState> emit
   )async{
-     emit(ProfileImageLoadingState());
+     emit(UserProfileLoadingState());
     try{
         final user = await _homeRepository.getUserProfileData();
         if(user != null ){
@@ -29,24 +29,24 @@ class HomeBloc extends Bloc<HomeEvent,HomeState>{
     }
   }
 
-  Future<void> _onUploadProfileImage(
-    UploadProfileImageEvent event,
-    Emitter<HomeState> emit,
-  ) async {
-    emit(ProfileImageLoadingState());
+  // Future<void> _onUploadProfileImage(
+  //   UploadProfileImageEvent event,
+  //   Emitter<HomeState> emit,
+  // ) async {
+  //   emit(ProfileImageLoadingState());
 
-    try {
-      final PatientModel? imageUrl = await _homeRepository.uploadOrUpdateProfileImage(
-        imageFile: event.imageFile,
-      );
+  //   try {
+  //     final PatientModel? imageUrl = await _homeRepository.uploadOrUpdateProfileImage(
+  //       imageFile: event.imageFile,
+  //     );
 
-      if (imageUrl != null) {
-        emit(ProfileImageSuccessState(imageUrl));
-      } else {
-        emit( ProfileImageFailureState("Failed to upload image"));
-      }
-    } catch (e) {
-      emit(ProfileImageFailureState(e.toString()));
-    }
-  }
+  //     if (imageUrl != null) {
+  //       emit(ProfileImageSuccessState(imageUrl));
+  //     } else {
+  //       emit( ProfileImageFailureState("Failed to upload image"));
+  //     }
+  //   } catch (e) {
+  //     emit(ProfileImageFailureState(e.toString()));
+  //   }
+  // }
 }

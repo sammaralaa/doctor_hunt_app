@@ -1,7 +1,6 @@
 import 'package:doctor_hunt_app/features/admin/create-doctor/data/repos/create_doctor_repository.dart';
 import 'package:doctor_hunt_app/features/admin/create-doctor/presentation/controller/Create_doctor_state.dart';
 import 'package:doctor_hunt_app/features/admin/create-doctor/presentation/controller/create_doctor_event.dart';
-import 'package:doctor_hunt_app/features/patient/home/presentation/controller/home_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CreateDoctorBloc extends Bloc<CreateDoctorEvent, CreateDoctorState> {

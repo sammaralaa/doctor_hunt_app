@@ -15,9 +15,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 final GetIt getIt = GetIt.instance;
 
 Future<void> setupGetIt() async {
-  /* final GoogleSignIn _googleSignIn = GoogleSignIn.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final CloudinaryServices _cloudinaryService = CloudinaryServices(); */
+ 
   getIt.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
 
   getIt.registerLazySingleton<GoogleSignIn>(() => GoogleSignIn.instance);
@@ -41,7 +39,6 @@ Future<void> setupGetIt() async {
     () => HomeRepository(
       firebaseAuth: getIt<FirebaseAuth>(),
       firestore: getIt<FirebaseFirestore>(),
-      cloudinaryService: getIt<CloudinaryServices>(),
     ),
   );
   getIt.registerLazySingleton<CreateDoctorRepository>(

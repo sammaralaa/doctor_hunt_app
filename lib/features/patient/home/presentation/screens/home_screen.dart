@@ -50,17 +50,17 @@ class _HomeScreen extends State<HomeScreen> {
             SliverToBoxAdapter(
               child: BlocConsumer<HomeBloc, HomeState>(
                 listener: (context, state) {
-                  if (state is ProfileImageSuccessState) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(t.profilePictureUpdatedSuccessfully),
-                      ),
-                    );
-                  } else if (state is ProfileImageFailureState) {
-                    ScaffoldMessenger.of(
-                      context,
-                    ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
-                  }
+                  // if (state is ProfileImageSuccessState) {
+                  //   ScaffoldMessenger.of(context).showSnackBar(
+                  //     SnackBar(
+                  //       content: Text(t.profilePictureUpdatedSuccessfully),
+                  //     ),
+                  //   );
+                  // } else if (state is ProfileImageFailureState) {
+                  //   ScaffoldMessenger.of(
+                  //     context,
+                  //   ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
+                  // }
                 },
                 builder: (context, state) {
                   String? currentProfileImage;
@@ -69,31 +69,28 @@ class _HomeScreen extends State<HomeScreen> {
                     currentProfileImage = state.user.profileImage;
                     userName = state.user.name;
                   }
-                  else if (state is ProfileImageSuccessState) {
-                    currentProfileImage = state.model.profileImage;
-                    userName = state.model.name;
-                  }
+                 
                   return CustomHomeTopHeader(
-                    isLoading: state is ProfileImageLoadingState,
+                    isLoading: state is UserProfileLoadingState,
                     searchController: searchController,
                     userName: userName,
                     profileImageUrl: currentProfileImage,
                     onProfileImageTap: () async {
-                      ImageSource source = ImageSource.gallery;
-                      final ImagePicker picker = ImagePicker();
-                      final XFile? pickedFile = await picker.pickImage(
-                        source: source,
-                        maxWidth: 512,
-                        maxHeight: 512,
-                        imageQuality: 80,
-                      );
+                      // ImageSource source = ImageSource.gallery;
+                      // final ImagePicker picker = ImagePicker();
+                      // final XFile? pickedFile = await picker.pickImage(
+                      //   source: source,
+                      //   maxWidth: 512,
+                      //   maxHeight: 512,
+                      //   imageQuality: 80,
+                      // );
                       // final File? pickedFile =
                       //     await HomeRepository.pickProfileImage();
-                      if (pickedFile != null && mounted) {
-                        context.read<HomeBloc>().add(
-                          UploadProfileImageEvent(File(pickedFile.path)),
-                        );
-                      }
+                      // if (pickedFile != null && mounted) {
+                      //   context.read<HomeBloc>().add(
+                      //     UploadProfileImageEvent(File(pickedFile.path)),
+                      //   );
+                      // }
                     },
                   );
                 },

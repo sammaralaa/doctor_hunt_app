@@ -8,14 +8,14 @@ abstract class HomeEvent extends Equatable {
   @override
   List<Object?> get props => [];
 }
-class UploadProfileImageEvent extends HomeEvent {
-  final File imageFile;
+// class UploadProfileImageEvent extends HomeEvent {
+//   final File imageFile;
 
-  const UploadProfileImageEvent(this.imageFile);
+//   const UploadProfileImageEvent(this.imageFile);
 
-  @override
-  List<Object?> get props => [imageFile];
-}
+//   @override
+//   List<Object?> get props => [imageFile];
+// }
 
 class GetUserProfileDataEvent extends HomeEvent{
   

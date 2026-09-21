@@ -28,8 +28,11 @@ class AuthRepository {
       imageUrl = await _cloudinaryService.uploadImage(profileImageFile);
     }
     await _firestore.collection('users').doc(uid).set({
+      'name':_firebaseAuth.currentUser?.displayName,
+      'email':email,
       'role': userRole,
       'profileImage': imageUrl ?? '',
+      
     });
     return userCredential;
   }

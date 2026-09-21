@@ -9,13 +9,13 @@ import 'package:image_picker/image_picker.dart';
 class HomeRepository {
   final FirebaseAuth _firebaseAuth;
   final FirebaseFirestore _firestore;
-  final CloudinaryServices _cloudinaryService;
-   final ImagePicker _picker = ImagePicker();
+  //final CloudinaryServices _cloudinaryService;
+  //  final ImagePicker _picker = ImagePicker();
 
   HomeRepository({
     required this._firebaseAuth,
     required this._firestore,
-    required this._cloudinaryService,
+    
   });
 
   Future<PatientModel?> getUserProfileData() async {
@@ -31,7 +31,7 @@ class HomeRepository {
       if (docSnapshot.exists && docSnapshot.data() != null) {
         final data = docSnapshot.data();
         return PatientModel(
-          name: data?['name'] ?? user.displayName,
+          name: data?['name'],
           profileImage: data?['profileImage'],
         );
       }
@@ -55,22 +55,22 @@ class HomeRepository {
   //   return File(pickedFile.path);
   // }
 
-  Future<PatientModel?> uploadOrUpdateProfileImage({
-    required File imageFile,
-  }) async {
-    final String? uid = _firebaseAuth.currentUser?.uid;
+  // Future<PatientModel?> uploadOrUpdateProfileImage({
+  //   required File imageFile,
+  // }) async {
+  //   final String? uid = _firebaseAuth.currentUser?.uid;
 
-    final String? imageUrl = await _cloudinaryService.uploadImage(imageFile);
+  //   final String? imageUrl = await _cloudinaryService.uploadImage(imageFile);
 
-    if (imageUrl != null) {
-      await _firestore.collection('users').doc(uid).set({
-        'profileImage': imageUrl,
-      }, SetOptions(merge: true));
-    }
+  //   if (imageUrl != null) {
+  //     await _firestore.collection('users').doc(uid).set({
+  //       'profileImage': imageUrl,
+  //     }, SetOptions(merge: true));
+  //   }
 
-    return PatientModel(
-      name: _firebaseAuth.currentUser?.displayName ?? "User",
-      profileImage: imageUrl,
-    );
-  }
+  //   return PatientModel(
+  //     name: _firebaseAuth.currentUser?.displayName ?? "User",
+  //     profileImage: imageUrl,
+  //   );
+  // }
 }

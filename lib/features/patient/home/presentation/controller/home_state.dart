@@ -7,23 +7,23 @@ abstract class HomeState extends Equatable {
   List<Object?> get props => [];
 }
 class HomeInitialState extends HomeState {}
-class ProfileImageLoadingState extends HomeState {}
-class ProfileImageSuccessState extends HomeState {
-  final PatientModel model;
+// class ProfileImageLoadingState extends HomeState {}
+// class ProfileImageSuccessState extends HomeState {
+//   final PatientModel model;
 
-   ProfileImageSuccessState( this.model);
+//    ProfileImageSuccessState( this.model);
 
-  @override
-  List<Object?> get props => [model];
-}
-class ProfileImageFailureState extends HomeState {
-  final String errorMessage;
+//   @override
+//   List<Object?> get props => [model];
+// }
+// class ProfileImageFailureState extends HomeState {
+//   final String errorMessage;
 
-   ProfileImageFailureState(this.errorMessage);
+//    ProfileImageFailureState(this.errorMessage);
 
-  @override
-  List<Object?> get props => [errorMessage];
-}
+//   @override
+//   List<Object?> get props => [errorMessage];
+// }
 
 class UserProfileLoadingState extends HomeState {}
 
