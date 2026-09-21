@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor_hunt_app/core/services/cloudinary_services.dart';
-import 'package:doctor_hunt_app/features/patient/home/data/patient_model.dart';
+import 'package:doctor_hunt_app/features/patient/home/data/model/patient_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -10,7 +10,7 @@ class HomeRepository {
   final FirebaseAuth _firebaseAuth;
   final FirebaseFirestore _firestore;
   final CloudinaryServices _cloudinaryService;
-   static final ImagePicker _picker = ImagePicker();
+   final ImagePicker _picker = ImagePicker();
 
   HomeRepository({
     required this._firebaseAuth,
@@ -18,49 +18,47 @@ class HomeRepository {
     required this._cloudinaryService,
   });
 
-  Future<PatientModel?> getUserProfileData()async{
+  Future<PatientModel?> getUserProfileData() async {
     final user = _firebaseAuth.currentUser;
     //final PatientModel userData = PatientModel(name: )
 
-    if (user == null) return null ;
-    try{
-      final docSnapshot = await _firestore.collection("users").doc(user.uid).get();
-      if(docSnapshot.exists && docSnapshot.data() != null ){
+    if (user == null) return null;
+    try {
+      final docSnapshot = await _firestore
+          .collection("users")
+          .doc(user.uid)
+          .get();
+      if (docSnapshot.exists && docSnapshot.data() != null) {
         final data = docSnapshot.data();
         return PatientModel(
           name: data?['name'] ?? user.displayName,
-          profileImage: data?['profileImage']
-          );
+          profileImage: data?['profileImage'],
+        );
       }
-      return PatientModel(
-          name:  user.displayName ?? "user",
-          profileImage: null
-          );
-   }catch(e){
+      return PatientModel(name: user.displayName ?? "user", profileImage: null);
+    } catch (e) {
       rethrow;
     }
   }
 
- static Future<File?> pickProfileImage({
-    ImageSource source = ImageSource.gallery,
+  //  Future<File?> pickProfileImage({
+  //   ImageSource source = ImageSource.gallery,
+  // }) async {
+  //   final XFile? pickedFile = await _picker.pickImage(
+  //     source: source,
+  //     maxWidth: 512,
+  //     maxHeight: 512,
+  //     imageQuality: 80,
+  //   );
+
+  //   if (pickedFile == null) return null;
+  //   return File(pickedFile.path);
+  // }
+
+  Future<PatientModel?> uploadOrUpdateProfileImage({
+    required File imageFile,
   }) async {
-    final XFile? pickedFile = await _picker.pickImage(
-      source: source,
-      maxWidth: 512,
-      maxHeight: 512,
-      imageQuality: 80,
-    );
-
-    if (pickedFile == null) return null;
-    return File(pickedFile.path);
-  }
-
-  Future<PatientModel?> uploadOrUpdateProfileImage({required File imageFile}) async {
     final String? uid = _firebaseAuth.currentUser?.uid;
-
-    if (uid == null) {
-      throw Exception("User not logged in");
-    }
 
     final String? imageUrl = await _cloudinaryService.uploadImage(imageFile);
 
@@ -70,6 +68,9 @@ class HomeRepository {
       }, SetOptions(merge: true));
     }
 
-    return PatientModel(name: _firebaseAuth.currentUser?.displayName ?? "User",profileImage: imageUrl);
+    return PatientModel(
+      name: _firebaseAuth.currentUser?.displayName ?? "User",
+      profileImage: imageUrl,
+    );
   }
 }

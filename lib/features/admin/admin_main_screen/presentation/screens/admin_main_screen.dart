@@ -4,6 +4,7 @@ import 'package:doctor_hunt_app/core/widgets/bottom_right_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/top_left_shadow_widget.dart';
 import 'package:doctor_hunt_app/features/admin/doctors_list/presentation/screens/doctors_list_screen.dart';
 import 'package:doctor_hunt_app/generated/icons_assets.dart';
+import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -23,7 +24,7 @@ class _AdminMainScreen extends State<AdminMainScreen> {
   );
   int maxCount = 2;
 
-  final List<Widget> _screens = [DoctorsListScreen(), Center(child: Text("Settings Screen"))];
+  final List<Widget> _screens = [DoctorsListScreen(), Center(child: Text(t.settingsScreen))];
   @override
   void dispose() {
     _controller.dispose();

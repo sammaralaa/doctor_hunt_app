@@ -22,8 +22,9 @@ class SharedPrefsService {
   static Future<void> setBool(String key, bool value) async {
     await prefs.setBool(key, value);
   }
-
+  
   static bool? getBool(String key) {
     return prefs.getBool(key);
   }
+
 }

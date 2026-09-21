@@ -4,16 +4,22 @@ import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 
 class CustomElevatdButton extends StatelessWidget {
-  final String buttonTXT;
+  final String? buttonTXT;
   final VoidCallback? onTap;
   final double? buttonWidth;
+  final Widget? childWidget;
 
-  const CustomElevatdButton({super.key, required this.buttonTXT, this.onTap,this.buttonWidth});
+  const CustomElevatdButton({
+    super.key,
+     this.buttonTXT,
+    this.onTap,
+    this.buttonWidth, this.childWidget,
+  });
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 50,
-      width:  buttonWidth ??  295,
+      width: buttonWidth ?? 295,
       child: ElevatedButton(
         onPressed: onTap,
         style: ElevatedButton.styleFrom(
@@ -22,7 +28,7 @@ class CustomElevatdButton extends StatelessWidget {
             borderRadius: BorderRadiusGeometry.circular(10),
           ),
         ),
-        child: Text(buttonTXT, style: context.bold18White),
+        child: childWidget?? Text(buttonTXT ?? "", style: context.bold18White),
       ),
     );
   }

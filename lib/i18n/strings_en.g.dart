@@ -229,6 +229,84 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 
 	/// en: 'Email/password accounts are not enabled.'
 	String get AccountsAreNotEnabled => 'Email/password accounts are not enabled.';
+
+	/// en: 'You can search c ourse, apply course and findscholarship for abroad studies'
+	String get youCanSearchCOurse => 'You can search c ourse, apply course and findscholarship for abroad studies';
+
+	/// en: 'Access denied.'
+	String get accessDenied => 'Access denied.';
+
+	/// en: 'Settings Screen'
+	String get settingsScreen => 'Settings Screen';
+
+	/// en: 'count'
+	String get count => 'count';
+
+	/// en: 'All'
+	String get all => 'All';
+
+	/// en: 'Cardiologist'
+	String get cardiologist => 'Cardiologist';
+
+	/// en: 'Orthopedic'
+	String get orthopedic => 'Orthopedic';
+
+	/// en: 'Dentist'
+	String get dentist => 'Dentist';
+
+	/// en: 'Active Doctors'
+	String get activeDoctors => 'Active Doctors';
+
+	/// en: 'Total Doctors'
+	String get totalDoctors => 'Total Doctors';
+
+	/// en: 'Active'
+	String get active => 'Active';
+
+	/// en: 'Inactive'
+	String get inactive => 'Inactive';
+
+	/// en: 'Enter 4 Digits Code'
+	String get enter_4DigitsCode => 'Enter 4 Digits Code';
+
+	/// en: 'Enter the 4 digits code that you received on your email.'
+	String get enterTheCodeThatYouReceived => 'Enter the 4 digits code that you received on your email.';
+
+	/// en: 'Enter your email for the verification process, we will send 4 digits code to your email.'
+	String get enterYourEmailForTheVerification => 'Enter your email for the verification process, we will send 4 digits code to your email.';
+
+	/// en: 'Runing'
+	String get runing => 'Runing';
+
+	/// en: 'Ongoing'
+	String get ongoing => 'Ongoing';
+
+	/// en: 'Favourite Doctors'
+	String get favouriteDoctors => 'Favourite Doctors';
+
+	/// en: 'Find Doctors'
+	String get findDoctors => 'Find Doctors';
+
+	/// en: 'Profile picture updated successfully!'
+	String get profilePictureUpdatedSuccessfully => 'Profile picture updated successfully!';
+
+	/// en: 'Create Doctor'
+	String get createDoctor => 'Create Doctor';
+
+	/// en: 'Doctor Name'
+	String get doctorName => 'Doctor Name';
+
+	/// en: 'Medical Specialty'
+	String get medicalSpecialty => 'Medical Specialty';
+
+	/// en: 'Add Photo'
+	String get addPhoto => 'Add Photo';
+
+	/// en: 'Select Specialty'
+	String get selectSpecialty => 'Select Specialty';
+
+	/// en: 'e.g. Dr. Ahmed Ali'
+	String get eGDrAhmedAli => 'e.g. Dr. Ahmed Ali';
 }
 
 /// The flat map containing all translations for locale <en>.
@@ -302,6 +380,32 @@ extension on Translations {
 			'thePasswordisWeak' => 'The password provided is too weak.',
 			'anUnknownAuthError' => 'An unknown authentication error occurred.',
 			'AccountsAreNotEnabled' => 'Email/password accounts are not enabled.',
+			'youCanSearchCOurse' => 'You can search c ourse, apply course and findscholarship for abroad studies',
+			'accessDenied' => 'Access denied.',
+			'settingsScreen' => 'Settings Screen',
+			'count' => 'count',
+			'all' => 'All',
+			'cardiologist' => 'Cardiologist',
+			'orthopedic' => 'Orthopedic',
+			'dentist' => 'Dentist',
+			'activeDoctors' => 'Active Doctors',
+			'totalDoctors' => 'Total Doctors',
+			'active' => 'Active',
+			'inactive' => 'Inactive',
+			'enter_4DigitsCode' => 'Enter 4 Digits Code',
+			'enterTheCodeThatYouReceived' => 'Enter the 4 digits code that you received on your email.',
+			'enterYourEmailForTheVerification' => 'Enter your email for the verification process, we will send 4 digits code to your email.',
+			'runing' => 'Runing',
+			'ongoing' => 'Ongoing',
+			'favouriteDoctors' => 'Favourite Doctors',
+			'findDoctors' => 'Find Doctors',
+			'profilePictureUpdatedSuccessfully' => 'Profile picture updated successfully!',
+			'createDoctor' => 'Create Doctor',
+			'doctorName' => 'Doctor Name',
+			'medicalSpecialty' => 'Medical Specialty',
+			'addPhoto' => 'Add Photo',
+			'selectSpecialty' => 'Select Specialty',
+			'eGDrAhmedAli' => 'e.g. Dr. Ahmed Ali',
 			_ => null,
 		};
 	}

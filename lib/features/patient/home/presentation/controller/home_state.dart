@@ -1,4 +1,4 @@
-import 'package:doctor_hunt_app/features/patient/home/data/patient_model.dart';
+import 'package:doctor_hunt_app/features/patient/home/data/model/patient_model.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class HomeState extends Equatable {

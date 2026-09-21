@@ -32,7 +32,7 @@ class _FavoriteScreen extends State<FavoriteScreen> {
                 children: [
                   CustomAppBarWidget(
                     showSearchIcon: false,
-                    title: "Favourite Doctors",
+                    title: t.favouriteDoctors,
                   ),
                   HeightSpace(30),
                   CustomSearchTextFieldWidget(onSubmit: (value) {}),

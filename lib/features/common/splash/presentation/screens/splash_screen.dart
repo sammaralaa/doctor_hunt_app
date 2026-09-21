@@ -19,24 +19,28 @@ class _SplashScreen extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    SharedPrefsService.init();
+    _initializeApp();
+  }
+
+  Future<void> _initializeApp() async {
+    await SharedPrefsService.init();
+    if (!mounted) return;
     _navigateToHome();
   }
+
   void _navigateToHome() {
     Future.delayed(const Duration(seconds: 2), () {
       if (!mounted) return;
-      if (SharedPrefsService.getBool('is_first_time') == true || SharedPrefsService.getBool('is_first_time') == null) {
+      if (SharedPrefsService.getBool('is_first_time') == true ||
+          SharedPrefsService.getBool('is_first_time') == null) {
         SharedPrefsService.setBool('is_first_time', false);
         OnBoardingRoute().go(context);
-      }
-      if (SharedPrefsService.getBool('is_logged_in') == true) {
-        
+      }else if (SharedPrefsService.getBool('is_logged_in') == true) {
         if (SharedPrefsService.getString('user_role') == 'admin') {
           AdminMainRoute().go(context);
-        }else {
+        } else {
           MainScreenRoute().go(context);
         }
-        
       } else {
         ChooseRoleRoute().go(context);
       }

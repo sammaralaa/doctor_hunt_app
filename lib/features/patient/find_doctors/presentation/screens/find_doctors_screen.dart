@@ -5,6 +5,7 @@ import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/core/widgets/top_left_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/custom_search_text_field_widget.dart';
 import 'package:doctor_hunt_app/features/patient/find_doctors/presentation/widgets/doctor_search_card_widget.dart';
+import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 
 class FindDoctorsScreen extends StatefulWidget {
@@ -32,7 +33,7 @@ class _FindDoctorsScreenState extends State<FindDoctorsScreen> {
                 children: [
                   CustomAppBarWidget(
                     showSearchIcon: false,
-                    title: 'Find Doctors',
+                    title: t.findDoctors,
                   ),
                   HeightSpace(24),
                   CustomSearchTextFieldWidget(onSubmit: (String value) {}),

@@ -1,12 +1,10 @@
 import 'package:doctor_hunt_app/core/routing/routes.dart';
-import 'package:doctor_hunt_app/core/utils/app_constants.dart';
 import 'package:doctor_hunt_app/core/widgets/bottom_right_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/core/widgets/top_left_color_shape.dart';
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../core/widgets/custom_elevated_button.dart';
 import '../../data/onboarding_model.dart';
@@ -23,8 +21,6 @@ class _OnboardingScreen extends State<OnboardingScreen> {
   int _currentIndex = 0;
   
   Future<void> _completeOnboarding() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(AppConstants.isFirstTime, false);
 
     if (!mounted) return;
     ChooseRoleRoute().go(context);

@@ -83,7 +83,7 @@ class _LoginScreen extends State<LoginScreen> {
                                 ),
                                 HeightSpace(15),
                                 Text(
-                                  "You can search c ourse, apply course and findscholarship for abroad studies",
+                                  t.youCanSearchCOurse,
                                   style: context.regular14TextSub,
                                   textAlign: TextAlign.center,
                                 ),
@@ -160,7 +160,7 @@ class _LoginScreen extends State<LoginScreen> {
                                                 AppColors.primaryColor,
                                           ),
                                         );
-
+                      //CR use enum state.role.isAdmin 
                                         if (state.role == 'admin') {
                                           AdminMainRoute().go(context);
                                         } else {
@@ -175,7 +175,7 @@ class _LoginScreen extends State<LoginScreen> {
                                         ).showSnackBar(
                                           SnackBar(
                                             content: Text(
-                                              "Access denied. This account is registered as a Patient, not an Admin.",
+                                              t.accessDenied,
                                             ),
                                             backgroundColor: AppColors.red,
                                           ),

@@ -17,6 +17,7 @@ import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -49,40 +50,49 @@ class _HomeScreen extends State<HomeScreen> {
             SliverToBoxAdapter(
               child: BlocConsumer<HomeBloc, HomeState>(
                 listener: (context, state) {
-                  
                   if (state is ProfileImageSuccessState) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Profile picture updated successfully!')),
-                  );
-                } else if (state is ProfileImageFailureState) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(state.errorMessage)),
-                  );
-                }
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(t.profilePictureUpdatedSuccessfully),
+                      ),
+                    );
+                  } else if (state is ProfileImageFailureState) {
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
+                  }
                 },
                 builder: (context, state) {
                   String? currentProfileImage;
                   String userName = "";
-                bool isLoading = false;
-                if(state is UserProfileSuccessState){
+                  if (state is UserProfileSuccessState) {
                     currentProfileImage = state.user.profileImage;
                     userName = state.user.name;
                   }
-                if (state is ProfileImageLoadingState) {
-                  isLoading = true;
-                } else if (state is ProfileImageSuccessState) {
-                  currentProfileImage = state.model.profileImage;
-                  userName = state.model.name;
-                }
+                  else if (state is ProfileImageSuccessState) {
+                    currentProfileImage = state.model.profileImage;
+                    userName = state.model.name;
+                  }
                   return CustomHomeTopHeader(
-                    isLoading : isLoading,
+                    isLoading: state is ProfileImageLoadingState,
                     searchController: searchController,
                     userName: userName,
                     profileImageUrl: currentProfileImage,
-                    onProfileImageTap: () async{
-                      final File? pickedFile = await HomeRepository.pickProfileImage();
-                      if (pickedFile != null) {
-                        context.read<HomeBloc>().add(UploadProfileImageEvent(pickedFile));
+                    onProfileImageTap: () async {
+                      ImageSource source = ImageSource.gallery;
+                      final ImagePicker picker = ImagePicker();
+                      final XFile? pickedFile = await picker.pickImage(
+                        source: source,
+                        maxWidth: 512,
+                        maxHeight: 512,
+                        imageQuality: 80,
+                      );
+                      // final File? pickedFile =
+                      //     await HomeRepository.pickProfileImage();
+                      if (pickedFile != null && mounted) {
+                        context.read<HomeBloc>().add(
+                          UploadProfileImageEvent(File(pickedFile.path)),
+                        );
                       }
                     },
                   );

@@ -18,6 +18,7 @@ List<RouteBase> get $appRoutes => [
   $selectTimeRoute,
   $doctorListRoute,
   $adminMainRoute,
+  $createDoctorRoute,
 ];
 
 RouteBase get $splashRoute => GoRouteData.$route(
@@ -112,16 +113,10 @@ RouteBase get $signUpRoute => GoRouteData.$route(
 );
 
 mixin $SignUpRoute on GoRouteData {
-  static SignUpRoute _fromState(GoRouterState state) =>
-      SignUpRoute(userRole: state.uri.queryParameters['user-role']);
-
-  SignUpRoute get _self => this as SignUpRoute;
+  static SignUpRoute _fromState(GoRouterState state) => const SignUpRoute();
 
   @override
-  String get location => GoRouteData.$location(
-    '/signup',
-    queryParams: {if (_self.userRole != null) 'user-role': _self.userRole},
-  );
+  String get location => GoRouteData.$location('/signup');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -311,6 +306,33 @@ mixin $AdminMainRoute on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/admin-main');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $createDoctorRoute => GoRouteData.$route(
+  path: '/create-doctor',
+  hasOverriddenOnExit: false,
+  factory: $CreateDoctorRoute._fromState,
+);
+
+mixin $CreateDoctorRoute on GoRouteData {
+  static CreateDoctorRoute _fromState(GoRouterState state) =>
+      const CreateDoctorRoute();
+
+  @override
+  String get location => GoRouteData.$location('/create-doctor');
 
   @override
   void go(BuildContext context) => context.go(location);

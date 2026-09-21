@@ -61,15 +61,15 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
                       children: [
                         buildNumberStatisticItem(
                           number: "100",
-                          label: "Runing",
+                          label: t.runing,
                         ),
                         buildNumberStatisticItem(
                           number: "500",
-                          label: "Ongoing",
+                          label: t.ongoing,
                         ),
                         buildNumberStatisticItem(
                           number: "700",
-                          label: "Patient",
+                          label: t.patient,
                         ),
                       ],
                     ),

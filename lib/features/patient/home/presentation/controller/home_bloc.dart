@@ -1,4 +1,4 @@
-import 'package:doctor_hunt_app/features/patient/home/data/patient_model.dart';
+import 'package:doctor_hunt_app/features/patient/home/data/model/patient_model.dart';
 import 'package:doctor_hunt_app/features/patient/home/data/repos/home_repository.dart';
 import 'package:doctor_hunt_app/features/patient/home/presentation/controller/home_event.dart';
 import 'package:doctor_hunt_app/features/patient/home/presentation/controller/home_state.dart';
@@ -25,7 +25,7 @@ class HomeBloc extends Bloc<HomeEvent,HomeState>{
         emit(UserProfileFailureState('User not found'));
       }
     }catch(e){
-        emit(UserProfileFailureState('User not found'));
+        emit(UserProfileFailureState(e.toString()));
     }
   }
 

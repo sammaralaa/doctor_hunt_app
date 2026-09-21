@@ -3,6 +3,7 @@ import 'package:doctor_hunt_app/core/widgets/custom_elevated_button.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/features/common/auth/presentation/widgets/reset_password_widget.dart';
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
+import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -41,14 +42,14 @@ class _EnterDigitsWidget extends State<EnterDigitsWidget>{
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Enter 4 Digits Code',
+                t.enter_4DigitsCode,
                 style: context.bold26TextMain,
                 textAlign: TextAlign.start,
               ),
 
               HeightSpace(12),
               Text(
-                'Enter the 4 digits code that you received on your email.',
+                t.enterTheCodeThatYouReceived,
                 style: context.regular14TextSub,
               ),
             ],
@@ -58,7 +59,7 @@ class _EnterDigitsWidget extends State<EnterDigitsWidget>{
           HeightSpace(35),
           MaterialPinField(length: 4),
           HeightSpace(40),
-          CustomElevatdButton(buttonTXT: "Continue",onTap: (){
+          CustomElevatdButton(buttonTXT: t.kContinue,onTap: (){
             showModalBottomSheet(
               context: context,
               isScrollControlled: true,

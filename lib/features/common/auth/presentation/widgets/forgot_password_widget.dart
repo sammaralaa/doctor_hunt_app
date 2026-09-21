@@ -4,6 +4,7 @@ import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/features/common/auth/presentation/widgets/custom_textfeild_widget.dart';
 import 'package:doctor_hunt_app/features/common/auth/presentation/widgets/enter_digits_widget.dart';
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
+import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPasswordWidget extends StatelessWidget {
@@ -37,24 +38,24 @@ class ForgotPasswordWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Forgot password',
+                t.forgotPassword,
                 style: context.bold26TextMain,
                 textAlign: TextAlign.start,
               ),
 
               HeightSpace(12),
               Text(
-                'Enter your email for the verification process, we will send 4 digits code to your email.',
+                t.enterYourEmailForTheVerification,
                 style: context.regular14TextSub,
               ),
             ],
           ),
 
           HeightSpace(36),
-          CustomTextfeildWidget(hintText: "Email"),
+          CustomTextfeildWidget(hintText: t.email),
           HeightSpace(30),
           CustomElevatdButton(
-            buttonTXT: "Continue",
+            buttonTXT: t.kContinue,
             onTap: () {
               showModalBottomSheet(
                 context: context,

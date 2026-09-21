@@ -2,6 +2,7 @@ import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/generated/image_assets.dart';
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
+import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 
 class DoctorsListCard extends StatefulWidget {
@@ -9,6 +10,7 @@ class DoctorsListCard extends StatefulWidget {
   final String name;
   final String specialization;
   final bool isActive;
+  final String imageUrl;
 
   const DoctorsListCard({
     super.key,
@@ -16,6 +18,7 @@ class DoctorsListCard extends StatefulWidget {
     required this.name,
     required this.specialization,
     required this.isActive,
+    required this.imageUrl,
   });
 
   @override
@@ -44,58 +47,61 @@ class _DoctorsListCard extends State<DoctorsListCard> {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(25),
-            child: Image.asset(
-              ImageAssets.doctorImage2,
-              width: 44,
-              height: 44,
+            child: Image.network(
+              widget.imageUrl,
+              width: 60,
+              height: 60,
               fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) => Image.asset(
+                ImageAssets.onBoarding5,
+                width: 60,
+                height: 60,
+                fit: BoxFit.cover,
+              ),
             ),
+            //  Image.asset(
+            //   ImageAssets.doctorImage2,
+            //   width: 44,
+            //   height: 44,
+            //   fit: BoxFit.cover,
+            // ),
           ),
           WidthSpace(12),
 
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(widget.name, style: context.bold16TextMain),
+              Text(widget.specialization, style: context.regular12TextSub),
+              HeightSpace(6),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: widget.isActive
+                      ? AppColors.primaryColorLight.withValues(alpha: 0.2)
+                      : AppColors.red.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Row(
                   children: [
-                    Text(widget.name, style: context.bold16TextMain),
-                    WidthSpace(6),
                     Icon(
                       Icons.circle,
                       color: widget.isActive
                           ? AppColors.primaryColor
-                          : AppColors.inactiveIconColor,
+                          : AppColors.red,
                       size: 10,
+                    ),
+                    WidthSpace(4),
+                    Text(
+                      widget.isActive ? t.active : t.inactive,
+                      style: widget.isActive
+                          ? context.regular12Primary
+                          : context.regular12Warning,
                     ),
                   ],
                 ),
-                Text(widget.specialization, style: context.regular12TextSub),
-              ],
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            decoration: BoxDecoration(
-              color: widget.isActive
-                  ? AppColors.primaryColorLight.withValues(alpha: 0.2)
-                  : AppColors.inactiveBorderColor,
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Text(
-              widget.isActive ? "Active" : "Inactive",
-              style: widget.isActive
-                  ? context.regular12Primary
-                  : context.regular12TextSub,
-            ),
-          ),
-          GestureDetector(
-            onTap: () {},
-            child: Icon(
-              Icons.more_vert,
-              color: AppColors.inactiveIconColor,
-              size: 20,
-            ),
+              ),
+            ],
           ),
         ],
       ),

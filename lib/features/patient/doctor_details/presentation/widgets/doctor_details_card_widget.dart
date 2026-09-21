@@ -2,6 +2,7 @@ import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/generated/image_assets.dart';
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
+import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 
 class DoctorDetailsCardWidget extends StatefulWidget {
@@ -143,7 +144,7 @@ class _DoctorDetailsCardWidgetState extends State<DoctorDetailsCardWidget> {
                 padding: EdgeInsets.zero,
               ),
               child: Text(
-                'Book Now',
+                t.bookNow,
                 style: context.bold14White,
               ),
             ),
