@@ -33,6 +33,7 @@ class CustomTextfeildWidget extends StatelessWidget {
 
       child: TextFormField(
         controller: controller,
+        
         validator: validator,
         initialValue: initValue,
         obscureText: isPassWord ?? false,
