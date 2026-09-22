@@ -21,8 +21,18 @@ class DoctorsListBloc extends Bloc<DoctorsListEvent, DoctorsListState> {
   ) async {
     emit(DoctorsListLoadingState());
     try {
-      final List<DoctorModel> doctorsList =await _DoctorsListRepository.getDoctors();
-      emit(DoctorsListSuccessState(doctorsList));
+      // final List<DoctorModel> doctorsList =await _DoctorsListRepository.getDoctors();
+      // emit(DoctorsListSuccessState(doctorsList));
+      await emit.forEach<List<DoctorModel>>(
+      _DoctorsListRepository.getDoctors(),
+      onData: (doctors) {
+       // final activeCount = doctors.where((d) => d.isActive).length;
+        return DoctorsListSuccessState( doctors,);
+      },
+      onError: (error, stackTrace) {
+        return DoctorsListFailureState(error.toString());
+      },
+    );
     } catch (e) {
       emit(DoctorsListFailureState(e.toString()));
     }

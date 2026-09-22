@@ -307,6 +307,33 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 
 	/// en: 'e.g. Dr. Ahmed Ali'
 	String get eGDrAhmedAli => 'e.g. Dr. Ahmed Ali';
+
+	/// en: 'Edit Doctor'
+	String get editDoctor => 'Edit Doctor';
+
+	/// en: 'Delete Doctor'
+	String get deleteDoctor => 'Delete Doctor';
+
+	/// en: 'Speciality'
+	String get speciality => 'Speciality';
+
+	/// en: 'Account Status'
+	String get accountStatus => 'Account Status';
+
+	/// en: 'Are you sure you want to delete this doctor?'
+	String get areYouSureYouWantToDeleteThisDoctor => 'Are you sure you want to delete this doctor?';
+
+	/// en: 'Are you sure you want to delete this doctor?'
+	String get areYouSureYouWantDelete => 'Are you sure you want to delete this doctor?';
+
+	/// en: 'Delete'
+	String get delete => 'Delete';
+
+	/// en: 'Cancel'
+	String get cancel => 'Cancel';
+
+	/// en: 'Doctor Added Successfully'
+	String get doctorAddedSuccessfully => 'Doctor Added Successfully';
 }
 
 /// The flat map containing all translations for locale <en>.
@@ -406,6 +433,15 @@ extension on Translations {
 			'addPhoto' => 'Add Photo',
 			'selectSpecialty' => 'Select Specialty',
 			'eGDrAhmedAli' => 'e.g. Dr. Ahmed Ali',
+			'editDoctor' => 'Edit Doctor',
+			'deleteDoctor' => 'Delete Doctor',
+			'speciality' => 'Speciality',
+			'accountStatus' => 'Account Status',
+			'areYouSureYouWantToDeleteThisDoctor' => 'Are you sure you want to delete this doctor?',
+			'areYouSureYouWantDelete' => 'Are you sure you want to delete this doctor?',
+			'delete' => 'Delete',
+			'cancel' => 'Cancel',
+			'doctorAddedSuccessfully' => 'Doctor Added Successfully',
 			_ => null,
 		};
 	}

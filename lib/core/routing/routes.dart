@@ -1,5 +1,8 @@
 import 'package:doctor_hunt_app/core/services/di.dart';
+import 'package:doctor_hunt_app/features/admin/admin_doctor_details/presentation/controller/admin_doc_details_bloc.dart';
+import 'package:doctor_hunt_app/features/admin/admin_doctor_details/presentation/screens/admin_doctor_details_screen.dart';
 import 'package:doctor_hunt_app/features/admin/admin_main_screen/presentation/screens/admin_main_screen.dart';
+import 'package:doctor_hunt_app/features/admin/create-doctor/data/model/doctor_model.dart';
 import 'package:doctor_hunt_app/features/admin/create-doctor/presentation/controller/Create_doctor_bloc.dart';
 import 'package:doctor_hunt_app/features/admin/create-doctor/presentation/screens/create-doctor-screen.dart';
 import 'package:doctor_hunt_app/features/common/auth/presentation/controller/auth_bloc.dart';
@@ -47,24 +50,22 @@ class LoginRoute extends GoRouteData with $LoginRoute {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return BlocProvider<AuthBloc>(
-      create: (context)=> getIt<AuthBloc>(),
-      child:  LoginScreen(userRole: userRole),
-      );
-   
+      create: (context) => getIt<AuthBloc>(),
+      child: LoginScreen(userRole: userRole),
+    );
   }
 }
 
 @TypedGoRoute<SignUpRoute>(path: '/signup')
 class SignUpRoute extends GoRouteData with $SignUpRoute {
   const SignUpRoute();
-  
+
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return BlocProvider(create: (context)=> getIt<AuthBloc>(),
-    child: SignUpScreen() ,
-    
+    return BlocProvider(
+      create: (context) => getIt<AuthBloc>(),
+      child: SignUpScreen(),
     );
-   
   }
 }
 
@@ -144,9 +145,41 @@ class CreateDoctorRoute extends GoRouteData with $CreateDoctorRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return BlocProvider(create: (context) => getIt<CreateDoctorBloc>(),
-    child:CreateDoctorScreen() ,
+    return BlocProvider(
+      create: (context) => getIt<CreateDoctorBloc>(),
+      child: CreateDoctorScreen(),
     );
-
   }
 }
+
+@TypedGoRoute<AdminDoctorDetailsRoute>(path: '/admin-doctor-details')
+class AdminDoctorDetailsRoute extends GoRouteData with $AdminDoctorDetailsRoute
+     {
+  final DoctorModel $extra;
+  const AdminDoctorDetailsRoute({required this.$extra});
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return BlocProvider<AdminDocDetailsBloc>(
+      create: (context)=> getIt<AdminDocDetailsBloc>(),
+      child: AdminDoctorDetailsScreen(doctor:  $extra,),
+      );
+    
+  }
+}
+
+/**
+@TypedGoRoute<LoginRoute>(path: '/login')
+class LoginRoute extends GoRouteData with $LoginRoute {
+  final String? userRole;
+  const LoginRoute({this.userRole});
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return BlocProvider<AuthBloc>(
+      create: (context)=> getIt<AuthBloc>(),
+      child:  LoginScreen(userRole: userRole),
+      );
+   
+  }
+} */

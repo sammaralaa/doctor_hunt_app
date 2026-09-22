@@ -9,6 +9,7 @@ class CreateDoctorBloc extends Bloc<CreateDoctorEvent, CreateDoctorState> {
   CreateDoctorBloc(this._createDoctorRepository)
     : super(CreateDoctorInitialState()) {
     on<CreateNewDoctorEvent>(_onCreateNewDoctor);
+   
     //on<GetUserProfileDataEvent>(_onGetUserProfileData);
   }
 

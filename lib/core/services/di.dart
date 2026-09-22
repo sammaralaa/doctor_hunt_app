@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor_hunt_app/core/services/cloudinary_services.dart';
+import 'package:doctor_hunt_app/features/admin/admin_doctor_details/data/repos/admin_doc_details_repository.dart';
+import 'package:doctor_hunt_app/features/admin/admin_doctor_details/presentation/controller/admin_doc_details_bloc.dart';
 import 'package:doctor_hunt_app/features/admin/create-doctor/data/repos/create_doctor_repository.dart';
 import 'package:doctor_hunt_app/features/admin/create-doctor/presentation/controller/Create_doctor_bloc.dart';
 import 'package:doctor_hunt_app/features/admin/doctors_list/data/repos/doctors_list_repository.dart';
@@ -53,7 +55,12 @@ Future<void> setupGetIt() async {
       firestore: getIt<FirebaseFirestore>(),
     ),
   );
-
+   getIt.registerLazySingleton<AdminDocDetailsRepository>(
+    () => AdminDocDetailsRepository(
+      firestore: getIt<FirebaseFirestore>(),
+      cloudinaryService: getIt<CloudinaryServices>()
+    ),
+  );
   getIt.registerFactory<AuthBloc>(() => AuthBloc(getIt<AuthRepository>()));
   getIt.registerFactory<HomeBloc>(() => HomeBloc(getIt<HomeRepository>()));
   getIt.registerFactory<CreateDoctorBloc>(
@@ -62,4 +69,8 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<DoctorsListBloc>(
     () => DoctorsListBloc(getIt<DoctorsListRepository>()),
   );
+   getIt.registerFactory<AdminDocDetailsBloc>(
+    () => AdminDocDetailsBloc(getIt<AdminDocDetailsRepository>()),
+  );
+
 }

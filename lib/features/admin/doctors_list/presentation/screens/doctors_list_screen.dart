@@ -161,8 +161,9 @@ class _DoctorsListScreen extends State<DoctorsListScreen> {
                             specialization: doctors[index].specialty,
                             isActive: doctors[index].isActive,
                             imageUrl: doctors[index].profileImageUrl,
-                            onBookNowPressed: () {
+                            onCardPressed: () {
                               //  book now
+                              AdminDoctorDetailsRoute($extra: doctors[index]).push(context);
                             },
                           );
                         },
