@@ -321,9 +321,6 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	String get accountStatus => 'Account Status';
 
 	/// en: 'Are you sure you want to delete this doctor?'
-	String get areYouSureYouWantToDeleteThisDoctor => 'Are you sure you want to delete this doctor?';
-
-	/// en: 'Are you sure you want to delete this doctor?'
 	String get areYouSureYouWantDelete => 'Are you sure you want to delete this doctor?';
 
 	/// en: 'Delete'
@@ -334,6 +331,21 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 
 	/// en: 'Doctor Added Successfully'
 	String get doctorAddedSuccessfully => 'Doctor Added Successfully';
+
+	/// en: 'No Doctors Found'
+	String get noDoctorsFound => 'No Doctors Found';
+
+	/// en: 'There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.'
+	String get thereAreCurrentlyNoDoctors => 'There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.';
+
+	/// en: 'Doctor Status'
+	String get doctorStatus => 'Doctor Status';
+
+	/// en: 'Save Changes'
+	String get saveChanges => 'Save Changes';
+
+	/// en: 'Tap photo to change'
+	String get tapPhotoToChange => 'Tap photo to change';
 }
 
 /// The flat map containing all translations for locale <en>.
@@ -437,11 +449,15 @@ extension on Translations {
 			'deleteDoctor' => 'Delete Doctor',
 			'speciality' => 'Speciality',
 			'accountStatus' => 'Account Status',
-			'areYouSureYouWantToDeleteThisDoctor' => 'Are you sure you want to delete this doctor?',
 			'areYouSureYouWantDelete' => 'Are you sure you want to delete this doctor?',
 			'delete' => 'Delete',
 			'cancel' => 'Cancel',
 			'doctorAddedSuccessfully' => 'Doctor Added Successfully',
+			'noDoctorsFound' => 'No Doctors Found',
+			'thereAreCurrentlyNoDoctors' => 'There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.',
+			'doctorStatus' => 'Doctor Status',
+			'saveChanges' => 'Save Changes',
+			'tapPhotoToChange' => 'Tap photo to change',
 			_ => null,
 		};
 	}

@@ -1,9 +1,7 @@
-import 'dart:io';
 
 import 'package:doctor_hunt_app/core/services/di.dart';
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
-import 'package:doctor_hunt_app/features/patient/home/data/repos/home_repository.dart';
 import 'package:doctor_hunt_app/features/patient/home/presentation/controller/home_bloc.dart';
 import 'package:doctor_hunt_app/features/patient/home/presentation/controller/home_event.dart';
 import 'package:doctor_hunt_app/features/patient/home/presentation/controller/home_state.dart';
@@ -17,7 +15,6 @@ import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

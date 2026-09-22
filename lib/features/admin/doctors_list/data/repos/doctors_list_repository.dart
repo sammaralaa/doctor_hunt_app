@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor_hunt_app/features/admin/create-doctor/data/model/doctor_model.dart';
 

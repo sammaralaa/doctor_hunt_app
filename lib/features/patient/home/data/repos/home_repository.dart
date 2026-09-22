@@ -1,10 +1,7 @@
-import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:doctor_hunt_app/core/services/cloudinary_services.dart';
 import 'package:doctor_hunt_app/features/patient/home/data/model/patient_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:image_picker/image_picker.dart';
 
 class HomeRepository {
   final FirebaseAuth _firebaseAuth;

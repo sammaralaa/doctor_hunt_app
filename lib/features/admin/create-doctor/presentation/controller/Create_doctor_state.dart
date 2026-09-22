@@ -1,4 +1,3 @@
-
 abstract class CreateDoctorState {}
 
 class CreateDoctorInitialState extends CreateDoctorState {}

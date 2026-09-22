@@ -20,6 +20,7 @@ List<RouteBase> get $appRoutes => [
   $adminMainRoute,
   $createDoctorRoute,
   $adminDoctorDetailsRoute,
+  $editDoctorRoute,
 ];
 
 RouteBase get $splashRoute => GoRouteData.$route(
@@ -378,4 +379,35 @@ mixin $AdminDoctorDetailsRoute on GoRouteData {
   @override
   void replace(BuildContext context) =>
       context.replace(location, extra: _self.$extra);
+}
+
+RouteBase get $editDoctorRoute => GoRouteData.$route(
+  path: '/edit-doctor/:doctorId',
+  hasOverriddenOnExit: false,
+  factory: $EditDoctorRoute._fromState,
+);
+
+mixin $EditDoctorRoute on GoRouteData {
+  static EditDoctorRoute _fromState(GoRouterState state) =>
+      EditDoctorRoute(doctorId: state.pathParameters['doctorId']!);
+
+  EditDoctorRoute get _self => this as EditDoctorRoute;
+
+  @override
+  String get location => GoRouteData.$location(
+    '/edit-doctor/${Uri.encodeComponent(_self.doctorId)}',
+  );
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
 }

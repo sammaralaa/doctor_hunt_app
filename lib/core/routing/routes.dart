@@ -3,8 +3,10 @@ import 'package:doctor_hunt_app/features/admin/admin_doctor_details/presentation
 import 'package:doctor_hunt_app/features/admin/admin_doctor_details/presentation/screens/admin_doctor_details_screen.dart';
 import 'package:doctor_hunt_app/features/admin/admin_main_screen/presentation/screens/admin_main_screen.dart';
 import 'package:doctor_hunt_app/features/admin/create-doctor/data/model/doctor_model.dart';
-import 'package:doctor_hunt_app/features/admin/create-doctor/presentation/controller/Create_doctor_bloc.dart';
+import 'package:doctor_hunt_app/features/admin/create-doctor/presentation/controller/create_doctor_bloc.dart';
 import 'package:doctor_hunt_app/features/admin/create-doctor/presentation/screens/create-doctor-screen.dart';
+import 'package:doctor_hunt_app/features/admin/edit_doctor/presentation/controller/edit_doctor_bloc.dart';
+import 'package:doctor_hunt_app/features/admin/edit_doctor/presentation/screens/edit_doctor_screen.dart';
 import 'package:doctor_hunt_app/features/common/auth/presentation/controller/auth_bloc.dart';
 import 'package:doctor_hunt_app/features/common/auth/presentation/screens/sign_up_screen.dart';
 import 'package:doctor_hunt_app/features/common/auth/presentation/screens/login_screen.dart';
@@ -153,18 +155,33 @@ class CreateDoctorRoute extends GoRouteData with $CreateDoctorRoute {
 }
 
 @TypedGoRoute<AdminDoctorDetailsRoute>(path: '/admin-doctor-details')
-class AdminDoctorDetailsRoute extends GoRouteData with $AdminDoctorDetailsRoute
-     {
+class AdminDoctorDetailsRoute extends GoRouteData
+    with $AdminDoctorDetailsRoute {
   final DoctorModel $extra;
   const AdminDoctorDetailsRoute({required this.$extra});
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return BlocProvider<AdminDocDetailsBloc>(
-      create: (context)=> getIt<AdminDocDetailsBloc>(),
-      child: AdminDoctorDetailsScreen(doctor:  $extra,),
+      create: (context) => getIt<AdminDocDetailsBloc>(),
+      child: AdminDoctorDetailsScreen(doctor: $extra),
+    );
+  }
+}
+
+@TypedGoRoute<EditDoctorRoute>(path: '/edit-doctor/:doctorId')
+class EditDoctorRoute extends GoRouteData with $EditDoctorRoute {
+  final String doctorId;
+  const EditDoctorRoute({required this.doctorId});
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return BlocProvider<EditDoctorBloc>(
+      create: (context)=> getIt<EditDoctorBloc>(),
+      child:  EditDoctorScreen(doctorId: doctorId),
       );
     
+   
   }
 }
 

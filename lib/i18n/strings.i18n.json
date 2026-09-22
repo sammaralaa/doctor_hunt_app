@@ -95,5 +95,10 @@
   "areYouSureYouWantDelete": "Are you sure you want to delete this doctor?",
   "delete": "Delete",
   "cancel": "Cancel",
-  "doctorAddedSuccessfully": "Doctor Added Successfully"
+  "doctorAddedSuccessfully": "Doctor Added Successfully",
+  "noDoctorsFound": "No Doctors Found",
+  "thereAreCurrentlyNoDoctors": "There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.",
+  "doctorStatus": "Doctor Status",
+  "saveChanges": "Save Changes",
+  "tapPhotoToChange": "Tap photo to change"
 }

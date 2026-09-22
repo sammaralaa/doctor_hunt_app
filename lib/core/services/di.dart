@@ -3,9 +3,11 @@ import 'package:doctor_hunt_app/core/services/cloudinary_services.dart';
 import 'package:doctor_hunt_app/features/admin/admin_doctor_details/data/repos/admin_doc_details_repository.dart';
 import 'package:doctor_hunt_app/features/admin/admin_doctor_details/presentation/controller/admin_doc_details_bloc.dart';
 import 'package:doctor_hunt_app/features/admin/create-doctor/data/repos/create_doctor_repository.dart';
-import 'package:doctor_hunt_app/features/admin/create-doctor/presentation/controller/Create_doctor_bloc.dart';
+import 'package:doctor_hunt_app/features/admin/create-doctor/presentation/controller/create_doctor_bloc.dart';
 import 'package:doctor_hunt_app/features/admin/doctors_list/data/repos/doctors_list_repository.dart';
 import 'package:doctor_hunt_app/features/admin/doctors_list/presentation/controller/doctors_list_bloc.dart';
+import 'package:doctor_hunt_app/features/admin/edit_doctor/data/repos/edit_doctor_repository.dart';
+import 'package:doctor_hunt_app/features/admin/edit_doctor/presentation/controller/edit_doctor_bloc.dart';
 import 'package:doctor_hunt_app/features/common/auth/data/repos/auth_repository.dart';
 import 'package:doctor_hunt_app/features/common/auth/presentation/controller/auth_bloc.dart';
 import 'package:doctor_hunt_app/features/patient/home/data/repos/home_repository.dart';
@@ -43,6 +45,13 @@ Future<void> setupGetIt() async {
       firestore: getIt<FirebaseFirestore>(),
     ),
   );
+
+  getIt.registerLazySingleton<EditDoctorRepository>(
+    () => EditDoctorRepository(
+      firebaseFirestore: getIt<FirebaseFirestore>(),
+    ),
+  );
+
   getIt.registerLazySingleton<CreateDoctorRepository>(
     () => CreateDoctorRepository(
       firebaseAuth: getIt<FirebaseAuth>(),
@@ -71,6 +80,10 @@ Future<void> setupGetIt() async {
   );
    getIt.registerFactory<AdminDocDetailsBloc>(
     () => AdminDocDetailsBloc(getIt<AdminDocDetailsRepository>()),
+  );
+
+  getIt.registerFactory<EditDoctorBloc>(
+    () => EditDoctorBloc(getIt<EditDoctorRepository>()),
   );
 
 }

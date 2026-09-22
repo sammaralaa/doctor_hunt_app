@@ -1,10 +1,10 @@
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
-
 class CustomTextfeildWidget extends StatelessWidget {
   final String? hintText;
   final Widget? suffixIcon;
+  final Widget? preffixIcon;
   final double? width;
   final double? height;
   final Color? backgroundColor;
@@ -12,6 +12,7 @@ class CustomTextfeildWidget extends StatelessWidget {
   final bool? isPassWord;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
+  final String? initValue;
   const CustomTextfeildWidget({
     super.key,
     this.hintText,
@@ -23,16 +24,17 @@ class CustomTextfeildWidget extends StatelessWidget {
     this.isPassWord,
     this.validator,
     this.controller,
+    this.preffixIcon, this.initValue,
   });
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-   
 
       child: TextFormField(
         controller: controller,
         validator: validator,
+        initialValue: initValue,
         obscureText: isPassWord ?? false,
         cursorColor: AppColors.primaryColor,
 
@@ -43,10 +45,7 @@ class CustomTextfeildWidget extends StatelessWidget {
             color: Color(0xff8391A1),
             fontWeight: FontWeight.w500,
           ),
-          contentPadding: EdgeInsets.symmetric(
-            horizontal: 18,
-            vertical: 18,
-          ),
+          contentPadding: EdgeInsets.symmetric(horizontal: 18, vertical: 18),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide(color: const Color(0xffE8ECF4), width: 1),
@@ -57,7 +56,7 @@ class CustomTextfeildWidget extends StatelessWidget {
           ),
           errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: AppColors.red , width: 1),
+            borderSide: BorderSide(color: AppColors.red, width: 1),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
@@ -66,7 +65,7 @@ class CustomTextfeildWidget extends StatelessWidget {
           filled: true,
           fillColor: AppColors.white,
           suffixIcon: suffixIcon,
-
+          prefixIcon: preffixIcon,
         ),
       ),
     );

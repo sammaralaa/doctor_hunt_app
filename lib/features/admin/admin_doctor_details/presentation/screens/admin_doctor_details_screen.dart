@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:doctor_hunt_app/core/routing/routes.dart';
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/custom_elevated_button.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
@@ -69,6 +70,11 @@ class _AdminDoctorDetailsScreenState extends State<AdminDoctorDetailsScreen> {
             const HeightSpace(12),
             BlocBuilder<AdminDocDetailsBloc, AdminDocDetailsState>(
               builder: (context, state) {
+                if (state is DeleteDoctorSuccessState) {
+                  if (context.mounted) {
+                    Navigator.pop(context);
+                  }
+                }
                 if (state is ChangeStatusSuccessState) {
                   return Container(
                     padding: const EdgeInsets.symmetric(
@@ -193,16 +199,16 @@ class _AdminDoctorDetailsScreenState extends State<AdminDoctorDetailsScreen> {
 
                   BlocConsumer<AdminDocDetailsBloc, AdminDocDetailsState>(
                     listener: (context, state) {
-                      // TODO: implement listener
+                      //  implement listener
                     },
                     builder: (context, state) {
                       if (state is ChangeStatusSuccessState) {
-                        return _DoctorStatusSection(
+                        return _doctorStatusSection(
                           doctorId: state.doctorId,
                           status: state.newStatus,
                         );
                       }
-                      return _DoctorStatusSection(
+                      return _doctorStatusSection(
                         doctorId: widget.doctor.id!,
                         status: widget.doctor.isActive,
                       );
@@ -215,7 +221,9 @@ class _AdminDoctorDetailsScreenState extends State<AdminDoctorDetailsScreen> {
 
             CustomElevatdButton(
               buttonTXT: t.editDoctor,
-              onTap: () {},
+              onTap: () {
+                EditDoctorRoute(doctorId: widget.doctor.id!).push(context);
+              },
               buttonWidth: double.infinity,
             ),
             const HeightSpace(16),
@@ -241,7 +249,7 @@ class _AdminDoctorDetailsScreenState extends State<AdminDoctorDetailsScreen> {
                           context.read<AdminDocDetailsBloc>().add(
                             DeleteDoctorEvent(doctorId: widget.doctor.id!),
                           );
-                          Navigator.pop(context);
+                          // Navigator.pop(context);
                         },
                         child: Text(t.delete, style: context.bold12Warning),
                       ),
@@ -258,7 +266,7 @@ class _AdminDoctorDetailsScreenState extends State<AdminDoctorDetailsScreen> {
     );
   }
 
-  Widget _DoctorStatusSection({
+  Widget _doctorStatusSection({
     required bool status,
     required String doctorId,
   }) {

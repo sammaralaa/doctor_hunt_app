@@ -1,16 +1,16 @@
 import 'dart:io';
 
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
+import 'package:doctor_hunt_app/core/utils/doctor_specialty_enum.dart';
 import 'package:doctor_hunt_app/core/widgets/custom_elevated_button.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
-import 'package:doctor_hunt_app/features/admin/create-doctor/presentation/controller/Create_doctor_bloc.dart';
-import 'package:doctor_hunt_app/features/admin/create-doctor/presentation/controller/Create_doctor_state.dart';
+import 'package:doctor_hunt_app/features/admin/create-doctor/presentation/controller/create_doctor_bloc.dart';
+import 'package:doctor_hunt_app/features/admin/create-doctor/presentation/controller/create_doctor_state.dart';
 import 'package:doctor_hunt_app/features/admin/create-doctor/presentation/controller/create_doctor_event.dart';
 import 'package:doctor_hunt_app/features/common/auth/presentation/widgets/custom_textfeild_widget.dart';
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -25,14 +25,14 @@ class CreateDoctorScreen extends StatefulWidget {
 class _CreateDoctorScreenState extends State<CreateDoctorScreen> {
   final formKey = GlobalKey<FormState>();
   late TextEditingController nameController;
-  String? _selectedSpecialty;
+  DoctorSpecialty? _selectedSpecialty;
   XFile? _pickedFile;
-  final List<String> _specialties = [
-    'Cardiology',
-    'Orthopedic',
-    'Dentistry',
-    'General Medicine',
-  ];
+  // final List<String> _specialties = [
+  //   'Cardiology',
+  //   'Orthopedic',
+  //   'Dentistry',
+  //   'General Medicine',
+  // ];
   @override
   void initState() {
     super.initState();
@@ -142,7 +142,7 @@ class _CreateDoctorScreenState extends State<CreateDoctorScreen> {
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: AppColors.inactiveBorderColor),
                 ),
-                child: DropdownButton<String>(
+                child: DropdownButton<DoctorSpecialty>(
                   value: _selectedSpecialty,
                   hint: Text(
                     t.selectSpecialty,
@@ -153,13 +153,13 @@ class _CreateDoctorScreenState extends State<CreateDoctorScreen> {
                     Icons.keyboard_arrow_down,
                     color: AppColors.black,
                   ),
-                  items: _specialties.map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value, style: context.regular14TextMain),
+                  items: DoctorSpecialty.values.map((DoctorSpecialty specialty) {
+                    return DropdownMenuItem<DoctorSpecialty>(
+                      value: specialty,
+                      child: Text(specialty.displayName, style: context.regular14TextMain),
                     );
                   }).toList(),
-                  onChanged: (String? newValue) {
+                  onChanged: (DoctorSpecialty? newValue) {
                     setState(() {
                       _selectedSpecialty = newValue;
                     });
@@ -214,7 +214,7 @@ class _CreateDoctorScreenState extends State<CreateDoctorScreen> {
                                 CreateNewDoctorEvent(
                                   name: nameController.text.trim(),
                                   specialty:
-                                      _selectedSpecialty ?? 'General Medicine',
+                                      _selectedSpecialty!.displayName,
                                   imageFile: File(_pickedFile!.path),
                                 ),
                               );
