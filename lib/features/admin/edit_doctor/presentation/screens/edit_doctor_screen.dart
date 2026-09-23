@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/utils/doctor_specialty_enum.dart';
@@ -11,6 +13,7 @@ import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 
 class EditDoctorScreen extends StatefulWidget {
   final String doctorId;
@@ -22,7 +25,6 @@ class EditDoctorScreen extends StatefulWidget {
 
 class _EditDoctorScreenState extends State<EditDoctorScreen> {
   DoctorSpecialty? _selectedSpecialty;
-  bool _isActive = true;
   late TextEditingController _controller;
   final formKey = GlobalKey<FormState>();
 
@@ -64,20 +66,25 @@ class _EditDoctorScreenState extends State<EditDoctorScreen> {
           child: BlocConsumer<EditDoctorBloc, EditDoctorState>(
             listener: (context, state) {
               if (state is FetchDoctorSuccessState) {
-                _isActive = state.doctor.isActive;
                 _controller.text = state.doctor.name;
                 _selectedSpecialty = DoctorSpecialty.fromKey(
                   state.doctor.specialty,
                 );
+              } else if (state is UpdateDoctorSuccessState) {
+                if (context.mounted) Navigator.pop(context);
               }
             },
             builder: (context, state) {
               if (state is FetchDoctorLoadingState) {
+                return const Center(child: CircularProgressIndicator());
               } else if (state is UpdateDoctorSuccessState) {
                 if (context.mounted) {
-                  Navigator.pop(context);
+                  Navigator.pop(context, true);
                 }
+                
               } else if (state is FetchDoctorSuccessState) {
+                final currentIsActive = state.isActive ?? state.doctor.isActive;
+                final currentImagePath = state.newImagePath;
                 return Form(
                   key: formKey,
                   child: Column(
@@ -88,17 +95,40 @@ class _EditDoctorScreenState extends State<EditDoctorScreen> {
                       Center(
                         child: Stack(
                           children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(50),
-                              child: CachedNetworkImage(
-                                imageUrl: state.doctor.profileImageUrl,
-                                placeholder: (context, url) =>
-                                    const CircularProgressIndicator(),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
-                                fit: BoxFit.cover,
-                                width: 112,
-                                height: 112,
+                            GestureDetector(
+                              onTap: () async {
+                                final ImagePicker picker = ImagePicker();
+                                final XFile? pickedFile = await picker
+                                    .pickImage(source: ImageSource.gallery);
+
+                                if (pickedFile != null && context.mounted) {
+                                  // Dispatch event to update local state immediately
+                                  context.read<EditDoctorBloc>().add(
+                                    ChangeDoctorImageEvent(
+                                      imagePath: pickedFile.path,
+                                    ),
+                                  );
+                                }
+                              },
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(50),
+                                child: currentImagePath != null
+                                    ? Image.file(
+                                        File(currentImagePath),
+                                        width: 112,
+                                        height: 112,
+                                        fit: BoxFit.cover,
+                                      )
+                                    : CachedNetworkImage(
+                                        imageUrl: state.doctor.profileImageUrl,
+                                        placeholder: (context, url) =>
+                                            const CircularProgressIndicator(),
+                                        errorWidget: (context, url, error) =>
+                                            const Icon(Icons.error),
+                                        fit: BoxFit.cover,
+                                        width: 112,
+                                        height: 112,
+                                      ),
                               ),
                             ),
                             Positioned(
@@ -241,22 +271,23 @@ class _EditDoctorScreenState extends State<EditDoctorScreen> {
                                   style: context.regular14TextMain,
                                 ),
                                 Text(
-                                  _isActive ? t.active : t.inactive,
+                                  currentIsActive ? t.active : t.inactive,
                                   style: context.regular12TextSub,
                                 ),
                               ],
                             ),
                             Spacer(),
                             Switch(
-                              value: _isActive,
+                              value: currentIsActive,
                               activeThumbColor: AppColors.white,
                               activeTrackColor: AppColors.primaryColor,
                               inactiveThumbColor: AppColors.white,
                               inactiveTrackColor: AppColors.inactiveBorderColor,
                               onChanged: (value) {
-                                setState(() {
-                                  _isActive = value;
-                                });
+                                print(value);
+                                context.read<EditDoctorBloc>().add(
+                                  ToggleDoctorStatusEvent(isActive: value),
+                                );
                               },
                             ),
                           ],
@@ -266,14 +297,27 @@ class _EditDoctorScreenState extends State<EditDoctorScreen> {
                       CustomElevatdButton(
                         buttonTXT: t.saveChanges,
                         onTap: () {
-                          context.read<EditDoctorBloc>().add(
-                            UpdateDoctorDetailsEvent(
-                              doctorId: state.doctor.id!,
-                              name: _controller.text.trim(),
-                              specialty: _selectedSpecialty!,
-                              isActive: _isActive,
-                            ),
-                          );
+                          if (formKey.currentState!.validate()) {
+                            if (currentImagePath != null) {
+                              context.read<EditDoctorBloc>().add(
+                                UpdateDoctorDetailsEvent(
+                                  doctorId: state.doctor.id!,
+                                  name: _controller.text.trim(),
+                                  specialty: _selectedSpecialty!,
+                                  isActive: currentIsActive,
+                                  imageFile: currentImagePath,
+                                ),
+                              );
+                            }
+                            context.read<EditDoctorBloc>().add(
+                              UpdateDoctorDetailsEvent(
+                                doctorId: state.doctor.id!,
+                                name: _controller.text.trim(),
+                                specialty: _selectedSpecialty!,
+                                isActive: currentIsActive,
+                              ),
+                            );
+                          }
                         },
                         buttonWidth: double.infinity,
                       ),

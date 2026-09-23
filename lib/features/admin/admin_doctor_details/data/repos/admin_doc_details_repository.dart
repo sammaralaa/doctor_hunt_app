@@ -1,15 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:doctor_hunt_app/core/services/cloudinary_services.dart';
+import 'package:doctor_hunt_app/features/admin/create-doctor/data/model/doctor_model.dart';
 
 class AdminDocDetailsRepository {
   final FirebaseFirestore _firestore;
-  final CloudinaryServices _cloudinaryService;
 
   AdminDocDetailsRepository({
     required this._firestore,
-    required this._cloudinaryService,
   }) ;
+    Future<DoctorModel> getDoctorById(String doctorId) async {
+    final docSnapshot = await _firestore
+        .collection('doctors')
+        .doc(doctorId)
+        .get();
 
+    if (!docSnapshot.exists || docSnapshot.data() == null) {
+      throw Exception('Doctor not found');
+    }
+
+    return DoctorModel.fromMap(docSnapshot.data()!, docSnapshot.id);
+  }
    Future<void> updateDoctorStatus({
     required String doctorId,
     required bool isActive,

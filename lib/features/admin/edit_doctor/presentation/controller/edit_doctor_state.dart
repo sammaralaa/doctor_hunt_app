@@ -8,7 +8,20 @@ class FetchDoctorLoadingState extends EditDoctorState {}
 
 class FetchDoctorSuccessState extends EditDoctorState {
   final DoctorModel doctor;
-  FetchDoctorSuccessState({required this.doctor});
+  final String? newImagePath;
+  final bool? isActive;
+  FetchDoctorSuccessState({required this.doctor, this.newImagePath, this.isActive});
+  FetchDoctorSuccessState copyWith({
+    DoctorModel? doctor,
+    String? newImagePath,
+    bool? isActive,
+  }) {
+    return FetchDoctorSuccessState(
+      doctor: doctor ?? this.doctor,
+      newImagePath: newImagePath ?? this.newImagePath,
+      isActive: isActive ?? this.isActive,
+    );
+  }
 }
 
 class FetchDoctorFailureState extends EditDoctorState {

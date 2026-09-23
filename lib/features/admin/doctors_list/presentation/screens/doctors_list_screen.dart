@@ -174,7 +174,7 @@ class _DoctorsListScreen extends State<DoctorsListScreen> {
                                 onCardPressed: () {
                                   //  book now
                                   AdminDoctorDetailsRoute(
-                                    $extra: doctors[index],
+                                    doctorId: doctors[index].id!,
                                   ).push(context);
                                 },
                               );

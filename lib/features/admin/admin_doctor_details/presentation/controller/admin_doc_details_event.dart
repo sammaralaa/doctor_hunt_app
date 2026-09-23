@@ -8,14 +8,19 @@ class DeleteDoctorEvent extends AdminDocDetailsEvent {
   const DeleteDoctorEvent({required this.doctorId});
 }
 
+class FetchDoctorDetailsEvent extends AdminDocDetailsEvent {
+  final String docotrId;
+  FetchDoctorDetailsEvent({required this.docotrId});
+}
+
 class ChangeDoctorStatusEvent extends AdminDocDetailsEvent {
   final String doctorId;
   final bool isActive;
   ChangeDoctorStatusEvent({required this.isActive, required this.doctorId});
 }
 
-class UpdateDoctorEvent extends AdminDocDetailsEvent {
-  final String doctorId;
+// class UpdateDoctorEvent extends AdminDocDetailsEvent {
+//   final String doctorId;
 
-  UpdateDoctorEvent({required this.doctorId});
-}
+//   UpdateDoctorEvent({required this.doctorId});
+// }

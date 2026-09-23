@@ -18,7 +18,7 @@ class DoctorModel {
       'id': id,
       'name': name,
       'specialty': specialty,
-      'imageUrl': profileImageUrl,
+      'profileImageUrl': profileImageUrl,
       'isActive': isActive,
       'createdBy': createdBy,
       'createdAt': DateTime.now(),
@@ -29,7 +29,7 @@ class DoctorModel {
       id: documentId,
       name: map['name'] ?? '',
       specialty: map['specialty'] ?? '',
-      profileImageUrl: map['profileImageUrl'] ?? map['imageUrl'],
+      profileImageUrl: map['profileImageUrl'],
       isActive: map['isActive'] ?? true,
       createdBy: map['createdBy']
     );

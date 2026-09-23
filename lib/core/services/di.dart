@@ -19,7 +19,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 final GetIt getIt = GetIt.instance;
 
 Future<void> setupGetIt() async {
- 
   getIt.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
 
   getIt.registerLazySingleton<GoogleSignIn>(() => GoogleSignIn.instance);
@@ -49,6 +48,7 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<EditDoctorRepository>(
     () => EditDoctorRepository(
       firebaseFirestore: getIt<FirebaseFirestore>(),
+      cloudinaryService: getIt<CloudinaryServices>(),
     ),
   );
 
@@ -59,15 +59,12 @@ Future<void> setupGetIt() async {
       cloudinaryService: getIt<CloudinaryServices>(),
     ),
   );
-   getIt.registerLazySingleton<DoctorsListRepository>(
-    () => DoctorsListRepository(
-      firestore: getIt<FirebaseFirestore>(),
-    ),
+  getIt.registerLazySingleton<DoctorsListRepository>(
+    () => DoctorsListRepository(firestore: getIt<FirebaseFirestore>()),
   );
-   getIt.registerLazySingleton<AdminDocDetailsRepository>(
+  getIt.registerLazySingleton<AdminDocDetailsRepository>(
     () => AdminDocDetailsRepository(
       firestore: getIt<FirebaseFirestore>(),
-      cloudinaryService: getIt<CloudinaryServices>()
     ),
   );
   getIt.registerFactory<AuthBloc>(() => AuthBloc(getIt<AuthRepository>()));
@@ -78,12 +75,11 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<DoctorsListBloc>(
     () => DoctorsListBloc(getIt<DoctorsListRepository>()),
   );
-   getIt.registerFactory<AdminDocDetailsBloc>(
+  getIt.registerFactory<AdminDocDetailsBloc>(
     () => AdminDocDetailsBloc(getIt<AdminDocDetailsRepository>()),
   );
 
   getIt.registerFactory<EditDoctorBloc>(
     () => EditDoctorBloc(getIt<EditDoctorRepository>()),
   );
-
 }

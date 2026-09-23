@@ -9,6 +9,20 @@ class EditDoctorBloc extends Bloc<EditDoctorEvent, EditDoctorState> {
   EditDoctorBloc(this._editDoctorRepository) : super(EditDoctorInitialState()) {
     on<FetchDoctorDetailsEvent>(_onFetchDoctorDetails);
     on<UpdateDoctorDetailsEvent>(_onUpdateDoctorDetails);
+    on<ChangeDoctorImageEvent>((event, emit) {
+      if (state is FetchDoctorSuccessState) {
+        final currentState = state as FetchDoctorSuccessState;
+        emit(currentState.copyWith(newImagePath: event.imagePath));
+      }
+    });
+
+    // Handle Switch Toggle
+    on<ToggleDoctorStatusEvent>((event, emit) {
+      if (state is FetchDoctorSuccessState) {
+        final currentState = state as FetchDoctorSuccessState;
+        emit(currentState.copyWith(isActive: event.isActive));
+      }
+    });
     //on<GetUserProfileDataEvent>(_onGetUserProfileData);
   }
 
@@ -33,16 +47,13 @@ class EditDoctorBloc extends Bloc<EditDoctorEvent, EditDoctorState> {
     emit(UpdateDoctorLoadingState());
 
     try {
-      String? imageUrl;
-      // if (event.imageFile != null) {
-      //   imageUrl = await uploadImageToStorage(event.imageFile!);
-      // }
+      
 
       await _editDoctorRepository.updateDoctor(
         doctorId: event.doctorId,
         name: event.name,
         specialty: event.specialty,
-        imageUrl: imageUrl,
+        newImagePath:event.imageFile ,
         isActive: event.isActive
       );
 

@@ -358,27 +358,30 @@ RouteBase get $adminDoctorDetailsRoute => GoRouteData.$route(
 
 mixin $AdminDoctorDetailsRoute on GoRouteData {
   static AdminDoctorDetailsRoute _fromState(GoRouterState state) =>
-      AdminDoctorDetailsRoute($extra: state.extra as DoctorModel);
+      AdminDoctorDetailsRoute(
+        doctorId: state.uri.queryParameters['doctor-id']!,
+      );
 
   AdminDoctorDetailsRoute get _self => this as AdminDoctorDetailsRoute;
 
   @override
-  String get location => GoRouteData.$location('/admin-doctor-details');
+  String get location => GoRouteData.$location(
+    '/admin-doctor-details',
+    queryParams: {'doctor-id': _self.doctorId},
+  );
 
   @override
-  void go(BuildContext context) => context.go(location, extra: _self.$extra);
+  void go(BuildContext context) => context.go(location);
 
   @override
-  Future<T?> push<T>(BuildContext context) =>
-      context.push<T>(location, extra: _self.$extra);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   @override
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: _self.$extra);
+      context.pushReplacement(location);
 
   @override
-  void replace(BuildContext context) =>
-      context.replace(location, extra: _self.$extra);
+  void replace(BuildContext context) => context.replace(location);
 }
 
 RouteBase get $editDoctorRoute => GoRouteData.$route(

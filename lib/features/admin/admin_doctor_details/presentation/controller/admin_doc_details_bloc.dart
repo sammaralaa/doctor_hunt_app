@@ -9,17 +9,19 @@ class AdminDocDetailsBloc
 
   AdminDocDetailsBloc(this._docDetailsRepository)
     : super(DoctorDetailsInitialState()) {
-    on<UpdateDoctorEvent>(_onUpdateDoctor);
+    on<FetchDoctorDetailsEvent>(_onFetchDoctorDetails);
     on<DeleteDoctorEvent>(_onDeleteDoctor);
     on<ChangeDoctorStatusEvent>(_onChangeDoctorStatus);
     //on<GetUserProfileDataEvent>(_onGetUserProfileData);
   }
 
-  Future<void> _onUpdateDoctor(
-    UpdateDoctorEvent event,
+  Future<void> _onFetchDoctorDetails(
+    FetchDoctorDetailsEvent event,
     Emitter<AdminDocDetailsState> emit,
   ) async {
     emit(DoctorDetailsLoadingState());
+    final docotr = await _docDetailsRepository.getDoctorById(event.docotrId);
+    emit(FetchDoctorDetailsSuccessState(doctor: docotr));
     try {} catch (e) {
       emit(DoctorDetailsFailureState(e.toString()));
     }

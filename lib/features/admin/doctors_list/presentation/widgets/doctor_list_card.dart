@@ -51,7 +51,7 @@ class _DoctorsListCard extends State<DoctorsListCard> {
             ClipRRect(
               borderRadius: BorderRadius.circular(25),
               child: CachedNetworkImage(
-                imageUrl:  widget.imageUrl,
+                imageUrl: widget.imageUrl,
                 placeholder: (context, url) =>
                     const CircularProgressIndicator(),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
