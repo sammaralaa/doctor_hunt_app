@@ -1,4 +1,3 @@
-
 import 'package:doctor_hunt_app/core/services/di.dart';
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
@@ -15,6 +14,7 @@ import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -26,39 +26,25 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreen extends State<HomeScreen> {
   late TextEditingController? searchController;
-  //late String userName;
 
   @override
   initState() {
     super.initState();
     searchController = TextEditingController();
-    //final user = FirebaseAuth.instance.currentUser;
-    //userName = user?.displayName ?? t.user;
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<HomeBloc>()..add(GetUserProfileDataEvent()),
+      create: (context) => getIt<HomeBloc>()
+        ..add(GetUserProfileDataEvent())
+        ..add(FetchDoctorsDataEvent()),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
-              child: BlocConsumer<HomeBloc, HomeState>(
-                listener: (context, state) {
-                  // if (state is ProfileImageSuccessState) {
-                  //   ScaffoldMessenger.of(context).showSnackBar(
-                  //     SnackBar(
-                  //       content: Text(t.profilePictureUpdatedSuccessfully),
-                  //     ),
-                  //   );
-                  // } else if (state is ProfileImageFailureState) {
-                  //   ScaffoldMessenger.of(
-                  //     context,
-                  //   ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
-                  // }
-                },
+              child: BlocBuilder<HomeBloc, HomeState>(
                 builder: (context, state) {
                   String? currentProfileImage;
                   String userName = "";
@@ -66,29 +52,13 @@ class _HomeScreen extends State<HomeScreen> {
                     currentProfileImage = state.user.profileImage;
                     userName = state.user.name;
                   }
-                 
+
                   return CustomHomeTopHeader(
                     isLoading: state is UserProfileLoadingState,
                     searchController: searchController,
                     userName: userName,
                     profileImageUrl: currentProfileImage,
-                    onProfileImageTap: () async {
-                      // ImageSource source = ImageSource.gallery;
-                      // final ImagePicker picker = ImagePicker();
-                      // final XFile? pickedFile = await picker.pickImage(
-                      //   source: source,
-                      //   maxWidth: 512,
-                      //   maxHeight: 512,
-                      //   imageQuality: 80,
-                      // );
-                      // final File? pickedFile =
-                      //     await HomeRepository.pickProfileImage();
-                      // if (pickedFile != null && mounted) {
-                      //   context.read<HomeBloc>().add(
-                      //     UploadProfileImageEvent(File(pickedFile.path)),
-                      //   );
-                      // }
-                    },
+                    onProfileImageTap: () {},
                   );
                 },
               ),
@@ -159,17 +129,107 @@ class _HomeScreen extends State<HomeScreen> {
                       ],
                     ),
                     HeightSpace(22),
-                    SizedBox(
-                      height: 265,
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 10,
-                        separatorBuilder: (context, index) =>
-                            SizedBox(width: 12),
-                        itemBuilder: (context, index) {
-                          return PopularDoctorCardWidget();
-                        },
-                      ),
+                    BlocBuilder<HomeBloc, HomeState>(
+                      buildWhen: (previous, current) {
+                        return current is FetchDoctorsLoadingState ||
+                            current is FetchDoctorsSuccessState ||
+                            current is FetchDoctorsFailureState;
+                      },
+                      builder: (context, state) {
+                        if (state is FetchDoctorsLoadingState) {
+                          return Shimmer.fromColors(
+                            baseColor: Colors.grey[300]!,
+                            highlightColor: Colors.grey[100]!,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // Header: Popular Doctor & See all
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        width: 120,
+                                        height: 18,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(
+                                            4,
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 50,
+                                        height: 14,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(
+                                            4,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+
+                                // Horizontal List of Doctor Cards
+                                SizedBox(
+                                  height: 250,
+                                  child: ListView.separated(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 16,
+                                    ),
+                                    scrollDirection: Axis.horizontal,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    itemCount: 3,
+                                    separatorBuilder: (context, index) =>
+                                        const SizedBox(width: 14),
+                                    itemBuilder: (context, index) {
+                                      //return _buildDoctorCardSkeleton();
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+                        if (state is FetchDoctorsFailureState) {}
+                        if (state is FetchDoctorsSuccessState) {
+                          final doctors = state.doctorsData;
+                          return SizedBox(
+                            height: 265,
+                            child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: doctors.length,
+                              separatorBuilder: (context, index) =>
+                                  SizedBox(width: 12),
+                              itemBuilder: (context, index) {
+                                return PopularDoctorCardWidget(
+                                  doctorData: doctors[index],
+                                );
+                              },
+                            ),
+                          );
+                        }
+                        return SizedBox(
+                          height: 265,
+                          child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: 10,
+                            separatorBuilder: (context, index) =>
+                                SizedBox(width: 12),
+                            itemBuilder: (context, index) {
+                              // return PopularDoctorCardWidget();
+                            },
+                          ),
+                        );
+                      },
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

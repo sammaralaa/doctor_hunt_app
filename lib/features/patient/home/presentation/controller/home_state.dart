@@ -1,46 +1,30 @@
+import 'package:doctor_hunt_app/features/admin/create-doctor/data/model/doctor_model.dart';
 import 'package:doctor_hunt_app/features/patient/home/data/model/patient_model.dart';
 import 'package:equatable/equatable.dart';
 
-abstract class HomeState extends Equatable {
+abstract class HomeState {}
 
-  @override
-  List<Object?> get props => [];
-}
 class HomeInitialState extends HomeState {}
-// class ProfileImageLoadingState extends HomeState {}
-// class ProfileImageSuccessState extends HomeState {
-//   final PatientModel model;
 
-//    ProfileImageSuccessState( this.model);
+class FetchDoctorsLoadingState extends HomeState {}
 
-//   @override
-//   List<Object?> get props => [model];
-// }
-// class ProfileImageFailureState extends HomeState {
-//   final String errorMessage;
-
-//    ProfileImageFailureState(this.errorMessage);
-
-//   @override
-//   List<Object?> get props => [errorMessage];
-// }
-
+class FetchDoctorsSuccessState extends HomeState {
+  final List<DoctorModel> doctorsData;
+  FetchDoctorsSuccessState({required this.doctorsData});
+}
+class FetchDoctorsFailureState extends HomeState{
+  final String errorMessage;
+  FetchDoctorsFailureState(this.errorMessage);
+}
 class UserProfileLoadingState extends HomeState {}
 
 class UserProfileSuccessState extends HomeState {
   final PatientModel user;
 
-   UserProfileSuccessState(this.user);
-
-  @override
-  List<Object?> get props => [user];
+  UserProfileSuccessState(this.user);
 }
 
 class UserProfileFailureState extends HomeState {
   final String errorMessage;
-
-   UserProfileFailureState(this.errorMessage);
-
-  @override
-  List<Object?> get props => [errorMessage];
+  UserProfileFailureState(this.errorMessage);
 }
