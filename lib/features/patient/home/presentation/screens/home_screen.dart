@@ -137,67 +137,7 @@ class _HomeScreen extends State<HomeScreen> {
                       },
                       builder: (context, state) {
                         if (state is FetchDoctorsLoadingState) {
-                          return Shimmer.fromColors(
-                            baseColor: Colors.grey[300]!,
-                            highlightColor: Colors.grey[100]!,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // Header: Popular Doctor & See all
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 16.0,
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Container(
-                                        width: 120,
-                                        height: 18,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.circular(
-                                            4,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        width: 50,
-                                        height: 14,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.circular(
-                                            4,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(height: 16),
-
-                                // Horizontal List of Doctor Cards
-                                SizedBox(
-                                  height: 250,
-                                  child: ListView.separated(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 16,
-                                    ),
-                                    scrollDirection: Axis.horizontal,
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    itemCount: 3,
-                                    separatorBuilder: (context, index) =>
-                                        const SizedBox(width: 14),
-                                    itemBuilder: (context, index) {
-                                      //return _buildDoctorCardSkeleton();
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
+                          return _doctorLoadingSkelton();
                         }
                         if (state is FetchDoctorsFailureState) {}
                         if (state is FetchDoctorsSuccessState) {
@@ -276,4 +216,89 @@ class _HomeScreen extends State<HomeScreen> {
       ),
     );
   }
+
+ Widget _doctorLoadingSkelton() {
+  return Shimmer.fromColors(
+    baseColor: AppColors.inactiveBorderColor,
+    highlightColor: AppColors.inactiveIconColor,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Header
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _skeletonBox(width: 120, height: 18),
+              _skeletonBox(width: 50, height: 14),
+            ],
+          ),
+        ),
+        const SizedBox(height: 16),
+
+        // Horizontal List
+        SizedBox(
+          height: 250,
+          child: ListView.separated(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            scrollDirection: Axis.horizontal,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: 3,
+            separatorBuilder: (_, __) => const SizedBox(width: 14),
+            itemBuilder: (_, __) => _doctorCardSkeleton(),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+// الكارت الخاص بالدكتور
+Widget _doctorCardSkeleton() {
+  return Container(
+    width: 170,
+    decoration: BoxDecoration(
+      color: AppColors.white,
+      borderRadius: BorderRadius.circular(12),
+    ),
+    child: Column(
+      children: [
+        _skeletonBox(width: double.infinity, height: 140, radius: 12),
+        const SizedBox(height: 12),
+        _skeletonBox(width: 120, height: 14),
+        const SizedBox(height: 8),
+        _skeletonBox(width: 90, height: 10),
+        const SizedBox(height: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(
+            5,
+            (_) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 2),
+              child: _skeletonBox(width: 12, height: 12, isCircle: true),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget _skeletonBox({
+  required double width,
+  required double height,
+  double radius = 4,
+  bool isCircle = false,
+}) {
+  return Container(
+    width: width,
+    height: height,
+    decoration: BoxDecoration(
+      color: AppColors.white,
+      shape: isCircle ? BoxShape.circle : BoxShape.rectangle,
+      borderRadius: isCircle ? null : BorderRadius.circular(radius),
+    ),
+  );
+}
 }
