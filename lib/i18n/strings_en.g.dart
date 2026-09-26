@@ -346,6 +346,9 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 
 	/// en: 'Tap photo to change'
 	String get tapPhotoToChange => 'Tap photo to change';
+
+	/// en: 'Doctor not found'
+	String get doctorNotFound => 'Doctor not found';
 }
 
 /// The flat map containing all translations for locale <en>.
@@ -458,6 +461,7 @@ extension on Translations {
 			'doctorStatus' => 'Doctor Status',
 			'saveChanges' => 'Save Changes',
 			'tapPhotoToChange' => 'Tap photo to change',
+			'doctorNotFound' => 'Doctor not found',
 			_ => null,
 		};
 	}

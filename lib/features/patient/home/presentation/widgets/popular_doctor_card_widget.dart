@@ -1,15 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:doctor_hunt_app/core/routing/routes.dart';
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
+import 'package:doctor_hunt_app/core/utils/doctor_specialty_enum.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/features/admin/create-doctor/data/model/doctor_model.dart';
-import 'package:doctor_hunt_app/generated/image_assets.dart';
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 
 class PopularDoctorCardWidget extends StatelessWidget {
   final DoctorModel doctorData;
-  const PopularDoctorCardWidget({super.key, required this.doctorData});
+  final VoidCallback onCardTap;
+  const PopularDoctorCardWidget({
+    super.key,
+    required this.doctorData,
+    required this.onCardTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +24,7 @@ class PopularDoctorCardWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: InkWell(
-        onTap: () {
-          // Handle card tap
-          DoctorDetailsRoute().push(context);
-        },
+        onTap: onCardTap,
         child: Column(
           children: [
             CachedNetworkImage(
@@ -35,7 +36,10 @@ class PopularDoctorCardWidget extends StatelessWidget {
 
             HeightSpace(14),
             Text(doctorData.name, style: context.bold18TextMain),
-            Text(doctorData.specialty, style: context.regular14TextSub),
+            Text(
+              DoctorSpecialty.fromKey(doctorData.specialty).displayName,
+              style: context.regular14TextSub,
+            ),
             HeightSpace(6),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

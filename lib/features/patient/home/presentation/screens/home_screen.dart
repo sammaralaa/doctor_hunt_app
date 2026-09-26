@@ -1,3 +1,4 @@
+import 'package:doctor_hunt_app/core/routing/routes.dart';
 import 'package:doctor_hunt_app/core/services/di.dart';
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
@@ -139,7 +140,38 @@ class _HomeScreen extends State<HomeScreen> {
                         if (state is FetchDoctorsLoadingState) {
                           return _doctorLoadingSkelton();
                         }
-                        if (state is FetchDoctorsFailureState) {}
+                        if (state is FetchDoctorsFailureState) {
+                          return SizedBox(
+                            height: 250,
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Icon(
+                                    Icons.error_outline,
+                                    color: AppColors.red,
+                                    size: 40,
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    state.errorMessage,
+                                    style: context.regular14TextSub,
+                                  ),
+                                  const SizedBox(height: 8),
+                                  TextButton.icon(
+                                    onPressed: () {
+                                      context.read<HomeBloc>().add(
+                                        FetchDoctorsDataEvent(),
+                                      );
+                                    },
+                                    icon: const Icon(Icons.refresh),
+                                    label: Text("Retry"),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        }
                         if (state is FetchDoctorsSuccessState) {
                           final doctors = state.doctorsData;
                           return SizedBox(
@@ -151,24 +183,18 @@ class _HomeScreen extends State<HomeScreen> {
                                   SizedBox(width: 12),
                               itemBuilder: (context, index) {
                                 return PopularDoctorCardWidget(
+                                  onCardTap: () {
+                                    DoctorDetailsRoute(
+                                      doctorId: doctors[index].id!,
+                                    ).push(context);
+                                  },
                                   doctorData: doctors[index],
                                 );
                               },
                             ),
                           );
                         }
-                        return SizedBox(
-                          height: 265,
-                          child: ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 10,
-                            separatorBuilder: (context, index) =>
-                                SizedBox(width: 12),
-                            itemBuilder: (context, index) {
-                              // return PopularDoctorCardWidget();
-                            },
-                          ),
-                        );
+                        return const SizedBox.shrink();
                       },
                     ),
                     Row(
@@ -217,88 +243,87 @@ class _HomeScreen extends State<HomeScreen> {
     );
   }
 
- Widget _doctorLoadingSkelton() {
-  return Shimmer.fromColors(
-    baseColor: AppColors.inactiveBorderColor,
-    highlightColor: AppColors.inactiveIconColor,
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Header
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _skeletonBox(width: 120, height: 18),
-              _skeletonBox(width: 50, height: 14),
-            ],
-          ),
-        ),
-        const SizedBox(height: 16),
-
-        // Horizontal List
-        SizedBox(
-          height: 250,
-          child: ListView.separated(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            scrollDirection: Axis.horizontal,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: 3,
-            separatorBuilder: (_, __) => const SizedBox(width: 14),
-            itemBuilder: (_, __) => _doctorCardSkeleton(),
-          ),
-        ),
-      ],
-    ),
-  );
-}
-
-// الكارت الخاص بالدكتور
-Widget _doctorCardSkeleton() {
-  return Container(
-    width: 170,
-    decoration: BoxDecoration(
-      color: AppColors.white,
-      borderRadius: BorderRadius.circular(12),
-    ),
-    child: Column(
-      children: [
-        _skeletonBox(width: double.infinity, height: 140, radius: 12),
-        const SizedBox(height: 12),
-        _skeletonBox(width: 120, height: 14),
-        const SizedBox(height: 8),
-        _skeletonBox(width: 90, height: 10),
-        const SizedBox(height: 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: List.generate(
-            5,
-            (_) => Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 2),
-              child: _skeletonBox(width: 12, height: 12, isCircle: true),
+  Widget _doctorLoadingSkelton() {
+    return Shimmer.fromColors(
+      baseColor: AppColors.inactiveBorderColor,
+      highlightColor: AppColors.inactiveIconColor,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Header
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _skeletonBox(width: 120, height: 18),
+                _skeletonBox(width: 50, height: 14),
+              ],
             ),
           ),
-        ),
-      ],
-    ),
-  );
-}
+          const SizedBox(height: 16),
 
-Widget _skeletonBox({
-  required double width,
-  required double height,
-  double radius = 4,
-  bool isCircle = false,
-}) {
-  return Container(
-    width: width,
-    height: height,
-    decoration: BoxDecoration(
-      color: AppColors.white,
-      shape: isCircle ? BoxShape.circle : BoxShape.rectangle,
-      borderRadius: isCircle ? null : BorderRadius.circular(radius),
-    ),
-  );
-}
+          // Horizontal List
+          SizedBox(
+            height: 250,
+            child: ListView.separated(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              scrollDirection: Axis.horizontal,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: 3,
+              separatorBuilder: (_, __) => const SizedBox(width: 14),
+              itemBuilder: (_, __) => _doctorCardSkeleton(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _doctorCardSkeleton() {
+    return Container(
+      width: 170,
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        children: [
+          _skeletonBox(width: double.infinity, height: 140, radius: 12),
+          const SizedBox(height: 12),
+          _skeletonBox(width: 120, height: 14),
+          const SizedBox(height: 8),
+          _skeletonBox(width: 90, height: 10),
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(
+              5,
+              (_) => Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 2),
+                child: _skeletonBox(width: 12, height: 12, isCircle: true),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _skeletonBox({
+    required double width,
+    required double height,
+    double radius = 4,
+    bool isCircle = false,
+  }) {
+    return Container(
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        shape: isCircle ? BoxShape.circle : BoxShape.rectangle,
+        borderRadius: isCircle ? null : BorderRadius.circular(radius),
+      ),
+    );
+  }
 }

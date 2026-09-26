@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/generated/image_assets.dart';
@@ -7,8 +8,16 @@ import 'package:flutter/material.dart';
 
 class DoctorDetailsCardWidget extends StatefulWidget {
   final VoidCallback? onBookNowPressed;
+  final String name;
+  final String specialty;
+  final String imageUrl;
 
-  const DoctorDetailsCardWidget({super.key, this.onBookNowPressed});
+  const DoctorDetailsCardWidget({
+    super.key,
+    this.onBookNowPressed,
+    required this.name,
+    required this.specialty, required this.imageUrl,
+  });
   @override
   State<DoctorDetailsCardWidget> createState() =>
       _DoctorDetailsCardWidgetState();
@@ -40,12 +49,15 @@ class _DoctorDetailsCardWidgetState extends State<DoctorDetailsCardWidget> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  ImageAssets.doctorImage2,
-                  width: 84,
-                  height: 84,
-                  fit: BoxFit.cover,
-                ),
+                child:CachedNetworkImage(
+                imageUrl: widget.imageUrl,
+                placeholder: (context, url) =>
+                    const CircularProgressIndicator(),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+                fit: BoxFit.cover,
+                width: 85,
+                height: 85,
+              ),
               ),
               WidthSpace(12),
 
@@ -58,9 +70,8 @@ class _DoctorDetailsCardWidgetState extends State<DoctorDetailsCardWidget> {
                       children: [
                         Expanded(
                           child: Text(
-                            'Dr. Pediatrician',
-                            style:context.bold16TextMain
-                            ,
+                            widget.name,
+                            style: context.bold16TextMain,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -85,10 +96,7 @@ class _DoctorDetailsCardWidgetState extends State<DoctorDetailsCardWidget> {
                     ),
                     HeightSpace(4),
 
-                    Text(
-                      'Specialist Cardiologist',
-                      style: context.regular12TextSub,
-                    ),
+                    Text(widget.specialty, style: context.regular12TextSub),
                     HeightSpace(8),
 
                     Row(
@@ -143,10 +151,7 @@ class _DoctorDetailsCardWidgetState extends State<DoctorDetailsCardWidget> {
                 ),
                 padding: EdgeInsets.zero,
               ),
-              child: Text(
-                t.bookNow,
-                style: context.bold14White,
-              ),
+              child: Text(t.bookNow, style: context.bold14White),
             ),
           ),
         ],

@@ -20,9 +20,11 @@ class AdminDocDetailsBloc
     Emitter<AdminDocDetailsState> emit,
   ) async {
     emit(DoctorDetailsLoadingState());
-    final docotr = await _docDetailsRepository.getDoctorById(event.docotrId);
-    emit(FetchDoctorDetailsSuccessState(doctor: docotr));
-    try {} catch (e) {
+
+    try {
+      final docotr = await _docDetailsRepository.getDoctorById(event.docotrId);
+      emit(FetchDoctorDetailsSuccessState(doctor: docotr));
+    } catch (e) {
       emit(DoctorDetailsFailureState(e.toString()));
     }
   }

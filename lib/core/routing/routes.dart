@@ -11,6 +11,7 @@ import 'package:doctor_hunt_app/features/common/auth/presentation/controller/aut
 import 'package:doctor_hunt_app/features/common/auth/presentation/screens/sign_up_screen.dart';
 import 'package:doctor_hunt_app/features/common/auth/presentation/screens/login_screen.dart';
 import 'package:doctor_hunt_app/features/common/choose_role/presentation/screens/choose_role_screen.dart';
+import 'package:doctor_hunt_app/features/patient/doctor_details/presentation/controller/doctor_details_bloc.dart';
 import 'package:doctor_hunt_app/features/patient/doctor_details/presentation/screens/doctor_details_screen.dart';
 import 'package:doctor_hunt_app/features/admin/doctors_list/presentation/screens/doctors_list_screen.dart';
 import 'package:doctor_hunt_app/features/patient/main_screen/presentation/screens/main_screen.dart';
@@ -93,11 +94,15 @@ class ChooseRoleRoute extends GoRouteData with $ChooseRoleRoute {
 
 @TypedGoRoute<DoctorDetailsRoute>(path: '/doctor-details')
 class DoctorDetailsRoute extends GoRouteData with $DoctorDetailsRoute {
-  const DoctorDetailsRoute();
+  final String doctorId;
+  const DoctorDetailsRoute({required this.doctorId});
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return DoctorDetailsScreen();
+    return BlocProvider(
+      create: (context) => getIt<DoctorDetailsBloc>(),
+      child: DoctorDetailsScreen(doctorId: doctorId,),
+    );
   }
 }
 

@@ -100,5 +100,6 @@
   "thereAreCurrentlyNoDoctors": "There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.",
   "doctorStatus": "Doctor Status",
   "saveChanges": "Save Changes",
-  "tapPhotoToChange": "Tap photo to change"
+  "tapPhotoToChange": "Tap photo to change",
+  "doctorNotFound": "Doctor not found"
 }

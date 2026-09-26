@@ -196,10 +196,15 @@ RouteBase get $doctorDetailsRoute => GoRouteData.$route(
 
 mixin $DoctorDetailsRoute on GoRouteData {
   static DoctorDetailsRoute _fromState(GoRouterState state) =>
-      const DoctorDetailsRoute();
+      DoctorDetailsRoute(doctorId: state.uri.queryParameters['doctor-id']!);
+
+  DoctorDetailsRoute get _self => this as DoctorDetailsRoute;
 
   @override
-  String get location => GoRouteData.$location('/doctor-details');
+  String get location => GoRouteData.$location(
+    '/doctor-details',
+    queryParams: {'doctor-id': _self.doctorId},
+  );
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -385,20 +390,21 @@ mixin $AdminDoctorDetailsRoute on GoRouteData {
 }
 
 RouteBase get $editDoctorRoute => GoRouteData.$route(
-  path: '/edit-doctor/:doctorId',
+  path: '/edit-doctor',
   hasOverriddenOnExit: false,
   factory: $EditDoctorRoute._fromState,
 );
 
 mixin $EditDoctorRoute on GoRouteData {
   static EditDoctorRoute _fromState(GoRouterState state) =>
-      EditDoctorRoute(doctorId: state.pathParameters['doctorId']!);
+      EditDoctorRoute(doctorId: state.uri.queryParameters['doctor-id']!);
 
   EditDoctorRoute get _self => this as EditDoctorRoute;
 
   @override
   String get location => GoRouteData.$location(
-    '/edit-doctor/${Uri.encodeComponent(_self.doctorId)}',
+    '/edit-doctor',
+    queryParams: {'doctor-id': _self.doctorId},
   );
 
   @override

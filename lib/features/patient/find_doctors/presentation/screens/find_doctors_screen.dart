@@ -47,7 +47,7 @@ class _FindDoctorsScreenState extends State<FindDoctorsScreen> {
                           child: DoctorSearchCardWidget(
                             onBookNowPressed: () {},
                             cardOnTap: () {
-                              DoctorDetailsRoute().push(context);
+                              DoctorDetailsRoute(doctorId: "").push(context);
                             },
                           ),
                         );
