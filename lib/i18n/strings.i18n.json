@@ -101,5 +101,7 @@
   "doctorStatus": "Doctor Status",
   "saveChanges": "Save Changes",
   "tapPhotoToChange": "Tap photo to change",
-  "doctorNotFound": "Doctor not found"
+  "doctorNotFound": "Doctor not found",
+  "signUpFailed": "Sign up failed",
+  "incorrectEmailOrPassword": "Incorrect email or password"
 }

@@ -89,7 +89,11 @@ class _SignUpScreen extends State<SignUpScreen> {
                                 children: [
                                   LoginWithWidget(
                                     btnText: t.google,
-                                    onTop: () {},
+                                    onTap: () {
+                                      context.read<AuthBloc>().add(
+                                        SignInWithGoogleEvent(),
+                                      );
+                                    },
                                     btnIcon: SvgPicture.asset(
                                       IconsAssets.googleIcon,
                                       width: 20,
@@ -99,7 +103,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                                   WidthSpace(15),
                                   LoginWithWidget(
                                     btnText: t.facebook,
-                                    onTop: () {},
+                                    onTap: () {},
                                     btnIcon: SvgPicture.asset(
                                       IconsAssets.facebookIcon,
                                       width: 20,

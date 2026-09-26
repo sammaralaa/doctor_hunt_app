@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor_hunt_app/core/services/cloudinary_services.dart';
+import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -11,10 +12,16 @@ class AuthRepository {
   final FirebaseFirestore _firestore;
   final CloudinaryServices _cloudinaryService;
 
-  AuthRepository({required this._firebaseAuth, required this._googleSignIn, required this._firestore, required this._cloudinaryService});
+  AuthRepository({
+    required this._firebaseAuth,
+    required this._googleSignIn,
+    required this._firestore,
+    required this._cloudinaryService,
+  });
   Future<UserCredential> signUp({
     required String email,
     required String password,
+    required String name,
     required String userRole,
     File? profileImageFile,
   }) async {
@@ -22,17 +29,21 @@ class AuthRepository {
       email: email,
       password: password,
     );
-    final String uid = userCredential.user!.uid;
+
+    final User? user = userCredential.user;
+    if (user == null) {
+      throw Exception(t.signUpFailed);
+    }
+    await user.updateDisplayName(name);
     String? imageUrl;
     if (profileImageFile != null) {
       imageUrl = await _cloudinaryService.uploadImage(profileImageFile);
     }
-    await _firestore.collection('users').doc(uid).set({
-      'name':_firebaseAuth.currentUser?.displayName,
-      'email':email,
+    await _firestore.collection('users').doc(user.uid).set({
+      'name': name,
+      'email': email,
       'role': userRole,
       'profileImage': imageUrl ?? '',
-      
     });
     return userCredential;
   }
@@ -59,7 +70,27 @@ class AuthRepository {
   }
 
   //with google
-  Future<UserCredential> signInWithGoogle() async {
+  // Future<UserCredential> signInWithGoogle() async {
+  //   final GoogleSignInAccount? googleUser = await _googleSignIn.authenticate();
+
+  //   if (googleUser == null) {
+  //     throw Exception('Google Sign-In was canceled by the user.');
+  //   }
+
+  //   final GoogleSignInAuthentication googleAuth =
+  //       await googleUser.authentication;
+
+  //   final OAuthCredential credential = GoogleAuthProvider.credential(
+  //     accessToken: googleAuth.idToken,
+  //     idToken: googleAuth.idToken,
+  //   );
+
+  //   return await _firebaseAuth.signInWithCredential(credential);
+  // }
+
+  Future<UserCredential> signInWithGoogle({
+    String defaultRole = 'patient',
+  }) async {
     final GoogleSignInAccount? googleUser = await _googleSignIn.authenticate();
 
     if (googleUser == null) {
@@ -74,27 +105,29 @@ class AuthRepository {
       idToken: googleAuth.idToken,
     );
 
-    return await _firebaseAuth.signInWithCredential(credential);
+    final userCredential = await _firebaseAuth.signInWithCredential(credential);
+    final User? user = userCredential.user;
+
+    if (user != null) {
+      final userDoc = await _firestore.collection('users').doc(user.uid).get();
+
+      if (!userDoc.exists) {
+        await _firestore.collection('users').doc(user.uid).set({
+          'name': user.displayName ?? '',
+          'email': user.email ?? '',
+          'role': defaultRole,
+          'profileImage': user.photoURL ?? '',
+          'createdAt': FieldValue.serverTimestamp(),
+        });
+      }
+    }
+
+    return userCredential;
   }
-
-  // Future<String?> uploadOrUpdateProfileImage({
-  //   required String uid,
-  //   required File imageFile,
-  // }) async {
-  //   final String? imageUrl = await _cloudinaryService.uploadImage(imageFile);
-
-  //   if (imageUrl != null) {
-  //     await _firestore.collection('users').doc(uid).set({
-  //       'profileImage': imageUrl,
-  //     }, SetOptions(merge: true));
-  //   }
-
-  //   return imageUrl;
-  // }
 
   Future<void> signOut() async {
     await _firebaseAuth.signOut();
     await _googleSignIn.signOut();
-    print('User signed out successfully. ${_firebaseAuth.currentUser}');
+    // print('User signed out successfully. ${_firebaseAuth.currentUser}');
   }
 }

@@ -6,7 +6,7 @@ class CustomIconBottomNav extends StatelessWidget {
   final String icon;
   final bool isSelected;
 
-  CustomIconBottomNav({super.key, required this.icon, required this.isSelected});
+  const CustomIconBottomNav({super.key, required this.icon, required this.isSelected});
 
   @override
   Widget build(BuildContext context) {

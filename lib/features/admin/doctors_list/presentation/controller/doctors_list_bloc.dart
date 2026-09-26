@@ -7,9 +7,9 @@ import 'package:doctor_hunt_app/features/admin/doctors_list/presentation/control
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DoctorsListBloc extends Bloc<DoctorsListEvent, DoctorsListState> {
-  final DoctorsListRepository _DoctorsListRepository;
+  final DoctorsListRepository _doctorsListRepository;
 
-  DoctorsListBloc(this._DoctorsListRepository)
+  DoctorsListBloc(this._doctorsListRepository)
     : super(DoctorsListInitialState()) {
     on<GetAllDoctorsEvent>(_onGetDoctors);
     //on<GetUserProfileDataEvent>(_onGetUserProfileData);
@@ -24,7 +24,7 @@ class DoctorsListBloc extends Bloc<DoctorsListEvent, DoctorsListState> {
       // final List<DoctorModel> doctorsList =await _DoctorsListRepository.getDoctors();
       // emit(DoctorsListSuccessState(doctorsList));
       await emit.forEach<List<DoctorModel>>(
-      _DoctorsListRepository.getDoctors(),
+      _doctorsListRepository.getDoctors(),
       onData: (doctors) {
        // final activeCount = doctors.where((d) => d.isActive).length;
         return DoctorsListSuccessState( doctors,);

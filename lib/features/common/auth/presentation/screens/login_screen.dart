@@ -95,7 +95,7 @@ class _LoginScreen extends State<LoginScreen> {
                                         children: [
                                           LoginWithWidget(
                                             btnText: t.google,
-                                            onTop: () {},
+                                            onTap: () {},
                                             btnIcon: SvgPicture.asset(
                                               IconsAssets.googleIcon,
                                               width: 20,

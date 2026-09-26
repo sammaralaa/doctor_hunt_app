@@ -5,15 +5,15 @@ import 'package:flutter/material.dart';
 
 class LoginWithWidget extends StatelessWidget{
   final String btnText;
-  final VoidCallback onTop;
+  final VoidCallback onTap;
   final Widget btnIcon;
 
-  const LoginWithWidget({super.key, required this.btnText, required this.onTop, required this.btnIcon});
+  const LoginWithWidget({super.key, required this.btnText, required this.onTap, required this.btnIcon});
   @override
   Widget build(BuildContext context) {
     return Expanded(
         child:ElevatedButton.icon(
-          onPressed: onTop,
+          onPressed: onTap,
           label: Text(btnText,style: context.regular16TextSub,),
           icon: btnIcon,
           style: ElevatedButton.styleFrom(

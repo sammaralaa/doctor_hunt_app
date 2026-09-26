@@ -12,6 +12,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignUpRequestedEvent>(_onSignUpRequested);
     on<LogInRequestedEvent>(_onLogInRequested);
     on<SignOutRequestedEvent>(_onSignOutRequested);
+    on<SignInWithGoogleEvent>(_onSignInWithGoogle);
   }
 
   Future<void> _onSignUpRequested(
@@ -21,17 +22,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(AuthLoading());
 
     try {
-      final userCredential = await authRepository.signUp(
+      await authRepository.signUp(
+        name: event.name,
         email: event.email,
         password: event.password,
         userRole: event.userRole,
       );
 
-      if (userCredential.user != null && event.name.isNotEmpty) {
-        await userCredential.user!.updateDisplayName(event.name);
-      }
-
-      emit(AuthSuccess(role: event.userRole ));
+      emit(AuthSuccess(role: event.userRole));
     } on FirebaseAuthException catch (e) {
       emit(AuthFailure(_mapFirebaseAuthError(e)));
     } catch (e) {
@@ -46,7 +44,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(AuthLoading());
 
     try {
-       final String? role = await authRepository.logIn(
+      final String? role = await authRepository.logIn(
         email: event.email,
         password: event.password,
       );
@@ -58,6 +56,22 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthFailure(e.toString()));
     }
   }
+
+  Future<void> _onSignInWithGoogle(
+    SignInWithGoogleEvent event,
+    Emitter<AuthState> emit,
+  ) async {
+    emit(AuthLoading());
+    try {
+      await authRepository.signInWithGoogle();
+      emit(const AuthSuccess(role: 'patient'));
+    } on FirebaseAuthException catch (e) {
+      emit(AuthFailure(_mapFirebaseAuthError(e)));
+    } catch (e) {
+      emit(AuthFailure(e.toString()));
+    }
+  }
+
   Future<void> _onSignOutRequested(
     SignOutRequestedEvent event,
     Emitter<AuthState> emit,
@@ -72,6 +86,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthFailure(e.toString()));
     }
   }
+
   String _mapFirebaseAuthError(FirebaseAuthException e) {
     switch (e.code) {
       case 'email-already-in-use':
@@ -82,6 +97,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         return t.thePasswordisWeak;
       case 'operation-not-allowed':
         return t.AccountsAreNotEnabled;
+      case 'invalid-credential':
+      case 'user-not-found':
+      case 'wrong-password':
+        return t.incorrectEmailOrPassword;
       default:
         return e.message ?? t.anUnknownAuthError;
     }

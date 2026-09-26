@@ -26,9 +26,11 @@ class HomeRepository {
         return PatientModel(
           name: data?['name'],
           profileImage: data?['profileImage'],
+           email: data?['email'], 
+           role: data?['role'],
         );
       }
-      return PatientModel(name: user.displayName ?? "user", profileImage: null);
+      return PatientModel(name: user.displayName ?? "user", profileImage: null, email: '', role: '');
     } catch (e) {
       rethrow;
     }

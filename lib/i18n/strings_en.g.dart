@@ -349,6 +349,12 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 
 	/// en: 'Doctor not found'
 	String get doctorNotFound => 'Doctor not found';
+
+	/// en: 'Sign up failed'
+	String get signUpFailed => 'Sign up failed';
+
+	/// en: 'Incorrect email or password'
+	String get incorrectEmailOrPassword => 'Incorrect email or password';
 }
 
 /// The flat map containing all translations for locale <en>.
@@ -462,6 +468,8 @@ extension on Translations {
 			'saveChanges' => 'Save Changes',
 			'tapPhotoToChange' => 'Tap photo to change',
 			'doctorNotFound' => 'Doctor not found',
+			'signUpFailed' => 'Sign up failed',
+			'incorrectEmailOrPassword' => 'Incorrect email or password',
 			_ => null,
 		};
 	}

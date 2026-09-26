@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor_hunt_app/core/services/cloudinary_services.dart';
 import 'package:doctor_hunt_app/core/utils/doctor_specialty_enum.dart';
 import 'package:doctor_hunt_app/features/admin/create-doctor/data/model/doctor_model.dart';
-import 'package:image_picker/image_picker.dart';
 
 class EditDoctorRepository {
   final FirebaseFirestore _firebaseFirestore;

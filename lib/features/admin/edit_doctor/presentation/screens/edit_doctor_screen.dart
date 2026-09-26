@@ -284,7 +284,7 @@ class _EditDoctorScreenState extends State<EditDoctorScreen> {
                               inactiveThumbColor: AppColors.white,
                               inactiveTrackColor: AppColors.inactiveBorderColor,
                               onChanged: (value) {
-                                print(value);
+                               // print(value);
                                 context.read<EditDoctorBloc>().add(
                                   ToggleDoctorStatusEvent(isActive: value),
                                 );
