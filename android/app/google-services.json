@@ -12,7 +12,20 @@
           "package_name": "com.example.doctor_hunt_app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1073846724163-g73q3fdmkqcvbihtu583fh4mu6b15fv1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.doctor_hunt_app",
+            "certificate_hash": "eec6f19f234e1b8ff297b63e4952ef8a44c209d4"
+          }
+        },
+        {
+          "client_id": "1073846724163-53l97vdo8ai806pdm83op706td43mhnp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCRhBRZGgG-0jwcOTTs8L2SNbtzWBDJtv0"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1073846724163-53l97vdo8ai806pdm83op706td43mhnp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1073846724163-9o8cipr3ruhelbhihmqb97enm8tfdlmp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.doctorHuntApp"
+              }
+            }
+          ]
         }
       }
     }
