@@ -2,6 +2,7 @@ import 'package:doctor_hunt_app/core/routing/routes.dart';
 import 'package:doctor_hunt_app/core/services/di.dart';
 import 'package:doctor_hunt_app/core/services/shared_prefs_service.dart';
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
+import 'package:doctor_hunt_app/core/utils/user_role_enum.dart';
 import 'package:doctor_hunt_app/core/widgets/bottom_right_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/custom_elevated_button.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
@@ -88,7 +89,7 @@ class _LoginScreen extends State<LoginScreen> {
                                   textAlign: TextAlign.center,
                                 ),
                                 HeightSpace(60),
-                                widget.userRole != "admin"
+                                widget.userRole != UserRole.admin.name
                                     ? Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
@@ -147,8 +148,14 @@ class _LoginScreen extends State<LoginScreen> {
                                   listener: (context, state) {
                                     if (state is AuthSuccess) {
                                       if (state.role == widget.userRole) {
-                                        SharedPrefsService.setBool('is_logged_in', true);
-                                        SharedPrefsService.setString('user_role', state.role);
+                                        SharedPrefsService.setBool(
+                                          'is_logged_in',
+                                          true,
+                                        );
+                                        SharedPrefsService.setString(
+                                          'user_role',
+                                          state.role,
+                                        );
                                         ScaffoldMessenger.of(
                                           context,
                                         ).showSnackBar(
@@ -160,8 +167,8 @@ class _LoginScreen extends State<LoginScreen> {
                                                 AppColors.primaryColor,
                                           ),
                                         );
-                      //CR use enum state.role.isAdmin 
-                                        if (state.role == 'admin') {
+                                        //CR use enum state.role.isAdmin
+                                        if (state.role == UserRole.admin.name) {
                                           AdminMainRoute().go(context);
                                         } else {
                                           MainScreenRoute().go(context);
@@ -174,9 +181,7 @@ class _LoginScreen extends State<LoginScreen> {
                                           context,
                                         ).showSnackBar(
                                           SnackBar(
-                                            content: Text(
-                                              t.accessDenied,
-                                            ),
+                                            content: Text(t.accessDenied),
                                             backgroundColor: AppColors.red,
                                           ),
                                         );
@@ -238,7 +243,7 @@ class _LoginScreen extends State<LoginScreen> {
                                 ),
                                 //HeightSpace(60),
                                 Spacer(),
-                                widget.userRole != "admin"
+                                widget.userRole != UserRole.admin.name
                                     ? Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -249,7 +254,7 @@ class _LoginScreen extends State<LoginScreen> {
                                           ),
                                           TextButton(
                                             onPressed: () {
-                                              ChooseRoleRoute().go(context);
+                                              SignUpRoute().go(context);
                                             },
                                             child: Text(
                                               t.joinUs,

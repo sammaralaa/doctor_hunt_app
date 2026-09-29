@@ -1,4 +1,5 @@
 import 'package:doctor_hunt_app/core/routing/routes.dart';
+import 'package:doctor_hunt_app/core/utils/user_role_enum.dart';
 import 'package:doctor_hunt_app/core/widgets/bottom_right_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/custom_elevated_button.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
@@ -10,7 +11,7 @@ import 'package:flutter/material.dart';
 import '../../../../../generated/image_assets.dart';
 import '../widgets/role_selection_card_widget.dart';
 
-enum UserRole { patient, admin }
+//enum UserRole { patient, admin }
 
 class ChooseRoleScreen extends StatefulWidget {
   const ChooseRoleScreen({super.key});

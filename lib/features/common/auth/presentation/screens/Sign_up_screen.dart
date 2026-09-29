@@ -1,6 +1,7 @@
 import 'package:doctor_hunt_app/core/routing/routes.dart';
 import 'package:doctor_hunt_app/core/services/di.dart';
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
+import 'package:doctor_hunt_app/core/utils/user_role_enum.dart';
 import 'package:doctor_hunt_app/core/widgets/bottom_right_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/custom_elevated_button.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
@@ -202,6 +203,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                                       MainScreenRoute().go(context);
                                     }
                                   } else if (state is AuthFailure) {
+                                    print(state.errorMessage);
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(state.errorMessage),
@@ -239,7 +241,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                                                 .trim(),
                                             name: nameController.text.trim(),
                                             userRole:
-                                                widget.userRole ?? 'patient',
+                                                widget.userRole ?? UserRole.patient.name,
                                           ),
                                         );
                                       }

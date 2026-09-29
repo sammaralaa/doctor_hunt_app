@@ -69,24 +69,6 @@ class AuthRepository {
     return role;
   }
 
-  //with google
-  // Future<UserCredential> signInWithGoogle() async {
-  //   final GoogleSignInAccount? googleUser = await _googleSignIn.authenticate();
-
-  //   if (googleUser == null) {
-  //     throw Exception('Google Sign-In was canceled by the user.');
-  //   }
-
-  //   final GoogleSignInAuthentication googleAuth =
-  //       await googleUser.authentication;
-
-  //   final OAuthCredential credential = GoogleAuthProvider.credential(
-  //     accessToken: googleAuth.idToken,
-  //     idToken: googleAuth.idToken,
-  //   );
-
-  //   return await _firebaseAuth.signInWithCredential(credential);
-  // }
 
   Future<UserCredential> signInWithGoogle({
     String defaultRole = 'patient',
