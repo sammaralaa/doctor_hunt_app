@@ -1,5 +1,6 @@
 import 'package:doctor_hunt_app/core/routing/routes.dart';
 import 'package:doctor_hunt_app/core/services/shared_prefs_service.dart';
+import 'package:doctor_hunt_app/core/utils/user_role_enum.dart';
 import 'package:doctor_hunt_app/core/widgets/bottom_right_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/core/widgets/top_left_shadow_widget.dart';
@@ -31,12 +32,11 @@ class _SplashScreen extends State<SplashScreen> {
   void _navigateToHome() {
     Future.delayed(const Duration(seconds: 2), () {
       if (!mounted) return;
-      if (SharedPrefsService.getBool('is_first_time') == true ||
-          SharedPrefsService.getBool('is_first_time') == null) {
-        SharedPrefsService.setBool('is_first_time', false);
+      if (SharedPrefsService.getIsFirstTime() == true || SharedPrefsService.getIsFirstTime() ==  null) {
+        SharedPrefsService.setIsFirstTime(false);
         OnBoardingRoute().go(context);
-      }else if (SharedPrefsService.getBool('is_logged_in') == true) {
-        if (SharedPrefsService.getString('user_role') == 'admin') {
+      }else if (SharedPrefsService.getIsLoggedIn() == true) {
+        if (SharedPrefsService.getUserRole() == UserRole.admin.name) {
           AdminMainRoute().go(context);
         } else {
           MainScreenRoute().go(context);

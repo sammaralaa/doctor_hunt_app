@@ -148,12 +148,8 @@ class _LoginScreen extends State<LoginScreen> {
                                   listener: (context, state) {
                                     if (state is AuthSuccess) {
                                       if (state.role == widget.userRole) {
-                                        SharedPrefsService.setBool(
-                                          'is_logged_in',
-                                          true,
-                                        );
-                                        SharedPrefsService.setString(
-                                          'user_role',
+                                        SharedPrefsService.setIsLoggedIn(true);
+                                        SharedPrefsService.setUserRole(
                                           state.role,
                                         );
                                         ScaffoldMessenger.of(
