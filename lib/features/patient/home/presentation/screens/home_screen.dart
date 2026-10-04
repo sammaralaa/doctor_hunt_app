@@ -46,6 +46,11 @@ class _HomeScreen extends State<HomeScreen> {
           slivers: [
             SliverToBoxAdapter(
               child: BlocBuilder<HomeBloc, HomeState>(
+                buildWhen: (previous, current) {
+                  return current is UserProfileLoadingState ||
+                      current is UserProfileSuccessState ||
+                      current is UserProfileFailureState;
+                },
                 builder: (context, state) {
                   String? currentProfileImage;
                   String userName = "";
@@ -70,23 +75,23 @@ class _HomeScreen extends State<HomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    HeightSpace(32),
-                    Text(t.liveDoctors, style: context.bold18TextMain),
+                    // Text(t.liveDoctors, style: context.bold18TextMain),
 
-                    HeightSpace(21),
-                    SizedBox(
-                      height: 168,
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 10,
-                        separatorBuilder: (context, index) =>
-                            SizedBox(width: 12),
-                        itemBuilder: (context, index) {
-                          return LiveDocotorWidget();
-                        },
-                      ),
-                    ),
-                    HeightSpace(30),
+                    // HeightSpace(21),
+                    // SizedBox(
+                    //   height: 168,
+                    //   child: ListView.separated(
+                    //     scrollDirection: Axis.horizontal,
+                    //     itemCount: 10,
+                    //     separatorBuilder: (context, index) =>
+                    //         SizedBox(width: 12),
+                    //     itemBuilder: (context, index) {
+                    //       return LiveDocotorWidget();
+                    //     },
+                    //   ),
+                    // ),
+                    HeightSpace(60),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -108,6 +113,7 @@ class _HomeScreen extends State<HomeScreen> {
                         ),
                       ],
                     ),
+                    HeightSpace(30),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

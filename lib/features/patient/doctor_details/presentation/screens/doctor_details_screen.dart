@@ -5,6 +5,10 @@ import 'package:doctor_hunt_app/core/widgets/bottom_right_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/custom_app_bar_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/core/widgets/top_left_shadow_widget.dart';
+import 'package:doctor_hunt_app/core/services/di.dart';
+import 'package:doctor_hunt_app/features/patient/favorite/presentation/controller/favorites_bloc.dart';
+import 'package:doctor_hunt_app/features/patient/favorite/presentation/controller/favorites_event.dart';
+import 'package:doctor_hunt_app/features/patient/favorite/presentation/controller/favorites_state.dart';
 import 'package:doctor_hunt_app/features/patient/doctor_details/presentation/controller/doctor_details_bloc.dart';
 import 'package:doctor_hunt_app/features/patient/doctor_details/presentation/controller/doctor_details_event.dart';
 import 'package:doctor_hunt_app/features/patient/doctor_details/presentation/controller/doctor_details_state.dart';
@@ -59,19 +63,29 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
                           title: t.doctorDetails,
                         ),
                         HeightSpace(30),
-                        DoctorDetailsCardWidget(
-                          name: state.doctorData.name,
-                          specialty: DoctorSpecialty.fromKey(
-                            state.doctorData.specialty,
-                          ).displayName,
-                          imageUrl: state.doctorData.profileImageUrl,
-                          onBookNowPressed: () {
-                            // showDialog(
-                            //   context: context,
-                            //   builder: (BuildContext dialogContext) =>
-                            //       SuccessWidget(),
-                            // );
-                            SelectTimeRoute().push(context);
+                        BlocBuilder<FavoritesBloc, FavoritesState>(
+                          bloc: getIt<FavoritesBloc>(),
+                          builder: (context, favState) {
+                            final isFav = getIt<FavoritesBloc>().isDoctorFavorite(
+                              state.doctorData.id,
+                            );
+
+                            return DoctorDetailsCardWidget(
+                              name: state.doctorData.name,
+                              specialty: DoctorSpecialty.fromKey(
+                                state.doctorData.specialty,
+                              ).displayName,
+                              imageUrl: state.doctorData.profileImageUrl,
+                              isFavorite: isFav,
+                              onFavoritePressed: () {
+                                getIt<FavoritesBloc>().add(
+                                  ToggleFavoriteDoctorEvent(state.doctorData),
+                                );
+                              },
+                              onBookNowPressed: () {
+                                SelectTimeRoute().push(context);
+                              },
+                            );
                           },
                         ),
                         //doctor card

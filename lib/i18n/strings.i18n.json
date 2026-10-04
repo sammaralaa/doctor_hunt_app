@@ -103,5 +103,10 @@
   "tapPhotoToChange": "Tap photo to change",
   "doctorNotFound": "Doctor not found",
   "signUpFailed": "Sign up failed",
-  "incorrectEmailOrPassword": "Incorrect email or password"
+  "incorrectEmailOrPassword": "Incorrect email or password",
+  "noFavouriteDoctors": "No Favourite Doctors",
+  "noFavouriteDoctorsDesc": "You haven't added any doctors to your favourites yet.",
+  "addedToFavorites": "Added to favourites",
+  "removedFromFavorites": "Removed from favourites",
+  "retry": "Retry"
 }

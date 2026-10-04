@@ -355,6 +355,21 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 
 	/// en: 'Incorrect email or password'
 	String get incorrectEmailOrPassword => 'Incorrect email or password';
+
+	/// en: 'No Favourite Doctors'
+	String get noFavouriteDoctors => 'No Favourite Doctors';
+
+	/// en: 'You haven't added any doctors to your favourites yet.'
+	String get noFavouriteDoctorsDesc => 'You haven\'t added any doctors to your favourites yet.';
+
+	/// en: 'Added to favourites'
+	String get addedToFavorites => 'Added to favourites';
+
+	/// en: 'Removed from favourites'
+	String get removedFromFavorites => 'Removed from favourites';
+
+	/// en: 'Retry'
+	String get retry => 'Retry';
 }
 
 /// The flat map containing all translations for locale <en>.
@@ -470,6 +485,11 @@ extension on Translations {
 			'doctorNotFound' => 'Doctor not found',
 			'signUpFailed' => 'Sign up failed',
 			'incorrectEmailOrPassword' => 'Incorrect email or password',
+			'noFavouriteDoctors' => 'No Favourite Doctors',
+			'noFavouriteDoctorsDesc' => 'You haven\'t added any doctors to your favourites yet.',
+			'addedToFavorites' => 'Added to favourites',
+			'removedFromFavorites' => 'Removed from favourites',
+			'retry' => 'Retry',
 			_ => null,
 		};
 	}

@@ -5,25 +5,23 @@ import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 
-class DoctorDetailsCardWidget extends StatefulWidget {
+class DoctorDetailsCardWidget extends StatelessWidget {
   final VoidCallback? onBookNowPressed;
   final String name;
   final String specialty;
   final String imageUrl;
+  final bool isFavorite;
+  final VoidCallback? onFavoritePressed;
 
   const DoctorDetailsCardWidget({
     super.key,
     this.onBookNowPressed,
     required this.name,
-    required this.specialty, required this.imageUrl,
+    required this.specialty,
+    required this.imageUrl,
+    this.isFavorite = false,
+    this.onFavoritePressed,
   });
-  @override
-  State<DoctorDetailsCardWidget> createState() =>
-      _DoctorDetailsCardWidgetState();
-}
-
-class _DoctorDetailsCardWidgetState extends State<DoctorDetailsCardWidget> {
-  bool isFavorite = true;
 
   @override
   Widget build(BuildContext context) {
@@ -48,15 +46,15 @@ class _DoctorDetailsCardWidgetState extends State<DoctorDetailsCardWidget> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child:CachedNetworkImage(
-                imageUrl: widget.imageUrl,
-                placeholder: (context, url) =>
-                    const CircularProgressIndicator(),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
-                fit: BoxFit.cover,
-                width: 85,
-                height: 85,
-              ),
+                child: CachedNetworkImage(
+                  imageUrl: imageUrl,
+                  placeholder: (context, url) =>
+                      const CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                  fit: BoxFit.cover,
+                  width: 85,
+                  height: 85,
+                ),
               ),
               WidthSpace(12),
 
@@ -69,33 +67,33 @@ class _DoctorDetailsCardWidgetState extends State<DoctorDetailsCardWidget> {
                       children: [
                         Expanded(
                           child: Text(
-                            widget.name,
+                            name,
                             style: context.bold16TextMain,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              isFavorite = !isFavorite;
-                            });
-                          },
-                          child: Icon(
-                            isFavorite
-                                ? Icons.favorite_rounded
-                                : Icons.favorite_border_rounded,
-                            color: isFavorite
-                                ? AppColors.red
-                                : AppColors.inactiveIconColor,
-                            size: 20,
+                          behavior: HitTestBehavior.opaque,
+                          onTap: onFavoritePressed,
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Icon(
+                              isFavorite
+                                  ? Icons.favorite_rounded
+                                  : Icons.favorite_border_rounded,
+                              color: isFavorite
+                                  ? AppColors.red
+                                  : AppColors.inactiveIconColor,
+                              size: 20,
+                            ),
                           ),
                         ),
                       ],
                     ),
                     HeightSpace(4),
 
-                    Text(widget.specialty, style: context.regular12TextSub),
+                    Text(specialty, style: context.regular12TextSub),
                     HeightSpace(8),
 
                     Row(
@@ -141,7 +139,7 @@ class _DoctorDetailsCardWidgetState extends State<DoctorDetailsCardWidget> {
             width: 140,
             height: 34,
             child: ElevatedButton(
-              onPressed: widget.onBookNowPressed,
+              onPressed: onBookNowPressed,
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primaryColor,
                 elevation: 0,

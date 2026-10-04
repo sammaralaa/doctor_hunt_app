@@ -4,13 +4,42 @@ import 'package:flutter/material.dart';
 
 class CustomSearchTextFieldWidget extends StatefulWidget {
   final ValueChanged<String>? onSubmit;
-  const CustomSearchTextFieldWidget({super.key, required this.onSubmit});
+  final ValueChanged<String>? onChanged;
+  final TextEditingController? controller;
+
+  const CustomSearchTextFieldWidget({
+    super.key,
+    this.onSubmit,
+    this.onChanged,
+    this.controller,
+  });
+
   @override
   State<StatefulWidget> createState() => _CustomSearchTextFieldWidget();
 }
 
 class _CustomSearchTextFieldWidget extends State<CustomSearchTextFieldWidget> {
-  TextEditingController? get searchController => null;
+  late final TextEditingController _controller;
+  bool _isInternalController = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.controller != null) {
+      _controller = widget.controller!;
+    } else {
+      _controller = TextEditingController();
+      _isInternalController = true;
+    }
+  }
+
+  @override
+  void dispose() {
+    if (_isInternalController) {
+      _controller.dispose();
+    }
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +56,8 @@ class _CustomSearchTextFieldWidget extends State<CustomSearchTextFieldWidget> {
         ],
       ),
       child: TextField(
-        controller: searchController,
+        controller: _controller,
+        onChanged: widget.onChanged,
         onSubmitted: widget.onSubmit,
         decoration: InputDecoration(
           hintText: 'Search.....',
