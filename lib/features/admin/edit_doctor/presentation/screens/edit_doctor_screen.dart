@@ -26,6 +26,7 @@ class EditDoctorScreen extends StatefulWidget {
 class _EditDoctorScreenState extends State<EditDoctorScreen> {
   DoctorSpecialty? _selectedSpecialty;
   late TextEditingController _controller;
+  late TextEditingController _feeController;
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -33,6 +34,7 @@ class _EditDoctorScreenState extends State<EditDoctorScreen> {
     super.initState();
 
     _controller = TextEditingController();
+    _feeController = TextEditingController();
     context.read<EditDoctorBloc>().add(
       FetchDoctorDetailsEvent(doctorId: widget.doctorId),
     );
@@ -41,6 +43,7 @@ class _EditDoctorScreenState extends State<EditDoctorScreen> {
   @override
   void dispose() {
     _controller.dispose();
+    _feeController.dispose();
 
     super.dispose();
   }
@@ -49,7 +52,8 @@ class _EditDoctorScreenState extends State<EditDoctorScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(t.editDoctor),
+        centerTitle: true,
+        title: Text(t.editDoctor, style: context.bold18TextMain),
         actions: [
           IconButton(
             icon: const Icon(
@@ -67,6 +71,7 @@ class _EditDoctorScreenState extends State<EditDoctorScreen> {
             listener: (context, state) {
               if (state is FetchDoctorSuccessState) {
                 _controller.text = state.doctor.name;
+                _feeController.text = state.doctor.consultationFee.toString();
                 _selectedSpecialty = DoctorSpecialty.fromKey(
                   state.doctor.specialty,
                 );
@@ -81,7 +86,6 @@ class _EditDoctorScreenState extends State<EditDoctorScreen> {
                 if (context.mounted) {
                   Navigator.pop(context, true);
                 }
-                
               } else if (state is FetchDoctorSuccessState) {
                 final currentIsActive = state.isActive ?? state.doctor.isActive;
                 final currentImagePath = state.newImagePath;
@@ -238,6 +242,29 @@ class _EditDoctorScreenState extends State<EditDoctorScreen> {
                         ),
                       ),
                       HeightSpace(16),
+                      Text(
+                        t.consultationFee,
+                        style: context.bold14TextMain,
+                        textAlign: TextAlign.start,
+                      ),
+                      CustomTextfeildWidget(
+                        controller: _feeController,
+                        validator: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return 'Please, Enter consultation fee';
+                          }
+                          if (num.tryParse(value.trim()) == null) {
+                            return 'Please, Enter a valid number';
+                          }
+                          return null;
+                        },
+                        width: double.infinity,
+                        preffixIcon: Icon(
+                          Icons.attach_money,
+                          color: AppColors.inactiveIconColor,
+                        ),
+                      ),
+                      HeightSpace(16),
                       Container(
                         padding: EdgeInsetsGeometry.all(16),
                         decoration: BoxDecoration(
@@ -284,7 +311,7 @@ class _EditDoctorScreenState extends State<EditDoctorScreen> {
                               inactiveThumbColor: AppColors.white,
                               inactiveTrackColor: AppColors.inactiveBorderColor,
                               onChanged: (value) {
-                               // print(value);
+                                // print(value);
                                 context.read<EditDoctorBloc>().add(
                                   ToggleDoctorStatusEvent(isActive: value),
                                 );
@@ -298,25 +325,30 @@ class _EditDoctorScreenState extends State<EditDoctorScreen> {
                         buttonTXT: t.saveChanges,
                         onTap: () {
                           if (formKey.currentState!.validate()) {
+                            final fee =
+                                num.tryParse(_feeController.text.trim()) ?? 0;
                             if (currentImagePath != null) {
                               context.read<EditDoctorBloc>().add(
                                 UpdateDoctorDetailsEvent(
                                   doctorId: state.doctor.id!,
                                   name: _controller.text.trim(),
                                   specialty: _selectedSpecialty!,
+                                  consultationFee: fee,
                                   isActive: currentIsActive,
                                   imageFile: currentImagePath,
                                 ),
                               );
+                            } else {
+                              context.read<EditDoctorBloc>().add(
+                                UpdateDoctorDetailsEvent(
+                                  doctorId: state.doctor.id!,
+                                  name: _controller.text.trim(),
+                                  specialty: _selectedSpecialty!,
+                                  consultationFee: fee,
+                                  isActive: currentIsActive,
+                                ),
+                              );
                             }
-                            context.read<EditDoctorBloc>().add(
-                              UpdateDoctorDetailsEvent(
-                                doctorId: state.doctor.id!,
-                                name: _controller.text.trim(),
-                                specialty: _selectedSpecialty!,
-                                isActive: currentIsActive,
-                              ),
-                            );
                           }
                         },
                         buttonWidth: double.infinity,

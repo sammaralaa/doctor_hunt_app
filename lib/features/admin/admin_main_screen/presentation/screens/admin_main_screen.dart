@@ -2,6 +2,8 @@ import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_not
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/bottom_right_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/top_left_shadow_widget.dart';
+import 'package:doctor_hunt_app/features/admin/admin_appointments/presentation/screens/admin_appointments_screen.dart';
+import 'package:doctor_hunt_app/features/admin/admin_settings/presentation/screens/admin_settings_screen.dart';
 import 'package:doctor_hunt_app/features/admin/doctors_list/presentation/screens/doctors_list_screen.dart';
 import 'package:doctor_hunt_app/generated/icons_assets.dart';
 import 'package:doctor_hunt_app/i18n/strings.g.dart';
@@ -24,7 +26,11 @@ class _AdminMainScreen extends State<AdminMainScreen> {
   );
   int maxCount = 2;
 
-  final List<Widget> _screens = [DoctorsListScreen(), Center(child: Text(t.settingsScreen))];
+  final List<Widget> _screens = [
+    DoctorsListScreen(),
+    AdminAppointmentsScreen(),
+    AdminSettingsScreen(),
+  ];
   @override
   void dispose() {
     _controller.dispose();
@@ -56,6 +62,22 @@ class _AdminMainScreen extends State<AdminMainScreen> {
             ),
             activeItem: SvgPicture.asset(
               IconsAssets.medicalIcon,
+              colorFilter: ColorFilter.mode(
+                AppColors.primaryColor,
+                BlendMode.srcIn,
+              ),
+            ),
+          ),
+          BottomBarItem(
+            inActiveItem: SvgPicture.asset(
+              IconsAssets.appoinment,
+              colorFilter: ColorFilter.mode(
+                AppColors.inactiveIconColor,
+                BlendMode.srcIn,
+              ),
+            ),
+            activeItem: SvgPicture.asset(
+              IconsAssets.appoinment,
               colorFilter: ColorFilter.mode(
                 AppColors.primaryColor,
                 BlendMode.srcIn,

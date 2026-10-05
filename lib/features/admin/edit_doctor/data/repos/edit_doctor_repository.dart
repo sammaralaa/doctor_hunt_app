@@ -31,18 +31,20 @@ class EditDoctorRepository {
     required String doctorId,
     required String name,
     required DoctorSpecialty specialty,
+    required num consultationFee,
     required bool isActive,
     String? newImagePath,
   }) async {
     String? uploadedImageUrl;
 
-  // 1. Upload new image if local path is provided
-  if (newImagePath != null && newImagePath.isNotEmpty) {
-    uploadedImageUrl = await _cloudinaryService.uploadImage(File(newImagePath));
-  }
+    // 1. Upload new image if local path is provided
+    if (newImagePath != null && newImagePath.isNotEmpty) {
+      uploadedImageUrl = await _cloudinaryService.uploadImage(File(newImagePath));
+    }
     final Map<String, dynamic> updateData = {
       'name': name,
       'specialty': specialty.key,
+      'consultationFee': consultationFee,
       'updatedAt': FieldValue.serverTimestamp(),
       'isActive': isActive,
     };

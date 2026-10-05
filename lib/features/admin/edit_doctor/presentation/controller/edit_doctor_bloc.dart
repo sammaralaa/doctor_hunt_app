@@ -53,8 +53,9 @@ class EditDoctorBloc extends Bloc<EditDoctorEvent, EditDoctorState> {
         doctorId: event.doctorId,
         name: event.name,
         specialty: event.specialty,
-        newImagePath:event.imageFile ,
-        isActive: event.isActive
+        consultationFee: event.consultationFee,
+        newImagePath: event.imageFile,
+        isActive: event.isActive,
       );
 
       emit(UpdateDoctorSuccessState());

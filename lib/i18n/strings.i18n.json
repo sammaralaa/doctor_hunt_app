@@ -108,5 +108,7 @@
   "noFavouriteDoctorsDesc": "You haven't added any doctors to your favourites yet.",
   "addedToFavorites": "Added to favourites",
   "removedFromFavorites": "Removed from favourites",
-  "retry": "Retry"
+  "retry": "Retry",
+  "consultationFee": "Consultation Fee",
+  "enterConsultationFee": "Enter consultation fee"
 }

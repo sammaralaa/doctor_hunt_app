@@ -22,6 +22,7 @@ class CreateDoctorBloc extends Bloc<CreateDoctorEvent, CreateDoctorState> {
       await _createDoctorRepository.createDoctor(
         name: event.name,
         specialty: event.specialty,
+        consultationFee: event.consultationFee,
         imageFile: event.imageFile,
       );
       emit(CreateDoctorSuccessState());

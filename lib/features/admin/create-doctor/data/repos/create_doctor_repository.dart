@@ -12,13 +12,14 @@ class CreateDoctorRepository {
 
   CreateDoctorRepository({
     required this._firestore,
-    required this._cloudinaryService, 
+    required this._cloudinaryService,
     required this._firebaseAuth,
   });
 
   Future<void> createDoctor({
     required String name,
     required String specialty,
+    required double consultationFee,
     File? imageFile,
     bool? isActive,
   }) async {
@@ -33,12 +34,12 @@ class CreateDoctorRepository {
       id: docRef.id,
       name: name,
       specialty: specialty,
+      consultationFee: consultationFee,
       profileImageUrl: imageUrl ?? "",
       isActive: isActive ?? true,
-      createdBy: _firebaseAuth.currentUser?.uid ??""
+      createdBy: _firebaseAuth.currentUser?.uid ?? "",
     );
 
     await docRef.set(doctor.toMap());
   }
-  
 }

@@ -75,9 +75,9 @@ class _AdminDoctorDetailsScreenState extends State<AdminDoctorDetailsScreen> {
                   ),
                   const HeightSpace(16),
                   Text(state.doctor.name, style: context.bold24TextMain),
-                  const HeightSpace(6),
-                  Text(state.doctor.specialty, style: context.regular14TextSub),
                   const HeightSpace(12),
+                  // Text(state.doctor.specialty, style: context.regular14TextSub),
+                  // const HeightSpace(12),
                   Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 14,
@@ -103,8 +103,8 @@ class _AdminDoctorDetailsScreenState extends State<AdminDoctorDetailsScreen> {
                         Text(
                           state.doctor.isActive ? t.active : t.inactive,
                           style: state.doctor.isActive
-                              ? context.regular12Primary
-                              : context.regular12Warning,
+                              ? context.bold12Primary
+                              : context.bold12Warning,
                         ),
                       ],
                     ),
@@ -127,7 +127,22 @@ class _AdminDoctorDetailsScreenState extends State<AdminDoctorDetailsScreen> {
                       children: [
                         Row(
                           children: [
-                            SvgPicture.asset(IconsAssets.medicalIcon),
+                            Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: AppColors.primaryColor.withValues(
+                                  alpha: 0.1,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: SvgPicture.asset(
+                                IconsAssets.medicalIcon,
+                                colorFilter: ColorFilter.mode(
+                                  AppColors.primaryColor,
+                                  BlendMode.srcIn,
+                                ),
+                              ),
+                            ),
 
                             const WidthSpace(15),
                             Column(
@@ -151,9 +166,80 @@ class _AdminDoctorDetailsScreenState extends State<AdminDoctorDetailsScreen> {
                           height: 30,
                           color: AppColors.inactiveBorderColor,
                         ),
-                        _doctorStatusSection(
-                          doctorId: state.doctor.id!,
-                          status: state.doctor.isActive,
+                        // _doctorStatusSection(
+                        //   doctorId: state.doctor.id!,
+                        //   status: state.doctor.isActive,
+                        // ),
+                        Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: AppColors.primaryColor.withValues(
+                                  alpha: 0.1,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.star_outline,
+                                    color: AppColors.primaryColor,
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            const WidthSpace(15),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Rating", style: context.regular12TextSub),
+                                const SizedBox(height: 2),
+                                Text(
+                                  state.doctor.specialty,
+                                  style: context.bold14TextMain,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        Divider(
+                          height: 30,
+                          color: AppColors.inactiveBorderColor,
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: AppColors.primaryColor.withValues(
+                                  alpha: 0.1,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Icon(
+                                Icons.paid_outlined,
+                                color: AppColors.primaryColor,
+                              ),
+                            ),
+
+                            const WidthSpace(15),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Consultation Fee",
+                                  style: context.regular12TextSub,
+                                ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  "\$${state.doctor.consultationFee}",
+                                  style: context.bold14TextMain,
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -175,48 +261,57 @@ class _AdminDoctorDetailsScreenState extends State<AdminDoctorDetailsScreen> {
                     buttonWidth: double.infinity,
                   ),
                   const HeightSpace(16),
-                  TextButton.icon(
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (dialogContext) => AlertDialog(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          title: Text(
-                            t.deleteDoctor,
-                            textAlign: TextAlign.center,
-                          ),
-                          content: Text(t.areYouSureYouWantDelete),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Navigator.pop(dialogContext),
-                              child: Text(t.cancel),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pop(dialogContext);
-
-                                context.read<AdminDocDetailsBloc>().add(
-                                  DeleteDoctorEvent(doctorId: state.doctor.id!),
-                                );
-                              },
-                              child: Text(
-                                t.delete,
-                                style: context.bold12Warning,
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                    icon: const Icon(
-                      Icons.delete,
-                      color: AppColors.red,
-                      size: 20,
+                  CustomElevatdButton(
+                    onTap: () async {},
+                    buttonWidth: double.infinity,
+                    buttonBackgroundColor: AppColors.white,
+                    childWidget: Text(
+                      "Manage Availability",
+                      style: context.bold16Primary,
                     ),
-                    label: Text(t.deleteDoctor, style: context.bold14Warning),
                   ),
+                  // TextButton.icon(
+                  //   onPressed: () {
+                  //     showDialog(
+                  //       context: context,
+                  //       builder: (dialogContext) => AlertDialog(
+                  //         shape: RoundedRectangleBorder(
+                  //           borderRadius: BorderRadius.circular(16),
+                  //         ),
+                  //         title: Text(
+                  //           t.deleteDoctor,
+                  //           textAlign: TextAlign.center,
+                  //         ),
+                  //         content: Text(t.areYouSureYouWantDelete),
+                  //         actions: [
+                  //           TextButton(
+                  //             onPressed: () => Navigator.pop(dialogContext),
+                  //             child: Text(t.cancel),
+                  //           ),
+                  //           TextButton(
+                  //             onPressed: () {
+                  //               Navigator.pop(dialogContext);
+
+                  //               context.read<AdminDocDetailsBloc>().add(
+                  //                 DeleteDoctorEvent(doctorId: state.doctor.id!),
+                  //               );
+                  //             },
+                  //             child: Text(
+                  //               t.delete,
+                  //               style: context.bold12Warning,
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     );
+                  //   },
+                  //   icon: const Icon(
+                  //     Icons.delete,
+                  //     color: AppColors.red,
+                  //     size: 20,
+                  //   ),
+                  //   label: Text(t.deleteDoctor, style: context.bold14Warning),
+                  // ),
                 ],
               );
             }

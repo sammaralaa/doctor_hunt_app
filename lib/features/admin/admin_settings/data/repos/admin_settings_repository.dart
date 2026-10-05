@@ -1,0 +1,3 @@
+class AdminSettingsRepository {
+  const AdminSettingsRepository();
+}

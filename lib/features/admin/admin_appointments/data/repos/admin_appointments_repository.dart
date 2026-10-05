@@ -1,0 +1,3 @@
+class AdminAppointmentsRepository {
+  const AdminAppointmentsRepository();
+}

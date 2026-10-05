@@ -370,6 +370,12 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 
 	/// en: 'Retry'
 	String get retry => 'Retry';
+
+	/// en: 'Consultation Fee'
+	String get consultationFee => 'Consultation Fee';
+
+	/// en: 'Enter consultation fee'
+	String get enterConsultationFee => 'Enter consultation fee';
 }
 
 /// The flat map containing all translations for locale <en>.
@@ -490,6 +496,8 @@ extension on Translations {
 			'addedToFavorites' => 'Added to favourites',
 			'removedFromFavorites' => 'Removed from favourites',
 			'retry' => 'Retry',
+			'consultationFee' => 'Consultation Fee',
+			'enterConsultationFee' => 'Enter consultation fee',
 			_ => null,
 		};
 	}

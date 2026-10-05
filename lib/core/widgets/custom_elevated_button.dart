@@ -8,12 +8,14 @@ class CustomElevatdButton extends StatelessWidget {
   final VoidCallback? onTap;
   final double? buttonWidth;
   final Widget? childWidget;
-
-  const CustomElevatdButton({
+  final Color? buttonBackgroundColor;
+  CustomElevatdButton({
     super.key,
-     this.buttonTXT,
+    this.buttonTXT,
     this.onTap,
-    this.buttonWidth, this.childWidget,
+    this.buttonWidth,
+    this.childWidget,
+    this.buttonBackgroundColor,
   });
   @override
   Widget build(BuildContext context) {
@@ -23,12 +25,12 @@ class CustomElevatdButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onTap,
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primaryColor,
+          backgroundColor: buttonBackgroundColor ?? AppColors.primaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadiusGeometry.circular(10),
           ),
         ),
-        child: childWidget?? Text(buttonTXT ?? "", style: context.bold18White),
+        child: childWidget ?? Text(buttonTXT ?? "", style: context.bold18White),
       ),
     );
   }

@@ -14,12 +14,14 @@ class UpdateDoctorDetailsEvent extends EditDoctorEvent {
   final String doctorId;
   final String name;
   final DoctorSpecialty specialty;
+  final num consultationFee;
   final String? imageFile;
   final bool isActive;
   UpdateDoctorDetailsEvent({
     required this.doctorId,
     required this.name,
     required this.specialty,
+    required this.consultationFee,
     this.imageFile,
     required this.isActive,
   });

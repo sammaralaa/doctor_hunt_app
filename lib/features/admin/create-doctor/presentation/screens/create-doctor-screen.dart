@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:doctor_hunt_app/core/routing/routes.dart';
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/utils/doctor_specialty_enum.dart';
 import 'package:doctor_hunt_app/core/widgets/custom_elevated_button.dart';
@@ -13,6 +14,7 @@ import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CreateDoctorScreen extends StatefulWidget {
@@ -25,6 +27,7 @@ class CreateDoctorScreen extends StatefulWidget {
 class _CreateDoctorScreenState extends State<CreateDoctorScreen> {
   final formKey = GlobalKey<FormState>();
   late TextEditingController nameController;
+  late TextEditingController feeController;
   DoctorSpecialty? _selectedSpecialty;
   XFile? _pickedFile;
   // final List<String> _specialties = [
@@ -37,11 +40,13 @@ class _CreateDoctorScreenState extends State<CreateDoctorScreen> {
   void initState() {
     super.initState();
     nameController = TextEditingController();
+    feeController = TextEditingController();
   }
 
   @override
   void dispose() {
     nameController.dispose();
+    feeController.dispose();
 
     super.dispose();
   }
@@ -153,10 +158,15 @@ class _CreateDoctorScreenState extends State<CreateDoctorScreen> {
                     Icons.keyboard_arrow_down,
                     color: AppColors.black,
                   ),
-                  items: DoctorSpecialty.values.map((DoctorSpecialty specialty) {
+                  items: DoctorSpecialty.values.map((
+                    DoctorSpecialty specialty,
+                  ) {
                     return DropdownMenuItem<DoctorSpecialty>(
                       value: specialty,
-                      child: Text(specialty.displayName, style: context.regular14TextMain),
+                      child: Text(
+                        specialty.displayName,
+                        style: context.regular14TextMain,
+                      ),
                     );
                   }).toList(),
                   onChanged: (DoctorSpecialty? newValue) {
@@ -166,15 +176,32 @@ class _CreateDoctorScreenState extends State<CreateDoctorScreen> {
                   },
                 ),
               ),
+              HeightSpace(20),
+              Text(t.consultationFee, style: context.bold12TextMain),
+              HeightSpace(8),
+              CustomTextfeildWidget(
+                hintText: t.enterConsultationFee,
+                controller: feeController,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Please, Enter consultation fee';
+                  }
+                  if (double.tryParse(value.trim()) == null) {
+                    return 'Please, Enter a valid number';
+                  }
+                  return null;
+                },
+              ),
               HeightSpace(40),
               BlocConsumer<CreateDoctorBloc, CreateDoctorState>(
                 listener: (context, state) {
                   if (state is CreateDoctorSuccessState) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                       SnackBar(
-                        content: Text(t.doctorAddedSuccessfully),
-                      ),
+                      SnackBar(content: Text(t.doctorAddedSuccessfully)),
                     );
+                    if (context.mounted) {
+                      AdminMainRoute().pushReplacement(context);
+                    }
                   } else if (state is CreateDoctorFailureState) {
                     ScaffoldMessenger.of(
                       context,
@@ -210,12 +237,18 @@ class _CreateDoctorScreenState extends State<CreateDoctorScreen> {
                                 return;
                               }
 
+                              final fee =
+                                  double.tryParse(feeController.text.trim()) ??
+                                  0;
+
                               context.read<CreateDoctorBloc>().add(
                                 CreateNewDoctorEvent(
                                   name: nameController.text.trim(),
-                                  specialty:
-                                      _selectedSpecialty!.displayName,
-                                  imageFile: File(_pickedFile!.path),
+                                  specialty: _selectedSpecialty!.displayName,
+                                  consultationFee: fee,
+                                  imageFile: _pickedFile != null
+                                      ? File(_pickedFile!.path)
+                                      : null,
                                 ),
                               );
                             }
