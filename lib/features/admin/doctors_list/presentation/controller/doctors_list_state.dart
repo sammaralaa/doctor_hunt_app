@@ -7,9 +7,15 @@ class DoctorsListInitialState extends DoctorsListState {}
 class DoctorsListLoadingState extends DoctorsListState {}
 
 class DoctorsListSuccessState extends DoctorsListState {
-  final List<DoctorModel> doctors;
+  final List<DoctorModel> allDoctors;
+  final List<DoctorModel> filteredDoctors;
+  final String selectedCategory;
 
-  DoctorsListSuccessState(this.doctors);
+  DoctorsListSuccessState({
+    required this.allDoctors,
+    required this.filteredDoctors,
+    required this.selectedCategory,
+  });
 }
 
 class DoctorsListFailureState extends DoctorsListState {

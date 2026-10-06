@@ -23,14 +23,8 @@ class DoctorsListScreen extends StatefulWidget {
 }
 
 class _DoctorsListScreen extends State<DoctorsListScreen> {
-  int _selectedIndex = 0;
+  // Removing static _categories and _selectedIndex
 
-  final List<Map<String, dynamic>> _categories = [
-    {'title': t.all, t.count: 12},
-    {'title': t.cardiologist, t.count: 3},
-    {'title': t.orthopedic, t.count: 2},
-    {'title': t.dentist, t.count: 4},
-  ];
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -62,7 +56,7 @@ class _DoctorsListScreen extends State<DoctorsListScreen> {
                 BlocBuilder<DoctorsListBloc, DoctorsListState>(
                   builder: (context, state) {
                     if (state is DoctorsListSuccessState) {
-                      final doctors = state.doctors;
+                      final doctors = state.allDoctors; // Stats show all doctors
 
                       if (doctors.isNotEmpty) {
                         final activeDoctorsCount = doctors
@@ -111,9 +105,17 @@ class _DoctorsListScreen extends State<DoctorsListScreen> {
                     if (state is DoctorsListLoadingState) {
                       return const Center(child: CircularProgressIndicator());
                     } else if (state is DoctorsListSuccessState) {
-                      final doctors = state.doctors;
+                      final doctors = state.filteredDoctors;
+                      final allDoctors = state.allDoctors;
 
-                      if (doctors.isEmpty) {
+                      final List<Map<String, dynamic>> categories = [
+                        {'title': t.all, 'id': 'All', 'count': allDoctors.length},
+                        {'title': t.cardiologist, 'id': 'Cardiologist', 'count': allDoctors.where((d) => d.specialty.toLowerCase().contains('cardio')).length},
+                        {'title': t.orthopedic, 'id': 'Orthopedic', 'count': allDoctors.where((d) => d.specialty.toLowerCase().contains('ortho')).length},
+                        {'title': t.dentist, 'id': 'Dentist', 'count': allDoctors.where((d) => d.specialty.toLowerCase().contains('dent')).length},
+                      ];
+
+                      if (doctors.isEmpty && allDoctors.isEmpty) {
                         return _emptyView();
                       }
                       return Column(
@@ -122,15 +124,18 @@ class _DoctorsListScreen extends State<DoctorsListScreen> {
                             height: 38,
                             child: ListView.separated(
                               scrollDirection: Axis.horizontal,
-                              itemCount: _categories.length,
+                              itemCount: categories.length,
                               separatorBuilder: (_, _) => WidthSpace(8),
                               itemBuilder: (context, index) {
-                                final isSelected = _selectedIndex == index;
-                                final category = _categories[index];
+                                final category = categories[index];
+                                final isSelected = state.selectedCategory == category['id'];
 
                                 return GestureDetector(
-                                  onTap: () =>
-                                      setState(() => _selectedIndex = index),
+                                  onTap: () {
+                                    context.read<DoctorsListBloc>().add(
+                                      FilterByCategoryEvent(category['id'] as String)
+                                    );
+                                  },
                                   child: AnimatedContainer(
                                     alignment: Alignment.center,
                                     duration: const Duration(milliseconds: 200),
@@ -162,26 +167,29 @@ class _DoctorsListScreen extends State<DoctorsListScreen> {
                             ),
                           ),
                           const HeightSpace(20),
-                          ListView.separated(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              return DoctorsListCard(
-                                name: doctors[index].name,
-                                specialization: doctors[index].specialty,
-                                isActive: doctors[index].isActive,
-                                imageUrl: doctors[index].profileImageUrl,
-                                onCardPressed: () {
-                                  //  book now
-                                  AdminDoctorDetailsRoute(
-                                    doctorId: doctors[index].id!,
-                                  ).push(context);
-                                },
-                              );
-                            },
-                            separatorBuilder: (_, _) => HeightSpace(12),
-                            itemCount: doctors.length,
-                          ),
+                          if (doctors.isEmpty)
+                            const Center(child: Text("No doctors found for this category.")),
+                          if (doctors.isNotEmpty)
+                            ListView.separated(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                return DoctorsListCard(
+                                  name: doctors[index].name,
+                                  specialization: doctors[index].specialty,
+                                  isActive: doctors[index].isActive,
+                                  imageUrl: doctors[index].profileImageUrl,
+                                  onCardPressed: () {
+                                    //  book now
+                                    AdminDoctorDetailsRoute(
+                                      doctorId: doctors[index].id!,
+                                    ).push(context);
+                                  },
+                                );
+                              },
+                              separatorBuilder: (_, _) => HeightSpace(12),
+                              itemCount: doctors.length,
+                            ),
                         ],
                       );
                     } else if (state is DoctorsListFailureState) {

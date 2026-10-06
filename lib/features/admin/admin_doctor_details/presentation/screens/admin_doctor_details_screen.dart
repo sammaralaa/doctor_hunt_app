@@ -262,11 +262,20 @@ class _AdminDoctorDetailsScreenState extends State<AdminDoctorDetailsScreen> {
                   ),
                   const HeightSpace(16),
                   CustomElevatdButton(
-                    onTap: () async {},
+                    onTap: () async {
+                      await DoctorAvailabilityRoute(
+                        doctorId: state.doctor.id!,
+                      ).push(context);
+                      if (context.mounted) {
+                        context.read<AdminDocDetailsBloc>().add(
+                          FetchDoctorDetailsEvent(docotrId: widget.doctorId),
+                        );
+                      }
+                    },
                     buttonWidth: double.infinity,
                     buttonBackgroundColor: AppColors.white,
                     childWidget: Text(
-                      "Manage Availability",
+                      t.manageAvailability,
                       style: context.bold16Primary,
                     ),
                   ),

@@ -69,7 +69,6 @@ class AuthRepository {
     return role;
   }
 
-
   Future<UserCredential> signInWithGoogle({
     String defaultRole = 'patient',
   }) async {
@@ -79,8 +78,7 @@ class AuthRepository {
       throw Exception('Google Sign-In was canceled by the user.');
     }
 
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
+    final GoogleSignInAuthentication googleAuth = googleUser.authentication;
 
     final OAuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.idToken,

@@ -376,6 +376,72 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 
 	/// en: 'Enter consultation fee'
 	String get enterConsultationFee => 'Enter consultation fee';
+
+	/// en: 'Doctor Availability'
+	String get doctorAvailability => 'Doctor Availability';
+
+	/// en: 'Working Days'
+	String get workingDays => 'Working Days';
+
+	/// en: '$count days enabled'
+	String daysEnabled({required Object count}) => '${count} days enabled';
+
+	/// en: '1 day enabled'
+	String get oneDayEnabled => '1 day enabled';
+
+	/// en: '0 days enabled'
+	String get noDaysEnabled => '0 days enabled';
+
+	/// en: 'Monday'
+	String get monday => 'Monday';
+
+	/// en: 'Tuesday'
+	String get tuesday => 'Tuesday';
+
+	/// en: 'Wednesday'
+	String get wednesday => 'Wednesday';
+
+	/// en: 'Thursday'
+	String get thursday => 'Thursday';
+
+	/// en: 'Friday'
+	String get friday => 'Friday';
+
+	/// en: 'Saturday'
+	String get saturday => 'Saturday';
+
+	/// en: 'Sunday'
+	String get sunday => 'Sunday';
+
+	/// en: 'Working Hours'
+	String get workingHours => 'Working Hours';
+
+	/// en: 'START TIME'
+	String get startTime => 'START TIME';
+
+	/// en: 'END TIME'
+	String get endTime => 'END TIME';
+
+	/// en: 'SLOT DURATION'
+	String get slotDuration => 'SLOT DURATION';
+
+	/// en: '$count Minutes'
+	String minutes({required Object count}) => '${count} Minutes';
+
+	/// en: 'Save Availability'
+	String get saveAvailability => 'Save Availability';
+
+	/// en: 'Manage Availability'
+	String get manageAvailability => 'Manage Availability';
+
+	/// en: 'Availability saved successfully!'
+	String get availabilitySavedSuccessfully => 'Availability saved successfully!';
+
+	/// en: 'Failed to save availability'
+	String get failedToSaveAvailability => 'Failed to save availability';
+
+	/// en: 'Central Clinic'
+	String get centralClinic => 'Central Clinic';
 }
 
 /// The flat map containing all translations for locale <en>.
@@ -498,6 +564,28 @@ extension on Translations {
 			'retry' => 'Retry',
 			'consultationFee' => 'Consultation Fee',
 			'enterConsultationFee' => 'Enter consultation fee',
+			'doctorAvailability' => 'Doctor Availability',
+			'workingDays' => 'Working Days',
+			'daysEnabled' => ({required Object count}) => '${count} days enabled',
+			'oneDayEnabled' => '1 day enabled',
+			'noDaysEnabled' => '0 days enabled',
+			'monday' => 'Monday',
+			'tuesday' => 'Tuesday',
+			'wednesday' => 'Wednesday',
+			'thursday' => 'Thursday',
+			'friday' => 'Friday',
+			'saturday' => 'Saturday',
+			'sunday' => 'Sunday',
+			'workingHours' => 'Working Hours',
+			'startTime' => 'START TIME',
+			'endTime' => 'END TIME',
+			'slotDuration' => 'SLOT DURATION',
+			'minutes' => ({required Object count}) => '${count} Minutes',
+			'saveAvailability' => 'Save Availability',
+			'manageAvailability' => 'Manage Availability',
+			'availabilitySavedSuccessfully' => 'Availability saved successfully!',
+			'failedToSaveAvailability' => 'Failed to save availability',
+			'centralClinic' => 'Central Clinic',
 			_ => null,
 		};
 	}

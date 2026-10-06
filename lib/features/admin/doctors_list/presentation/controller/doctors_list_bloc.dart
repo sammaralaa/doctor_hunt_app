@@ -12,6 +12,7 @@ class DoctorsListBloc extends Bloc<DoctorsListEvent, DoctorsListState> {
   DoctorsListBloc(this._doctorsListRepository)
     : super(DoctorsListInitialState()) {
     on<GetAllDoctorsEvent>(_onGetDoctors);
+    on<FilterByCategoryEvent>(_onFilterByCategory);
     //on<GetUserProfileDataEvent>(_onGetUserProfileData);
   }
 
@@ -21,13 +22,24 @@ class DoctorsListBloc extends Bloc<DoctorsListEvent, DoctorsListState> {
   ) async {
     emit(DoctorsListLoadingState());
     try {
-      // final List<DoctorModel> doctorsList =await _DoctorsListRepository.getDoctors();
-      // emit(DoctorsListSuccessState(doctorsList));
       await emit.forEach<List<DoctorModel>>(
       _doctorsListRepository.getDoctors(),
       onData: (doctors) {
-       // final activeCount = doctors.where((d) => d.isActive).length;
-        return DoctorsListSuccessState( doctors,);
+        String currentCategory = 'All';
+        if (state is DoctorsListSuccessState) {
+          currentCategory = (state as DoctorsListSuccessState).selectedCategory;
+        }
+        
+        List<DoctorModel> filtered = doctors;
+        if (currentCategory != 'All' && currentCategory.isNotEmpty) {
+          filtered = doctors.where((d) => d.specialty.toLowerCase() == currentCategory.toLowerCase()).toList();
+        }
+
+        return DoctorsListSuccessState(
+          allDoctors: doctors,
+          filteredDoctors: filtered,
+          selectedCategory: currentCategory,
+        );
       },
       onError: (error, stackTrace) {
         return DoctorsListFailureState(error.toString());
@@ -35,6 +47,35 @@ class DoctorsListBloc extends Bloc<DoctorsListEvent, DoctorsListState> {
     );
     } catch (e) {
       emit(DoctorsListFailureState(e.toString()));
+    }
+  }
+
+  void _onFilterByCategory(
+    FilterByCategoryEvent event,
+    Emitter<DoctorsListState> emit,
+  ) {
+    if (state is DoctorsListSuccessState) {
+      final currentState = state as DoctorsListSuccessState;
+      final allDoctors = currentState.allDoctors;
+      
+      List<DoctorModel> filtered = allDoctors;
+      // We assume event.category is the filter term. 
+      // In the screen, t.all is used, so we check if it's the "All" category.
+      // But since we don't have access to context here, the screen can pass a special marker like 'All' or empty string.
+      if (event.category != 'All' && event.category.isNotEmpty) {
+        // Simple case-insensitive exact match for now. Or contains if preferable.
+        // It's safer to use contains in case the specialty is "Cardiology" but category is "Cardiologist".
+        filtered = allDoctors.where((d) => 
+          d.specialty.toLowerCase().contains(event.category.toLowerCase()) || 
+          event.category.toLowerCase().contains(d.specialty.toLowerCase())
+        ).toList();
+      }
+
+      emit(DoctorsListSuccessState(
+        allDoctors: allDoctors,
+        filteredDoctors: filtered,
+        selectedCategory: event.category,
+      ));
     }
   }
 }

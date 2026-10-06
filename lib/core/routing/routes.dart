@@ -4,6 +4,8 @@ import 'package:doctor_hunt_app/features/admin/admin_doctor_details/presentation
 import 'package:doctor_hunt_app/features/admin/admin_main_screen/presentation/screens/admin_main_screen.dart';
 import 'package:doctor_hunt_app/features/admin/create-doctor/presentation/controller/create_doctor_bloc.dart';
 import 'package:doctor_hunt_app/features/admin/create-doctor/presentation/screens/create-doctor-screen.dart';
+import 'package:doctor_hunt_app/features/admin/doctor_availability/presentation/controller/doctor_availability_bloc.dart';
+import 'package:doctor_hunt_app/features/admin/doctor_availability/presentation/screens/doctor_availability_screen.dart';
 import 'package:doctor_hunt_app/features/admin/edit_doctor/presentation/controller/edit_doctor_bloc.dart';
 import 'package:doctor_hunt_app/features/admin/edit_doctor/presentation/screens/edit_doctor_screen.dart';
 import 'package:doctor_hunt_app/features/common/auth/presentation/controller/auth_bloc.dart';
@@ -183,11 +185,25 @@ class EditDoctorRoute extends GoRouteData with $EditDoctorRoute {
     return BlocProvider<EditDoctorBloc>(
       create: (context)=> getIt<EditDoctorBloc>(),
       child:  EditDoctorScreen(doctorId: doctorId),
-      );
-    
-   
+    );
   }
 }
+
+@TypedGoRoute<DoctorAvailabilityRoute>(path: '/doctor-availability')
+class DoctorAvailabilityRoute extends GoRouteData
+    with $DoctorAvailabilityRoute {
+  final String doctorId;
+  const DoctorAvailabilityRoute({required this.doctorId});
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return BlocProvider<DoctorAvailabilityBloc>(
+      create: (context) => getIt<DoctorAvailabilityBloc>(),
+      child: DoctorAvailabilityScreen(doctorId: doctorId),
+    );
+  }
+}
+
 
 /**
 @TypedGoRoute<LoginRoute>(path: '/login')
