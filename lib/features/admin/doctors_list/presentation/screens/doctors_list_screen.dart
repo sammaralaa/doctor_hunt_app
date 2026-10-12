@@ -30,7 +30,7 @@ class _DoctorsListScreen extends State<DoctorsListScreen> {
     return BlocProvider(
       create: (context) => getIt<DoctorsListBloc>()..add(GetAllDoctorsEvent()),
       child: Scaffold(
-        appBar: buildCustomAppBar(context),
+        appBar: buildCustomAppBar(context, title: t.doctors),
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(bottom: 80.0),
           child: FloatingActionButton.extended(
@@ -56,7 +56,8 @@ class _DoctorsListScreen extends State<DoctorsListScreen> {
                 BlocBuilder<DoctorsListBloc, DoctorsListState>(
                   builder: (context, state) {
                     if (state is DoctorsListSuccessState) {
-                      final doctors = state.allDoctors; // Stats show all doctors
+                      final doctors =
+                          state.allDoctors; // Stats show all doctors
 
                       if (doctors.isNotEmpty) {
                         final activeDoctorsCount = doctors
@@ -109,10 +110,53 @@ class _DoctorsListScreen extends State<DoctorsListScreen> {
                       final allDoctors = state.allDoctors;
 
                       final List<Map<String, dynamic>> categories = [
-                        {'title': t.all, 'id': 'All', 'count': allDoctors.length},
-                        {'title': t.cardiologist, 'id': 'Cardiologist', 'count': allDoctors.where((d) => d.specialty.toLowerCase().contains('cardio')).length},
-                        {'title': t.orthopedic, 'id': 'Orthopedic', 'count': allDoctors.where((d) => d.specialty.toLowerCase().contains('ortho')).length},
-                        {'title': t.dentist, 'id': 'Dentist', 'count': allDoctors.where((d) => d.specialty.toLowerCase().contains('dent')).length},
+                        {
+                          'title': t.all,
+                          'id': 'All',
+                          'count': allDoctors.length,
+                        },
+                        {
+                          'title': t.cardiologist,
+                          'id': 'cardiology',
+                          'count': allDoctors
+                              .where(
+                                (d) => d.specialty.toLowerCase().contains(
+                                  'cardio',
+                                ),
+                              )
+                              .length,
+                        },
+                        {
+                          'title': t.orthopedic,
+                          'id': 'Orthopedic',
+                          'count': allDoctors
+                              .where(
+                                (d) =>
+                                    d.specialty.toLowerCase().contains('ortho'),
+                              )
+                              .length,
+                        },
+                        {
+                          'title': t.dentist,
+                          'id': 'dentistry',
+                          'count': allDoctors
+                              .where(
+                                (d) =>
+                                    d.specialty.toLowerCase().contains('dent'),
+                              )
+                              .length,
+                        },
+                        {
+                          'title': "General Medicine",
+                          'id': 'generalMedicine',
+                          'count': allDoctors
+                              .where(
+                                (d) => d.specialty.toLowerCase().contains(
+                                  'general',
+                                ),
+                              )
+                              .length,
+                        },
                       ];
 
                       if (doctors.isEmpty && allDoctors.isEmpty) {
@@ -128,12 +172,15 @@ class _DoctorsListScreen extends State<DoctorsListScreen> {
                               separatorBuilder: (_, _) => WidthSpace(8),
                               itemBuilder: (context, index) {
                                 final category = categories[index];
-                                final isSelected = state.selectedCategory == category['id'];
+                                final isSelected =
+                                    state.selectedCategory == category['id'];
 
                                 return GestureDetector(
                                   onTap: () {
                                     context.read<DoctorsListBloc>().add(
-                                      FilterByCategoryEvent(category['id'] as String)
+                                      FilterByCategoryEvent(
+                                        category['id'] as String,
+                                      ),
                                     );
                                   },
                                   child: AnimatedContainer(
@@ -168,7 +215,11 @@ class _DoctorsListScreen extends State<DoctorsListScreen> {
                           ),
                           const HeightSpace(20),
                           if (doctors.isEmpty)
-                            const Center(child: Text("No doctors found for this category.")),
+                            const Center(
+                              child: Text(
+                                "No doctors found for this category.",
+                              ),
+                            ),
                           if (doctors.isNotEmpty)
                             ListView.separated(
                               shrinkWrap: true,

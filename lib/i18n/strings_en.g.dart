@@ -442,6 +442,36 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 
 	/// en: 'Central Clinic'
 	String get centralClinic => 'Central Clinic';
+
+	/// en: 'Appointments'
+	String get appointments => 'Appointments';
+
+	/// en: 'Upcoming'
+	String get upcoming => 'Upcoming';
+
+	/// en: 'Completed'
+	String get completed => 'Completed';
+
+	/// en: 'Cancelled'
+	String get cancelled => 'Cancelled';
+
+	/// en: 'Cancel Appointment'
+	String get cancelAppointment => 'Cancel Appointment';
+
+	/// en: 'Mark as Completed'
+	String get markAsCompleted => 'Mark as Completed';
+
+	/// en: 'View Details'
+	String get viewDetails => 'View Details';
+
+	/// en: 'Date'
+	String get date => 'Date';
+
+	/// en: 'Time'
+	String get time => 'Time';
+
+	/// en: 'Fee'
+	String get fee => 'Fee';
 }
 
 /// The flat map containing all translations for locale <en>.
@@ -586,6 +616,16 @@ extension on Translations {
 			'availabilitySavedSuccessfully' => 'Availability saved successfully!',
 			'failedToSaveAvailability' => 'Failed to save availability',
 			'centralClinic' => 'Central Clinic',
+			'appointments' => 'Appointments',
+			'upcoming' => 'Upcoming',
+			'completed' => 'Completed',
+			'cancelled' => 'Cancelled',
+			'cancelAppointment' => 'Cancel Appointment',
+			'markAsCompleted' => 'Mark as Completed',
+			'viewDetails' => 'View Details',
+			'date' => 'Date',
+			'time' => 'Time',
+			'fee' => 'Fee',
 			_ => null,
 		};
 	}

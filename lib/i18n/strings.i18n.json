@@ -132,5 +132,15 @@
   "manageAvailability": "Manage Availability",
   "availabilitySavedSuccessfully": "Availability saved successfully!",
   "failedToSaveAvailability": "Failed to save availability",
-  "centralClinic": "Central Clinic"
+  "centralClinic": "Central Clinic",
+  "appointments": "Appointments",
+  "upcoming": "Upcoming",
+  "completed": "Completed",
+  "cancelled": "Cancelled",
+  "cancelAppointment": "Cancel Appointment",
+  "markAsCompleted": "Mark as Completed",
+  "viewDetails": "View Details",
+  "date": "Date",
+  "time": "Time",
+  "fee": "Fee"
 }

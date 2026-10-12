@@ -3,7 +3,7 @@ import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 
-AppBar buildCustomAppBar(BuildContext context) {
+AppBar buildCustomAppBar(BuildContext context, {required String title}) {
   return AppBar(
     backgroundColor: Colors.transparent,
     elevation: 0,
@@ -15,7 +15,7 @@ AppBar buildCustomAppBar(BuildContext context) {
       },
     ),
     title: Text(
-      t.doctors,
+      title,
       style: context.bold18Primary.copyWith(color: AppColors.titleColor),
     ),
     actions: [
