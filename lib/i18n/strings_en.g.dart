@@ -86,11 +86,53 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	/// en: 'Contact Clinic'
 	String get contactClinic => 'Contact Clinic';
 
-	/// en: 'Evening $length slots'
-	String eveningSlots({required Object length}) => 'Evening ${length} slots';
+	/// en: 'Morning $length slots'
+	String morningSlots({required Object length}) => 'Morning ${length} slots';
 
 	/// en: 'Afternoon $length slots'
 	String afternoonSlots({required Object length}) => 'Afternoon ${length} slots';
+
+	/// en: 'Evening $length slots'
+	String eveningSlots({required Object length}) => 'Evening ${length} slots';
+
+	/// en: 'Morning'
+	String get morning => 'Morning';
+
+	/// en: 'Afternoon'
+	String get afternoon => 'Afternoon';
+
+	/// en: 'Evening'
+	String get evening => 'Evening';
+
+	/// en: 'slots'
+	String get slots => 'slots';
+
+	/// en: 'Confirm'
+	String get confirm => 'Confirm';
+
+	/// en: '$count slots available'
+	String slotsAvailable({required Object count}) => '${count} slots available';
+
+	/// en: 'Today'
+	String get today => 'Today';
+
+	/// en: 'Tomorrow'
+	String get tomorrow => 'Tomorrow';
+
+	/// en: 'Thank You !'
+	String get thankYou => 'Thank You !';
+
+	/// en: 'Your Appointment Successful'
+	String get appointmentSuccessful => 'Your Appointment Successful';
+
+	/// en: 'You booked an appointment with $doctorName on $date, at $time'
+	String appointmentBookedDetails({required Object doctorName, required Object date, required Object time}) => 'You booked an appointment with ${doctorName} on ${date}, at ${time}';
+
+	/// en: 'Done'
+	String get done => 'Done';
+
+	/// en: 'Edit your appointment'
+	String get editYourAppointment => 'Edit your appointment';
 
 	/// en: 'Password'
 	String get password => 'Password';
@@ -472,6 +514,54 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 
 	/// en: 'Fee'
 	String get fee => 'Fee';
+
+	/// en: 'Settings'
+	String get settings => 'Settings';
+
+	/// en: 'Administrator'
+	String get administrator => 'Administrator';
+
+	/// en: 'admin@doctorhunt.com'
+	String get adminEmail => 'admin@doctorhunt.com';
+
+	/// en: 'Admin Profile'
+	String get adminProfile => 'Admin Profile';
+
+	/// en: 'Edit super admin details & permissions'
+	String get editSuperAdminDetails => 'Edit super admin details & permissions';
+
+	/// en: 'Change Password'
+	String get changePassword => 'Change Password';
+
+	/// en: 'Update master security credentials'
+	String get updateMasterSecurityCredentials => 'Update master security credentials';
+
+	/// en: 'App Information'
+	String get appInformation => 'App Information';
+
+	/// en: 'Build version'
+	String get buildVersion => 'Build version';
+
+	/// en: 'v1.0.0'
+	String get appVersionValue => 'v1.0.0';
+
+	/// en: 'Logout'
+	String get logout => 'Logout';
+
+	/// en: 'Rate Doctor'
+	String get rateDoctor => 'Rate Doctor';
+
+	/// en: 'Tap to rate your visit'
+	String get tapToRateYourVisit => 'Tap to rate your visit';
+
+	/// en: 'Appointment date'
+	String get appointmentDate => 'Appointment date';
+
+	/// en: 'Appointment time'
+	String get appointmentTime => 'Appointment time';
+
+	/// en: 'Consultation fee'
+	String get consultationFeeLabel => 'Consultation fee';
 }
 
 /// The flat map containing all translations for locale <en>.
@@ -497,8 +587,22 @@ extension on Translations {
 			'noSlotsAvailable' => 'No slots available',
 			'or' => 'OR',
 			'contactClinic' => 'Contact Clinic',
-			'eveningSlots' => ({required Object length}) => 'Evening ${length} slots',
+			'morningSlots' => ({required Object length}) => 'Morning ${length} slots',
 			'afternoonSlots' => ({required Object length}) => 'Afternoon ${length} slots',
+			'eveningSlots' => ({required Object length}) => 'Evening ${length} slots',
+			'morning' => 'Morning',
+			'afternoon' => 'Afternoon',
+			'evening' => 'Evening',
+			'slots' => 'slots',
+			'confirm' => 'Confirm',
+			'slotsAvailable' => ({required Object count}) => '${count} slots available',
+			'today' => 'Today',
+			'tomorrow' => 'Tomorrow',
+			'thankYou' => 'Thank You !',
+			'appointmentSuccessful' => 'Your Appointment Successful',
+			'appointmentBookedDetails' => ({required Object doctorName, required Object date, required Object time}) => 'You booked an appointment with ${doctorName} on ${date}, at ${time}',
+			'done' => 'Done',
+			'editYourAppointment' => 'Edit your appointment',
 			'password' => 'Password',
 			'email' => 'Email',
 			'name' => 'Name',
@@ -626,6 +730,22 @@ extension on Translations {
 			'date' => 'Date',
 			'time' => 'Time',
 			'fee' => 'Fee',
+			'settings' => 'Settings',
+			'administrator' => 'Administrator',
+			'adminEmail' => 'admin@doctorhunt.com',
+			'adminProfile' => 'Admin Profile',
+			'editSuperAdminDetails' => 'Edit super admin details & permissions',
+			'changePassword' => 'Change Password',
+			'updateMasterSecurityCredentials' => 'Update master security credentials',
+			'appInformation' => 'App Information',
+			'buildVersion' => 'Build version',
+			'appVersionValue' => 'v1.0.0',
+			'logout' => 'Logout',
+			'rateDoctor' => 'Rate Doctor',
+			'tapToRateYourVisit' => 'Tap to rate your visit',
+			'appointmentDate' => 'Appointment date',
+			'appointmentTime' => 'Appointment time',
+			'consultationFeeLabel' => 'Consultation fee',
 			_ => null,
 		};
 	}

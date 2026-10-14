@@ -2,23 +2,33 @@ import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/generated/icons_assets.dart';
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
+import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class SuccessWidget extends StatelessWidget {
-  const SuccessWidget({super.key});
+  final String doctorName;
+  final String date;
+  final String time;
+
+  const SuccessWidget({
+    super.key,
+    required this.doctorName,
+    required this.date,
+    required this.time,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      constraints: BoxConstraints(maxHeight: 600),
+      constraints: const BoxConstraints(maxHeight: 600),
       child: Padding(
         padding: const EdgeInsets.all(25.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              padding: EdgeInsetsGeometry.all(40),
+              padding: const EdgeInsets.all(40),
               decoration: BoxDecoration(
                 color: AppColors.mintBackground,
                 borderRadius: BorderRadius.circular(80),
@@ -27,27 +37,31 @@ class SuccessWidget extends StatelessWidget {
                 IconsAssets.likeIcon,
                 width: 70,
                 height: 70,
-                colorFilter: ColorFilter.mode(
+                colorFilter: const ColorFilter.mode(
                   AppColors.primaryColor,
                   BlendMode.srcIn,
                 ),
               ),
             ),
-            HeightSpace(12),
-            Text("Thank You !", style: context.bold36TextMain),
-            HeightSpace(5),
+            const HeightSpace(12),
+            Text(t.thankYou, style: context.bold36TextMain),
+            const HeightSpace(5),
             Text(
-              "Your Appointment Successful",
+              t.appointmentSuccessful,
               style: context.regular18TextSub,
               textAlign: TextAlign.center,
             ),
-            HeightSpace(25),
+            const HeightSpace(25),
             Text(
-              "You booked an appointment with Dr. Pediatrician Purpieson on February 21, at 02:00 PM",
+              t.appointmentBookedDetails(
+                doctorName: doctorName,
+                date: date,
+                time: time,
+              ),
               style: context.regular14TextSub,
               textAlign: TextAlign.center,
             ),
-            HeightSpace(30),
+            const HeightSpace(30),
             SizedBox(
               width: double.infinity,
               height: 54,
@@ -61,14 +75,16 @@ class SuccessWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(6),
                   ),
                 ),
-                child: Text("Done", style: context.bold18White),
+                child: Text(t.done, style: context.bold18White),
               ),
             ),
-            HeightSpace(5),
+            const HeightSpace(5),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               child: Text(
-                "Edit your appointment",
+                t.editYourAppointment,
                 style: context.regular14TextSub,
               ),
             ),

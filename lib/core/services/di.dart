@@ -18,6 +18,8 @@ import 'package:doctor_hunt_app/features/patient/home/data/repos/home_repository
 import 'package:doctor_hunt_app/features/patient/home/presentation/controller/home_bloc.dart';
 import 'package:doctor_hunt_app/features/patient/favorite/data/repos/favorites_repository.dart';
 import 'package:doctor_hunt_app/features/patient/favorite/presentation/controller/favorites_bloc.dart';
+import 'package:doctor_hunt_app/features/patient/select_time_and_date/data/repos/select_time_date_repository.dart';
+import 'package:doctor_hunt_app/features/patient/select_time_and_date/presentation/controller/select_time_date_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -78,6 +80,12 @@ Future<void> setupGetIt() async {
       firestore: getIt<FirebaseFirestore>(),
     ),
   );
+  getIt.registerLazySingleton<SelectTimeDateRepository>(
+    () => SelectTimeDateRepository(
+      firestore: getIt<FirebaseFirestore>(),
+      firebaseAuth: getIt<FirebaseAuth>(),
+    ),
+  );
   getIt.registerFactory<AuthBloc>(() => AuthBloc(getIt<AuthRepository>()));
   getIt.registerFactory<HomeBloc>(() => HomeBloc(getIt<HomeRepository>()));
   getIt.registerLazySingleton<DoctorDetailsRepository>(
@@ -115,6 +123,9 @@ Future<void> setupGetIt() async {
   );
   getIt.registerFactory<DoctorAvailabilityBloc>(
     () => DoctorAvailabilityBloc(getIt<DoctorAvailabilityRepository>()),
+  );
+  getIt.registerFactory<SelectTimeDateBloc>(
+    () => SelectTimeDateBloc(repository: getIt<SelectTimeDateRepository>()),
   );
 }
 

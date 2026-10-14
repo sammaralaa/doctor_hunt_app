@@ -83,7 +83,10 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
                                 );
                               },
                               onBookNowPressed: () {
-                                SelectTimeRoute().push(context);
+                                SelectTimeRoute(
+                                  doctorId:
+                                      state.doctorData.id ?? widget.doctorId,
+                                ).push(context);
                               },
                             );
                           },

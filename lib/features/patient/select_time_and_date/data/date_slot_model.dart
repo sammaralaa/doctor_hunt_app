@@ -1,12 +1,14 @@
+import 'package:doctor_hunt_app/i18n/strings.g.dart';
+import 'package:equatable/equatable.dart';
 import 'package:intl/intl.dart';
 
-class DaySlotModel {
+class DaySlotModel extends Equatable {
   final DateTime date;
   final List<TimeSlotModel> timeSlots;
 
-  DaySlotModel({
+  const DaySlotModel({
     required this.date,
-    required this.timeSlots,
+    this.timeSlots = const [],
   });
 
   String get dayLabel {
@@ -15,59 +17,33 @@ class DaySlotModel {
     final targetDate = DateTime(date.year, date.month, date.day);
 
     if (targetDate.difference(today).inDays == 0) {
-      return 'Today, ${DateFormat('d MMM').format(date)}';
+      return '${t.today}, ${DateFormat('d MMM').format(date)}';
     } else if (targetDate.difference(today).inDays == 1) {
-      return 'Tomorrow, ${DateFormat('d MMM').format(date)}';
+      return '${t.tomorrow}, ${DateFormat('d MMM').format(date)}';
     }
     return DateFormat('EEE, d MMM').format(date);
   }
 
   String get availabilityText {
-    if (timeSlots.isEmpty) return 'No slots available';
-    return '${timeSlots.length} slots available';
+    if (timeSlots.isEmpty) return t.noSlotsAvailable;
+    return t.slotsAvailable(count: timeSlots.length);
   }
+
+  @override
+  List<Object?> get props => [date, timeSlots];
 }
 
-class TimeSlotModel {
+class TimeSlotModel extends Equatable {
   final DateTime dateTime;
 
-  TimeSlotModel({required this.dateTime});
+  const TimeSlotModel({required this.dateTime});
 
   String get formattedTime => DateFormat('h:mm a').format(dateTime);
 
-  bool get isAfternoon => dateTime.hour < 17;
-}
+  bool get isMorning => dateTime.hour < 12;
+  bool get isAfternoon => dateTime.hour >= 12 && dateTime.hour < 17;
+  bool get isEvening => dateTime.hour >= 17;
 
-///////
- final List<DaySlotModel> dummyDays = [
-  DaySlotModel(
-    date: DateTime(2026, 2, 23),
-    timeSlots: [],
-  ),
-  DaySlotModel(
-    date: DateTime(2026, 2, 24),
-    timeSlots: [
-      // Afternoon
-      TimeSlotModel(dateTime: DateTime(2026, 2, 24, 13, 0)),
-      TimeSlotModel(dateTime: DateTime(2026, 2, 24, 13, 30)),
-      TimeSlotModel(dateTime: DateTime(2026, 2, 24, 14, 0)),
-      TimeSlotModel(dateTime: DateTime(2026, 2, 24, 14, 30)),
-      TimeSlotModel(dateTime: DateTime(2026, 2, 24, 15, 0)),
-      TimeSlotModel(dateTime: DateTime(2026, 2, 24, 15, 30)),
-      TimeSlotModel(dateTime: DateTime(2026, 2, 24, 16, 0)),
-      // Evening
-      TimeSlotModel(dateTime: DateTime(2026, 2, 24, 17, 0)),
-      TimeSlotModel(dateTime: DateTime(2026, 2, 24, 17, 30)),
-      TimeSlotModel(dateTime: DateTime(2026, 2, 24, 18, 0)),
-      TimeSlotModel(dateTime: DateTime(2026, 2, 24, 18, 30)),
-      TimeSlotModel(dateTime: DateTime(2026, 2, 24, 19, 0)),
-    ],
-  ),
-  DaySlotModel(
-    date: DateTime(2026, 2, 25),
-    timeSlots: [
-      TimeSlotModel(dateTime: DateTime(2026, 2, 25, 10, 0)),
-      TimeSlotModel(dateTime: DateTime(2026, 2, 25, 11, 0)),
-    ],
-  ),
-];
+  @override
+  List<Object?> get props => [dateTime];
+}

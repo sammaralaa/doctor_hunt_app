@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/spacing_widgets.dart';
 import 'package:doctor_hunt_app/generated/image_assets.dart';
@@ -9,12 +10,15 @@ class SelectedDoctorInfoCard extends StatefulWidget {
   final String name;
   final String location;
   final int rating;
+  final String? imageUrl;
 
   const SelectedDoctorInfoCard({
     super.key,
     this.onBookNowPressed,
     required this.name,
-    required this.location, required this.rating,
+    required this.location,
+    required this.rating,
+    this.imageUrl,
   });
 
   @override
@@ -46,12 +50,27 @@ class _SelectedDoctorInfoCard extends State<SelectedDoctorInfoCard> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  ImageAssets.doctorImage2,
-                  width: 84,
-                  height: 84,
-                  fit: BoxFit.cover,
-                ),
+                child: widget.imageUrl != null && widget.imageUrl!.isNotEmpty
+                    ? CachedNetworkImage(
+                        imageUrl: widget.imageUrl!,
+                        width: 84,
+                        height: 84,
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) =>
+                            const Center(child: CircularProgressIndicator()),
+                        errorWidget: (context, url, error) => Image.asset(
+                          ImageAssets.doctorImage2,
+                          width: 84,
+                          height: 84,
+                          fit: BoxFit.cover,
+                        ),
+                      )
+                    : Image.asset(
+                        ImageAssets.doctorImage2,
+                        width: 84,
+                        height: 84,
+                        fit: BoxFit.cover,
+                      ),
               ),
               WidthSpace(12),
 
@@ -70,22 +89,22 @@ class _SelectedDoctorInfoCard extends State<SelectedDoctorInfoCard> {
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              isFavorite = !isFavorite;
-                            });
-                          },
-                          child: Icon(
-                            isFavorite
-                                ? Icons.favorite_rounded
-                                : Icons.favorite_border_rounded,
-                            color: isFavorite
-                                ? AppColors.red
-                                : AppColors.inactiveIconColor,
-                            size: 20,
-                          ),
-                        ),
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     setState(() {
+                        //       isFavorite = !isFavorite;
+                        //     });
+                        //   },
+                        //   child: Icon(
+                        //     isFavorite
+                        //         ? Icons.favorite_rounded
+                        //         : Icons.favorite_border_rounded,
+                        //     color: isFavorite
+                        //         ? AppColors.red
+                        //         : AppColors.inactiveIconColor,
+                        //     size: 20,
+                        //   ),
+                        // ),
                       ],
                     ),
                     HeightSpace(4),

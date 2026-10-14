@@ -4,6 +4,7 @@ import 'package:doctor_hunt_app/core/widgets/bottom_right_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/top_left_shadow_widget.dart';
 import 'package:doctor_hunt_app/features/patient/favorite/presentation/screens/favorite_screen.dart';
 import 'package:doctor_hunt_app/features/patient/home/presentation/screens/home_screen.dart';
+import 'package:doctor_hunt_app/features/patient/patient_appointments/presentation/screens/patient_appointments_screen.dart';
 import 'package:doctor_hunt_app/generated/icons_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -27,7 +28,7 @@ class _MainScreen extends State<MainScreen> {
   final List<Widget> _screens = [
     HomeScreen(),
     FavoriteScreen(),
-    Center(child: Text('News Screen', style: TextStyle(fontSize: 20))),
+    PatientAppointmentsScreen(),
     Center(child: Text('Chat Screen', style: TextStyle(fontSize: 20))),
   ];
   @override
@@ -54,41 +55,65 @@ class _MainScreen extends State<MainScreen> {
           BottomBarItem(
             inActiveItem: SvgPicture.asset(
               IconsAssets.home,
-              colorFilter: ColorFilter.mode(AppColors.inactiveIconColor, BlendMode.srcIn),
+              colorFilter: ColorFilter.mode(
+                AppColors.inactiveIconColor,
+                BlendMode.srcIn,
+              ),
             ),
             activeItem: SvgPicture.asset(
               IconsAssets.home,
-              colorFilter: ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),
+              colorFilter: ColorFilter.mode(
+                AppColors.primaryColor,
+                BlendMode.srcIn,
+              ),
             ),
           ),
           BottomBarItem(
             inActiveItem: SvgPicture.asset(
               IconsAssets.favorite,
-              colorFilter: ColorFilter.mode(AppColors.inactiveIconColor, BlendMode.srcIn),
+              colorFilter: ColorFilter.mode(
+                AppColors.inactiveIconColor,
+                BlendMode.srcIn,
+              ),
             ),
             activeItem: SvgPicture.asset(
               IconsAssets.favorite,
-              colorFilter: ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),
+              colorFilter: ColorFilter.mode(
+                AppColors.primaryColor,
+                BlendMode.srcIn,
+              ),
             ),
           ),
           BottomBarItem(
             inActiveItem: SvgPicture.asset(
               IconsAssets.news,
-              colorFilter: ColorFilter.mode(AppColors.inactiveIconColor, BlendMode.srcIn),
+              colorFilter: ColorFilter.mode(
+                AppColors.inactiveIconColor,
+                BlendMode.srcIn,
+              ),
             ),
             activeItem: SvgPicture.asset(
               IconsAssets.news,
-              colorFilter: ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),
+              colorFilter: ColorFilter.mode(
+                AppColors.primaryColor,
+                BlendMode.srcIn,
+              ),
             ),
           ),
           BottomBarItem(
             inActiveItem: SvgPicture.asset(
               IconsAssets.chat,
-              colorFilter: ColorFilter.mode(AppColors.inactiveIconColor, BlendMode.srcIn),
+              colorFilter: ColorFilter.mode(
+                AppColors.inactiveIconColor,
+                BlendMode.srcIn,
+              ),
             ),
             activeItem: SvgPicture.asset(
               IconsAssets.chat,
-              colorFilter: ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),
+              colorFilter: ColorFilter.mode(
+                AppColors.primaryColor,
+                BlendMode.srcIn,
+              ),
             ),
           ),
         ],

@@ -58,6 +58,7 @@ dependencies:
   dotted_border: ^3.1.0
   cached_network_image: ^4.0.0
   shimmer: ^4.0.0
+  lottie: ^3.6.1
 
 dev_dependencies:
   flutter_test:
@@ -88,7 +89,8 @@ flutter:
      - assets/images/
      - assets/fonts/
      - assets/icons/
-  #   - images/a_dot_ham.jpeg
+     - assets/lotties/     
+  
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

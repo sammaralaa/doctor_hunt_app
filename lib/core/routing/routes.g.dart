@@ -256,10 +256,15 @@ RouteBase get $selectTimeRoute => GoRouteData.$route(
 
 mixin $SelectTimeRoute on GoRouteData {
   static SelectTimeRoute _fromState(GoRouterState state) =>
-      const SelectTimeRoute();
+      SelectTimeRoute(doctorId: state.uri.queryParameters['doctor-id']!);
+
+  SelectTimeRoute get _self => this as SelectTimeRoute;
 
   @override
-  String get location => GoRouteData.$location('/select-time');
+  String get location => GoRouteData.$location(
+    '/select-time',
+    queryParams: {'doctor-id': _self.doctorId},
+  );
 
   @override
   void go(BuildContext context) => context.go(location);

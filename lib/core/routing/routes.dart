@@ -18,6 +18,7 @@ import 'package:doctor_hunt_app/features/admin/doctors_list/presentation/screens
 import 'package:doctor_hunt_app/features/patient/main_screen/presentation/screens/main_screen.dart';
 import 'package:doctor_hunt_app/features/common/onboarding/presentation/screens/onboarding_screen.dart';
 import 'package:doctor_hunt_app/features/patient/find_doctors/presentation/screens/find_doctors_screen.dart';
+import 'package:doctor_hunt_app/features/patient/select_time_and_date/presentation/controller/select_time_date_bloc.dart';
 import 'package:doctor_hunt_app/features/patient/select_time_and_date/presentation/screens/select_time_date_screen.dart';
 import 'package:doctor_hunt_app/features/common/splash/presentation/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -119,11 +120,15 @@ class FindDoctorsRoute extends GoRouteData with $FindDoctorsRoute {
 
 @TypedGoRoute<SelectTimeRoute>(path: '/select-time')
 class SelectTimeRoute extends GoRouteData with $SelectTimeRoute {
-  const SelectTimeRoute();
+  final String doctorId;
+  const SelectTimeRoute({required this.doctorId});
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return SelectTimeDateScreen();
+    return BlocProvider(
+      create: (context) => getIt<SelectTimeDateBloc>(),
+      child: SelectTimeDateScreen(doctorId: doctorId),
+    );
   }
 }
 
