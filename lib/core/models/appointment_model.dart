@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:intl/intl.dart';
 
 class AppointmentModel extends Equatable {
   final String id;
@@ -36,6 +37,67 @@ class AppointmentModel extends Equatable {
     this.reviewText,
     this.clinicLocation,
   });
+
+  bool get isPast {
+    final scheduled = parseScheduledDateTime();
+    if (scheduled == null) return false;
+    return scheduled.isBefore(DateTime.now());
+  }
+
+  DateTime? parseScheduledDateTime() {
+    final cleanDate = date.trim();
+    if (cleanDate.isEmpty) return null;
+
+    DateTime? parsedDate = DateTime.tryParse(cleanDate);
+    if (parsedDate == null) {
+      for (final fmt in [
+        'yyyy-MM-dd',
+        'd MMM yyyy',
+        'dd MMM yyyy',
+        'yyyy/MM/dd',
+        'd/M/yyyy',
+        'dd/MM/yyyy',
+        'MM/dd/yyyy',
+      ]) {
+        try {
+          parsedDate = DateFormat(fmt).parse(cleanDate);
+          break;
+        } catch (_) {}
+      }
+    }
+
+    if (parsedDate == null) return null;
+
+    int hour = 0;
+    int minute = 0;
+    final cleanTime = time.trim().toUpperCase();
+    if (cleanTime.isNotEmpty) {
+      if (cleanTime.contains('AM') || cleanTime.contains('PM')) {
+        for (final fmt in ['h:mm a', 'hh:mm a', 'h:mma', 'hh:mma']) {
+          try {
+            final t = DateFormat(fmt).parse(cleanTime);
+            hour = t.hour;
+            minute = t.minute;
+            break;
+          } catch (_) {}
+        }
+      } else {
+        final parts = cleanTime.split(':');
+        if (parts.length >= 2) {
+          hour = int.tryParse(parts[0]) ?? 0;
+          minute = int.tryParse(parts[1].split(' ')[0]) ?? 0;
+        }
+      }
+    }
+
+    return DateTime(
+      parsedDate.year,
+      parsedDate.month,
+      parsedDate.day,
+      hour,
+      minute,
+    );
+  }
 
   factory AppointmentModel.fromJson(
     Map<String, dynamic> json,

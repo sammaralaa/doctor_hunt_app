@@ -14,7 +14,18 @@ class AppointmentDetailsRepository {
       throw Exception('Appointment not found');
     }
 
-    final appointment = AppointmentModel.fromJson(doc.data()!, doc.id);
+    var appointment = AppointmentModel.fromJson(doc.data()!, doc.id);
+
+    final scheduled = appointment.parseScheduledDateTime();
+    final statusLower = appointment.status.trim().toLowerCase();
+    if (scheduled != null &&
+        scheduled.isBefore(DateTime.now()) &&
+        (statusLower == 'upcoming' || statusLower == 'pending')) {
+      firestore.collection('appointments').doc(appointment.id).update({
+        'status': 'Completed',
+      }).catchError((_) {});
+      appointment = appointment.copyWith(status: 'Completed');
+    }
 
     // If patient email is not populated on the appointment, attempt to fetch from user profile
     String? email = appointment.patientEmail;

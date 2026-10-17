@@ -21,7 +21,7 @@ class PatientAppointmentsBloc
     emit(const PatientAppointmentsLoadingState());
     try {
       await emit.forEach<List<AppointmentModel>>(
-        repository.fetchMyAppointments(),
+        repository.getAppointments(),
         onData: (appointments) {
           final upcoming = <AppointmentModel>[];
           final completed = <AppointmentModel>[];
