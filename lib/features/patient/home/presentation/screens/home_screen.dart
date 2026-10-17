@@ -8,17 +8,23 @@ import 'package:doctor_hunt_app/features/patient/home/presentation/controller/ho
 import 'package:doctor_hunt_app/features/patient/home/presentation/widgets/cateory_card.dart';
 import 'package:doctor_hunt_app/features/patient/home/presentation/widgets/custom_home_top_header.dart';
 import 'package:doctor_hunt_app/features/patient/home/presentation/widgets/feature_doctor_card.dart';
-import 'package:doctor_hunt_app/features/patient/home/presentation/widgets/live_docotor_widget.dart';
 import 'package:doctor_hunt_app/features/patient/home/presentation/widgets/popular_doctor_card_widget.dart';
 import 'package:doctor_hunt_app/generated/icons_assets.dart';
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:doctor_hunt_app/i18n/strings.g.dart';
+import 'package:doctor_hunt_app/features/patient/menu_drawer/presentation/widgets/custom_animated_drawer.dart';
+import 'package:doctor_hunt_app/features/patient/popular_doctors/presentation/controller/popular_doctors_bloc.dart';
+import 'package:doctor_hunt_app/features/patient/popular_doctors/presentation/controller/popular_doctors_event.dart';
+import 'package:doctor_hunt_app/features/patient/popular_doctors/presentation/controller/popular_doctors_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final VoidCallback? onOpenDrawer;
+
+  const HomeScreen({super.key, this.onOpenDrawer});
+
   @override
   State<StatefulWidget> createState() {
     return _HomeScreen();
@@ -36,10 +42,18 @@ class _HomeScreen extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<HomeBloc>()
-        ..add(GetUserProfileDataEvent())
-        ..add(FetchDoctorsDataEvent()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<HomeBloc>(
+          create: (context) => getIt<HomeBloc>()
+            ..add(GetUserProfileDataEvent())
+            ..add(FetchDoctorsDataEvent()),
+        ),
+        BlocProvider<PopularDoctorsBloc>(
+          create: (context) => getIt<PopularDoctorsBloc>()
+            ..add(const FetchPopularDoctorsEvent()),
+        ),
+      ],
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: CustomScrollView(
@@ -64,7 +78,11 @@ class _HomeScreen extends State<HomeScreen> {
                     searchController: searchController,
                     userName: userName,
                     profileImageUrl: currentProfileImage,
-                    onProfileImageTap: () {},
+                    onSearchTap: () => const SearchRoute().push(context),
+                    onProfileImageTap: widget.onOpenDrawer ??
+                        () {
+                          CustomAnimatedDrawerScope.of(context)?.openDrawer();
+                        },
                   );
                 },
               ),
@@ -75,21 +93,6 @@ class _HomeScreen extends State<HomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Text(t.liveDoctors, style: context.bold18TextMain),
-
-                    // HeightSpace(21),
-                    // SizedBox(
-                    //   height: 168,
-                    //   child: ListView.separated(
-                    //     scrollDirection: Axis.horizontal,
-                    //     itemCount: 10,
-                    //     separatorBuilder: (context, index) =>
-                    //         SizedBox(width: 12),
-                    //     itemBuilder: (context, index) {
-                    //       return LiveDocotorWidget();
-                    //     },
-                    //   ),
-                    // ),
                     HeightSpace(60),
 
                     Row(
@@ -120,7 +123,7 @@ class _HomeScreen extends State<HomeScreen> {
                         Text(t.popularDoctors, style: context.bold18TextMain),
                         TextButton(
                           onPressed: () {
-                            // Handle "See All" button press
+                            const PopularDoctorsRoute().push(context);
                           },
                           child: Row(
                             children: [
@@ -209,7 +212,7 @@ class _HomeScreen extends State<HomeScreen> {
                         Text(t.featureDoctor, style: context.bold18TextMain),
                         TextButton(
                           onPressed: () {
-                            // Handle "See All" button press
+                            const PopularDoctorsRoute().push(context);
                           },
                           child: Row(
                             children: [
@@ -225,18 +228,42 @@ class _HomeScreen extends State<HomeScreen> {
                       ],
                     ),
                     HeightSpace(22),
-                    SizedBox(
-                      height: 150,
-
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 10,
-                        separatorBuilder: (context, index) =>
-                            SizedBox(width: 12),
-                        itemBuilder: (context, index) {
-                          return FeatureDoctorCard();
-                        },
-                      ),
+                    BlocBuilder<PopularDoctorsBloc, PopularDoctorsState>(
+                      builder: (context, state) {
+                        if (state is PopularDoctorsLoadingState ||
+                            state is PopularDoctorsInitialState) {
+                          return _featureDoctorsLoadingSkeleton();
+                        }
+                        if (state is PopularDoctorsLoadedState) {
+                          final doctors = state.doctors;
+                          if (doctors.isEmpty) {
+                            return const SizedBox.shrink();
+                          }
+                          return SizedBox(
+                            height: 150,
+                            child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: doctors.length,
+                              separatorBuilder: (context, index) =>
+                                  const SizedBox(width: 12),
+                              itemBuilder: (context, index) {
+                                final doctor = doctors[index];
+                                return FeatureDoctorCard(
+                                  doctor: doctor,
+                                  onTap: () {
+                                    if (doctor.id != null) {
+                                      DoctorDetailsRoute(
+                                        doctorId: doctor.id!,
+                                      ).push(context);
+                                    }
+                                  },
+                                );
+                              },
+                            ),
+                          );
+                        }
+                        return const SizedBox.shrink();
+                      },
                     ),
                     HeightSpace(100),
                   ],
@@ -252,35 +279,61 @@ class _HomeScreen extends State<HomeScreen> {
   Widget _doctorLoadingSkelton() {
     return Shimmer.fromColors(
       baseColor: AppColors.inactiveBorderColor,
-      highlightColor: AppColors.inactiveIconColor,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Header
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _skeletonBox(width: 120, height: 18),
-                _skeletonBox(width: 50, height: 14),
-              ],
-            ),
-          ),
-          const SizedBox(height: 16),
+      highlightColor: AppColors.inactiveIconColor.withValues(alpha: 0.3),
+      child: SizedBox(
+        height: 265,
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: 3,
+          separatorBuilder: (_, _) => const SizedBox(width: 12),
+          itemBuilder: (_, _) => _doctorCardSkeleton(),
+        ),
+      ),
+    );
+  }
 
-          // Horizontal List
-          SizedBox(
-            height: 250,
-            child: ListView.separated(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              scrollDirection: Axis.horizontal,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: 3,
-              separatorBuilder: (_, _) => const SizedBox(width: 14),
-              itemBuilder: (_, _) => _doctorCardSkeleton(),
-            ),
+  Widget _featureDoctorsLoadingSkeleton() {
+    return Shimmer.fromColors(
+      baseColor: AppColors.inactiveBorderColor,
+      highlightColor: AppColors.inactiveIconColor.withValues(alpha: 0.3),
+      child: SizedBox(
+        height: 150,
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: 4,
+          separatorBuilder: (_, _) => const SizedBox(width: 12),
+          itemBuilder: (_, _) => _featureDoctorCardSkeleton(),
+        ),
+      ),
+    );
+  }
+
+  Widget _featureDoctorCardSkeleton() {
+    return Container(
+      width: 100,
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _skeletonBox(width: 14, height: 14, isCircle: true),
+              _skeletonBox(width: 25, height: 10, radius: 2),
+            ],
           ),
+          const SizedBox(height: 8),
+          _skeletonBox(width: 55, height: 55, isCircle: true),
+          const SizedBox(height: 8),
+          _skeletonBox(width: 65, height: 10, radius: 2),
+          const SizedBox(height: 4),
+          _skeletonBox(width: 45, height: 8, radius: 2),
         ],
       ),
     );
@@ -288,18 +341,19 @@ class _HomeScreen extends State<HomeScreen> {
 
   Widget _doctorCardSkeleton() {
     return Container(
-      width: 170,
+      width: 150,
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
         children: [
-          _skeletonBox(width: double.infinity, height: 140, radius: 12),
-          const SizedBox(height: 12),
-          _skeletonBox(width: 120, height: 14),
+          _skeletonBox(width: 120, height: 120, radius: 8),
+          const SizedBox(height: 14),
+          _skeletonBox(width: 100, height: 16, radius: 4),
           const SizedBox(height: 8),
-          _skeletonBox(width: 90, height: 10),
+          _skeletonBox(width: 80, height: 12, radius: 4),
           const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

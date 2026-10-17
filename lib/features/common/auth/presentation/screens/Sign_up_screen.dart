@@ -34,6 +34,7 @@ class _SignUpScreen extends State<SignUpScreen> {
   late TextEditingController emailController;
   late TextEditingController passController;
   late TextEditingController nameController;
+  late TextEditingController phoneController;
   bool isAccepted = false;
   @override
   void initState() {
@@ -41,6 +42,7 @@ class _SignUpScreen extends State<SignUpScreen> {
     emailController = TextEditingController();
     passController = TextEditingController();
     nameController = TextEditingController();
+    phoneController = TextEditingController();
   }
 
   @override
@@ -49,6 +51,7 @@ class _SignUpScreen extends State<SignUpScreen> {
     emailController.dispose();
     passController.dispose();
     nameController.dispose();
+    phoneController.dispose();
   }
 
   @override
@@ -101,16 +104,16 @@ class _SignUpScreen extends State<SignUpScreen> {
                                       height: 20,
                                     ),
                                   ),
-                                  WidthSpace(15),
-                                  LoginWithWidget(
-                                    btnText: t.facebook,
-                                    onTap: () {},
-                                    btnIcon: SvgPicture.asset(
-                                      IconsAssets.facebookIcon,
-                                      width: 20,
-                                      height: 20,
-                                    ),
-                                  ),
+                                  // WidthSpace(15),
+                                  // LoginWithWidget(
+                                  //   btnText: t.facebook,
+                                  //   onTap: () {},
+                                  //   btnIcon: SvgPicture.asset(
+                                  //     IconsAssets.facebookIcon,
+                                  //     width: 20,
+                                  //     height: 20,
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                               HeightSpace(34),
@@ -134,6 +137,18 @@ class _SignUpScreen extends State<SignUpScreen> {
                                   return null;
                                 },
                                 controller: emailController,
+                              ),
+                              HeightSpace(18),
+                              CustomTextfeildWidget(
+                                hintText: t.phoneNumber,
+                                keyboardType: TextInputType.phone,
+                                validator: (value) {
+                                  if (value == null || value.trim().isEmpty) {
+                                    return t.enterYourPhoneNumber;
+                                  }
+                                  return null;
+                                },
+                                controller: phoneController,
                               ),
                               HeightSpace(18),
                               CustomTextfeildWidget(
@@ -200,7 +215,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                                     if (widget.userRole == 'admin') {
                                       AdminMainRoute().go(context);
                                     } else {
-                                      MainScreenRoute().go(context);
+                                      LoginRoute().go(context);
                                     }
                                   } else if (state is AuthFailure) {
                                     print(state.errorMessage);
@@ -240,8 +255,11 @@ class _SignUpScreen extends State<SignUpScreen> {
                                             password: passController.text
                                                 .trim(),
                                             name: nameController.text.trim(),
+                                            phoneNumber: phoneController.text
+                                                .trim(),
                                             userRole:
-                                                widget.userRole ?? UserRole.patient.name,
+                                                widget.userRole ??
+                                                UserRole.patient.name,
                                           ),
                                         );
                                       }

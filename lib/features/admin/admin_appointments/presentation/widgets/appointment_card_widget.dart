@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:doctor_hunt_app/core/models/appointment_model.dart';
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:doctor_hunt_app/i18n/strings.g.dart';
-import '../bloc/admin_appointments_state.dart';
 
 class AppointmentCardWidget extends StatelessWidget {
-  final MockAppointment appointment;
+  final AppointmentModel appointment;
+  final bool isOperating;
   final VoidCallback? onCancel;
   final VoidCallback? onMarkCompleted;
   final VoidCallback? onViewDetails;
@@ -13,6 +14,7 @@ class AppointmentCardWidget extends StatelessWidget {
   const AppointmentCardWidget({
     super.key,
     required this.appointment,
+    this.isOperating = false,
     this.onCancel,
     this.onMarkCompleted,
     this.onViewDetails,
@@ -20,6 +22,13 @@ class AppointmentCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final status = appointment.status.trim().toLowerCase();
+    final isCancelled = status == 'cancelled' || status == 'canceled';
+    final isCompleted = status == 'completed';
+    final isUpcoming = !isCancelled && !isCompleted;
+    final hasPatientImage = appointment.patientImage != null &&
+        appointment.patientImage!.isNotEmpty;
+
     return Container(
       margin: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
       padding: const EdgeInsets.all(16),
@@ -28,7 +37,7 @@ class AppointmentCardWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
+            color: AppColors.midnightBlue.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -48,14 +57,14 @@ class AppointmentCardWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   color: AppColors.mintBackground,
-                  image: appointment.patientImage.isNotEmpty
+                  image: hasPatientImage
                       ? DecorationImage(
-                          image: NetworkImage(appointment.patientImage),
+                          image: NetworkImage(appointment.patientImage!),
                           fit: BoxFit.cover,
                         )
                       : null,
                 ),
-                child: appointment.patientImage.isEmpty
+                child: !hasPatientImage
                     ? const Icon(Icons.person, color: AppColors.primaryColor)
                     : null,
               ),
@@ -88,8 +97,8 @@ class AppointmentCardWidget extends StatelessWidget {
                   vertical: 4,
                 ),
                 decoration: BoxDecoration(
-                  color: appointment.status == AppointmentFilter.cancelled
-                      ? Colors.red.withValues(alpha: 0.1)
+                  color: isCancelled
+                      ? AppColors.red.withValues(alpha: 0.1)
                       : AppColors.mintBackground,
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -101,19 +110,17 @@ class AppointmentCardWidget extends StatelessWidget {
                       height: 6,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: appointment.status == AppointmentFilter.cancelled
-                            ? Colors.red
+                        color: isCancelled
+                            ? AppColors.red
                             : AppColors.primaryColor,
                       ),
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      _getStatusText(),
-                      style: context.medium11Primary.copyWith(
-                        color: appointment.status == AppointmentFilter.cancelled
-                            ? Colors.red
-                            : AppColors.primaryColor,
-                      ),
+                      _getStatusText(isCancelled, isCompleted),
+                      style: isCancelled
+                          ? context.medium11Danger
+                          : context.medium11Primary,
                     ),
                   ],
                 ),
@@ -144,38 +151,40 @@ class AppointmentCardWidget extends StatelessWidget {
                 context,
                 Icons.monetization_on_outlined,
                 t.fee,
-                appointment.fee,
+                '\$${appointment.fee}',
               ),
             ],
           ),
 
-          if (appointment.status == AppointmentFilter.completed &&
-              appointment.rating != null) ...[
+          if (isCompleted && appointment.rating != null) ...[
             const SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
-                color: Colors.orange.withOpacity(0.05),
+                color: AppColors.categoryColorOrangeFrom.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.star, color: Colors.amber, size: 16),
+                  const Icon(Icons.star, color: AppColors.yellow, size: 16),
                   const SizedBox(width: 4),
                   Text(
                     '${appointment.rating}',
                     style: context.medium12Secondary,
                   ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      '- "${appointment.reviewText ?? ''}"',
-                      style: context.regular12TextSub.copyWith(
-                        fontStyle: FontStyle.italic,
+                  if (appointment.reviewText != null &&
+                      appointment.reviewText!.isNotEmpty) ...[
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        '- "${appointment.reviewText}"',
+                        style: context.regular12TextSub.copyWith(
+                          fontStyle: FontStyle.italic,
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      overflow: TextOverflow.ellipsis,
                     ),
-                  ),
+                  ],
                 ],
               ),
             ),
@@ -184,7 +193,7 @@ class AppointmentCardWidget extends StatelessWidget {
           const SizedBox(height: 16),
 
           // Action Buttons
-          _buildActionButtons(context),
+          _buildActionButtons(context, isUpcoming),
         ],
       ),
     );
@@ -218,27 +227,27 @@ class AppointmentCardWidget extends StatelessWidget {
     );
   }
 
-  String _getStatusText() {
-    switch (appointment.status) {
-      case AppointmentFilter.upcoming:
-        return t.upcoming;
-      case AppointmentFilter.completed:
-        return t.completed;
-      case AppointmentFilter.cancelled:
-        return t.cancelled;
+  String _getStatusText(bool isCancelled, bool isCompleted) {
+    if (isCancelled) {
+      return t.cancelled;
+    } else if (isCompleted) {
+      return t.completed;
     }
+    return t.upcoming;
   }
 
-  Widget _buildActionButtons(BuildContext context) {
-    if (appointment.status == AppointmentFilter.upcoming) {
+  Widget _buildActionButtons(BuildContext context, bool isUpcoming) {
+    if (isUpcoming) {
       return Row(
         children: [
           Expanded(
             child: OutlinedButton(
-              onPressed: onCancel,
+              onPressed: isOperating ? null : onCancel,
               style: OutlinedButton.styleFrom(
-                foregroundColor: Colors.red,
-                side: BorderSide(color: Colors.red.withOpacity(0.5)),
+                foregroundColor: AppColors.red,
+                side: BorderSide(
+                  color: AppColors.red.withValues(alpha: 0.5),
+                ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -246,14 +255,14 @@ class AppointmentCardWidget extends StatelessWidget {
               ),
               child: Text(
                 t.cancelAppointment,
-                style: context.medium12Secondary.copyWith(color: Colors.red),
+                style: context.medium12Danger,
               ),
             ),
           ),
           const SizedBox(width: 12),
           Expanded(
             child: ElevatedButton(
-              onPressed: onMarkCompleted,
+              onPressed: isOperating ? null : onMarkCompleted,
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primaryColor,
                 foregroundColor: AppColors.white,
@@ -263,7 +272,16 @@ class AppointmentCardWidget extends StatelessWidget {
                 ),
                 padding: const EdgeInsets.symmetric(vertical: 12),
               ),
-              child: Text(t.markAsCompleted, style: context.medium12White),
+              child: isOperating
+                  ? const SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: AppColors.white,
+                      ),
+                    )
+                  : Text(t.markAsCompleted, style: context.medium12White),
             ),
           ),
         ],

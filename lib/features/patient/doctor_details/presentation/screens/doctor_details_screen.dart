@@ -53,8 +53,8 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
               }
               if (state is DoctorDetailsSuccessState) {
                 return SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(25.0),
+                  child: SafeArea(
+                    minimum: const EdgeInsets.symmetric(horizontal: 25.0),
 
                     child: Column(
                       children: [
@@ -66,9 +66,8 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
                         BlocBuilder<FavoritesBloc, FavoritesState>(
                           bloc: getIt<FavoritesBloc>(),
                           builder: (context, favState) {
-                            final isFav = getIt<FavoritesBloc>().isDoctorFavorite(
-                              state.doctorData.id,
-                            );
+                            final isFav = getIt<FavoritesBloc>()
+                                .isDoctorFavorite(state.doctorData.id);
 
                             return DoctorDetailsCardWidget(
                               name: state.doctorData.name,
@@ -82,12 +81,15 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
                                   ToggleFavoriteDoctorEvent(state.doctorData),
                                 );
                               },
-                              onBookNowPressed: () {
-                                SelectTimeRoute(
-                                  doctorId:
-                                      state.doctorData.id ?? widget.doctorId,
-                                ).push(context);
-                              },
+                              onBookNowPressed: !state.doctorData.isActive
+                                  ? null
+                                  : () {
+                                      SelectTimeRoute(
+                                        doctorId:
+                                            state.doctorData.id ??
+                                            widget.doctorId,
+                                      ).push(context);
+                                    },
                             );
                           },
                         ),

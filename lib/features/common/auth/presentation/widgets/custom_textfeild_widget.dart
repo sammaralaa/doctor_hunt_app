@@ -13,6 +13,7 @@ class CustomTextfeildWidget extends StatelessWidget {
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final String? initValue;
+  final TextInputType? keyboardType;
   const CustomTextfeildWidget({
     super.key,
     this.hintText,
@@ -24,7 +25,9 @@ class CustomTextfeildWidget extends StatelessWidget {
     this.isPassWord,
     this.validator,
     this.controller,
-    this.preffixIcon, this.initValue,
+    this.preffixIcon,
+    this.initValue,
+    this.keyboardType,
   });
   @override
   Widget build(BuildContext context) {
@@ -33,7 +36,7 @@ class CustomTextfeildWidget extends StatelessWidget {
 
       child: TextFormField(
         controller: controller,
-        
+        keyboardType: keyboardType,
         validator: validator,
         initialValue: initValue,
         obscureText: isPassWord ?? false,

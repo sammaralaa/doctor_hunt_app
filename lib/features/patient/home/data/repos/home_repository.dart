@@ -1,7 +1,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:doctor_hunt_app/core/models/patient_model.dart';
 import 'package:doctor_hunt_app/features/admin/create-doctor/data/model/doctor_model.dart';
-import 'package:doctor_hunt_app/features/patient/home/data/model/patient_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class HomeRepository {
@@ -22,15 +22,17 @@ class HomeRepository {
           .doc(user.uid)
           .get();
       if (docSnapshot.exists && docSnapshot.data() != null) {
-        final data = docSnapshot.data();
-        return PatientModel(
-          name: data?['name'],
-          profileImage: data?['profileImage'],
-           email: data?['email'], 
-           role: data?['role'],
-        );
+        final data = docSnapshot.data()!;
+        return PatientModel.fromMap(data, user.uid);
       }
-      return PatientModel(name: user.displayName ?? "user", profileImage: null, email: '', role: '');
+      return PatientModel(
+        uid: user.uid,
+        name: user.displayName ?? "User",
+        profileImage: user.photoURL,
+        email: user.email ?? '',
+        role: 'patient',
+        phoneNumber: null,
+      );
     } catch (e) {
       rethrow;
     }

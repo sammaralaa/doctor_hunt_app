@@ -197,8 +197,8 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	/// en: 'Don’t have an account?'
 	String get donTHaveAnAccount => 'Don’t have an account?';
 
-	/// en: 'You can search c ourse, apply course and findscholarship for abroad studies'
-	String get authDescreption => 'You can search c ourse, apply course and findscholarship for abroad studies';
+	/// en: 'Find the best doctors, book appointments easily, and take control of your health'
+	String get authDescreption => 'Find the best doctors, book appointments easily, and take control of your health';
 
 	/// en: 'Account created successfully!'
 	String get accountCreatedSuccessfully => 'Account created successfully!';
@@ -272,8 +272,8 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	/// en: 'Email/password accounts are not enabled.'
 	String get AccountsAreNotEnabled => 'Email/password accounts are not enabled.';
 
-	/// en: 'You can search c ourse, apply course and findscholarship for abroad studies'
-	String get youCanSearchCOurse => 'You can search c ourse, apply course and findscholarship for abroad studies';
+	/// en: 'Log in to manage your upcoming appointments and keep track of your health'
+	String get youCanSearchCOurse => 'Log in to manage your upcoming appointments and keep track of your health';
 
 	/// en: 'Access denied.'
 	String get accessDenied => 'Access denied.';
@@ -374,8 +374,8 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	/// en: 'Doctor Added Successfully'
 	String get doctorAddedSuccessfully => 'Doctor Added Successfully';
 
-	/// en: 'No Doctors Found'
-	String get noDoctorsFound => 'No Doctors Found';
+	/// en: 'No doctors found'
+	String get noDoctorsFound => 'No doctors found';
 
 	/// en: 'There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.'
 	String get thereAreCurrentlyNoDoctors => 'There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.';
@@ -500,6 +500,9 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	/// en: 'Cancel Appointment'
 	String get cancelAppointment => 'Cancel Appointment';
 
+	/// en: 'Appointment cancelled successfully'
+	String get appointmentCancelledSuccessfully => 'Appointment cancelled successfully';
+
 	/// en: 'Mark as Completed'
 	String get markAsCompleted => 'Mark as Completed';
 
@@ -562,6 +565,156 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 
 	/// en: 'Consultation fee'
 	String get consultationFeeLabel => 'Consultation fee';
+
+	/// en: '($count views)'
+	String viewsCount({required Object count}) => '(${count} views)';
+
+	/// en: 'No popular doctors found'
+	String get noPopularDoctorsFound => 'No popular doctors found';
+
+	/// en: 'No appointments found'
+	String get noAppointmentsFound => 'No appointments found';
+
+	/// en: 'Appointment Details'
+	String get appointmentDetails => 'Appointment Details';
+
+	/// en: 'Doctor'
+	String get doctor => 'Doctor';
+
+	/// en: 'Appointment'
+	String get appointment => 'Appointment';
+
+	/// en: 'Clinic Location'
+	String get clinicLocation => 'Clinic Location';
+
+	/// en: 'CLINIC LOCATION'
+	String get clinicLocationUpper => 'CLINIC LOCATION';
+
+	/// en: 'DATE'
+	String get dateUpper => 'DATE';
+
+	/// en: 'TIME'
+	String get timeUpper => 'TIME';
+
+	/// en: 'CONSULTATION FEE'
+	String get consultationFeeUpper => 'CONSULTATION FEE';
+
+	/// en: 'Central Clinic • 24 Garden Avenue'
+	String get centralClinicAddress => 'Central Clinic • 24 Garden Avenue';
+
+	/// en: 'Appointment marked as completed successfully'
+	String get appointmentCompletedSuccessfully => 'Appointment marked as completed successfully';
+
+	/// en: 'Appointment not found'
+	String get appointmentNotFound => 'Appointment not found';
+
+	/// en: 'Are you sure you want to cancel this appointment?'
+	String get areYouSureCancelAppointment => 'Are you sure you want to cancel this appointment?';
+
+	/// en: 'Yes, Cancel'
+	String get yesCancel => 'Yes, Cancel';
+
+	/// en: 'No'
+	String get no => 'No';
+
+	/// en: 'Complete Appointment'
+	String get completeAppointment => 'Complete Appointment';
+
+	/// en: 'Are you sure you want to mark this appointment as completed?'
+	String get areYouSureMarkCompleted => 'Are you sure you want to mark this appointment as completed?';
+
+	/// en: 'Yes'
+	String get yes => 'Yes';
+
+	/// en: 'Edit Profile'
+	String get editProfile => 'Edit Profile';
+
+	/// en: 'FULL NAME'
+	String get fullNameUpper => 'FULL NAME';
+
+	/// en: 'EMAIL ADDRESS'
+	String get emailAddressUpper => 'EMAIL ADDRESS';
+
+	/// en: 'Profile updated successfully!'
+	String get profileUpdatedSuccessfully => 'Profile updated successfully!';
+
+	/// en: 'Please enter your name'
+	String get pleaseEnterFullName => 'Please enter your name';
+
+	/// en: 'Please enter clinic location'
+	String get pleaseEnterClinicLocation => 'Please enter clinic location';
+
+	/// en: 'Are you sure you want to log out?'
+	String get areYouSureLogout => 'Are you sure you want to log out?';
+
+	/// en: 'Coming Soon'
+	String get comingSoon => 'Coming Soon';
+
+	/// en: 'Yes, Logout'
+	String get yesLogout => 'Yes, Logout';
+
+	/// en: 'Account settings'
+	String get accountSettings => 'Account settings';
+
+	/// en: 'Notifications'
+	String get notifications => 'Notifications';
+
+	/// en: 'Privacy Policy'
+	String get privacyPolicy => 'Privacy Policy';
+
+	/// en: 'More options'
+	String get moreOptions => 'More options';
+
+	/// en: 'Languages'
+	String get languages => 'Languages';
+
+	/// en: 'English'
+	String get english => 'English';
+
+	/// en: 'Patient User'
+	String get patientUser => 'Patient User';
+
+	/// en: 'Phone Number'
+	String get phoneNumber => 'Phone Number';
+
+	/// en: 'Enter your phone number'
+	String get enterYourPhoneNumber => 'Enter your phone number';
+
+	/// en: 'Profile'
+	String get profile => 'Profile';
+
+	/// en: 'Personal information'
+	String get personalInformation => 'Personal information';
+
+	/// en: 'Contact Number'
+	String get contactNumber => 'Contact Number';
+
+	/// en: 'Please enter your contact number'
+	String get pleaseEnterContactNumber => 'Please enter your contact number';
+
+	/// en: 'Failed to update profile'
+	String get failedToUpdateProfile => 'Failed to update profile';
+
+	/// en: 'Home'
+	String get home => 'Home';
+
+	/// en: 'Favourites'
+	String get favourites => 'Favourites';
+
+	/// en: 'My Appointments'
+	String get myAppointments => 'My Appointments';
+
+	/// en: 'Search doctors...'
+	String get searchDoctors => 'Search doctors...';
+
+	/// en: 'Try searching with a different name or medical specialty'
+	String get noDoctorsFoundDesc => 'Try searching with a different name or medical specialty';
+
+	/// en: 'Search by doctor name or specialty'
+	String get searchForDoctorsPrompt => 'Search by doctor name or specialty';
+
+	/// en: 'Search Doctors'
+	String get searchDoctorsTitle => 'Search Doctors';
 }
 
 /// The flat map containing all translations for locale <en>.
@@ -624,7 +777,7 @@ extension on Translations {
 			'logedInSuccessfully' => 'loged in successfully!',
 			'forgotPassword' => 'Forgot password',
 			'donTHaveAnAccount' => 'Don’t have an account?',
-			'authDescreption' => 'You can search c ourse, apply course and findscholarship for abroad studies',
+			'authDescreption' => 'Find the best doctors, book appointments easily, and take control of your health',
 			'accountCreatedSuccessfully' => 'Account created successfully!',
 			'AcceptTheTermsPrivacy' => 'Please accept the Terms & Privacy Policy',
 			'doctors' => 'Doctors',
@@ -649,7 +802,7 @@ extension on Translations {
 			'thePasswordisWeak' => 'The password provided is too weak.',
 			'anUnknownAuthError' => 'An unknown authentication error occurred.',
 			'AccountsAreNotEnabled' => 'Email/password accounts are not enabled.',
-			'youCanSearchCOurse' => 'You can search c ourse, apply course and findscholarship for abroad studies',
+			'youCanSearchCOurse' => 'Log in to manage your upcoming appointments and keep track of your health',
 			'accessDenied' => 'Access denied.',
 			'settingsScreen' => 'Settings Screen',
 			'count' => 'count',
@@ -683,7 +836,7 @@ extension on Translations {
 			'delete' => 'Delete',
 			'cancel' => 'Cancel',
 			'doctorAddedSuccessfully' => 'Doctor Added Successfully',
-			'noDoctorsFound' => 'No Doctors Found',
+			'noDoctorsFound' => 'No doctors found',
 			'thereAreCurrentlyNoDoctors' => 'There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.',
 			'doctorStatus' => 'Doctor Status',
 			'saveChanges' => 'Save Changes',
@@ -725,6 +878,7 @@ extension on Translations {
 			'completed' => 'Completed',
 			'cancelled' => 'Cancelled',
 			'cancelAppointment' => 'Cancel Appointment',
+			'appointmentCancelledSuccessfully' => 'Appointment cancelled successfully',
 			'markAsCompleted' => 'Mark as Completed',
 			'viewDetails' => 'View Details',
 			'date' => 'Date',
@@ -746,6 +900,56 @@ extension on Translations {
 			'appointmentDate' => 'Appointment date',
 			'appointmentTime' => 'Appointment time',
 			'consultationFeeLabel' => 'Consultation fee',
+			'viewsCount' => ({required Object count}) => '(${count} views)',
+			'noPopularDoctorsFound' => 'No popular doctors found',
+			'noAppointmentsFound' => 'No appointments found',
+			'appointmentDetails' => 'Appointment Details',
+			'doctor' => 'Doctor',
+			'appointment' => 'Appointment',
+			'clinicLocation' => 'Clinic Location',
+			'clinicLocationUpper' => 'CLINIC LOCATION',
+			'dateUpper' => 'DATE',
+			'timeUpper' => 'TIME',
+			'consultationFeeUpper' => 'CONSULTATION FEE',
+			'centralClinicAddress' => 'Central Clinic • 24 Garden Avenue',
+			'appointmentCompletedSuccessfully' => 'Appointment marked as completed successfully',
+			'appointmentNotFound' => 'Appointment not found',
+			'areYouSureCancelAppointment' => 'Are you sure you want to cancel this appointment?',
+			'yesCancel' => 'Yes, Cancel',
+			'no' => 'No',
+			'completeAppointment' => 'Complete Appointment',
+			'areYouSureMarkCompleted' => 'Are you sure you want to mark this appointment as completed?',
+			'yes' => 'Yes',
+			'editProfile' => 'Edit Profile',
+			'fullNameUpper' => 'FULL NAME',
+			'emailAddressUpper' => 'EMAIL ADDRESS',
+			'profileUpdatedSuccessfully' => 'Profile updated successfully!',
+			'pleaseEnterFullName' => 'Please enter your name',
+			'pleaseEnterClinicLocation' => 'Please enter clinic location',
+			'areYouSureLogout' => 'Are you sure you want to log out?',
+			'comingSoon' => 'Coming Soon',
+			'yesLogout' => 'Yes, Logout',
+			'accountSettings' => 'Account settings',
+			'notifications' => 'Notifications',
+			'privacyPolicy' => 'Privacy Policy',
+			'moreOptions' => 'More options',
+			'languages' => 'Languages',
+			'english' => 'English',
+			'patientUser' => 'Patient User',
+			'phoneNumber' => 'Phone Number',
+			'enterYourPhoneNumber' => 'Enter your phone number',
+			'profile' => 'Profile',
+			'personalInformation' => 'Personal information',
+			'contactNumber' => 'Contact Number',
+			'pleaseEnterContactNumber' => 'Please enter your contact number',
+			'failedToUpdateProfile' => 'Failed to update profile',
+			'home' => 'Home',
+			'favourites' => 'Favourites',
+			'myAppointments' => 'My Appointments',
+			'searchDoctors' => 'Search doctors...',
+			'noDoctorsFoundDesc' => 'Try searching with a different name or medical specialty',
+			'searchForDoctorsPrompt' => 'Search by doctor name or specialty',
+			'searchDoctorsTitle' => 'Search Doctors',
 			_ => null,
 		};
 	}

@@ -12,7 +12,6 @@ import 'package:doctor_hunt_app/features/patient/favorite/presentation/controlle
 import 'package:doctor_hunt_app/features/patient/favorite/presentation/controller/favorites_event.dart';
 import 'package:doctor_hunt_app/features/patient/favorite/presentation/controller/favorites_state.dart';
 import 'package:doctor_hunt_app/features/patient/favorite/presentation/widgets/favorite_card_widget.dart';
-import 'package:doctor_hunt_app/features/patient/home/presentation/widgets/feature_doctor_card.dart';
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
@@ -47,8 +46,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     return BlocProvider.value(
       value: getIt<FavoritesBloc>(),
       child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+        body: SafeArea(
+          minimum: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           child: CustomScrollView(
             slivers: [
               SliverToBoxAdapter(

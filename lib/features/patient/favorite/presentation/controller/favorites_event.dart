@@ -21,6 +21,8 @@ class ToggleFavoriteDoctorEvent extends FavoritesEvent {
   List<Object?> get props => [doctor];
 }
 
+typedef ToggleFavoriteEvent = ToggleFavoriteDoctorEvent;
+
 class FavoritesUpdatedEvent extends FavoritesEvent {
   final List<DoctorModel> doctors;
 

@@ -8,6 +8,7 @@ import 'package:doctor_hunt_app/features/admin/doctor_availability/presentation/
 import 'package:doctor_hunt_app/features/admin/doctor_availability/presentation/screens/doctor_availability_screen.dart';
 import 'package:doctor_hunt_app/features/admin/edit_doctor/presentation/controller/edit_doctor_bloc.dart';
 import 'package:doctor_hunt_app/features/admin/edit_doctor/presentation/screens/edit_doctor_screen.dart';
+import 'package:doctor_hunt_app/features/admin/edit_admin_profile/presentation/screens/edit_admin_profile_screen.dart';
 import 'package:doctor_hunt_app/features/common/auth/presentation/controller/auth_bloc.dart';
 import 'package:doctor_hunt_app/features/common/auth/presentation/screens/sign_up_screen.dart';
 import 'package:doctor_hunt_app/features/common/auth/presentation/screens/login_screen.dart';
@@ -16,11 +17,26 @@ import 'package:doctor_hunt_app/features/patient/doctor_details/presentation/con
 import 'package:doctor_hunt_app/features/patient/doctor_details/presentation/screens/doctor_details_screen.dart';
 import 'package:doctor_hunt_app/features/admin/doctors_list/presentation/screens/doctors_list_screen.dart';
 import 'package:doctor_hunt_app/features/patient/main_screen/presentation/screens/main_screen.dart';
+import 'package:doctor_hunt_app/features/patient/home/presentation/screens/home_screen.dart';
+import 'package:doctor_hunt_app/features/patient/favorite/presentation/screens/favorite_screen.dart';
+import 'package:doctor_hunt_app/features/patient/patient_appointments/presentation/screens/patient_appointments_screen.dart';
+import 'package:doctor_hunt_app/features/patient/patient_settings/presentation/screens/patient_settings_screen.dart';
+import 'package:doctor_hunt_app/features/patient/search_doctors/presentation/controller/search_doctors_bloc.dart';
+import 'package:doctor_hunt_app/features/patient/search_doctors/presentation/screens/search_screen.dart';
 import 'package:doctor_hunt_app/features/common/onboarding/presentation/screens/onboarding_screen.dart';
 import 'package:doctor_hunt_app/features/patient/find_doctors/presentation/screens/find_doctors_screen.dart';
+import 'package:doctor_hunt_app/features/patient/favorite/presentation/controller/favorites_bloc.dart';
+import 'package:doctor_hunt_app/features/patient/favorite/presentation/controller/favorites_event.dart';
+import 'package:doctor_hunt_app/features/patient/popular_doctors/presentation/controller/popular_doctors_bloc.dart';
+import 'package:doctor_hunt_app/features/patient/popular_doctors/presentation/controller/popular_doctors_event.dart';
+import 'package:doctor_hunt_app/features/patient/popular_doctors/presentation/screens/popular_doctors_screen.dart';
 import 'package:doctor_hunt_app/features/patient/select_time_and_date/presentation/controller/select_time_date_bloc.dart';
 import 'package:doctor_hunt_app/features/patient/select_time_and_date/presentation/screens/select_time_date_screen.dart';
+import 'package:doctor_hunt_app/features/common/appointment_details/presentation/controller/appointment_details_bloc.dart';
+import 'package:doctor_hunt_app/features/common/appointment_details/presentation/controller/appointment_details_event.dart';
+import 'package:doctor_hunt_app/features/common/appointment_details/presentation/screens/appointment_details_screen.dart';
 import 'package:doctor_hunt_app/features/common/splash/presentation/screens/splash_screen.dart';
+import 'package:doctor_hunt_app/features/patient/patient_profile/presentation/screens/patient_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -74,15 +90,96 @@ class SignUpRoute extends GoRouteData with $SignUpRoute {
   }
 }
 
-@TypedGoRoute<MainScreenRoute>(path: '/main')
+@TypedStatefulShellRoute<MainShellRouteData>(
+  branches: <TypedStatefulShellBranch<StatefulShellBranchData>>[
+    TypedStatefulShellBranch<HomeBranchData>(
+      routes: <TypedRoute<RouteData>>[
+        TypedGoRoute<MainScreenRoute>(path: '/main'),
+      ],
+    ),
+    TypedStatefulShellBranch<FavoriteBranchData>(
+      routes: <TypedRoute<RouteData>>[
+        TypedGoRoute<FavoriteRoute>(path: '/favorites'),
+      ],
+    ),
+    TypedStatefulShellBranch<AppointmentsBranchData>(
+      routes: <TypedRoute<RouteData>>[
+        TypedGoRoute<PatientAppointmentsRoute>(path: '/appointments'),
+      ],
+    ),
+    TypedStatefulShellBranch<SettingsBranchData>(
+      routes: <TypedRoute<RouteData>>[
+        TypedGoRoute<PatientSettingsRoute>(path: '/settings'),
+      ],
+    ),
+  ],
+)
+class MainShellRouteData extends StatefulShellRouteData {
+  const MainShellRouteData();
+
+  @override
+  Widget builder(
+    BuildContext context,
+    GoRouterState state,
+    StatefulNavigationShell navigationShell,
+  ) {
+    return MainScreen(navigationShell: navigationShell);
+  }
+}
+
+class HomeBranchData extends StatefulShellBranchData {
+  const HomeBranchData();
+}
+
+class FavoriteBranchData extends StatefulShellBranchData {
+  const FavoriteBranchData();
+}
+
+class AppointmentsBranchData extends StatefulShellBranchData {
+  const AppointmentsBranchData();
+}
+
+class SettingsBranchData extends StatefulShellBranchData {
+  const SettingsBranchData();
+}
+
 class MainScreenRoute extends GoRouteData with $MainScreenRoute {
   const MainScreenRoute();
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return MainScreen();
+    return const HomeScreen();
   }
 }
+
+class FavoriteRoute extends GoRouteData with $FavoriteRoute {
+  const FavoriteRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const FavoriteScreen();
+  }
+}
+
+class PatientAppointmentsRoute extends GoRouteData
+    with $PatientAppointmentsRoute {
+  const PatientAppointmentsRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const PatientAppointmentsScreen();
+  }
+}
+
+class PatientSettingsRoute extends GoRouteData with $PatientSettingsRoute {
+  const PatientSettingsRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const PatientSettingsScreen();
+  }
+}
+
 
 @TypedGoRoute<ChooseRoleRoute>(path: '/choose-role')
 class ChooseRoleRoute extends GoRouteData with $ChooseRoleRoute {
@@ -209,6 +306,82 @@ class DoctorAvailabilityRoute extends GoRouteData
   }
 }
 
+@TypedGoRoute<PopularDoctorsRoute>(path: '/popular-doctors')
+class PopularDoctorsRoute extends GoRouteData with $PopularDoctorsRoute {
+  const PopularDoctorsRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<PopularDoctorsBloc>(
+          create: (context) =>
+              getIt<PopularDoctorsBloc>()..add(const FetchPopularDoctorsEvent()),
+        ),
+        BlocProvider<FavoritesBloc>.value(
+          value: getIt<FavoritesBloc>()..add(const FetchFavoriteDoctorsEvent()),
+        ),
+      ],
+      child: const PopularDoctorsScreen(),
+    );
+  }
+}
+
+@TypedGoRoute<AppointmentDetailsRoute>(path: '/appointment-details')
+class AppointmentDetailsRoute extends GoRouteData
+    with $AppointmentDetailsRoute {
+  final String appointmentId;
+  const AppointmentDetailsRoute({required this.appointmentId});
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return BlocProvider<AppointmentDetailsBloc>(
+      create: (context) => getIt<AppointmentDetailsBloc>()
+        ..add(FetchAppointmentDetailsEvent(appointmentId)),
+      child: AppointmentDetailsScreen(appointmentId: appointmentId),
+    );
+  }
+}
+
+@TypedGoRoute<EditAdminProfileRoute>(path: '/edit-admin-profile')
+class EditAdminProfileRoute extends GoRouteData with $EditAdminProfileRoute {
+  const EditAdminProfileRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const EditAdminProfileScreen();
+  }
+}
+
+@TypedGoRoute<PatientProfileRoute>(path: '/patient-profile')
+class PatientProfileRoute extends GoRouteData with $PatientProfileRoute {
+  const PatientProfileRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const PatientProfileScreen();
+  }
+}
+
+@TypedGoRoute<SearchRoute>(path: '/search')
+class SearchRoute extends GoRouteData with $SearchRoute {
+  const SearchRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<SearchDoctorsBloc>(
+          create: (context) => getIt<SearchDoctorsBloc>(),
+        ),
+        BlocProvider<FavoritesBloc>.value(
+          value: getIt<FavoritesBloc>()..add(const FetchFavoriteDoctorsEvent()),
+        ),
+      ],
+      child: const SearchScreen(),
+    );
+  }
+}
 
 /**
 @TypedGoRoute<LoginRoute>(path: '/login')

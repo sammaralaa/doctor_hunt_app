@@ -119,6 +119,7 @@ class SelectTimeDateBloc
     SelectTimeSlotEvent event,
     Emitter<SelectTimeDateState> emit,
   ) {
+    if (event.slot.isDisabled) return;
     final currentState = state;
     if (currentState is! SelectTimeDateLoadedState) return;
 
@@ -148,13 +149,19 @@ class SelectTimeDateBloc
       );
 
       final updatedMorning = currentState.morningSlots
-          .where((s) => !_isSlotBooked(s, [bookedAppointment]))
+          .map((s) => _isSlotBooked(s.dateTime, [bookedAppointment])
+              ? s.copyWith(isBooked: true)
+              : s)
           .toList();
       final updatedAfternoon = currentState.afternoonSlots
-          .where((s) => !_isSlotBooked(s, [bookedAppointment]))
+          .map((s) => _isSlotBooked(s.dateTime, [bookedAppointment])
+              ? s.copyWith(isBooked: true)
+              : s)
           .toList();
       final updatedEvening = currentState.eveningSlots
-          .where((s) => !_isSlotBooked(s, [bookedAppointment]))
+          .map((s) => _isSlotBooked(s.dateTime, [bookedAppointment])
+              ? s.copyWith(isBooked: true)
+              : s)
           .toList();
 
       emit(
@@ -211,6 +218,11 @@ class SelectTimeDateBloc
         ? availability.slotDuration
         : 30;
 
+    final now = DateTime.now();
+    final isToday = DateUtils.isSameDay(date, now);
+    final todayMidnight = DateTime(now.year, now.month, now.day);
+    final isSelectedDatePast = date.isBefore(todayMidnight);
+
     final List<TimeSlotModel> generated = [];
     for (int m = startMinutes; m + duration <= endMinutes; m += duration) {
       final hour = m ~/ 60;
@@ -222,50 +234,58 @@ class SelectTimeDateBloc
         hour,
         minute,
       );
-      generated.add(TimeSlotModel(dateTime: slotDateTime));
+
+      final isBooked = _isSlotBooked(slotDateTime, bookedAppointments);
+      final isPast =
+          isSelectedDatePast || (isToday && slotDateTime.isBefore(now));
+
+      generated.add(
+        TimeSlotModel(
+          dateTime: slotDateTime,
+          isBooked: isBooked,
+          isPast: isPast,
+        ),
+      );
     }
 
-    final available = generated
-        .where((slot) => !_isSlotBooked(slot, bookedAppointments))
-        .toList();
-
     // morning: opening until 11:59 AM (hour < 12)
-    final morning = available.where((s) => s.isMorning).toList();
+    final morning = generated.where((s) => s.isMorning).toList();
     // afternoon: 12:00 PM to 4:59 PM (hour >= 12 && hour < 17)
-    final afternoon = available.where((s) => s.isAfternoon).toList();
+    final afternoon = generated.where((s) => s.isAfternoon).toList();
     // evening: 5:00 PM onwards (hour >= 17)
-    final evening = available.where((s) => s.isEvening).toList();
+    final evening = generated.where((s) => s.isEvening).toList();
 
     return (morning: morning, afternoon: afternoon, evening: evening);
   }
 
   bool _isSlotBooked(
-    TimeSlotModel slot,
+    DateTime slotDateTime,
     List<AppointmentModel> bookedAppointments,
   ) {
+    final slotFormatted = DateFormat('h:mm a').format(slotDateTime);
     for (final app in bookedAppointments) {
       if (app.status.toLowerCase() == 'cancelled') continue;
 
       final appTime = app.time.trim();
       if (appTime.isEmpty) continue;
 
-      if (slot.formattedTime.toLowerCase() == appTime.toLowerCase()) {
+      if (slotFormatted.toLowerCase() == appTime.toLowerCase()) {
         return true;
       }
 
-      final hhmmA = DateFormat('hh:mm a').format(slot.dateTime);
+      final hhmmA = DateFormat('hh:mm a').format(slotDateTime);
       if (hhmmA.toLowerCase() == appTime.toLowerCase()) {
         return true;
       }
 
-      final format24 = DateFormat('HH:mm').format(slot.dateTime);
+      final format24 = DateFormat('HH:mm').format(slotDateTime);
       if (format24 == appTime) {
         return true;
       }
 
       final parsed = _parseTime(appTime, const TimeOfDay(hour: -1, minute: -1));
-      if (parsed.hour == slot.dateTime.hour &&
-          parsed.minute == slot.dateTime.minute) {
+      if (parsed.hour == slotDateTime.hour &&
+          parsed.minute == slotDateTime.minute) {
         return true;
       }
     }

@@ -21,5 +21,8 @@ class AppColors {
   static const Color yellow = Color(0xffF6D060);
   static const Color white = Color(0xffFFFFFF);
   static const Color black = Color(0xff000000);
-  static  Color transparent = Colors.transparent;
+  static Color transparent = Colors.transparent;
+
+  static const Color drawerBackgroundStart = Color(0xFF6B7B9E);
+  static const Color drawerBackgroundEnd = Color(0xFF536182);
 }

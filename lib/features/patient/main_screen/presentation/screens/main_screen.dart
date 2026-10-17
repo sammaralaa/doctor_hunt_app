@@ -1,16 +1,21 @@
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
+import 'package:doctor_hunt_app/core/services/di.dart';
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/core/widgets/bottom_right_shadow_widget.dart';
 import 'package:doctor_hunt_app/core/widgets/top_left_shadow_widget.dart';
-import 'package:doctor_hunt_app/features/patient/favorite/presentation/screens/favorite_screen.dart';
-import 'package:doctor_hunt_app/features/patient/home/presentation/screens/home_screen.dart';
-import 'package:doctor_hunt_app/features/patient/patient_appointments/presentation/screens/patient_appointments_screen.dart';
+import 'package:doctor_hunt_app/features/patient/menu_drawer/presentation/controller/menu_drawer_bloc.dart';
+import 'package:doctor_hunt_app/features/patient/menu_drawer/presentation/controller/menu_drawer_event.dart';
+import 'package:doctor_hunt_app/features/patient/menu_drawer/presentation/widgets/custom_animated_drawer.dart';
 import 'package:doctor_hunt_app/generated/icons_assets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  final StatefulNavigationShell navigationShell;
+
+  const MainScreen({super.key, required this.navigationShell});
 
   @override
   State<StatefulWidget> createState() {
@@ -19,177 +24,130 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreen extends State<MainScreen> {
-  int _currentIndex = 0;
-  final NotchBottomBarController _controller = NotchBottomBarController(
-    index: 0,
-  );
-  int maxCount = 4;
+  late final NotchBottomBarController _controller;
+  final GlobalKey<CustomAnimatedDrawerState> _drawerKey =
+      GlobalKey<CustomAnimatedDrawerState>();
+  final int maxCount = 4;
 
-  final List<Widget> _screens = [
-    HomeScreen(),
-    FavoriteScreen(),
-    PatientAppointmentsScreen(),
-    Center(child: Text('Chat Screen', style: TextStyle(fontSize: 20))),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _controller = NotchBottomBarController(
+      index: widget.navigationShell.currentIndex,
+    );
+  }
+
+  @override
+  void didUpdateWidget(covariant MainScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.navigationShell.currentIndex != _controller.index) {
+      _controller.jumpTo(widget.navigationShell.currentIndex);
+    }
+  }
+
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
 
+  void _onMenuItemSelected(int index) {
+    if (index >= 0 && index < maxCount) {
+      widget.navigationShell.goBranch(index);
+      _controller.jumpTo(index);
+      _drawerKey.currentState?.closeDrawer();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBody: true,
-      body: Stack(
-        children: [
-          TopLeftShadowWidget(),
-
-          BottomRightShadowWidget(),
-          IndexedStack(index: _currentIndex, children: _screens),
-        ],
+    return BlocProvider<MenuDrawerBloc>(
+      create: (context) =>
+          getIt<MenuDrawerBloc>()..add(const LoadMenuDrawerDataEvent()),
+      child: CustomAnimatedDrawer(
+        key: _drawerKey,
+        selectedIndex: widget.navigationShell.currentIndex,
+        onMenuItemSelected: _onMenuItemSelected,
+        child: Scaffold(
+          extendBody: true,
+          body: Stack(
+            children: [
+              const TopLeftShadowWidget(),
+              const BottomRightShadowWidget(),
+              widget.navigationShell,
+            ],
+          ),
+          bottomNavigationBar: AnimatedNotchBottomBar(
+            notchBottomBarController: _controller,
+            bottomBarItems: [
+              BottomBarItem(
+                inActiveItem: SvgPicture.asset(
+                  IconsAssets.home,
+                  colorFilter: const ColorFilter.mode(
+                    AppColors.inactiveIconColor,
+                    BlendMode.srcIn,
+                  ),
+                ),
+                activeItem: SvgPicture.asset(
+                  IconsAssets.home,
+                  colorFilter: const ColorFilter.mode(
+                    AppColors.primaryColor,
+                    BlendMode.srcIn,
+                  ),
+                ),
+              ),
+              BottomBarItem(
+                inActiveItem: SvgPicture.asset(
+                  IconsAssets.favorite,
+                  colorFilter: const ColorFilter.mode(
+                    AppColors.inactiveIconColor,
+                    BlendMode.srcIn,
+                  ),
+                ),
+                activeItem: SvgPicture.asset(
+                  IconsAssets.favorite,
+                  colorFilter: const ColorFilter.mode(
+                    AppColors.primaryColor,
+                    BlendMode.srcIn,
+                  ),
+                ),
+              ),
+              BottomBarItem(
+                inActiveItem: SvgPicture.asset(
+                  IconsAssets.appoinment,
+                  colorFilter: const ColorFilter.mode(
+                    AppColors.inactiveIconColor,
+                    BlendMode.srcIn,
+                  ),
+                ),
+                activeItem: SvgPicture.asset(
+                  IconsAssets.appoinment,
+                  colorFilter: const ColorFilter.mode(
+                    AppColors.primaryColor,
+                    BlendMode.srcIn,
+                  ),
+                ),
+              ),
+              const BottomBarItem(
+                inActiveItem: Icon(
+                  Icons.settings,
+                  color: AppColors.inactiveIconColor,
+                ),
+                activeItem: Icon(
+                  Icons.settings,
+                  color: AppColors.primaryColor,
+                ),
+              ),
+            ],
+            onTap: (int value) {
+              widget.navigationShell.goBranch(value);
+            },
+            kIconSize: 20,
+            kBottomRadius: 20,
+          ),
+        ),
       ),
-      bottomNavigationBar: AnimatedNotchBottomBar(
-        notchBottomBarController: _controller,
-        bottomBarItems: [
-          BottomBarItem(
-            inActiveItem: SvgPicture.asset(
-              IconsAssets.home,
-              colorFilter: ColorFilter.mode(
-                AppColors.inactiveIconColor,
-                BlendMode.srcIn,
-              ),
-            ),
-            activeItem: SvgPicture.asset(
-              IconsAssets.home,
-              colorFilter: ColorFilter.mode(
-                AppColors.primaryColor,
-                BlendMode.srcIn,
-              ),
-            ),
-          ),
-          BottomBarItem(
-            inActiveItem: SvgPicture.asset(
-              IconsAssets.favorite,
-              colorFilter: ColorFilter.mode(
-                AppColors.inactiveIconColor,
-                BlendMode.srcIn,
-              ),
-            ),
-            activeItem: SvgPicture.asset(
-              IconsAssets.favorite,
-              colorFilter: ColorFilter.mode(
-                AppColors.primaryColor,
-                BlendMode.srcIn,
-              ),
-            ),
-          ),
-          BottomBarItem(
-            inActiveItem: SvgPicture.asset(
-              IconsAssets.news,
-              colorFilter: ColorFilter.mode(
-                AppColors.inactiveIconColor,
-                BlendMode.srcIn,
-              ),
-            ),
-            activeItem: SvgPicture.asset(
-              IconsAssets.news,
-              colorFilter: ColorFilter.mode(
-                AppColors.primaryColor,
-                BlendMode.srcIn,
-              ),
-            ),
-          ),
-          BottomBarItem(
-            inActiveItem: SvgPicture.asset(
-              IconsAssets.chat,
-              colorFilter: ColorFilter.mode(
-                AppColors.inactiveIconColor,
-                BlendMode.srcIn,
-              ),
-            ),
-            activeItem: SvgPicture.asset(
-              IconsAssets.chat,
-              colorFilter: ColorFilter.mode(
-                AppColors.primaryColor,
-                BlendMode.srcIn,
-              ),
-            ),
-          ),
-        ],
-        onTap: (int value) {
-          setState(() {
-            _currentIndex = value;
-          });
-        },
-        kIconSize: 20,
-        kBottomRadius: 20,
-      ),
-      // Container(
-      //   decoration: BoxDecoration(
-      //     color: Colors.white,
-      //     borderRadius: BorderRadius.only(
-      //       topLeft: Radius.circular(20),
-      //       topRight: Radius.circular(20),
-      //     ),
-      //     boxShadow: [
-      //       BoxShadow(
-      //         color: Colors.black.withAlpha(50),
-      //         blurRadius: 10,
-      //         offset: const Offset(0, -4),
-      //       ),
-      //     ],
-      //   ),
-      //   child: ClipRRect(
-      //     borderRadius: BorderRadius.only(
-      //       topLeft: Radius.circular(20),
-      //       topRight: Radius.circular(20),
-      //     ),
-      //     child: BottomNavigationBar(
-      //       type: BottomNavigationBarType.fixed,
-      //       elevation: 0,
-      //       backgroundColor: AppColors.white,
-      //       showSelectedLabels: false,
-      //       showUnselectedLabels: false,
-      //       currentIndex: _currentIndex,
-      //       onTap: (index) {
-      //         setState(() {
-      //           _currentIndex = index;
-      //         });
-      //       },
-      //       items: [
-      //         BottomNavigationBarItem(
-      //           icon: CustomIconBottomNav(
-      //             icon: IconsAssets.home,
-      //             isSelected: _currentIndex == 0,
-      //           ),
-      //           label: "Home",
-      //         ),
-      //         BottomNavigationBarItem(
-      //           icon: CustomIconBottomNav(
-      //             icon: IconsAssets.favorite,
-      //             isSelected: _currentIndex == 1,
-      //           ),
-      //           label: "Favorites",
-      //         ),
-      //         BottomNavigationBarItem(
-      //           icon: CustomIconBottomNav(
-      //             icon: IconsAssets.news,
-      //             isSelected: _currentIndex == 2,
-      //           ),
-      //           label: "News",
-      //         ),
-      //         BottomNavigationBarItem(
-      //           icon: CustomIconBottomNav(
-      //             icon: IconsAssets.chat,
-      //             isSelected: _currentIndex == 3,
-      //           ),
-      //           label: "Chat",
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // ),
     );
   }
 }
+

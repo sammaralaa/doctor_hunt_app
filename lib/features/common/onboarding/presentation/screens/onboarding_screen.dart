@@ -19,12 +19,12 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreen extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
-  
-  Future<void> _completeOnboarding() async {
 
+  Future<void> _completeOnboarding() async {
     if (!mounted) return;
     ChooseRoleRoute().go(context);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,76 +33,71 @@ class _OnboardingScreen extends State<OnboardingScreen> {
           TopLeftColorShape(),
           BottomRightShadowWidget(),
           SafeArea(
-            child: Padding(
-              padding: EdgeInsets.all(20),
-              child: PageView.builder(
-                controller: _pageController,
-                itemCount: OnboardingModel.onboardingPages.length,
-                onPageChanged: (index) {
-                  setState(() {
-                    _currentIndex = index;
-                  });
-                },
-                itemBuilder: (context, index) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      HeightSpace(70),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(160.0),
-                        child: Image.asset(
-                          OnboardingModel.onboardingPages[index].image,
-                          width: 336,
-                          height: 336,
-                          fit: BoxFit.cover,
-                        ),
+            minimum: EdgeInsets.symmetric(horizontal: 20),
+            child: PageView.builder(
+              controller: _pageController,
+              itemCount: OnboardingModel.onboardingPages.length,
+              onPageChanged: (index) {
+                setState(() {
+                  _currentIndex = index;
+                });
+              },
+              itemBuilder: (context, index) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    HeightSpace(60),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(160.0),
+                      child: Image.asset(
+                        OnboardingModel.onboardingPages[index].image,
+                        width: 336,
+                        height: 336,
+                        fit: BoxFit.cover,
                       ),
-                      HeightSpace(65),
-                      Text(
-                        OnboardingModel.onboardingPages[index].title,
-                        style: context.bold26TextMain,
-                      ),
-                      HeightSpace(11),
-                      Text(
-                        OnboardingModel
-                            .onboardingPages[_currentIndex]
-                            .description,
-                        style: context.regular14TextSub,
-                        textAlign: TextAlign.center,
-                      ),
-                      HeightSpace(35),
-                      CustomElevatdButton(
-                        buttonTXT: t.getStarted,
-                        onTap: () {
-                          if (_currentIndex <
-                              (OnboardingModel.onboardingPages.length - 1)) {
-                            _pageController.nextPage(
-                              duration: const Duration(milliseconds: 500),
-                              curve: Curves.easeInOut,
-                            );
-                          } else {
-                            _completeOnboarding();
-                            //GoRouter.of(context,).pushNamed(AppRoutes.chooseRoleScreen);
-                          }
-                        },
-                      ),
-                      HeightSpace(10),
-                      TextButton(
-                        onPressed: () {
-                          // GoRouter.of(
-                          //   context,
-                          // ).pushNamed(AppRoutes.chooseRoleScreen);
+                    ),
+                    HeightSpace(65),
+                    Text(
+                      OnboardingModel.onboardingPages[index].title,
+                      style: context.bold26TextMain,
+                    ),
+                    HeightSpace(11),
+                    Text(
+                      OnboardingModel
+                          .onboardingPages[_currentIndex]
+                          .description,
+                      style: context.regular14TextSub,
+                      textAlign: TextAlign.center,
+                    ),
+                    HeightSpace(35),
+                    CustomElevatdButton(
+                      buttonTXT: t.getStarted,
+                      onTap: () {
+                        if (_currentIndex <
+                            (OnboardingModel.onboardingPages.length - 1)) {
+                          _pageController.nextPage(
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.easeInOut,
+                          );
+                        } else {
                           _completeOnboarding();
-                        },
-                        child: Text(
-                          t.skip,
-                          style: context.regular14TextSub,
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              ),
+                          //GoRouter.of(context,).pushNamed(AppRoutes.chooseRoleScreen);
+                        }
+                      },
+                    ),
+                    HeightSpace(10),
+                    TextButton(
+                      onPressed: () {
+                        // GoRouter.of(
+                        //   context,
+                        // ).pushNamed(AppRoutes.chooseRoleScreen);
+                        _completeOnboarding();
+                      },
+                      child: Text(t.skip, style: context.regular14TextSub),
+                    ),
+                  ],
+                );
+              },
             ),
           ),
         ],

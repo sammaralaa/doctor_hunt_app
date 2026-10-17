@@ -240,7 +240,7 @@ class _SelectTimeDateScreenState extends State<SelectTimeDateScreen> {
           );
 
           final availabilityText = isSelected
-              ? (state.hasSlots
+              ? (state.hasAvailableSlots
                   ? t.slotsAvailable(count: state.totalAvailableSlotsCount)
                   : t.noSlotsAvailable)
               : ((state.doctor.availability?.workingDays
@@ -347,26 +347,43 @@ class _SelectTimeDateScreenState extends State<SelectTimeDateScreen> {
       spacing: 10,
       runSpacing: 10,
       children: slots.map((slot) {
-        final isSelected = selectedTimeSlot?.dateTime == slot.dateTime;
+        final isDisabled = slot.isDisabled;
+        final isSelected =
+            !isDisabled && selectedTimeSlot?.dateTime == slot.dateTime;
+
+        final Color backgroundColor;
+        final TextStyle textStyle;
+
+        if (isDisabled) {
+          backgroundColor = AppColors.inactiveBorderColor;
+          textStyle = context.regular12BoxShadow;
+        } else if (isSelected) {
+          backgroundColor = AppColors.primaryColor;
+          textStyle = context.regular12White;
+        } else {
+          backgroundColor = AppColors.primaryColor.withValues(alpha: 0.08);
+          textStyle = context.regular12Primary;
+        }
+
         return InkWell(
-          onTap: () {
-            context.read<SelectTimeDateBloc>().add(SelectTimeSlotEvent(slot));
-          },
+          onTap: isDisabled
+              ? null
+              : () {
+                  context
+                      .read<SelectTimeDateBloc>()
+                      .add(SelectTimeSlotEvent(slot));
+                },
           borderRadius: BorderRadius.circular(6),
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 150),
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
             decoration: BoxDecoration(
-              color: isSelected
-                  ? AppColors.primaryColor
-                  : AppColors.primaryColor.withValues(alpha: 0.08),
+              color: backgroundColor,
               borderRadius: BorderRadius.circular(6),
             ),
             child: Text(
               slot.formattedTime,
-              style: isSelected
-                  ? context.regular12White
-                  : context.regular12Primary,
+              style: textStyle,
             ),
           ),
         );

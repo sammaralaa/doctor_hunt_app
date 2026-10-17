@@ -6,3 +6,11 @@ abstract class AdminSettingsEvent extends Equatable {
   @override
   List<Object?> get props => [];
 }
+
+class LoadAdminSettingsEvent extends AdminSettingsEvent {
+  const LoadAdminSettingsEvent();
+}
+
+class AdminLogoutEvent extends AdminSettingsEvent {
+  const AdminLogoutEvent();
+}

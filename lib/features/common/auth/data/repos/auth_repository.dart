@@ -23,6 +23,7 @@ class AuthRepository {
     required String password,
     required String name,
     required String userRole,
+    String? phoneNumber,
     File? profileImageFile,
   }) async {
     final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
@@ -42,6 +43,7 @@ class AuthRepository {
     await _firestore.collection('users').doc(user.uid).set({
       'name': name,
       'email': email,
+      'phoneNumber': phoneNumber ?? '',
       'role': userRole,
       'profileImage': imageUrl ?? '',
     });

@@ -15,17 +15,20 @@ class OnboardingModel {
     OnboardingModel(
       image: ImageAssets.onBoarding1,
       title: 'Find Trusted Doctors',
-      description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of it over 2000 years old.',
+      description:
+          'Discover a wide network of certified and experienced medical professionals ready to provide top-quality healthcare for you and your family.',
     ),
     OnboardingModel(
       image: ImageAssets.onBoarding5,
       title: 'Choose Best Doctors',
-      description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of it over 2000 years old.',
+      description:
+          'Review detailed doctor profiles, read genuine patient feedback, and select the perfect specialist who meets your specific health and medical needs.',
     ),
     OnboardingModel(
       image: ImageAssets.onBoarding3,
       title: 'Easy Appointments',
-      description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of it over 2000 years old.',
+      description:
+          'Schedule your clinic visits instantly with our seamless booking system, saving you valuable time and avoiding long waiting room queues.',
     ),
   ];
 }

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:doctor_hunt_app/core/models/appointment_model.dart';
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
+import 'package:doctor_hunt_app/features/patient/patient_appointments/presentation/controller/patient_appointments_bloc.dart';
+import 'package:doctor_hunt_app/features/patient/patient_appointments/presentation/controller/patient_appointments_event.dart';
+import 'package:doctor_hunt_app/features/patient/patient_appointments/presentation/widgets/cancel_appointment_dialog.dart';
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
 import 'package:doctor_hunt_app/i18n/strings.g.dart';
 
@@ -10,6 +15,7 @@ enum PatientAppointmentStatus {
 }
 
 class PatientAppointmentCardWidget extends StatefulWidget {
+  final String? appointmentId;
   final String doctorName;
   final String doctorSpecialty;
   final String doctorImage;
@@ -18,6 +24,7 @@ class PatientAppointmentCardWidget extends StatefulWidget {
   final String fee;
   final PatientAppointmentStatus status;
   final int initialRating;
+  final bool isCancelling;
   final ValueChanged<int>? onRatingChanged;
   final VoidCallback? onViewDetails;
   final VoidCallback? onCancelAppointment;
@@ -25,6 +32,7 @@ class PatientAppointmentCardWidget extends StatefulWidget {
 
   const PatientAppointmentCardWidget({
     super.key,
+    this.appointmentId,
     required this.doctorName,
     required this.doctorSpecialty,
     required this.doctorImage,
@@ -33,11 +41,50 @@ class PatientAppointmentCardWidget extends StatefulWidget {
     required this.fee,
     required this.status,
     this.initialRating = 0,
+    this.isCancelling = false,
     this.onRatingChanged,
     this.onViewDetails,
     this.onCancelAppointment,
     this.onRateDoctor,
   });
+
+  factory PatientAppointmentCardWidget.fromModel({
+    Key? key,
+    required AppointmentModel appointment,
+    bool isCancelling = false,
+    VoidCallback? onViewDetails,
+    VoidCallback? onCancelAppointment,
+    VoidCallback? onRateDoctor,
+    ValueChanged<int>? onRatingChanged,
+  }) {
+    PatientAppointmentStatus status;
+    final s = appointment.status.toLowerCase().trim();
+    if (s == 'completed') {
+      status = PatientAppointmentStatus.completed;
+    } else if (s == 'cancelled' || s == 'canceled') {
+      status = PatientAppointmentStatus.cancelled;
+    } else {
+      status = PatientAppointmentStatus.upcoming;
+    }
+
+    return PatientAppointmentCardWidget(
+      key: key,
+      appointmentId: appointment.id,
+      doctorName: appointment.doctorName,
+      doctorSpecialty: appointment.doctorSpecialty,
+      doctorImage: appointment.doctorImage ?? '',
+      date: appointment.date,
+      time: appointment.time,
+      fee: '\$${appointment.fee}',
+      status: status,
+      initialRating: appointment.rating?.toInt() ?? 0,
+      isCancelling: isCancelling,
+      onViewDetails: onViewDetails,
+      onCancelAppointment: onCancelAppointment,
+      onRateDoctor: onRateDoctor,
+      onRatingChanged: onRatingChanged,
+    );
+  }
 
   @override
   State<PatientAppointmentCardWidget> createState() =>
@@ -306,7 +353,23 @@ class _PatientAppointmentCardWidgetState
             const SizedBox(width: 12),
             Expanded(
               child: OutlinedButton(
-                onPressed: widget.onCancelAppointment,
+                onPressed: widget.isCancelling
+                    ? null
+                    : () {
+                        if (widget.onCancelAppointment != null) {
+                          widget.onCancelAppointment!();
+                        } else if (widget.appointmentId != null) {
+                          final bloc = context.read<PatientAppointmentsBloc>();
+                          showCancelAppointmentDialog(
+                            context: context,
+                            onConfirm: () {
+                              bloc.add(
+                                CancelAppointmentEvent(widget.appointmentId!),
+                              );
+                            },
+                          );
+                        }
+                      },
                 style: OutlinedButton.styleFrom(
                   side: BorderSide(
                     color: AppColors.red.withValues(alpha: 0.5),
@@ -316,10 +379,20 @@ class _PatientAppointmentCardWidgetState
                   ),
                   padding: const EdgeInsets.symmetric(vertical: 11),
                 ),
-                child: Text(
-                  t.cancelAppointment,
-                  style: context.medium12Primary.copyWith(color: AppColors.red),
-                ),
+                child: widget.isCancelling
+                    ? const SizedBox(
+                        height: 16,
+                        width: 16,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: AppColors.red,
+                        ),
+                      )
+                    : Text(
+                        t.cancelAppointment,
+                        style: context.medium12Primary
+                            .copyWith(color: AppColors.red),
+                      ),
               ),
             ),
           ],

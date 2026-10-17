@@ -79,15 +79,15 @@ class SuccessWidget extends StatelessWidget {
               ),
             ),
             const HeightSpace(5),
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text(
-                t.editYourAppointment,
-                style: context.regular14TextSub,
-              ),
-            ),
+            // TextButton(
+            //   onPressed: () {
+            //     Navigator.pop(context);
+            //   },
+            //   child: Text(
+            //     t.editYourAppointment,
+            //     style: context.regular14TextSub,
+            //   ),
+            // ),
           ],
         ),
       ),

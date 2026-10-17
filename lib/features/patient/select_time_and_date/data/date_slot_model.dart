@@ -25,8 +25,9 @@ class DaySlotModel extends Equatable {
   }
 
   String get availabilityText {
-    if (timeSlots.isEmpty) return t.noSlotsAvailable;
-    return t.slotsAvailable(count: timeSlots.length);
+    final availableCount = timeSlots.where((s) => s.isAvailable).length;
+    if (availableCount == 0) return t.noSlotsAvailable;
+    return t.slotsAvailable(count: availableCount);
   }
 
   @override
@@ -35,8 +36,17 @@ class DaySlotModel extends Equatable {
 
 class TimeSlotModel extends Equatable {
   final DateTime dateTime;
+  final bool isBooked;
+  final bool isPast;
 
-  const TimeSlotModel({required this.dateTime});
+  const TimeSlotModel({
+    required this.dateTime,
+    this.isBooked = false,
+    this.isPast = false,
+  });
+
+  bool get isDisabled => isBooked || isPast;
+  bool get isAvailable => !isDisabled;
 
   String get formattedTime => DateFormat('h:mm a').format(dateTime);
 
@@ -44,6 +54,18 @@ class TimeSlotModel extends Equatable {
   bool get isAfternoon => dateTime.hour >= 12 && dateTime.hour < 17;
   bool get isEvening => dateTime.hour >= 17;
 
+  TimeSlotModel copyWith({
+    DateTime? dateTime,
+    bool? isBooked,
+    bool? isPast,
+  }) {
+    return TimeSlotModel(
+      dateTime: dateTime ?? this.dateTime,
+      isBooked: isBooked ?? this.isBooked,
+      isPast: isPast ?? this.isPast,
+    );
+  }
+
   @override
-  List<Object?> get props => [dateTime];
+  List<Object?> get props => [dateTime, isBooked, isPast];
 }

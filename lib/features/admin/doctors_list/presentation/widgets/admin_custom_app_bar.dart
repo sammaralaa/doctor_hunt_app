@@ -1,6 +1,5 @@
 import 'package:doctor_hunt_app/core/theme/app_colors.dart';
 import 'package:doctor_hunt_app/generated/style_atoms.dart';
-import 'package:doctor_hunt_app/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 
 AppBar buildCustomAppBar(BuildContext context, {required String title}) {

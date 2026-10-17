@@ -55,7 +55,11 @@ class SelectTimeDateLoadedState extends SelectTimeDateState {
       eveningSlots.isNotEmpty;
 
   int get totalAvailableSlotsCount =>
-      morningSlots.length + afternoonSlots.length + eveningSlots.length;
+      morningSlots.where((s) => s.isAvailable).length +
+      afternoonSlots.where((s) => s.isAvailable).length +
+      eveningSlots.where((s) => s.isAvailable).length;
+
+  bool get hasAvailableSlots => totalAvailableSlotsCount > 0;
 
   SelectTimeDateLoadedState copyWith({
     DoctorModel? doctor,

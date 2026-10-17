@@ -1,5 +1,5 @@
+import 'package:doctor_hunt_app/core/models/patient_model.dart';
 import 'package:doctor_hunt_app/features/admin/create-doctor/data/model/doctor_model.dart';
-import 'package:doctor_hunt_app/features/patient/home/data/model/patient_model.dart';
 
 abstract class HomeState {}
 
